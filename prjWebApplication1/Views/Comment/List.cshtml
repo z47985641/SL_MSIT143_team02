@@ -1,0 +1,54 @@
+﻿@model IEnumerable<PJ_MSIT143_team02.Models.Comment>
+
+@{
+    ViewData["Title"] = "List";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+<link href="~/css/ForTable.css" rel="stylesheet" />
+
+<br />
+<p style="font-size:30px" class="forp">評論管理系統</p>
+<div class="forp">
+    @using (Html.BeginForm())
+    {
+        @:關鍵字 @Html.TextBox("txtKey", "", new { @class = "form-control" }) <input type="submit" value="查詢" class="btn btn-secondary" />
+    }
+    <br />
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                評論編號
+            </th>
+            <th>
+                評分
+            </th>
+            <th>
+                評論
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentPoint)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CommentDetail)
+            </td>
+            <td>
+                @Html.ActionLink("編輯", "Edit", new { id = item.CommentId }, new { @class = "btn btn-dark" }) |
+                @Html.ActionLink("刪除", "Delete", "Comment", new { id = item.CommentId },
+                new { onclick = "return confirm('確定要刪除嗎?')", @class = "btn btn-danger" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,68 @@
+﻿@model PJ_MSIT143_team02.Models.Room
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Room</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @*<label asp-for="RoomId" class="control-label"></label>*@
+                <input type="hidden" asp-for="RoomId" class="form-control" />
+                @*<span asp-validation-for="RoomId" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomName" class="control-label">房間名稱</label>
+                <input asp-for="RoomName" class="form-control" />
+                <span asp-validation-for="RoomName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomPrice" class="control-label">房間價格</label>
+                <input asp-for="RoomPrice" class="form-control" />
+                <span asp-validation-for="RoomPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomIntrodution" class="control-label">房間介紹</label>
+                <input asp-for="RoomIntrodution" class="form-control" />
+                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MemberId" class="control-label">會員ID</label>
+                <input asp-for="MemberId" class="form-control" />
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
+                <input asp-for="RoomstatusId" class="form-control" />
+                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label">地址</label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateDate" class="control-label">日期</label>
+                <input asp-for="CreateDate" class="form-control" value="@DateTime.Now" />
+                <span asp-validation-for="CreateDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" onclick = "return confirm('確定要送出嗎?')" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">回主頁</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

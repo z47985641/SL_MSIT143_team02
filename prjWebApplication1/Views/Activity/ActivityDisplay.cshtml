@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PJ_MSIT143_team02.Models.Activity>
+
+@{
+    ViewData["Title"] = "ActivityDisplay";
+}
+
+<h1>活動</h1>
+<div>
+    <div class="container p-lg-5 p-3 wow bounceInUp">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 col-sm-6 mb-4">
+                    <div class="card" style="height:130px">
+                        @*<img src=""
+                             class="card-img-top" />*@
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.ActivityName)</h5>
+                            <p class="card-text">
+                                活動日期: @Html.DisplayFor(modelItem => item.ActivityDate)
+                            </p>
+                            <p class="card-text">
+                                人數上限: @Html.DisplayFor(modelItem => item.ActivityCapacity) 人
+                            </p>
+                            <p class="card-text">
+                                活動狀態: @Html.DisplayFor(modelItem => item.ActivityStatus)
+                            </p>
+                            <p class="card-text">
+                                簡介: @Html.DisplayFor(modelItem => item.ActivityInfo)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
