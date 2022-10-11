@@ -61,13 +61,16 @@
                         <div class="nav-menu">
                             <nav class="mainmenu">
                                 <ul>
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">首頁</a></li>
-                                    <li class="active">
-                                        <a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a><ul class="dropdown">
+                                    <li><a asp-area="" asp-controller="Home" asp-action="Index">首頁</a></li>
+                                    <li>
+                                        <a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a>
+                                        <ul class="dropdown">
                                             <li>
                                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour1">家庭房</a>
                                             </li>
-                                            <li><a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour2">雙人房</a>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour2">雙人房</a>
+                                            </li>
                                             <li>
                                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour3">單人房</a>
                                             </li>
@@ -76,23 +79,39 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li class="active">
+                                    <li>
                                         <a asp-area="" asp-controller="Discount" asp-action="DiscountMain">折扣</a>
                                     </li>
-                                    <li class="active">
+                                    <li>
                                         <a asp-area="" asp-controller="Activity" asp-action="ActivityDisplay">活動</a>
                                     </li>
-                                    <li class="active">
+                                    <li>
                                         <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
                                     </li>
-                                    <li class="active">
+                                    <li>
                                         <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
                                     </li>
-
-                                    <li class="active">
-                                        <a asp-area="" asp-controller="MemberOnly" asp-action="AdminMainPage">後臺管理</a>
+                                    <li>
+                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
+                                        <ul class="dropdown">
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">個人資料</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">喜愛清單</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
+                                            </li>
+                                            <li>
+                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
+                                            </li>
+                                        </ul>
                                     </li>
-
+                                    
                                 </ul>
                             </nav>
                         </div>
