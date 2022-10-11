@@ -38,7 +38,11 @@ namespace PJ_MSIT143_team02.Controllers
                         select p;
             }
             else
-                datas = db.Activities.Where(p => p.ActivityName.Contains(model.txtKeyword));
+                datas = db.Activities.Where(p => p.ActivityName.Contains(model.txtKeyword)
+                || p.ActivityDate.ToString().Contains(model.txtKeyword)
+                || p.ActivityCapacity.ToString().Contains(model.txtKeyword)
+                || p.ActivityStatus.Contains(model.txtKeyword)
+                || p.ActivityInfo.Contains(model.txtKeyword));
 
             return View(datas);
         }
