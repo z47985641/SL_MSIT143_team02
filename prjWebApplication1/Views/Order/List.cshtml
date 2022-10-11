@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<PJ_MSIT143_team02.Models.Order>
 
 @{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "List";
 }
 <div class="container">
@@ -13,8 +14,8 @@
         }
     </div>
     <p>
-            <a asp-action="Create" class="btn btn-dark">新增訂單</a>
-        </p>
+        <a asp-action="Create" class="btn btn-dark">新增訂單</a>
+    </p>
 
     <table class="table table-hover">
         <thead>
@@ -67,4 +68,7 @@
     </table>
 </div>
 
- 
+@section Scripts {
+    <script>$('#Order').addClass('active');</script>
+}
+

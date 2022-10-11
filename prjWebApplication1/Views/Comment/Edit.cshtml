@@ -1,6 +1,7 @@
 ﻿@model PJ_MSIT143_team02.Models.Comment
 
 @{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "Edit";
 }
 
@@ -34,7 +35,7 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="儲存" class="btn btn-primary" />
-                <input type="button" value="屏蔽" class="btn btn-primary"/>
+                <input type="button" value="屏蔽" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -46,4 +47,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>$('#Comment').addClass('active');</script>
 }

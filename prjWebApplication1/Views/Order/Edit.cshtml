@@ -1,6 +1,7 @@
 ﻿@model PJ_MSIT143_team02.Models.Order
 
 @{
+    Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "Edit";
 }
 
@@ -8,7 +9,7 @@
 
 <h1>修改訂單作業</h1>
 
-<h4 >輸入訂單資料</h4>
+<h4>輸入訂單資料</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -52,4 +53,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>$('#Order').addClass('active');</script>
 }

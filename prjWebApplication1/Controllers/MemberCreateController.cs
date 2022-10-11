@@ -27,6 +27,7 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
             db.Members.Add(member);
             db.SaveChanges();
+
             return RedirectToAction("Login");
         }
         public IActionResult Login()
@@ -44,6 +45,10 @@ namespace PJ_MSIT143_team02.Controllers
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString("KK", jsonUser);
                     ViewBag.check = true;
+
+                    if(cust.Authority.Equals("管理員"))
+                        return RedirectToAction("AdminMainPage", "MemberOnly");
+
                     return RedirectToAction("Index", "Home");
                 }
             }

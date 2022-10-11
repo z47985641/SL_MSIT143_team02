@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<PJ_MSIT143_team02.Models.Discount>
 
-@{ ViewData["Title"] = "DiscountAdmin"; }
+@{ Layout = "~/Views/Shared/_Layout_Admin.cshtml";
+    ViewData["Title"] = "DiscountAdmin"; }
 <div class="container">
     <br />
     <p style="font-size:30px">優惠一覽表</p>
     <div class="forp">
         @using (Html.BeginForm())
         {
-             @:關鍵字 @Html.TextBox("txtKey", "", new { @class = "form-control" }) <input type="submit" value="查詢" class="btn btn-secondary" />
+            @:關鍵字 @Html.TextBox("txtKey", "", new { @class = "form-control" }) <input type="submit" value="查詢" class="btn btn-secondary" />
         }
         <br />
         <p>
@@ -34,23 +35,27 @@
                 foreach (var item in Model)
                 {
                     i++;
-    <tr>
-        <td>
-            @i
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscountName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DiscountInfo)
-        </td>
-        <td>
-            @Html.ActionLink("編輯", "Edit", new { id = item.RoomDiscountId }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("刪除", "Delete", "Discount", new { id = item.RoomDiscountId },
-                      new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-        </td>
-    </tr>
- } }
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiscountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiscountInfo)
+                        </td>
+                        <td>
+                            @Html.ActionLink("編輯", "Edit", new { id = item.RoomDiscountId }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Discount", new { id = item.RoomDiscountId },
+                                      new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                } }
         </tbody>
     </table>
 </div>
+@section Scripts {
+    <script>$('#Discount').addClass('active');</script>
+}
+
