@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "會員清單";
 }
+
 <div class="container">
     <br />
     <p style="font-size:30px">
@@ -51,74 +52,85 @@
         <tbody>
             @using (Html.BeginForm())
             {
-<tr>
-    <td>
-    </td>
-    <td>
-        @Html.TextBox("KW_MemberAccount", "", new { @class = "form-control" })
-    </td>
-    <td>
-        @Html.TextBox("KW_MemberPassword", "", new { @class = "form-control" })
-    </td>
-    <td>
-        @Html.TextBox("KW_MemberName", "", new { @class = "form-control" })
-    </td>
-    <td>
-    </td>
-    <td>
-        @Html.TextBox("KW_MemberPhone", "", new { @class = "form-control" })
-    </td>
-    <td>
-        @Html.TextBox("KW_MemberEmail", "", new { @class = "form-control" })
-    </td>
-    <td>
-        @Html.TextBox("KW_CityId", "", new { @class = "form-control" })
-    </td>
-    <td>
-        @Html.TextBox("KW_Authority", "", new { @class = "form-control" })
-    </td>
-    <td>
-        <input type="submit" value="查詢" class="btn btn-secondary" />
-    </td>
-</tr>}
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_MemberAccount", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_MemberPassword", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_MemberName", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_MemberPhone", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_MemberEmail", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_CityId", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        @Html.TextBox("KW_Authority", "", new { @class = "form-control" })
+                    </td>
+                    <td>
+                        <input type="submit" value="查詢" class="btn btn-secondary" />
+                    </td>
+                </tr>
+            }
             @{ int count = 0;
                 foreach (var item in Model)
                 {
                     count++;
-    <tr>
-        <td>
-            @count
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberAccount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberPassword)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BirthDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberPhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MemberEmail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CityId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Authority)
-        </td>
-        <td>
-            @Html.ActionLink("修改", "MemberEdit", new { MemberId = item.MemberId }, new { @class = "btn btn-primary" }) |
-            @Html.ActionLink("刪除", "Delete", "Order", new { id = item.MemberId },
-                           new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-        </td>
-    </tr> } }
+                    <tr>
+                        <td>
+                            @count
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberPassword)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BirthDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberPhone)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberEmail)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CityId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Authority)
+                        </td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { MemberId = item.MemberId }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { id = item.MemberId },
+                                           new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                } }
         </tbody>
     </table>
 </div>
+
+@section scripts
+{
+    <script>
+        $('#Member').addClass('active');
+    </script>
+    
+}
+

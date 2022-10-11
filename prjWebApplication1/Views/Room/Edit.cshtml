@@ -54,7 +54,7 @@
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" onclick = "return confirm('確定要送出嗎?')" />
+                <input type="submit" value="Save" class="btn btn-primary" onclick="return confirm('確定要送出嗎?')" />
             </div>
         </form>
     </div>
@@ -66,4 +66,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>$('#Room').addClass('active');</script>
 }

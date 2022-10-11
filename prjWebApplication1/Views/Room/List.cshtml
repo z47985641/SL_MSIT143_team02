@@ -107,54 +107,57 @@
             @{
                 //foreach (var i in Model)
                 {
-                        <tr>
-                            <td>海景房</td>
-                            <td>500</td>
-                            <td>看海</td>
-                            <td>aaa.gmail.com</td>
-                            <td>已預定</td>
-                            <td>仁愛路</td>
-                            <td>2022/10/05</td>
-                            <td><img src="~/Image/光之旅-1602655934.jpg" style="height:100px"></td>
-                            <td>
-                                @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                            </td>
+                    <tr>
+                        <td>海景房</td>
+                        <td>500</td>
+                        <td>看海</td>
+                        <td>aaa.gmail.com</td>
+                        <td>已預定</td>
+                        <td>仁愛路</td>
+                        <td>2022/10/05</td>
+                        <td><img src="~/Image/光之旅-1602655934.jpg" style="height:100px"></td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
 
-                        </tr>
-                        <tr>
-                            <td>山景房</td>
-                            <td>1000</td>
-                            <td>看山</td>
-                            <td>bbb.gmail.com</td>
-                            <td>未預定</td>
-                            <td>士東路</td>
-                            <td>2022/10/06</td>
-                            <td><img src="~/Image/山景房jpg.jpg" style="height:100px"></td>
-                            <td>
-                                @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                            </td>
+                    </tr>
+                    <tr>
+                        <td>山景房</td>
+                        <td>1000</td>
+                        <td>看山</td>
+                        <td>bbb.gmail.com</td>
+                        <td>未預定</td>
+                        <td>士東路</td>
+                        <td>2022/10/06</td>
+                        <td><img src="~/Image/山景房jpg.jpg" style="height:100px"></td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
 
-                        </tr>
-                        <tr>
-                            <td>工地房</td>
-                            <td>1500</td>
-                            <td>看工地</td>
-                            <td>ccc.gmail.com</td>
-                            <td>等待預付訂金</td>
-                            <td>長春路</td>
-                            <td>2022/10/07</td>
-                            <td><img src="~/Image/工地.jpg" style="height:100px"></td>
-                            <td>
-                                @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                            </td>
+                    </tr>
+                    <tr>
+                        <td>工地房</td>
+                        <td>1500</td>
+                        <td>看工地</td>
+                        <td>ccc.gmail.com</td>
+                        <td>等待預付訂金</td>
+                        <td>長春路</td>
+                        <td>2022/10/07</td>
+                        <td><img src="~/Image/工地.jpg" style="height:100px"></td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
 
-                        </tr>
+                    </tr>
                 }
             }
         </tbody>
 
     </table>
 </div>
+@section Scripts {
+    <script>$('#Room').addClass('active');</script>
+}
