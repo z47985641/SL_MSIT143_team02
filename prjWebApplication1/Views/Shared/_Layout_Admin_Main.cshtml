@@ -26,33 +26,21 @@
         <div class="container">
             <div class="menu-item">
                 <div class="row">
-                    <div class="col-lg-2">
-                        <div class="ft-about">
-                            <div class="logo">
-                                <a href="#">
-                                    <img width="150" src="../img/Admin/Logo_Admin.png" />  @*..絕對路徑  ~為相對路徑*@
-                                </a>
+                    <div class="col-lg-12" style="align-items:center">
+                        <div style="text-align: center">
+                            <div class="ft-about">
+                                <div class="logo">
+                                    <a href="#">
+                                        <img width="150" src="../img/Admin/Logo_Admin.png" />  @*..絕對路徑  ~為相對路徑*@
+                                        @*<p style="color:aliceblue">後台管理</p>*@
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-9 ">
-                        <div class="nav-menu ">
-                            <nav class="mainmenu">
-                                <ul>
-                                    <li class="active"><a asp-area="" asp-controller="MemberOnly" asp-action="AdminMainPage" style="color:aliceblue">後臺首頁</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Room" asp-action="List" style="color:aliceblue">房源管理</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Activity" asp-action="List" style="color:aliceblue">活動管理</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Discount" asp-action="DiscountAdmin" style="color:aliceblue">優惠管理</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Order" asp-action="List" style="color:aliceblue">訂單管理</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Comment" asp-action="List" style="color:aliceblue">評論管理</a></li>
-                                    <li class="active"><a asp-area="" asp-controller="Member" asp-action="MemberList" style="color:aliceblue">會員管理</a></li>
-                                </ul>
-                                </nav>
-                        </div>
-                    </div>
+                </div>
             </div>
         </div>
-            </div>
     </footer>
     
     @RenderBody()
