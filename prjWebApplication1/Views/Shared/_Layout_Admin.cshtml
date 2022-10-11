@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIND HOTEL</title>
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700&display=swap" rel="stylesheet">
+    <!-- Css Styles -->
+    <link href="~/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="~/css/flaticon.css" type="text/css">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="~/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+</head>
+
+<body>
+    <footer class="footer-section">
+        <div class="container">
+            <div class="menu-item">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="ft-about">
+                            <div class="logo">
+                                <a href="#">
+                                    <img width="150" src="../img/Admin/Logo_Admin.png" />  @*..絕對路徑  ~為相對路徑*@
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 ">
+                        <div class="nav-menu ">
+                            <nav class="mainmenu">
+                                <ul>
+                                    <li class="active"><a asp-area="" asp-controller="" asp-action="" style="color:aliceblue">後臺首頁</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Room" asp-action="List" style="color:aliceblue">房源管理</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Activity" asp-action="List" style="color:aliceblue">活動管理</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Discount" asp-action="DiscountAdmin" style="color:aliceblue">優惠管理</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Order" asp-action="List" style="color:aliceblue">訂單管理</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Comment" asp-action="List" style="color:aliceblue">評論管理</a></li>
+                                    <li class="active"><a asp-area="" asp-controller="Member" asp-action="MemberList" style="color:aliceblue">會員管理</a></li>
+                                </ul>
+                                </nav>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </footer>
+    
+    @RenderBody()
+    <script src="~/js/jquery-3.3.1.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/js/jquery.nice-select.min.js"></script>
+    <script src="~/js/jquery-ui.min.js"></script>
+    <script src="~/js/jquery.slicknav.js"></script>
+    <script src="~/js/owl.carousel.min.js"></script>
+    <script src="~/js/main.js"></script>
+    @RenderSection("scripts", required: false)
+
+
+
+</body>
+</html>
