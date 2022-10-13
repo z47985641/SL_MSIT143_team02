@@ -606,6 +606,10 @@ ul, ol {
 	margin-top: 0;
 	width: 100%;
 }
+.btn {
+	width: 500%;
+	height: 46px;
+}
 .booking-form form button {
 	display: block;
 	font-size: 14px;

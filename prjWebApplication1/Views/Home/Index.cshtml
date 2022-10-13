@@ -31,7 +31,7 @@
                         <div class="check-date">
                             <label for="date-in">旅客:</label>
                             <button type="button" class="btn btn-primary" id="minus">-</button>
-                            <label id="num">01</label>
+                            <label id="num" style="text-align:center">01</label>
                             <button type="button" class="btn btn-primary" id="plus">+</button>
                         </div>
 
@@ -39,16 +39,17 @@
                         <div class="check-date">
                             <label for="date-in">兒童:</label>
                             <button type="button" class="btn btn-primary" id="kidminus">-</button>
-                            <label id="kidnum">01</label>
+                            <label id="kidnum" style="text-align:center">01</label>
                             <button type="button" class="btn btn-primary" id="kidplus">+</button>
                         </div>
-                        <div class="select-option">
-                            <label for="room">客房:</label>
-                            <select id="room">
-                                <option value="">1 客房</option>
-                                <option value="">2 客房</option>
-                            </select>
+
+                        <div class="check-date">
+                            <label for="date-in">客房:</label>
+                            <button type="button" class="btn btn-primary" id="roomminus">-</button>
+                            <label id="roomnum" style="text-align:center">01</label>
+                            <button type="button" class="btn btn-primary" id="roomplus">+</button>
                         </div>
+
                         <button type="submit">立即搜尋</button>
                     </form>
                 </div>
@@ -422,6 +423,8 @@
     </div>
 </section>
 <!-- Blog Section End -->
+
+
 @section Scripts{
     <script>
         //旅客++
@@ -443,7 +446,6 @@
       }
     });
 
-
         //兒童++
         const kidplus = document.querySelector("#kidplus"),
             kidminus = document.querySelector("#kidminus"),
@@ -463,5 +465,23 @@
             }
         });
 
+        //客房
+        const roomplus = document.querySelector("#roomplus"),
+            roomminus = document.querySelector("#roomminus"),
+            roomnum = document.querySelector("#roomnum");
+        let c = 1;
+        roomplus.addEventListener("click", () => {
+            c++;
+            c = (c < 10) ? "0" + c : c;
+            roomnum.innerText = c;
+        });
+
+        roomminus.addEventListener("click", () => {
+            if (c > 1) {
+                c--;
+                c = (c < 10) ? "0" + c : c;
+                roomnum.innerText = c;
+            }
+        });
     </script>
 }
