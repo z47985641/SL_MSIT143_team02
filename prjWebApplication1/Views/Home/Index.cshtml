@@ -27,16 +27,21 @@
                             <input type="text" class="date-input" id="date-out">
                             <i class="icon_calendar"></i>
                         </div>
-                            @*<select id="guest">
-            <option value="">2 大人</option>
-            <option value="">3 大人</option>
-        </select>*@
-                    <div class="wrapper">
-                        <label for="guest">旅客:</label>
-                        <span class="minus">-</span>
-                        <span class="num">01</span>
-                        <span class="plus">+</span>
-                    </div>
+
+                        <div class="check-date">
+                            <label for="date-in">旅客:</label>
+                            <button type="button" class="btn btn-primary" id="minus">-</button>
+                            <label id="num">01</label>
+                            <button type="button" class="btn btn-primary" id="plus">+</button>
+                        </div>
+
+
+                        <div class="check-date">
+                            <label for="date-in">兒童:</label>
+                            <button type="button" class="btn btn-primary" id="kidminus">-</button>
+                            <label id="kidnum">01</label>
+                            <button type="button" class="btn btn-primary" id="kidplus">+</button>
+                        </div>
                         <div class="select-option">
                             <label for="room">客房:</label>
                             <select id="room">
@@ -417,3 +422,46 @@
     </div>
 </section>
 <!-- Blog Section End -->
+@section Scripts{
+    <script>
+        //旅客++
+        const plus = document.querySelector("#plus"),
+    minus = document.querySelector("#minus"),
+    num = document.querySelector("#num");
+    let a = 1;
+    plus.addEventListener("click", ()=>{
+      a++;
+      a = (a < 10) ? "0" + a : a;
+      num.innerText = a;
+    });
+
+    minus.addEventListener("click", ()=>{
+      if(a > 1){
+        a--;
+        a = (a < 10) ? "0" + a : a;
+        num.innerText = a;
+      }
+    });
+
+
+        //兒童++
+        const kidplus = document.querySelector("#kidplus"),
+            kidminus = document.querySelector("#kidminus"),
+            kidnum = document.querySelector("#kidnum");
+        let b = 1;
+        kidplus.addEventListener("click", () => {
+            b++;
+            b = (b < 10) ? "0" + b : b;
+            kidnum.innerText = b;
+        });
+
+        kidminus.addEventListener("click", () => {
+            if (b > 1) {
+                b--;
+                b = (b < 10) ? "0" + b : b;
+                kidnum.innerText = b;
+            }
+        });
+
+    </script>
+}
