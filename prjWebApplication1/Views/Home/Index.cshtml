@@ -16,15 +16,15 @@
             <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                 <div class="booking-form">
                     <h3>訂下專屬你的房間</h3>
-                    <form action="#">
+                    <form action="#" name="myForm" onsubmit="return validateForm()" method="get">
                         <div class="check-date">
                             <label for="date-in">入住時間:</label>
-                            <input type="text" class="date-input" id="date-in">
+                            <input type="text" class="date-input" id="date-in" name="mydatein" required>
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="check-date">
                             <label for="date-out">退房時間:</label>
-                            <input type="text" class="date-input" id="date-out">
+                            <input type="text" class="date-input" id="date-out"  name="mydateout" required>
                             <i class="icon_calendar"></i>
                         </div>
 
@@ -50,7 +50,7 @@
                             <button type="button" class="btn btn-primary" id="roomplus">+</button>
                         </div>
 
-                        <button type="submit">立即搜尋</button>
+                        <button type="submit" onsubmit="myButton()">立即搜尋</button>
                     </form>
                 </div>
             </div>
@@ -483,5 +483,25 @@
                 roomnum.innerText = c;
             }
         });
+
+        function validateForm() {
+            var x = document.forms["myForm"]["mydatein"].value;
+            if (x == "") {
+                alert("不能為空值");
+                return false;
+            }
+        }
+        function validateForm() {
+            var y = document.forms["myForm"]["mydateout"].value;
+            if (y == "") {
+                alert("不能為空值");
+                return false;
+            }
+        }
+        
+        
+
+
+
     </script>
 }
