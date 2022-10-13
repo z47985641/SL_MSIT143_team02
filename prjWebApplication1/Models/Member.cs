@@ -24,7 +24,7 @@ namespace PJ_MSIT143_team02.Models
         public byte[] MemberImage { get; set; }
         public string Authority { get; set; }
 
-        public virtual City City { get; set; }
+       // public virtual City City { get; set; }
         public virtual ICollection<Admin> Admins { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

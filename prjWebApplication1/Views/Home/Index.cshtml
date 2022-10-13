@@ -27,13 +27,16 @@
                             <input type="text" class="date-input" id="date-out">
                             <i class="icon_calendar"></i>
                         </div>
-                        <div class="select-option">
-                            <label for="guest">旅客:</label>
-                            <select id="guest">
-                                <option value="">2 大人</option>
-                                <option value="">3 大人</option>
-                            </select>
-                        </div>
+                            @*<select id="guest">
+            <option value="">2 大人</option>
+            <option value="">3 大人</option>
+        </select>*@
+                    <div class="wrapper">
+                        <label for="guest">旅客:</label>
+                        <span class="minus">-</span>
+                        <span class="num">01</span>
+                        <span class="plus">+</span>
+                    </div>
                         <div class="select-option">
                             <label for="room">客房:</label>
                             <select id="room">
