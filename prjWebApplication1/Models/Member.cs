@@ -20,11 +20,11 @@ namespace PJ_MSIT143_team02.Models
         public DateTime BirthDate { get; set; }
         public string MemberPhone { get; set; }
         public string MemberEmail { get; set; }
-        public int CityId { get; set; }
+        public string CityName { get; set; }
         public byte[] MemberImage { get; set; }
         public string Authority { get; set; }
 
-        public virtual City City { get; set; }
+       // public virtual City City { get; set; }
         public virtual ICollection<Admin> Admins { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
     }

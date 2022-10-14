@@ -16,32 +16,34 @@
             <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                 <div class="booking-form">
                     <h3>訂下專屬你的房間</h3>
-                    <form action="#">
+                    <form action="#" name="myForm" onsubmit="return validateForm()" method="get">
                         <div class="check-date">
                             <label for="date-in">入住時間:</label>
-                            <input type="text" class="date-input" id="date-in">
+                            <input type="text" class="date-input" id="date-in" name="mydatein" required>
                             <i class="icon_calendar"></i>
                         </div>
                         <div class="check-date">
                             <label for="date-out">退房時間:</label>
-                            <input type="text" class="date-input" id="date-out">
+                            <input type="text" class="date-input" id="date-out"  name="mydateout" required>
                             <i class="icon_calendar"></i>
                         </div>
-                        <div class="select-option">
-                            <label for="guest">旅客:</label>
-                            <select id="guest">
-                                <option value="">2 大人</option>
-                                <option value="">3 大人</option>
-                            </select>
+
+                        <div class="check-date">
+                            <label for="date-in">旅客:</label>
+                            <button type="button" class="btn btn-primary" id="minus">-</button>
+                            <label id="num" style="text-align:center">01</label>
+                            <button type="button" class="btn btn-primary" id="plus">+</button>
                         </div>
-                        <div class="select-option">
-                            <label for="room">客房:</label>
-                            <select id="room">
-                                <option value="">1 客房</option>
-                                <option value="">2 客房</option>
-                            </select>
+
+
+                        <div class="check-date">
+                            <label for="date-in">客房:</label>
+                            <button type="button" class="btn btn-primary" id="roomminus">-</button>
+                            <label id="roomnum" style="text-align:center">01</label>
+                            <button type="button" class="btn btn-primary" id="roomplus">+</button>
                         </div>
-                        <button type="submit">立即搜尋</button>
+
+                        <button type="submit" onsubmit="myButton()">立即搜尋</button>
                     </form>
                 </div>
             </div>
@@ -414,3 +416,85 @@
     </div>
 </section>
 <!-- Blog Section End -->
+
+
+@section Scripts{
+    <script>
+        //旅客++
+        const plus = document.querySelector("#plus"),
+    minus = document.querySelector("#minus"),
+    num = document.querySelector("#num");
+    let a = 1;
+    plus.addEventListener("click", ()=>{
+      a++;
+      a = (a < 10) ? "0" + a : a;
+      num.innerText = a;
+    });
+
+    minus.addEventListener("click", ()=>{
+      if(a > 1){
+        a--;
+        a = (a < 10) ? "0" + a : a;
+        num.innerText = a;
+      }
+    });
+
+        //兒童++
+        const kidplus = document.querySelector("#kidplus"),
+            kidminus = document.querySelector("#kidminus"),
+            kidnum = document.querySelector("#kidnum");
+        let b = 1;
+        kidplus.addEventListener("click", () => {
+            b++;
+            b = (b < 10) ? "0" + b : b;
+            kidnum.innerText = b;
+        });
+
+        kidminus.addEventListener("click", () => {
+            if (b > 1) {
+                b--;
+                b = (b < 10) ? "0" + b : b;
+                kidnum.innerText = b;
+            }
+        });
+
+        //客房
+        const roomplus = document.querySelector("#roomplus"),
+            roomminus = document.querySelector("#roomminus"),
+            roomnum = document.querySelector("#roomnum");
+        let c = 1;
+        roomplus.addEventListener("click", () => {
+            c++;
+            c = (c < 10) ? "0" + c : c;
+            roomnum.innerText = c;
+        });
+
+        roomminus.addEventListener("click", () => {
+            if (c > 1) {
+                c--;
+                c = (c < 10) ? "0" + c : c;
+                roomnum.innerText = c;
+            }
+        });
+
+        function validateForm() {
+            var x = document.forms["myForm"]["mydatein"].value;
+            if (x == "") {
+                alert("不能為空值");
+                return false;
+            }
+        }
+        function validateForm() {
+            var y = document.forms["myForm"]["mydateout"].value;
+            if (y == "") {
+                alert("不能為空值");
+                return false;
+            }
+        }
+        
+        
+
+
+
+    </script>
+}

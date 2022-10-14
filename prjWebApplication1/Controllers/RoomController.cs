@@ -91,6 +91,34 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.CreateDate.ToString().Contains(model.txtKeyword));
             return View(cAlls);
         }
+        public IActionResult TestListView(CKeywordViewModel model)
+        {
+            MingSuContext db = new MingSuContext();
+            List<CAllViewModel> cAlls = new List<CAllViewModel>();
+            var q = from r in db.Rooms
+                    select r;
+            IEnumerable<Room> datas = null;
+            if (string.IsNullOrEmpty(model.txtKeyword))
+
+                datas = from r in db.Rooms
+                        join i in db.ImageReferences on r.RoomId equals i.RoomId
+                        join k in db.Images on i.ImageId equals k.ImageId
+                        join m in db.Members on r.MemberId equals m.MemberId
+                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
+                        select r;
+            else
+                datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
+                || p.RoomPrice.ToString().Contains(model.txtKeyword)
+                || p.RoomIntrodution.Contains(model.txtKeyword)
+                || p.MemberId.ToString().Contains(model.txtKeyword)
+                || p.RoomstatusId.ToString().Contains(model.txtKeyword)
+                || p.Address.Contains(model.txtKeyword)
+                || p.CreateDate.ToString().Contains(model.txtKeyword));
+            return View(cAlls);
+        }
+        
+
+
         public IActionResult Create()
         {
             return View();
@@ -156,5 +184,6 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("List");
         }
+
     }
 }
