@@ -14,8 +14,8 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
             IEnumerable<Member> datas = from I in db.Members
-                                        join A in db.Cities
-                                        on I.CityId equals A.CityId
+                                        //join A in db.Cities
+                                        //on I.CityName equals A.CityId
                                         select I;
 
             if (!string.IsNullOrEmpty(KW.KW_MemberAccount))
@@ -29,7 +29,7 @@ namespace PJ_MSIT143_team02.Controllers
             if (!string.IsNullOrEmpty(KW.KW_MemberEmail))
                datas = datas.Where(p => p.MemberEmail.Contains(KW.KW_MemberEmail));
             if (KW.KW_CityId >0)
-               datas = datas.Where(p => p.CityId.Equals(KW.KW_CityId));
+               //datas = datas.Where(p => p.CityId.Equals(KW.KW_CityId));
             if (!string.IsNullOrEmpty(KW.KW_Authority))
                datas = datas.Where(p => p.Authority.Contains(KW.KW_Authority));
 
