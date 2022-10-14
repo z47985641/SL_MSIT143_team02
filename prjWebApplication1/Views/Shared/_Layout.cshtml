@@ -41,7 +41,7 @@
                             </div>
                             <a href="#" class="bk-btn">立即訂房</a>
                             <div class="language-option">
-                                <img src="~/img/TAIWAN.png" >
+                                <img src="~/img/TAIWAN.png">
                                 <span>TW <i class="fa fa-angle-down"></i></span>
                             </div>
                         </div>
@@ -54,7 +54,9 @@
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
-                                <img src="../img/logo.png" />
+                            <a asp-area="" asp-controller="Home" asp-action="Index">
+                                <img src="../img/logo.png">
+                            </a>
                         </div>
                     </div>
                     <div class="col-lg-10">
@@ -63,7 +65,10 @@
                                 <ul>
                                     <li><a asp-area="" asp-controller="Home" asp-action="Index">首頁</a></li>
                                     <li>
+
                                         <a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a>
+                                        <a asp-area="" asp-controller="Room" asp-action="TestListView">測試搜好房</a>
+
                                         <ul class="dropdown">
                                             <li>
                                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour1">家庭房</a>
@@ -111,7 +116,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    
+
                                 </ul>
                             </nav>
                         </div>
@@ -137,64 +142,66 @@
     <script src="~/js/main.js"></script>
     @RenderSection("scripts", required: false)
 
-<footer class="footer-section">
-    <div class="container">
-        <div class="footer-text">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="ft-about">
-                        <div class="logo">
-                            <a href="#">
-                                <img src="../img/contact.png" />  @*..絕對路徑  ~為相對路徑*@  
-                            </a>
+    
+
+    <footer class="footer-section">
+        <div class="container">
+            <div class="footer-text">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="ft-about">
+                            <div class="logo">
+                                <a href="#">
+                                    <img src="../img/contact.png" />  @*..絕對路徑  ~為相對路徑*@
+                                </a>
+                            </div>
+                            <div class="fa-social">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-tripadvisor"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-youtube-play"></i></a>
+                            </div>
                         </div>
-                        <div class="fa-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-tripadvisor"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                            <a href="#"><i class="fa fa-youtube-play"></i></a>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="ft-contact">
+                            <h6>聯絡我們</h6>
+                            <ul>
+                                <li>(02)6631-6588(臺北窗口)</li>
+                                <li>FIND HOTEL@gmail.com</li>
+                                <li>台北市大安區復興南路一段390號2樓(大安捷運站4號、6號出口)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 offset-lg-1">
+                        <div class="ft-newslatter">
+                            <h6>省時又省錢！</h6>
+                            <p>現在訂閱，我們將寄送最佳訂房優惠給您。</p>
+                            <form action="#" class="fn-form">
+                                <input type="text" placeholder="Email">
+                                <button type="submit"><i class="fa fa-send"></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 offset-lg-1">
-                    <div class="ft-contact">
-                        <h6>聯絡我們</h6>
+            </div>
+        </div>
+        <div class="copyright-option">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-7">
                         <ul>
-                            <li>(02)6631-6588(臺北窗口)</li>
-                            <li>FIND HOTEL@gmail.com</li>
-                            <li>台北市大安區復興南路一段390號2樓(大安捷運站4號、6號出口)</li>
+                            <li><a href="#">聯繫我們</a></li>
+                            <li><a href="#">使用條款</a></li>
+                            <li><a href="#">隱私</a></li>
+                            <li><a href="#">本網站內容由© 2022FIND HOTEL 保留所有權利</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 offset-lg-1">
-                    <div class="ft-newslatter">
-                        <h6>省時又省錢！</h6>
-                        <p>現在訂閱，我們將寄送最佳訂房優惠給您。</p>
-                        <form action="#" class="fn-form">
-                            <input type="text" placeholder="Email">
-                            <button type="submit"><i class="fa fa-send"></i></button>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
-    <div class="copyright-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-7">
-                    <ul>
-                        <li><a href="#">聯繫我們</a></li>
-                        <li><a href="#">使用條款</a></li>
-                        <li><a href="#">隱私</a></li>
-                        <li><a href="#">本網站內容由© 2022FIND HOTEL 保留所有權利</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
 </html>

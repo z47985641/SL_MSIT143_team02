@@ -332,7 +332,7 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                entity.Property(e => e.CityId).HasColumnName("CityID");
+                //entity.Property(e => e.CityId).HasColumnName("CityID");
 
                 entity.Property(e => e.MemberAccount)
                     .IsRequired()
@@ -354,11 +354,11 @@ namespace PJ_MSIT143_team02.Models
                     .IsRequired()
                     .HasMaxLength(15);
 
-                entity.HasOne(d => d.City)
-                    .WithMany(p => p.Members)
-                    .HasForeignKey(d => d.CityId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Member_City");
+                //entity.HasOne(d => d.City)
+                //    //.WithMany(p => p.Members)
+                //    .HasForeignKey(d => d.CityId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_Member_City");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -410,7 +410,7 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.OrderStartDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PayId).HasColumnName("PayID");
+                //entity.Property(e => e.PayId).HasColumnName("PayID");
 
                 entity.Property(e => e.RoomDiscountId).HasColumnName("RoomDiscountID");
 
@@ -424,11 +424,11 @@ namespace PJ_MSIT143_team02.Models
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetails_Order");
 
-                entity.HasOne(d => d.Pay)
-                    .WithMany(p => p.OrderDetails)
-                    .HasForeignKey(d => d.PayId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_OrderDetails_Payment");
+                //entity.HasOne(d => d.Pay)
+                //    .WithMany(p => p.OrderDetails)
+                //    .HasForeignKey(d => d.PayId)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_OrderDetails_Payment");
 
                 entity.HasOne(d => d.RoomDiscount)
                     .WithMany(p => p.OrderDetails)
