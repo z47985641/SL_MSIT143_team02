@@ -116,6 +116,9 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.CreateDate.ToString().Contains(model.txtKeyword));
             return View(cAlls);
         }
+        
+
+
         public IActionResult Create()
         {
             return View();
@@ -181,5 +184,6 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("List");
         }
+
     }
 }
