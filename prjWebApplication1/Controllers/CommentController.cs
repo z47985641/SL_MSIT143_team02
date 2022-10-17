@@ -63,6 +63,7 @@ namespace PJ_MSIT143_team02.Controllers
                 c.RoomId = input.RoomId;
                 c.CommentDetail = input.CommentDetail;
                 c.CommentPoint = input.CommentPoint;
+                c.CommentStatus = input.CommentStatus;
                 db.SaveChanges();
             }
             return RedirectToAction("List");

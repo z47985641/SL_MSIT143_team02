@@ -33,9 +33,15 @@
                 <textarea asp-for="CommentDetail" class="form-control" style="height:200px"></textarea>
                 <span asp-validation-for="CommentDetail" class="text-danger"></span>
             </div>
+            <div class="form-group" hidden>
+                <label asp-for="CommentStatus" class="control-label"></label>
+                <input asp-for="CommentStatus" id="status" class="form-control" />
+                <span asp-validation-for="CommentStatus" class="text-danger"></span>
+            </div>
             <div class="form-group">
-                <input type="submit" value="儲存" class="btn btn-primary" />
-                <input type="button" value="屏蔽" class="btn btn-primary" />
+                <input type="submit" id="save" value="儲存" class="btn btn-primary" />
+                <input type="button" id="block" value="隱藏" class="btn btn-primary" />
+                <input type="button" id="unblock" value="取消隱藏" class="btn btn-primary" disabled/>
             </div>
         </form>
     </div>
@@ -48,4 +54,26 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>$('#Comment').addClass('active');</script>
+    <script>
+        $(function () {
+            if ($("#status").val() == "2") {
+                $("#unblock").removeAttr("disabled");
+                $("#block").attr("disabled", true);
+            }
+        })
+        $("#block").click(function () {
+            $("#status").val("2");
+            var result = confirm("確定要隱藏該評論嗎?");
+            if (result) {                
+                $("#save").click();
+            }
+        })
+        $("#unblock").click(function () {
+            $("#status").val("1");
+            var result = confirm("確定要取消隱藏該評論嗎?");
+            if (result) {
+                $("#save").click();                
+            }
+        })
+    </script>
 }
