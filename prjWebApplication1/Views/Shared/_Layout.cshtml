@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -121,6 +124,16 @@
                                             <img src="~/img/cart_shopping.png" />購物車
                                         </a>
                                     </li>
+                                    @{
+                                        if (@Accessor.HttpContext.Session.GetString("KK") != null)
+                                        {
+                                            <li>
+                                                <a asp-area="" asp-controller="Home" asp-action="Index">
+                                                    測試用
+                                                </a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </nav>
                         </div>
