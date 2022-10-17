@@ -486,23 +486,23 @@
         });
 
         //兒童++
-        //const kidplus = document.querySelector("#kidplus"),
-        //    kidminus = document.querySelector("#kidminus"),
-        //    kidnum = document.querySelector("#kidnum");
-        //let b = 1;
-        //kidplus.addEventListener("click", () => {
-        //    b++;
-        //    b = (b < 10) ? "0" + b : b;
-        //    kidnum.innerText = b;
-        //});
+        const kidplus = document.querySelector("#kidplus"),
+            kidminus = document.querySelector("#kidminus"),
+            kidnum = document.querySelector("#kidnum");
+        let b = 1;
+        kidplus.addEventListener("click", () => {
+            b++;
+            b = (b < 10) ? "0" + b : b;
+            kidnum.innerText = b;
+        });
 
-        //kidminus.addEventListener("click", () => {
-        //    if (b > 1) {
-        //        b--;
-        //        b = (b < 10) ? "0" + b : b;
-        //        kidnum.innerText = b;
-        //    }
-        //});
+        kidminus.addEventListener("click", () => {
+            if (b > 1) {
+                b--;
+                b = (b < 10) ? "0" + b : b;
+                kidnum.innerText = b;
+            }
+        });
 
         //客房
         const roomplus = document.querySelector("#roomplus"),

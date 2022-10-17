@@ -1,4 +1,5 @@
 ﻿@model PJ_MSIT143_team02.Models.Room
+
 @{
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "Create";
@@ -12,11 +13,11 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                @*<label asp-for="RoomId" class="control-label"></label>*@
-                <input type="hidden" asp-for="RoomId" class="form-control" />
-                @*<span asp-validation-for="RoomId" class="text-danger"></span>*@
-            </div>
+            @*<div class="form-group">
+                    <label asp-for="RoomId" class="control-label"></label>
+                    <input asp-for="RoomId" class="form-control" />
+                    <span asp-validation-for="RoomId" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="RoomName" class="control-label">房間名稱</label>
                 <input asp-for="RoomName" class="form-control" />

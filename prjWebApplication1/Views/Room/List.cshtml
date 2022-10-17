@@ -1,5 +1,5 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
-@*@model List<PJ_MSIT143_team02.ViewModel.CRoomViewModel>*@
+﻿@*@model IEnumerable<PJ_MSIT143_team02.Models.Room>*@
+@model List<PJ_MSIT143_team02.ViewModel.CAllViewModel>
 @{
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "List";
@@ -16,147 +16,147 @@
     <p>
         <a asp-action="Create" class="btn btn-dark">新增房間</a>
     </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    房間序號
-                </th>
-                <th>
-                    房間名稱
-                </th>
-                <th>
-                    房間價格
-                </th>
-                <th>
-                    房間介紹
-                </th>
-                <th>
-                    會員ID
-                </th>
-                <th>
-                    房間狀態
-                </th>
-                <th>
-                    房間地址
-                </th>
-                <th>
-                    照片
-                </th>
-                <th>
-                    日期
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomIntrodution)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MemberId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomstatusId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Address)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => Model.imageReference.Image)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CreateDate)
-                    </td>
-                    <td>
-                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }) |
-
-                        @Html.ActionLink("刪除", "Delete", new { id = item.RoomId }, new { onclick = "return confirm('確定要刪除嗎?')" })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
     @*<table class="table">
             <thead>
                 <tr>
-                    <th scope="col">房名</th>
-                    <th scope="col">房價</th>
-                    <th scope="col">房間介紹</th>
-                    <th scope="col">會員帳號</th>
-                    <th scope="col">房間狀態</th>
-                    <th scope="col">地址</th>
-                    <th scope="col">日期</th>
-                    <th scope="col">照片</th>
+                    <th>
+                        房間序號
+                    </th>
+                    <th>
+                        房間名稱
+                    </th>
+                    <th>
+                        房間價格
+                    </th>
+                    <th>
+                        房間介紹
+                    </th>
+                    <th>
+                        會員ID
+                    </th>
+                    <th>
+                        房間狀態
+                    </th>
+                    <th>
+                        房間地址
+                    </th>
+                    <th>
+                        照片
+                    </th>
+                    <th>
+                        日期
+                    </th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                @{
-                    //foreach (var i in Model)
-                    {
-                        <tr>
-                            <td>海景房</td>
-                            <td>500</td>
-                            <td>看海</td>
-                            <td>aaa.gmail.com</td>
-                            <td>已預定</td>
-                            <td>仁愛路</td>
-                            <td>2022/10/05</td>
-                            <td><img src="~/Image/光之旅-1602655934.jpg" style="height:100px"></td>
-                            <td>
-                                @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                            </td>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomIntrodution)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.member.MemberAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomstatusId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Address)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model.imageReference.Image)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreateDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }) |
 
-                        </tr>
-                        <tr>
-                            <td>山景房</td>
-                            <td>1000</td>
-                            <td>看山</td>
-                            <td>bbb.gmail.com</td>
-                            <td>未預定</td>
-                            <td>士東路</td>
-                            <td>2022/10/06</td>
-                            <td><img src="~/Image/山景房jpg.jpg" style="height:100px"></td>
-                            <td>
-                                @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td>工地房</td>
-                            <td>1500</td>
-                            <td>看工地</td>
-                            <td>ccc.gmail.com</td>
-                            <td>等待預付訂金</td>
-                            <td>長春路</td>
-                            <td>2022/10/07</td>
-                            <td><img src="~/Image/工地.jpg" style="height:100px"></td>
-                            <td>
-                                @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
-                                @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                            </td>
-
-                        </tr>
-                    }
+                            @Html.ActionLink("刪除", "Delete", new { id = item.RoomId }, new { onclick = "return confirm('確定要刪除嗎?')" })
+                        </td>
+                    </tr>
                 }
             </tbody>
-
         </table>*@
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">房名</th>
+                <th scope="col">房價</th>
+                <th scope="col">房間介紹</th>
+                <th scope="col">會員帳號</th>
+                <th scope="col">房間狀態</th>
+                <th scope="col">地址</th>
+                <th scope="col">日期</th>
+                <th scope="col">照片</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                //foreach (var i in Model)
+                {
+                    <tr>
+                        <td>海景房</td>
+                        <td>500</td>
+                        <td>看海</td>
+                        <td>aaa.gmail.com</td>
+                        <td>已預定</td>
+                        <td>仁愛路</td>
+                        <td>2022/10/05</td>
+                        <td><img src="~/Image/光之旅-1602655934.jpg" style="height:100px"></td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>山景房</td>
+                        <td>1000</td>
+                        <td>看山</td>
+                        <td>bbb.gmail.com</td>
+                        <td>未預定</td>
+                        <td>士東路</td>
+                        <td>2022/10/06</td>
+                        <td><img src="~/Image/山景房jpg.jpg" style="height:100px"></td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td>工地房</td>
+                        <td>1500</td>
+                        <td>看工地</td>
+                        <td>ccc.gmail.com</td>
+                        <td>等待預付訂金</td>
+                        <td>長春路</td>
+                        <td>2022/10/07</td>
+                        <td><img src="~/Image/工地.jpg" style="height:100px"></td>
+                        <td>
+                            @Html.ActionLink("修改", "MemberEdit", new { }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Order", new { }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
+                        </td>
+
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
 </div>
 @section Scripts {
     <script>$('#Room').addClass('active');</script>

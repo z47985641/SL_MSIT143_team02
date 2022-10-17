@@ -1,6 +1,4 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
-
-
+﻿
 @{
     ViewData["Title"] = "TestListView";
 }
@@ -14,202 +12,165 @@
     <link rel="stylesheet" media="screen and (max-width:768px)" href="~/css/rooms-mobile.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Source+Sans+Pro:wght@200&display=swap" rel="stylesheet">
-    <link href="https://code.jquery.com/ui/1.12.1/themes/ui-lightness/jquery-ui.css" rel="stylesheet" />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <link href="~/css/price_range_style.css" rel="stylesheet" />
+
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
-
-
+    <script src="~/js/price_range_script.js"></script>
 </head>
-
 <body>
-    @*<div class="price-range-block">
+    <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
 
-            <div id="slider-range" class="price-filter-range" name="rangeInput"></div>
+    <div style="margin:30px auto">
+        <input type="number" min=0 max="50000" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
+        <input type="number" min=0 max="60000" oninput="validity.valid||(value='60000');" id="max_price" class="price-range-field" />
+    </div>
 
-            <div style="margin:30px auto">
-                <input type="number" min=0 max="9900" oninput="validity.valid||(value='0');" id="min_price" class="price-range-field" />
-                <input type="number" min=0 max="10000" oninput="validity.valid||(value='10000');" id="max_price" class="price-range-field" />
-            </div>
+    <button class="price-range-search" id="price-range-submit">搜尋</button>
 
-            <button class="price-range-search" id="price-range-submit">Search</button>
-
-            <div id="searchResults" class="search-results-block"></div>
-
-        </div>*@
-<div id="test"></div>
-   
-
-    @*<div class="description">
-                <img class="images" src="~/assets/img2/ralph-kayden-FqqiAvJejto-unsplash.jpg" alt="#">
-                <p class="room-price" id="priceid">NT$50,000</p>
-                <p class="room-status">商務房間</p>
-                <ul>
-                    <li>液晶螢幕</li>
-                    <li>寢具用品</li>
-                    <li>衛浴乾濕分離</li>
-                    <li>空調、冰箱、WIFI及微波爐</li>
-                </ul>
-                <a class="bbtn" href="#">
-                    <span>立即預訂</span>
-                    <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
-                </a>
-            </div>
-
-            <div class="description">
-                <img class="images" src="~/assets/img2/海景四人房.jpg" alt="#">
-                <p class="room-price" id="priceid">NT$32,000</p>
-                <p class="room-status">海景房</p>
-                <ul>
-                    <li>空調</li>
-                    <li>WIFI</li>
-                    <li>冰箱</li>
-                    <li>寢具用品</li>
-                </ul>
-                <a class="bbtn" href="#">
-                    <span>立即預訂</span>
-                    <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
-                </a>
-            </div>
-        </section>
-
-        <section id="room-description">
-            <div class="description">
-                <img src="~/assets/img2/Rectangle 390.png" alt="#">
-                <p class="room-price" id="priceid">NT$20,000</p>
-                <p class="room-status">Master Longue</p>
-                <ul>
-                    <li>空調</li>
-                    <li>WIFI</li>
-                    <li>冰箱</li>
-                    <li>寢具用品</li>
-                </ul>
-
-                <a class="bbtn" href="#">
-                    <span>立即預訂</span>
-                    <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
-                </a>
-            </div>
+    <div id="searchResults" class="search-results-block"></div>
 
 
-            <div class="description">
-                <img class="images" src="~/assets/img2/Rectangle 389.png" alt="#">
-                <p class="room-price" id="priceid">NT$50,000</p>
-                <p class="room-status">商務房間</p>
-                <ul>
-                    <li>液晶螢幕</li>
-                    <li>寢具用品</li>
-                    <li>衛浴乾濕分離</li>
-                    <li>空調、冰箱、WIFI及微波爐</li>
-                </ul>
-                <a class="bbtn" href="#">
-                    <span>立即預訂</span>
-                    <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
-                </a>
-            </div>
-            <div class="description">
-                <img class="images" src="~/assets/img2/olexandr-ignatov-w72a24brINI-unsplash.jpg" alt="#">
-                <p class="room-price" id="priceid">NT$32,000</p>
-                <p class="room-status">景觀房</p>
-                <ul>
-                    <li>空調</li>
-                    <li>WIFI</li>
-                    <li>冰箱</li>
-                    <li>寢具用品</li>
-                </ul>
-                <a class="bbtn" href="#">
-                    <span>立即預訂</span>
-                    <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
-                </a>
-            </div>*@
+
+    <section id="room-description">
+        <div class="description">
+            <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
+            <p class="room-price" id="priceid">NT$20,000</p>
+            <p class="room-status">單人床</p>
+            <ul>
+                <li>空調</li>
+                <li>WIFI</li>
+                <li>冰箱</li>
+                <li>寢具用品</li>
+            </ul>
+            <a class="bbtn" href="#">
+                <span>立即預訂</span>
+                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
+            </a>
+        </div>
 
 
+        <div class="description">
+            <img class="images" src="~/assets/img2/ralph-kayden-FqqiAvJejto-unsplash.jpg" alt="#">
+            <p class="room-price" id="priceid">NT$50,000</p>
+            <p class="room-status">商務房間</p>
+            <ul>
+                <li>液晶螢幕</li>
+                <li>寢具用品</li>
+                <li>衛浴乾濕分離</li>
+                <li>空調、冰箱、WIFI及微波爐</li>
+            </ul>
+            <a class="bbtn" href="#">
+                <span>立即預訂</span>
+                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
+            </a>
+        </div>
+
+        <div class="description">
+            <img class="images" src="~/assets/img2/海景四人房.jpg" alt="#">
+            <p class="room-price" id="priceid">NT$32,000</p>
+            <p class="room-status">海景房</p>
+            <ul>
+                <li>空調</li>
+                <li>WIFI</li>
+                <li>冰箱</li>
+                <li>寢具用品</li>
+            </ul>
+            <a class="bbtn" href="#">
+                <span>立即預訂</span>
+                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
+            </a>
+        </div>
+    </section>
+
+    <section id="room-description">
+        <div class="description">
+            <img src="~/assets/img2/Rectangle 390.png" alt="#">
+            <p class="room-price" id="priceid">NT$20,000</p>
+            <p class="room-status">Master Longue</p>
+            <ul>
+                <li>空調</li>
+                <li>WIFI</li>
+                <li>冰箱</li>
+                <li>寢具用品</li>
+            </ul>
+
+            <a class="bbtn" href="#">
+                <span>立即預訂</span>
+                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
+            </a>
+        </div>
+
+
+        <div class="description">
+            <img class="images" src="~/assets/img2/Rectangle 389.png" alt="#">
+            <p class="room-price" id="priceid">NT$50,000</p>
+            <p class="room-status">商務房間</p>
+            <ul>
+                <li>液晶螢幕</li>
+                <li>寢具用品</li>
+                <li>衛浴乾濕分離</li>
+                <li>空調、冰箱、WIFI及微波爐</li>
+            </ul>
+            <a class="bbtn" href="#">
+                <span>立即預訂</span>
+                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
+            </a>
+        </div>
+        <div class="description">
+            <img class="images" src="~/assets/img2/olexandr-ignatov-w72a24brINI-unsplash.jpg" alt="#">
+            <p class="room-price" id="priceid">NT$32,000</p>
+            <p class="room-status">景觀房</p>
+            <ul>
+                <li>空調</li>
+                <li>WIFI</li>
+                <li>冰箱</li>
+                <li>寢具用品</li>
+            </ul>
+            <a class="bbtn" href="#">
+                <span>立即預訂</span>
+                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
+            </a>
+        </div>
+    </section>
     <br />
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
 
-@section Scripts{
-    <script>
-                //    $("#slider-range").slider({
-                //        range: true,
-                //        orientation: "horizontal",
-                //        min: 0,
-                //        max: 10000,
-                //        values: [0, 10000],
-                //        step: 100,
+@section Scripts{ 
+<script>
+    $("#slider-range").slider({
+        range: true,
+        orientation: "horizontal",
+        min: 0,
+        max: 60000,
+        values: [0, 60000],
+        step: 100,
 
-                //        slide: function (event, ui) {
-                //            if (ui.values[0] == ui.values[1]) {
-                //                return false;
-                //            }
+        slide: function (event, ui) {
+            if (ui.values[0] == ui.values[1]) {
+                return false;
+            }
 
-                //            $("#min_price").val(ui.values[0]);
-                //            $("#max_price").val(ui.values[1]);
-                //        }
-                //    });
+            $("#min_price").val(ui.values[0]);
+            $("#max_price").val(ui.values[1]);
+        }
+    });
 
-                //const  search = document.querySelector("#price-range-submit"),
-                //          minprice=document.querySelector("#min_price"),
-                //          maxprice=document.querySelector("#max_price"),
-                //          priceid = document.querySelector("#priceid");
-
-                //search.addEventListener("click", () => {
-
-
-
-                //})
-         @{
-                 int count = 0;
-                 string 字串 = "";
-                 foreach (PJ_MSIT143_team02.Models.Room r in Model)
-                 {
-                     count++;
-                     字串 = $"<div id='room - description'>" +
-                        $" <div class='description'>"+
-                        $"< img class='img1' src='~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg' alt='#'>"+
-                        $"<p class='room-price' id='priceid'>@r.RoomPrice</p>"+
-                        $"<p class='room-status'>@r.RoomName</p>" +
-                        $"< ul >"+
-                        $"<li>空調</li>" +
-                        $"<li>WIFI</li>" +
-                        $"<li>@r.RoomIntrodution</li>" +
-                        $"<li>@r.Address</li>" +
-                        $"</ul>" +
-                        $" < a class='bbtn' href='#'>" +
-                        $"<span>立即預訂</span>" +
-                        $"<img class='arrow' src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>" +
-                        $"</a>" +
-                        $"</div>" +
-                        $" </div>"
-;
-
-                            @*<p class="room-price" id="priceid">@r.RoomPrice</p>
-                            <p class="room-status">@r.RoomName</p>
-                            <ul>
-                                <li>空調</li>
-                                <li>WIFI</li>
-                                <li>@r.RoomIntrodution</li>
-                                <li>@r.Address</li>
-                            </ul>
-                            <a class="bbtn" href="#">
-                                <span>立即預訂</span>
-                                <img class="arrow" src="~/assets/img2/Icon ionic-ios-arrow-round-forward.svg" alt="#">
-                            </a>
-                    </div>
-            </div>"*@
-
-             };
+    const  search = document.querySelector("#price-range-submit"),
+              minprice=document.querySelector("#min_price"),
+              maxprice=document.querySelector("#max_price"),
+              priceid = document.querySelector("#priceid");
+    
+    search.addEventListener("click", () => {
 
 
-    }
-        let abc = document.querySelector("#test")
-        let abc = "";
+
+    })
 
 
-    </script>
+</script>
 }
