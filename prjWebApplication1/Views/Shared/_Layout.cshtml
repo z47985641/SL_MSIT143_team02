@@ -52,6 +52,7 @@
                 </div>
             </div>
         </div>
+
         <div class="menu-item">
             <div class="container">
                 <div class="row">
@@ -98,39 +99,53 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
-                                        <ul class="dropdown">
+                                    @{
+                                        if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
+                                        {
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">個人資料</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
                                             </li>
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
                                             </li>
+                                        }
+                                        else
+                                        {
+                                            if ((@Accessor.HttpContext.Session.GetString("Power")) != "管理員")
+                                            {
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">喜愛清單</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
+                                                <ul class="dropdown">
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">個人資料</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">喜愛清單</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
+                                                    </li>
+                                                </ul>
                                             </li>
+                                            }
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Logout">登出</a>
                                             </li>
-                                            <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                        }
+                                    }
                                     <li>
                                         <a asp-area="" asp-controller="Home" asp-action="Index">
                                             <img src="~/img/cart_shopping.png" />購物車
                                         </a>
                                     </li>
                                     @{
-                                        if (@Accessor.HttpContext.Session.GetString("KK") != null)
+                                        if ((@Accessor.HttpContext.Session.GetString("Power")) == "管理員")
                                         {
                                             <li>
                                                 <a asp-area="" asp-controller="MemberOnly" asp-action="AdminMainPage">
@@ -146,6 +161,7 @@
                 </div>
             </div>
         </div>
+
     </header>
 
 
