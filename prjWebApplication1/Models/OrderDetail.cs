@@ -20,5 +20,6 @@ namespace PJ_MSIT143_team02.Models
         public virtual Order Order { get; set; }
         //public virtual Payment Pay { get; set; }
         public virtual Discount RoomDiscount { get; set; }
+
     }
 }
