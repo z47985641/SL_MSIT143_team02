@@ -23,6 +23,7 @@ namespace PJ_MSIT143_team02.Controllers
                 data = from c in (new MingSuContext()).Comments
                        where (c.CommentId.ToString().Contains(model.txtKey) ||
                        c.CommentDetail.Contains(model.txtKey) ||
+                       c.CommentStatus.Contains(model.txtKey) ||
                        c.CommentPoint.ToString().Contains(model.txtKey) ||
                        c.RoomId.ToString().Contains(model.txtKey))
                        select c;
