@@ -56,20 +56,20 @@
     <script>$('#Comment').addClass('active');</script>
     <script>
         $(function () {
-            if ($("#status").val() == "2") {
+            if ($("#status").val() == "yes") {
                 $("#unblock").removeAttr("disabled");
                 $("#block").attr("disabled", true);
             }
         })
         $("#block").click(function () {
-            $("#status").val("2");
+            $("#status").val("yes");
             var result = confirm("確定要隱藏該評論嗎?");
             if (result) {                
                 $("#save").click();
             }
         })
         $("#unblock").click(function () {
-            $("#status").val("1");
+            $("#status").val("no");
             var result = confirm("確定要取消隱藏該評論嗎?");
             if (result) {
                 $("#save").click();                
