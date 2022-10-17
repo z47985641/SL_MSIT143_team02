@@ -28,6 +28,11 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return (int)_comment.CommentPoint; }
             set { _comment.CommentPoint = value; }
         }
+        public string CommentStatus
+        {
+            get { return _comment.CommentStatus; }
+            set { _comment.CommentStatus = value; }
+        }
         public int RoomId
         {
             get { return _comment.RoomId; }

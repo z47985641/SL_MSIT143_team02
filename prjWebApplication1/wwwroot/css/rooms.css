@@ -51,13 +51,13 @@ nav {
   margin-top:1.25rem;
   line-height: 1.7;
 }
+#room-description {
+    display: flex;
+    margin: auto;
+    width: 80%;
+    /*    justify-content: space-between;
+*/ margin-top: 6.67rem;
 
-#room-description{
-  display: flex;
-  margin: auto;
-  width: 80%;
-  justify-content: space-between;
-  margin-top: 6.67rem;
 }
 
 #room-description img{

@@ -88,10 +88,15 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a asp-area="" asp-controller="Discount" asp-action="DiscountMain">折扣</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="Activity" asp-action="ActivityDisplay">活動</a>
+                                        <a>好康專區</a>
+                                        <ul class="dropdown">
+                                            <li>
+                                                <a asp-area="" asp-controller="Discount" asp-action="DiscountMain">折扣</a>
+                                            </li>
+                                            <li>
+                                                <a asp-area="" asp-controller="Activity" asp-action="ActivityDisplay">活動</a>
+                                            </li>
+                                        </ul>
                                     </li>
                                     <li>
                                         <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
