@@ -14,48 +14,15 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult List(CKeywordViewModel model)
         {
             MingSuContext db = new MingSuContext();
-            List<CAllViewModel> cAlls = new List<CAllViewModel>();
-
-            //var rooms = db.Rooms.Select(i => i);
-            //var image = db.Images.Select(i => i);
-            //var member = db.Members.Select(i => i);
-            //var RoomStatus = db.RoomStatuses.Select(i => i);
-            //var rooms = (from r in db.Rooms
-            //             join i in db.ImageReferences on r.RoomId equals i.RoomId
-            //             join k in db.Images on i.ImageId equals k.ImageId
-            //             join m in db.Members on r.MemberId equals m.MemberId
-            //             join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
-            //             select new
-            //             {
-            //                 r.RoomName,
-            //                 r.RoomPrice,
-            //                 r.RoomIntrodution,
-            //                 m.MemberAccount,
-            //                 r.Roomstatus,
-            //                 r.ImageReferences,
-            //                 r.CreateDate
-            //             }).ToList();
-
-            //foreach (var i in rooms)
-            //{
-            //    CAllViewModel x = new CAllViewModel();
-            //    x.room = i;
-            //    cAlls.Add(x);
-            //}
-
-
-
-            var q = from r in db.Rooms
-                    select r;
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
 
-                datas = from r in db.Rooms
-                        join i in db.ImageReferences on r.RoomId equals i.RoomId
-                        join k in db.Images on i.ImageId equals k.ImageId
-                        join m in db.Members on r.MemberId equals m.MemberId
-                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
-                        select r;
+                datas = from p in db.Rooms
+                            //join i in db.ImageReferences on r.RoomId equals i.RoomId
+                            //join k in db.Images on i.ImageId equals k.ImageId
+                            //join m in db.Members on r.MemberId equals m.MemberId
+                            //join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
+                        select p;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
                 || p.RoomPrice.ToString().Contains(model.txtKeyword)
@@ -64,7 +31,7 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
                 || p.CreateDate.ToString().Contains(model.txtKeyword));
-            return View(cAlls);
+            return View(datas);
         }
         public IActionResult ListView(CKeywordViewModel model)
         {
@@ -94,17 +61,14 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult TestListView(CKeywordViewModel model)
         {
             MingSuContext db = new MingSuContext();
-            List<CAllViewModel> cAlls = new List<CAllViewModel>();
-            var q = from r in db.Rooms
-                    select r;
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
 
                 datas = from r in db.Rooms
-                        join i in db.ImageReferences on r.RoomId equals i.RoomId
-                        join k in db.Images on i.ImageId equals k.ImageId
-                        join m in db.Members on r.MemberId equals m.MemberId
-                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
+                            //join i in db.ImageReferences on r.RoomId equals i.RoomId
+                            //join k in db.Images on i.ImageId equals k.ImageId
+                            //join m in db.Members on r.MemberId equals m.MemberId
+                            //join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
                         select r;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
@@ -114,7 +78,7 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
                 || p.CreateDate.ToString().Contains(model.txtKeyword));
-            return View(cAlls);
+            return View(datas);
         }
         
 
