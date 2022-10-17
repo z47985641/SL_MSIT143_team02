@@ -23,6 +23,7 @@ namespace PJ_MSIT143_team02
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddHttpContextAccessor();
             services.AddControllersWithViews();
             services.AddSession();
         }
@@ -46,7 +47,6 @@ namespace PJ_MSIT143_team02
             app.UseRouting();
             app.UseSession();
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
