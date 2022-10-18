@@ -22,19 +22,17 @@
                 {
                     <div class="col-lg-4 col-md-6 mb-4">
                         <div class="room-item card">
-                            <img src="" class="card-img-top" />
+                            @*<img src="" class="card-img-top" />*@
                             <div class="ri-text">
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        @Html.DisplayFor(modelItem => item.DiscountName)
-                                    </h5>
-                                    <p class="card-text">
-                                        @Html.DisplayFor(modelItem => item.DiscountInfo)
-                                    </p>
-                                    <p class="card-text" style="text-align:right">
-                                        @Html.ActionLink("查看更多", "Details", new { id = item.RoomDiscountId }, new { @class = "btn btn-secondary" })
-                                    </p>
-                                </div>
+                                <h5 class="card-title">
+                                    @Html.DisplayFor(modelItem => item.DiscountName)
+                                </h5>
+                                @*<p class="card-text">
+                                    @Html.DisplayFor(modelItem => item.DiscountInfo)
+                                </p>*@
+                                <p class="card-text" style="text-align:right">
+                                    @Html.ActionLink("查看更多", "Details", new { id = item.RoomDiscountId }, new { @class = "btn btn-secondary" })
+                                </p>
                             </div>
                         </div>
                     </div>
