@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link href="~/css/notice.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -126,6 +127,23 @@
                                             <img src="~/img/cart_shopping.png" />購物車
                                         </a>
                                     </li>
+                                    <li>
+                                        <div class="icon" onclick="toggleNotifi()">
+                                            <img src="img/notice_icon.png" alt=""> <span>01</span>
+                                        </div>
+                                        <div class="notifi-box" id="box">
+                                            <h2>通知欄<span>01</span></h2>
+                                            <div class="notifi-item">
+                                                <div class="text">
+                                                    <h4>最佳活動體驗</h4>
+                                                    <p class="text">
+                                                        @Html.ActionLink("立即點選", "ActivityDisplay", "Activity", null, null)
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -151,6 +169,8 @@
     <script src="~/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/js/script.js"></script>
+
     @RenderSection("scripts", required: false)
 
 
@@ -215,3 +235,23 @@
     </footer>
 </body>
 </html>
+
+@section Scripts{ 
+<script>
+    var box = document.getElementById('box');
+    var down = false;
+
+
+    function toggleNotifi() {
+        if (down) {
+            box.style.height = '0px';
+            box.style.opacity = 0;
+            down = false;
+        } else {
+            box.style.height = '510px';
+            box.style.opacity = 1;
+            down = true;
+        }
+    }
+</script>
+}
