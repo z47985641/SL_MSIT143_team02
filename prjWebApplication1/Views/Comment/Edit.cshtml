@@ -25,12 +25,12 @@
             </div>
             <div class="form-group">
                 <label class="control-label">評分</label>
-                <input asp-for="CommentPoint" id="point" class="form-control" />
+                <input asp-for="CommentPoint" id="point" class="form-control" disabled />
                 <span asp-validation-for="CommentPoint" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label class="control-label">評論</label>
-                <textarea asp-for="CommentDetail" class="form-control" style="height:200px"></textarea>
+                <textarea asp-for="CommentDetail" id="comment" class="form-control" style="height:200px" disabled></textarea>
                 <span asp-validation-for="CommentDetail" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
@@ -39,7 +39,7 @@
                 <span asp-validation-for="CommentStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="button" id="save" value="儲存" class="btn btn-primary" />
+                <input type="button" id="save" value="儲存" class="btn btn-primary" hidden />
                 <input type="button" id="block" value="隱藏" class="btn btn-primary" />
                 <input type="button" id="unblock" value="取消隱藏" class="btn btn-primary" disabled/>
             </div>
@@ -62,6 +62,8 @@
             }
         })
         $("#save").click(function () {
+            $("#point").removeAttr("disabled");
+            $("#comment").removeAttr("disabled");
             if ($("#point").val() > 5 || $("#point").val() < 1) {
                 window.alert("評分需在1 - 5之間");
                 return;
