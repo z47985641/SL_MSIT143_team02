@@ -31,6 +31,9 @@
                                     <p class="card-text">
                                         @Html.DisplayFor(modelItem => item.DiscountInfo)
                                     </p>
+                                    <p class="card-text" style="text-align:right">
+                                        @Html.ActionLink("查看更多", "Details", new { id = item.RoomDiscountId }, new { @class = "btn btn-secondary" })
+                                    </p>
                                 </div>
                             </div>
                         </div>

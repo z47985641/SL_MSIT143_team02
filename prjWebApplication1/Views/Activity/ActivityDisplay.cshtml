@@ -24,7 +24,7 @@
                     <div class="room-item card">
                         @*<img src=""
                 class="card-img-top" />*@
-                        <div class="ri-text" style="height:250px" >
+                        <div class="ri-text" style="height:300px" >
                             <h5 class="card-title">@Html.DisplayFor(modelItem => item.ActivityName)</h5>
                             <p class="card-text">
                                 活動日期: @Html.DisplayFor(modelItem => item.ActivityDate)
@@ -37,6 +37,9 @@
                             </p>
                             <p class="card-text">
                                 簡介: @Html.DisplayFor(modelItem => item.ActivityInfo)
+                            </p>
+                            <p class="card-text" style="text-align:right">
+                                @Html.ActionLink("查看更多", "Details", new { id = item.ActivityId }, new { @class = "btn btn-secondary" })
                             </p>
                         </div>
                     </div>
