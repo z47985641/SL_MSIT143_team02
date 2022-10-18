@@ -45,7 +45,15 @@
                             <button type="button" class="btn btn-primary" id="roomplus">+</button>
                         </div>
 
-                        <button type="submit" onsubmit="myButton()">立即搜尋</button>
+                        @*<a href="@Url.Action("Room","TestListView")">*@
+                        @*<button type="submit" onsubmit="myButton()" id="myButton">立即搜尋</button>*@
+                        @*</a>*@
+
+
+                    <button type="submit" onsubmit="myButton()" id="myButton">
+                        @Html.ActionLink("立即搜尋", "TestListView", "Room")
+                    </button>
+
                     </form>
                 </div>
             </div>
@@ -537,6 +545,19 @@
                 return false;
             }
         }
+
+        //立即搜尋的按鈕進去到搜好房
+
+        //const myBtn = document.querySelector("#myButton")
+        @*$('#myButton').click(function () {
+            $.ajax({
+                url: '@Url.Content("~/room/TestListView")'
+                type: 'POST', //GET POST PUT DELETE
+                data: { "@Model.Rood": "臺北市" }, //{ "keyword": "Fiona" }
+
+            })
+
+        })*@
 
     </script>
     <script src="~/js/chat.js"></script>
