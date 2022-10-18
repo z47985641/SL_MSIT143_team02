@@ -25,7 +25,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label">評分</label>
-                <input asp-for="CommentPoint" class="form-control" />
+                <input asp-for="CommentPoint" id="point" class="form-control" />
                 <span asp-validation-for="CommentPoint" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -39,7 +39,7 @@
                 <span asp-validation-for="CommentStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" id="save" value="儲存" class="btn btn-primary" />
+                <input type="button" id="save" value="儲存" class="btn btn-primary" />
                 <input type="button" id="block" value="隱藏" class="btn btn-primary" />
                 <input type="button" id="unblock" value="取消隱藏" class="btn btn-primary" disabled/>
             </div>
@@ -59,6 +59,14 @@
             if ($("#status").val() == "yes") {
                 $("#unblock").removeAttr("disabled");
                 $("#block").attr("disabled", true);
+            }
+        })
+        $("#save").click(function () {
+            if ($("#point").val() > 5 || $("#point").val() < 1) {
+                window.alert("評分需在1 - 5之間");
+                return;
+            } else {
+                $("#save").get(0).type = "submit";               
             }
         })
         $("#block").click(function () {
