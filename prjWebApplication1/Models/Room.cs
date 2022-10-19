@@ -24,6 +24,8 @@ namespace PJ_MSIT143_team02.Models
         public int RoomstatusId { get; set; }
         public string Address { get; set; }
         public DateTime? CreateDate { get; set; }
+        public int Qty { get; set; }
+
 
         public virtual RoomStatus Roomstatus { get; set; }
         public virtual ICollection<AdminReference> AdminReferences { get; set; }
