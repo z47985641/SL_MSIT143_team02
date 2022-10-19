@@ -66,10 +66,8 @@
                                 <ul>
                                     <li><a asp-area="" asp-controller="Home" asp-action="Index">首頁</a></li>
                                     <li>
-
-                                        <a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a>
+                                        @*<a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a>*@
                                         <a asp-area="" asp-controller="Room" asp-action="TestListView">測試搜好房</a>
-
                                         <ul class="dropdown">
                                             <li>
                                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour1">家庭房</a>
@@ -95,6 +93,11 @@
                                                 <a asp-area="" asp-controller="Activity" asp-action="ActivityDisplay">活動</a>
                                             </li>
                                         </ul>
+                                    </li>
+                                    <li>
+                                        @*<a>*@
+                                            @Html.ActionLink("刊登旅宿", "Login", "MemberCreate", null, null)
+                                        @*</a>*@
                                     </li>
                                     <li>
                                         <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>

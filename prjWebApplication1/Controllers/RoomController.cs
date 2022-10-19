@@ -78,7 +78,11 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.Qty.ToString().Contains(model.txtKeyword));
             return View(datas);
         }
-        
+        public IActionResult AddRoom(CKeywordViewModel model)
+        {
+            return View();
+
+        }
 
 
         public IActionResult Create()
@@ -146,6 +150,7 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("List");
         }
+
 
     }
 }
