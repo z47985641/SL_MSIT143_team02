@@ -30,6 +30,7 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.Qty.ToString().Contains(model.txtKeyword));
             return View(datas);
         }
+
         public IActionResult ListView(CKeywordViewModel model)
         {
             MingSuContext db = new MingSuContext();
@@ -64,8 +65,8 @@ namespace PJ_MSIT143_team02.Controllers
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
 
-                datas = from r in db.Rooms
-                        select r;
+                datas = from p in db.Rooms
+                        select p;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
                 || p.RoomPrice.ToString().Contains(model.txtKeyword)
