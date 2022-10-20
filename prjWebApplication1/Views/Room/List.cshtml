@@ -55,38 +55,36 @@
         <tbody>
             @foreach (var item in Model)
             {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomIntrodution)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MemberId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomstatusId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Qty)
-                </td>
-                <td>
-                    @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }) |
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomIntrodution)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MemberId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomstatusId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    @*<td>
+                            @Html.DisplayFor(modelItem => Model.imageReference.Image)
+                        </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }) |
 
                     @Html.ActionLink("刪除", "Delete", new { id = item.RoomId }, new { onclick = "return confirm('確定要刪除嗎?')" })
                 </td>
