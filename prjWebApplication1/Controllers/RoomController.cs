@@ -26,7 +26,8 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.MemberId.ToString().Contains(model.txtKeyword)
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
+                || p.CreateDate.ToString().Contains(model.txtKeyword)
+                || p.Qty.ToString().Contains(model.txtKeyword));
             return View(datas);
         }
         public IActionResult ListView(CKeywordViewModel model)
@@ -51,7 +52,8 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.MemberId.ToString().Contains(model.txtKeyword)
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
+                || p.CreateDate.ToString().Contains(model.txtKeyword)
+                || p.Qty.ToString().Contains(model.txtKeyword));
             return View(cAlls);
         }
        
@@ -70,7 +72,8 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.MemberId.ToString().Contains(model.txtKeyword)
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
+                || p.CreateDate.ToString().Contains(model.txtKeyword)
+                || p.Qty.ToString().Contains(model.txtKeyword));
             return View(datas);
         }
         
