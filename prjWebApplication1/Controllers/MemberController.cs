@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using PJ_MSIT143_team02.Models;
 using Microsoft.AspNetCore.Http;
+using PJ_MSIT143_team02.ViewModels;
 
 namespace PJ_MSIT143_team02.Controllers
 {
@@ -116,23 +117,29 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult MemberPasswordEdit()
         {
-            return View();
+                return View();
         }
         [HttpPost]
-        public IActionResult MemberPasswordEdit(Member datasedit)
+        public IActionResult MemberPasswordEdit(CMemberPassword datasedit)
         {
             MingSuContext db = new MingSuContext();
-            Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
-            datas.MemberPassword = datasedit.MemberPassword;
-            datas.MemberPhone = datasedit.MemberPhone;
-            datas.Authority = datasedit.Authority;
-            datas.Admins = datasedit.Admins;
-            datas.BirthDate = datasedit.BirthDate;
+            Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == HttpContext.Session.GetInt32("MemberID"));
+            if (datasedit.MemberPassword != datas.MemberPassword) 
+               return View(); 
+                
+            datas.MemberPassword = datasedit.MemberNewPassword;
             db.SaveChanges();
-
             return RedirectToAction("MemberPersonalData");
         }
-
+        public IActionResult LikeList()
+        {
+            MingSuContext db = new MingSuContext();
+            Order orderDatas = db.Orders.FirstOrDefault(Order => Order.OrderstatusId == 5);
+            IEnumerable<Order> datas = from I in db.Orders
+                                       where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
+                                       select I;
+            return View(datas);
+        }
 
     }
 }
