@@ -37,6 +37,8 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.SetString("Power", "");
+            HttpContext.Session.SetString("MemberID", "");
+
             return RedirectToAction("Index", "Home");
         }
         [HttpPost]
@@ -48,8 +50,8 @@ namespace PJ_MSIT143_team02.Controllers
                 if (cust.MemberPassword.Equals(vModel.txtPassword))
                 {
                     string jsonUser = JsonSerializer.Serialize(cust);
-                    HttpContext.Session.SetString("KK", jsonUser);
                     HttpContext.Session.SetString("Power", cust.Authority);
+                    HttpContext.Session.SetInt32("MemberID", cust.MemberId);
                     if (cust.Authority.Equals("管理員"))
                         return RedirectToAction("AdminMainPage", "MemberOnly");
 
