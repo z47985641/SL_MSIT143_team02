@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PJ_MSIT143_team02.Models.Member>
+
+@{
+    ViewData["Title"] = "MemberPersonalData";
+}
+<div class="container">
+    <h3 style="text-align:center">個人資料</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.MemberName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BirthDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MemberPhone)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MemberEmail)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CityName)
+                </th>
+                <th>
+                    功能
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MemberName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MemberPhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MemberEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CityName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("編輯", "MemberPersonalEdit", new {id=item.MemberId}) |
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+    
