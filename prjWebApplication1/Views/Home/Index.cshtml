@@ -45,7 +45,9 @@
                             <button type="button" class="btn btn-primary" id="roomplus">+</button>
                         </div>
 
-                        <button type="submit" onsubmit="myButton()">立即搜尋</button>
+                        <button type="submit" onsubmit="myButton()">
+                            @Html.ActionLink("立即搜尋","TestListView","Room")
+                        </button>
                     </form>
                 </div>
             </div>
