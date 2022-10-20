@@ -2,7 +2,8 @@
 
 @{ ViewData["Title"] = "ActivityDisplay"; }
 
-<div>
+<link href="~/css/acti-and-disc.css" rel="stylesheet" />
+<div id="box">
     <div class="breadcrumb-section">
         <div class="container">
             <div class="row">
@@ -14,35 +15,36 @@
             </div>
         </div>
     </div>
-</div>
-<section class="rooms-section spad">
-    <div class="container">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="room-item">
-                    @*<img src=""
-            class="card-img-top" />*@
-                    <div class="ri-text" style="border:solid;height:250px" >
-                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.ActivityName)</h5>
-                        <p class="card-text">
-                            活動日期: @Html.DisplayFor(modelItem => item.ActivityDate)
-                        </p>
-                        <p class="card-text">
-                            人數上限: @Html.DisplayFor(modelItem => item.ActivityCapacity) 人
-                        </p>
-                        <p class="card-text">
-                            活動狀態: @Html.DisplayFor(modelItem => item.ActivityStatus)
-                        </p>
-                        <p class="card-text">
-                            簡介: @Html.DisplayFor(modelItem => item.ActivityInfo)
-                        </p>
+    <section class="rooms-section spad">
+        <div class="container">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="room-item card">
+                        @*<img src=""
+                class="card-img-top" />*@
+                        <div class="ri-text">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.ActivityName)</h5>
+                            <p class="card-text">
+                                活動日期: @Html.DisplayFor(modelItem => item.ActivityDate)
+                            </p>
+                            @*<p class="card-text">
+                                人數上限: @Html.DisplayFor(modelItem => item.ActivityCapacity) 人
+                            </p>
+                            <p class="card-text">
+                                活動狀態: @Html.DisplayFor(modelItem => item.ActivityStatus)
+                            </p>
+                            <p class="card-text">
+                                簡介: @Html.DisplayFor(modelItem => item.ActivityInfo)
+                            </p>*@
+                            <p class="card-text" style="text-align:right">
+                                @Html.ActionLink("查看更多", "Details", new { id = item.ActivityId }, new { @class = "btn btn-secondary" })
+                            </p>
+                        </div>
                     </div>
-                </div>
-
-
-            </div>}
+                </div>}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+</div>

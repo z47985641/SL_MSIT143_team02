@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -30,7 +33,7 @@
                     <div class="col-lg-6">
                         <ul class="tn-left">
                             <li><i class="fa fa-phone"></i> (02) 6631-6588</li>
-                            <li><i class="fa fa-envelope"></i>FIND HOTEL@gmail.com</li>
+                            <li><i class="fa fa-envelope"></i>FIND HOTEL@gmail. com</li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -50,13 +53,14 @@
                 </div>
             </div>
         </div>
+
         <div class="menu-item">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2">
                         <div class="logo">
                             <a asp-area="" asp-controller="Home" asp-action="Index">
-                                <img src="../img/logo.png">
+                                <img src="~/img/logo.png">
                             </a>
                         </div>
                     </div>
@@ -94,59 +98,53 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        @*<a>*@
-                                            @Html.ActionLink("刊登旅宿", "Login", "MemberCreate", null, null)
-                                        @*</a>*@
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
-                                        <ul class="dropdown">
+                                    @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
+                                        {
+                            <li>
+                                <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
+                            </li>
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">個人資料</a>
-                                            </li>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
+                                            </li> }
+                                                        else
+                                                        {
+                                                            if ((@Accessor.HttpContext.Session.GetString("Power")) != "管理員")
+                                                            {
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
-                                            </li>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
+                                                <ul class="dropdown">
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">個人資料</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">喜愛清單</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
+                                                    </li>
+                                                </ul>
+                                            </li> }
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">喜愛清單</a>
-                                            </li>
-                                            <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
-                                            </li>
-                                            <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Logout">登出</a>
+                                            </li> } }
                                     <li>
                                         <a asp-area="" asp-controller="Home" asp-action="Index">
                                             <img src="~/img/cart_shopping.png" />購物車
                                         </a>
                                     </li>
-                                    <li>
-                                        <div class="icon" onclick="toggleNotifi()">
-                                            <img src="~/img/notice_icon.png" alt=""> <span>01</span>
-                                        </div>
-                                        <div class="notifi-box" id="box">
-                                            <h2>通知欄<span>01</span></h2>
-                                            <div class="notifi-item">
-                                                <div class="text">
-                                                    <h4>最佳活動體驗</h4>
-                                                    <p class="text">
-                                                        @Html.ActionLink("立即點選", "ActivityDisplay", "Activity", null, null)
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-
+                                    @{ if (@Accessor.HttpContext.Session.GetString("KK") != null)
+                                        {
+                            <li>
+                                <a asp-area="" asp-controller="MemberOnly" asp-action="AdminMainPage">
+                                    後臺管理
+                                </a>
+                            </li> } }
                                 </ul>
                             </nav>
                         </div>
@@ -154,6 +152,7 @@
                 </div>
             </div>
         </div>
+
     </header>
 
 
@@ -186,7 +185,7 @@
                         <div class="ft-about">
                             <div class="logo">
                                 <a href="#">
-                                    <img src="../img/contact.png" />  @*..絕對路徑  ~為相對路徑*@
+                                    <img src="~/img/contact.png" />  @*..絕對路徑  ~為相對路徑*@
                                 </a>
                             </div>
                             <div class="fa-social">
