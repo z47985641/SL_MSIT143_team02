@@ -81,6 +81,15 @@ namespace PJ_MSIT143_team02.Controllers
         {
             return View();
         }
+        public IActionResult AddtoLike(int? id)
+        {
+            MingSuContext db = new MingSuContext();
+            Room datas = db.Rooms.FirstOrDefault(Room_datas => Room_datas.RoomId == id);
 
+
+
+
+            return View();
+        }
     }
 }

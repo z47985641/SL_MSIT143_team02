@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using PJ_MSIT143_team02.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace PJ_MSIT143_team02.Controllers
 {
@@ -46,14 +47,14 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
-            datas.MemberEmail       = datasedit.MemberEmail   ;
-            datas.MemberAccount     = datasedit.MemberAccount ;
-            datas.MemberName        = datasedit.MemberName    ;
-            datas.MemberPassword    = datasedit.MemberPassword;
-            datas.MemberPhone       = datasedit.MemberPhone   ;
-            datas.Authority         = datasedit.Authority     ;
-            datas.Admins             = datasedit.Admins         ;
-            datas.BirthDate         = datasedit.BirthDate;
+            datas.MemberEmail = datasedit.MemberEmail;
+            datas.MemberAccount = datasedit.MemberAccount;
+            datas.MemberName = datasedit.MemberName;
+            datas.MemberPassword = datasedit.MemberPassword;
+            datas.MemberPhone = datasedit.MemberPhone;
+            datas.Authority = datasedit.Authority;
+            datas.Admins = datasedit.Admins;
+            datas.BirthDate = datasedit.BirthDate;
             db.SaveChanges();
 
             return RedirectToAction("MemberList");
@@ -82,5 +83,56 @@ namespace PJ_MSIT143_team02.Controllers
             db.SaveChanges();
             return RedirectToAction("MemberList");
         }
+
+        public IActionResult MemberPersonalEdit()
+        {
+            MingSuContext db = new MingSuContext();
+            Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == HttpContext.Session.GetInt32("MemberID"));
+            return View(datas);
+        }
+        [HttpPost]
+        public IActionResult MemberPersonalEdit(Member datasedit)
+        {
+            MingSuContext db = new MingSuContext();
+            Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
+            datas.MemberEmail = datasedit.MemberEmail;
+            datas.MemberName = datasedit.MemberName;
+            datas.MemberPhone = datasedit.MemberPhone;
+            datas.BirthDate = datasedit.BirthDate;
+            datas.CityName = datasedit.CityName;
+            db.SaveChanges();
+
+            return RedirectToAction("MemberPersonalData");
+        }
+
+        public IActionResult MemberPersonalData()
+        {
+            MingSuContext db = new MingSuContext();
+            IEnumerable<Member> datas = from I in db.Members
+                                        where I.MemberId == HttpContext.Session.GetInt32("MemberID")
+                                        select I;
+            return View(datas);
+        }
+
+        public IActionResult MemberPasswordEdit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult MemberPasswordEdit(Member datasedit)
+        {
+            MingSuContext db = new MingSuContext();
+            Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
+            datas.MemberPassword = datasedit.MemberPassword;
+            datas.MemberPhone = datasedit.MemberPhone;
+            datas.Authority = datasedit.Authority;
+            datas.Admins = datasedit.Admins;
+            datas.BirthDate = datasedit.BirthDate;
+            db.SaveChanges();
+
+            return RedirectToAction("MemberPersonalData");
+        }
+
+
     }
 }
