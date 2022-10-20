@@ -54,6 +54,11 @@
                 <span asp-validation-for="CreateDate" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Qty" class="control-label">數量</label>
+                <input asp-for="Qty" class="form-control"/>
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" onclick="return confirm('確定要送出嗎?')" />
             </div>
         </form>

@@ -26,9 +26,11 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.MemberId.ToString().Contains(model.txtKeyword)
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
+                || p.CreateDate.ToString().Contains(model.txtKeyword)
+                || p.Qty.ToString().Contains(model.txtKeyword));
             return View(datas);
         }
+
         public IActionResult ListView(CKeywordViewModel model)
         {
             MingSuContext db = new MingSuContext();
@@ -51,7 +53,9 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.MemberId.ToString().Contains(model.txtKeyword)
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
+                || p.CreateDate.ToString().Contains(model.txtKeyword)
+                || p.Qty.ToString().Contains(model.txtKeyword));
+
             return View(cAlls);
         }
        
@@ -62,6 +66,10 @@ namespace PJ_MSIT143_team02.Controllers
             if (string.IsNullOrEmpty(model.txtKeyword))
 
                 datas = from r in db.Rooms
+                            //join i in db.ImageReferences on r.RoomId equals i.RoomId
+                            //join k in db.Images on i.ImageId equals k.ImageId
+                            //join m in db.Members on r.MemberId equals m.MemberId
+                            //join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
                         select r;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
@@ -70,10 +78,15 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.MemberId.ToString().Contains(model.txtKeyword)
                 || p.RoomstatusId.ToString().Contains(model.txtKeyword)
                 || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
+                || p.CreateDate.ToString().Contains(model.txtKeyword)
+                || p.Qty.ToString().Contains(model.txtKeyword));
             return View(datas);
         }
-        
+        public IActionResult AddRoom(CKeywordViewModel model)
+        {
+            return View();
+
+        }
 
 
         public IActionResult Create()
@@ -136,11 +149,12 @@ namespace PJ_MSIT143_team02.Controllers
                 r.RoomstatusId = InRoom.RoomstatusId;
                 r.Address = InRoom.Address;
                 r.CreateDate = InRoom.CreateDate;
-
+                r.Qty= InRoom.Qty;
                 db.SaveChanges();
             }
             return RedirectToAction("List");
         }
+
 
     }
 }
