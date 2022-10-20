@@ -60,6 +60,7 @@ namespace PJ_MSIT143_team02.Controllers
                 o.OrderId = inCust.OrderId;
                 o.OrderRemark = inCust.OrderRemark;
                 o.MemberId = inCust.MemberId;
+                o.OrderstatusId = inCust.OrderstatusId;
                 hotel.SaveChanges();
             }
             return RedirectToAction("List");
@@ -76,7 +77,10 @@ namespace PJ_MSIT143_team02.Controllers
             hotel.SaveChanges();
             return RedirectToAction("List");
         }
-
+        public IActionResult AddtoCart()
+        {
+            return View();
+        }
 
     }
 }
