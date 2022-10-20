@@ -34,6 +34,11 @@ namespace PJ_MSIT143_team02.Controllers
         {
             return View();
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.SetString("Power", "");
+            return RedirectToAction("Index", "Home");
+        }
         [HttpPost]
         public ActionResult Login(CLoginViewModel vModel)
         {
@@ -44,9 +49,8 @@ namespace PJ_MSIT143_team02.Controllers
                 {
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString("KK", jsonUser);
-                    ViewBag.check = true;
-
-                    if(cust.Authority.Equals("管理員"))
+                    HttpContext.Session.SetString("Power", cust.Authority);
+                    if (cust.Authority.Equals("管理員"))
                         return RedirectToAction("AdminMainPage", "MemberOnly");
 
                     return RedirectToAction("Index", "Home");

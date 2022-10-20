@@ -28,6 +28,17 @@ namespace PJ_MSIT143_team02.Controllers
             var data = queryAll();
             return View(data);
         }
+        public IActionResult Details(int? id)
+        {
+            if (id != null)
+            {
+                MingSuContext db = new MingSuContext();
+                Activity act = db.Activities.FirstOrDefault(p => p.ActivityId == id);
+                if (act != null)
+                    return View(act);
+            }
+            return RedirectPermanent("ActivityDisplay");
+        }
         public IActionResult List(CKeywordViewModel model)
         {            
             MingSuContext db = new MingSuContext();
