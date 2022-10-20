@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link href="~/css/notice.css" rel="stylesheet" />
 </head>
 
 <body>
@@ -68,10 +69,8 @@
                                 <ul>
                                     <li><a asp-area="" asp-controller="Home" asp-action="Index">首頁</a></li>
                                     <li>
-
-                                        <a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a>
+                                        @*<a asp-area="" asp-controller="Room" asp-action="ListView">搜好房</a>*@
                                         <a asp-area="" asp-controller="Room" asp-action="TestListView">測試搜好房</a>
-
                                         <ul class="dropdown">
                                             <li>
                                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Tour1">家庭房</a>
@@ -97,6 +96,11 @@
                                                 <a asp-area="" asp-controller="Activity" asp-action="ActivityDisplay">活動</a>
                                             </li>
                                         </ul>
+                                    </li>
+                                    <li>
+                                        @*<a>*@
+                                            @Html.ActionLink("刊登旅宿", "Login", "MemberCreate", null, null)
+                                        @*</a>*@
                                     </li>
                                     <li>
                                         <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
@@ -129,16 +133,6 @@
                                             <img src="~/img/cart_shopping.png" />購物車
                                         </a>
                                     </li>
-                                    @{
-                                        if (@Accessor.HttpContext.Session.GetString("KK") != null)
-                                        {
-                                            <li>
-                                                <a asp-area="" asp-controller="MemberOnly" asp-action="AdminMainPage">
-                                                    後臺管理
-                                                </a>
-                                            </li>
-                                        }
-                                    }
                                 </ul>
                             </nav>
                         </div>
@@ -164,6 +158,8 @@
     <script src="~/js/main.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/js/script.js"></script>
+
     @RenderSection("scripts", required: false)
 
 
@@ -228,3 +224,23 @@
     </footer>
 </body>
 </html>
+
+@section Scripts{ 
+<script>
+    var box = document.getElementById('box');
+    var down = false;
+
+
+    function toggleNotifi() {
+        if (down) {
+            box.style.height = '0px';
+            box.style.opacity = 0;
+            down = false;
+        } else {
+            box.style.height = '510px';
+            box.style.opacity = 1;
+            down = true;
+        }
+    }
+</script>
+}
