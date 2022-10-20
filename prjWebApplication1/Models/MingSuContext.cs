@@ -482,6 +482,7 @@ namespace PJ_MSIT143_team02.Models
                 entity.Property(e => e.RoomPrice).HasColumnType("money");
 
                 entity.Property(e => e.RoomstatusId).HasColumnName("RoomstatusID");
+                entity.Property(e => e.Qty).HasColumnName("Qty");
 
                 entity.HasOne(d => d.Roomstatus)
                     .WithMany(p => p.Rooms)
