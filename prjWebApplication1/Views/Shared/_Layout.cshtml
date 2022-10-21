@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
     <link href="~/css/home.css" rel="stylesheet" />
     <link href="~/css/notice.css" rel="stylesheet" />
+    @RenderSection("head", required: false)
 </head>
 
 <body>
@@ -34,7 +35,10 @@
                     <div class="col-lg-6">
                         <ul class="tn-left">
                             <li><i class="fa fa-phone"></i> (02) 6631-6588</li>
-                            <li><i class="fa fa-envelope"></i>FIND HOTEL@gmail. com</li>
+                            <li>
+                                <a href="mailto:FIND HOTEL@gmail. com?cc=molly021456@gmail.com&subject=這是一個主旨&body=xxx 您好：%0D%0A我想問的事情是%0D%0A回信請回到" class="fa fa-envelope"></a>
+                                    FIND HOTEL@gmail. com
+                             </li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -100,7 +104,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Login">刊登旅宿</a>
+                                        <a asp-area="" asp-controller="AddHotel" asp-action="Index">刊登旅宿</a>
                                     </li>
                                     @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
                                         {
@@ -202,6 +206,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="~/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     @RenderSection("scripts", required: false)
 
@@ -238,7 +246,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
-                        <div class="ft-newslatter" >
+                        <div class="ft-newslatter">
                             <h6>省時又省錢！</h6>
                             <p>現在訂閱，我們將寄送最佳訂房優惠給您。</p>
                             <form action="#" class="fn-form">

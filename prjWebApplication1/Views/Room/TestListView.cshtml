@@ -47,7 +47,11 @@
                                 <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
                                     <span>立即預訂</span>
                                     <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                                </a><br />
+                                </a>
+                                <a href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                <img src="~/Image/heart.png" style="width:30px ;height:30px" />
+                            </a>
+                                <br />
                             </div>
                         </div>
                     };
