@@ -1,0 +1,34 @@
+﻿@model IEnumerable<PJ_MSIT143_team02.Models.Order>
+
+@{
+    ViewData["Title"] = "LikeList";
+}
+
+<div class="container">
+    <p style="font-size:30px">
+        LikeList
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.RoomId)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Delete", "Delete", new { id = item.OrderId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    </div>
