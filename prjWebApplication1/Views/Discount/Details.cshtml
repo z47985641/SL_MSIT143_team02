@@ -45,9 +45,11 @@
 
 @section Scripts {
     <script>
-        window.onload = function () {
+        $(function (){
             $("#setImg").attr("src", "../../Image/dis" + @Html.DisplayFor(model => model.RoomDiscountId) + ".jpg")
-            $("#textcard").height($("#imgcard").height() - 72);
-        };
+            setTimeout(function () {
+                $("#textcard").height($("#imgcard").height() - 72);
+            }, 1);
+        });
     </script>
 }

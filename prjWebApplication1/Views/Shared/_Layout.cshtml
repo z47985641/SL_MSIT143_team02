@@ -101,32 +101,48 @@
                                     <li>
                                         <a asp-area="" asp-controller="AddHotel" asp-action="Index">刊登旅宿</a>
                                     </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
-                                    </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
-                                        <ul class="dropdown">
+                                    @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
+                                        {
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">個人資料</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
                                             </li>
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Register">註冊</a>
                                             </li>
+                                        }
+                                        else
+                                        {
+                                            if ((@Accessor.HttpContext.Session.GetString("Power")) != "管理員")
+                                            {
+                                                <li>
+                                                    <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
+                                                    <ul class="dropdown">
+                                                        <li>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="MemberPasswordEdit">更改密碼</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="MemberPersonalData">個人資料</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="LikeList">喜愛清單</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            }
                                             <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">喜愛清單</a>
+                                                <a asp-area="" asp-controller="MemberCreate" asp-action="Logout">登出</a>
                                             </li>
-                                            <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>
-                                            </li>
-                                            <li>
-                                                <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">歷史評論</a>
-                                            </li>
-                                        </ul>
-                                    </li>
+                                        }
+                                    }
                                     <li>
                                         <a asp-area="" asp-controller="Order" asp-action="AddToCart">
                                             <img src="~/img/cart_shopping.png" />購物車
@@ -149,6 +165,15 @@
                                         </div>
                                     </li>
 
+                                    @{ if (@Accessor.HttpContext.Session.GetString("Power") == "管理員")
+                                        {
+                                            <li>
+                                                <a asp-area="" asp-controller="MemberOnly" asp-action="AdminMainPage">
+                                                    後臺管理~
+                                                </a>
+                                            </li>
+                                        }
+                                    }
                                 </ul>
                             </nav>
                         </div>
@@ -212,7 +237,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
-                        <div class="ft-newslatter">
+                        <div class="ft-newslatter" >
                             <h6>省時又省錢！</h6>
                             <p>現在訂閱，我們將寄送最佳訂房優惠給您。</p>
                             <form action="#" class="fn-form">
@@ -246,7 +271,6 @@
 <script>
     var box = document.getElementById('box');
     var down = false;
-
 
     function toggleNotifi() {
         if (down) {
