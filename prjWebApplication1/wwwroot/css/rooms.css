@@ -1,4 +1,4 @@
-*{
+/**{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -7,11 +7,11 @@
 
 body {
     background-color: #ffffff;
-}
+}*/
 
 /* NAV BAR */
 
-nav {
+/*nav {
   width: 80%;
   margin: auto;
 }
@@ -22,7 +22,7 @@ nav {
 
 .nav-item {
   margin-right: 1.3rem;
-}
+}*/
 
 /* ROOMS DESCRIPTION */
 

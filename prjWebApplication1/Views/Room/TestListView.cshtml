@@ -24,35 +24,38 @@
 </head>
 
 <body>
-    @{
+    <section id="room-description">
+        <div class="container">
+            <div class="row">
+                @{
 
-        int count = 0;
-        foreach (PJ_MSIT143_team02.Models.Room r in Model)
-        {
-            count++;
-            <section id="room-description">
-                <div class="description">
-                    <div class="description">
-                        <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
-                        <p class="room-price" id="priceid">@r.RoomPrice</p>
-                        <p class='room-status'>@r.RoomName</p>
-                        <ul>
-                            <li>空調</li>
-                            <li>WIFI</li>
-                            <li>@r.RoomIntrodution</li>
-                            <li>@r.Address</li>
-                        </ul>
-                        <a class="bbtn" href="#">
-                            <span>立即預訂</span>
-                            <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                        </a>
-                    </div>
-                </div>
-            </section>
-        };
+                    int count = 0;
+                    foreach (PJ_MSIT143_team02.Models.Room r in Model)
+                    {
+                        count++;
+                        <div class="description">
+                            <div class="description" style="margin:20px">
+                                <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
+                                <p class="room-price" id="priceid">@r.RoomPrice</p>
+                                <p class='room-status'>@r.RoomName</p>
+                                <ul>
+                                    <li>空調</li>
+                                    <li>WIFI</li>
+                                    <li>@r.RoomIntrodution</li>
+                                    <li>@r.Address</li>
+                                </ul>
+                                <a class="bbtn" href="#">
+                                    <span>立即預訂</span>
+                                    <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+                                </a>
+                            </div>
+                        </div>
+                    };
 
-    }
-
+                }
+            </div>
+        </div>
+    </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
