@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@*<div class="container">*@
+<br />
+<br />
+
+<h1 style="font-size:28px" class="middle">簡單四步驟</h1>
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div class="row">
+    <div class="col-md-3 houseuser">
+        <img src="~/img/house_user.png" />
+        <p class="words">登入或加入FindHotel會員帳戶</p>
+    </div>
+
+    <div class="col-md-3 houseuser">
+        <img src="~/img/userphoto.png" />
+        <p class="words">上傳你的物業資訊及照片</p>
+    </div>
+
+    <div class="col-md-3 houseuser">
+        <img src="~/img/pricetag.png" />
+        <p class="words">設定房價和可預訂日期</p>
+    </div>
+
+    <div class="col-md-3 houseuser">
+        <img src="~/img/hotelroom.png" />
+        <p class="words">正式上線，打開大門迎接上百萬名潛在住客！</p>
+    </div>
+
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<div style="text-align:center">
+    <button class="thisbtn">
+        @Html.ActionLink("立即加入", "Register", "MemberCreate", null, null)
+    </button>
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<style>
+    .middle {
+        text-align: center
+    }
+
+    .houseuser {
+        vertical-align: middle;
+        border: 0;
+        text-align: center;
+    }
+
+    .words {
+        font-size: 19px;
+        color: black;
+    }
+
+    .thisbtn {
+        border: 1px solid #dfa974;
+        background: transparent;
+    }
+</style>
