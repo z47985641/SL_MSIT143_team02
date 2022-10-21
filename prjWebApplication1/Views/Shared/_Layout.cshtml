@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
     <link href="~/css/notice.css" rel="stylesheet" />
+    @RenderSection("head", required: false)
 </head>
 
 <body>
@@ -201,6 +202,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="~/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+    <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
     @RenderSection("scripts", required: false)
 
@@ -237,7 +242,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 offset-lg-1">
-                        <div class="ft-newslatter" >
+                        <div class="ft-newslatter">
                             <h6>省時又省錢！</h6>
                             <p>現在訂閱，我們將寄送最佳訂房優惠給您。</p>
                             <form action="#" class="fn-form">
