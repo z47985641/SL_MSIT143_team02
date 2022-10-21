@@ -35,7 +35,78 @@
         </div>
     </div>
 </section>
+<div id="B">
+    <ul>
+        <li>房間介紹</li>
+        <li>設施與服務</li>
+        <li>住宿評鑑</li>
+        <li>地點</li>
+        <li style="margin-right:200px">注意事項</li>
+        <li>
+            NT @Html.DisplayFor(model => model.RoomPrice)起
+        </li>
+        <li>
+            @*class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">*@
+            <span>加入購物車</span>
+            <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+        </li>
+    </ul>
+</div>
+<div style=" border: solid; border-color:#E0E0E0; width:800px">
+    北海岸海景飯店
+    <p @*style="margin-left:30px"*@>
+        <a href="https://goo.gl/maps/D34Roij8t3o3EzgX8" target="_blank">台北市復興南路二段449號</a>
+    </p>
+    <hr />
+    入住完美住宿，是完美旅程的必備要素。快來享受住宿提供的客房免費Wi-Fi吧！ 住宿位於萬華區的絕佳位置，讓您輕鬆探索周遭景點。 離開前，別忘了探訪知名的台北101大樓。 這間高品質飯店被評為5星級，提供客人健身中心、餐廳和室內泳池。
+</div>
+<div style=" border: solid; border-color:#E0E0E0; width:800px;">
+    <h4>重點設施</h4>
+    <div id="C">
+        <figure>
+            <img src="~/Image/bus_icon.png" />
+            <figcaption>距離大眾運輸100公尺</figcaption>
+        </figure>
+        <figure>
+            <img src="~/Image/Door.png" />
+            <figcaption>24小時皆可入住</figcaption>
+        </figure>
+        <figure>
+            <img src="~/Image/flight.png" />
+            <figcaption>機場接送</figcaption>
+        </figure>
+        <figure>
+            <img src="~/Image/restaurant.png" />
+            <figcaption>早餐很棒</figcaption>
+        </figure>
+        <figure>
+            <img src="~/Image/landscape.png" />
+            <figcaption>景觀很棒</figcaption>
+        </figure>
+    </div>
+</div>
+<div style=" border: solid; border-color:#E0E0E0; width:800px;">
+    <ul class="ap-services">
+        <li class="d-flex justify-content-between align-items-center">
+            <span>游泳池</span><img src="~/Image/swimming_icon.png" height="48" />
+            <img src="~/Image/remove.png" height="24" />
+        </li>
+        <li class="d-flex justify-content-between align-items-center">
+            <span>健身房</span><img src="~/Image/gym_icon.png" height="48" />
+            <img src="~/Image/remove.png" height="24" />
+        </li>
+        <li class="d-flex justify-content-between align-items-center">
+            <span>Wi-fi</span><img src="~/Image/wifi_icon.png" height="48" />
+            <img src="~/Image/check_sign_icon.png" height="24" />
+        </li>
+        <li class="d-flex justify-content-between align-items-center">
+            <span>客房服務</span><img src="~/Image/service.png" height="48" />
+            <img src="~/Image/remove.png" height="24" />
+        </li>
+    </ul>
+</div>
 
-@section Scripts{
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
-}
+
+    @section Scripts{
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    }

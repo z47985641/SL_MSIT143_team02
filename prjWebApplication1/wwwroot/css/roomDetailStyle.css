@@ -1,0 +1,22 @@
+﻿#imgbox {
+    height: 500px;
+}
+#B ul li {
+    display: inline;
+    margin-left: 50PX;
+}
+
+#C figure {
+    display: inline-block;
+    margin-left:50px;
+}
+
+#B {
+    margin-left: 100PX;
+    border: solid;
+    border-color: #E0E0E0;
+}
+/*#li1 {
+    text-align:right;
+}
+*/
