@@ -40,14 +40,10 @@
                                     <li>@r.RoomIntrodution</li>
                                     <li>@r.Address</li>
                                 </ul>
-                                <a class="bbtn" href="#">
+                                <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
                                     <span>立即預訂</span>
                                     <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
                                 </a><br />
-                                <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
-                                    <span>更多細節</span>
-                                    <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                                </a>
                             </div>
                         </div>
                     };
