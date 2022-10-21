@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="~/css/magnific-popup.css" type="text/css">
     <link rel="stylesheet" href="~/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="~/css/style.css" type="text/css">
+    <link href="~/css/home.css" rel="stylesheet" />
     <link href="~/css/notice.css" rel="stylesheet" />
 </head>
 
@@ -33,7 +34,10 @@
                     <div class="col-lg-6">
                         <ul class="tn-left">
                             <li><i class="fa fa-phone"></i> (02) 6631-6588</li>
-                            <li><i class="fa fa-envelope"></i>FIND HOTEL@gmail. com</li>
+                            <li>
+                                <a href="mailto:FIND HOTEL@gmail. com?cc=molly021456@gmail.com&subject=這是一個主旨&body=xxx 您好：%0D%0A我想問的事情是%0D%0A回信請回到" class="fa fa-envelope"></a>
+                                    FIND HOTEL@gmail. com
+                             </li>
                         </ul>
                     </div>
                     <div class="col-lg-6">
@@ -99,7 +103,7 @@
                                         </ul>
                                     </li>
                                     <li>
-                                        <a asp-area="" asp-controller="MemberCreate" asp-action="Login">刊登旅宿</a>
+                                        <a asp-area="" asp-controller="AddHotel" asp-action="Index">刊登旅宿</a>
                                     </li>
                                     @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
                                         {
@@ -148,7 +152,7 @@
                                             <img src="~/img/cart_shopping.png" />購物車
                                         </a>
                                     </li>
-                                    <li>
+                                    <li id="notification">
                                         <div class="icon" onclick="toggleNotifi()">
                                             <img src="~/img/notice_icon.png" alt=""> <span>01</span>
                                         </div>

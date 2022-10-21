@@ -152,7 +152,17 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("List");
         }
-
+        public IActionResult Details(int? Id)
+        {
+            if (Id != null)
+            {
+                MingSuContext db = new MingSuContext();
+                Room d = db.Rooms.FirstOrDefault(d => d.RoomId == Id);
+                if (d != null)
+                    return View(d);
+            }
+            return RedirectPermanent("TestListView");
+        }
 
     }
 }
