@@ -140,6 +140,31 @@ namespace PJ_MSIT143_team02.Controllers
                                        select I;
             return View(datas);
         }
+        public IActionResult AddLikeList(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            Order Likeitem = new Order();
+            Likeitem.MemberId = (int)HttpContext.Session.GetInt32("MemberID");
+            Likeitem.OrderstatusId = 5;
+            Likeitem.RoomId = (int)ItemId;
+            db.Orders.Add(Likeitem);
+            db.SaveChanges();
 
+            return  RedirectToAction("TestListView","Room");
+        }
+        public IActionResult DeleteLikeList(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            Order deleteItem = db.Orders.FirstOrDefault(t => t.OrderId == ItemId);
+            if (deleteItem != null)
+            {
+                db.Orders.Remove(deleteItem);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("LikeList");
+
+
+        }
     }
 }

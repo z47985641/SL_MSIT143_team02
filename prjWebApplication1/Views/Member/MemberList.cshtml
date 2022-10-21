@@ -117,7 +117,7 @@
                         </td>
                         <td>
                             @Html.ActionLink("修改", "MemberEdit", new { MemberId = item.MemberId }, new { @class = "btn btn-primary" }) |
-                            @Html.ActionLink("刪除", "Delete", "Order", new { id = item.MemberId },
+                            @Html.ActionLink("刪除", "MemberDelete", new { MemberId = item.MemberId },
                                            new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
                         </td>
                     </tr>

@@ -32,21 +32,25 @@
             count++;
             <section id="room-description">
                 <div class="description">
-                    <div class="description">
-                        <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
-                        <p class="room-price" id="priceid">@r.RoomPrice</p>
-                        <p class='room-status'>@r.RoomName</p>
-                        <ul>
-                            <li>空調</li>
-                            <li>WIFI</li>
-                            <li>@r.RoomIntrodution</li>
-                            <li>@r.Address</li>
-                        </ul>
-                        <a class="bbtn" href="#">
-                            <span>立即預訂</span>
-                            <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                        </a>
-                    </div>
+                        <div class="description">
+                            <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
+                            <p class="room-price" id="priceid">@r.RoomPrice</p>
+                            <p class='room-status'>@r.RoomName</p>
+                            <ul>
+                                <li>空調</li>
+                                <li>WIFI</li>
+                                <li>@r.RoomIntrodution</li>
+                                <li>@r.Address</li>
+                            </ul>
+                            <a class="bbtn" href="#">
+                                <span>立即預訂</span>
+                                <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+                            </a>
+                            <a class="bbtn" href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                <span>加入喜愛清單</span>
+                                <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+                            </a>
+                        </div>
                 </div>
             </section>
         };
