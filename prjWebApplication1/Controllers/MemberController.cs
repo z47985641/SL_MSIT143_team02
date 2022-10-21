@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PJ_MSIT143_team02.Models;
 using Microsoft.AspNetCore.Http;
 using PJ_MSIT143_team02.ViewModels;
+using System.IO;
 
 namespace PJ_MSIT143_team02.Controllers
 {
@@ -140,6 +141,44 @@ namespace PJ_MSIT143_team02.Controllers
                                        select I;
             return View(datas);
         }
+        public IActionResult AddLikeList(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            Order Likeitem = new Order();
+            Likeitem.MemberId = (int)HttpContext.Session.GetInt32("MemberID");
+            Likeitem.OrderstatusId = 5;
+            Likeitem.RoomId = (int)ItemId;
+            db.Orders.Add(Likeitem);
+            db.SaveChanges();
 
+            return  RedirectToAction("TestListView","Room");
+        }
+        public IActionResult DeleteLikeList(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            Order deleteItem = db.Orders.FirstOrDefault(t => t.OrderId == ItemId);
+            if (deleteItem != null)
+            {
+                db.Orders.Remove(deleteItem);
+                db.SaveChanges();
+            }
+            return RedirectToAction("LikeList");
+        }
+        public IActionResult MemberPhoto(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
+            if (photoData.MemberImage != null)
+            {
+                using (MemoryStream ms = new MemoryStream()) 
+                {
+                    byte[] b_photo = photoData.MemberImage;
+                    ms.Write(b_photo);
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+            return new EmptyResult();
+            
+        }
     }
 }
