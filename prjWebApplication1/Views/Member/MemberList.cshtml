@@ -83,54 +83,56 @@
                     </td>
                 </tr>
             }
-            @{ int count = 0;
-                foreach (var item in Model)
-                {
-                    count++;
-                    <tr>
-                        <td>
-                            @count
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MemberAccount)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MemberPassword)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MemberName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BirthDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MemberPhone)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MemberEmail)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CityName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Authority)
-                        </td>
-                        <td>
-                            @Html.ActionLink("修改", "MemberEdit", new { MemberId = item.MemberId }, new { @class = "btn btn-primary" }) |
-                            @Html.ActionLink("刪除", "Delete", "Order", new { id = item.MemberId },
-                                           new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger" })
-                        </td>
-                    </tr>
-                } }
+
         </tbody>
     </table>
+    @{ 
+        foreach (var item in Model)
+        {
+            <div style="        border: solid;
+        display: flex;
+        float: left;
+        padding: 5px;
+        margin: 5px;
+        width: 550px;
+    ">
+                <div style="        
+                            width: 250px;
+                            height: 250px;
+                            position: relative;
+                            ">
+                    <div style="position:absolute;top:0px;left:0px;background-color:ghostwhite;opacity:0.9;width: 100px;">會員編號:@Html.DisplayFor(modelItem => item.MemberId)</div>
+                    <div style="position:absolute;bottom:0px;display:inline-flex ;background-color:ghostwhite;opacity:0.9;width: 250px;text-align:justify">
+                        @Html.DisplayFor(modelItem => item.Authority) : @Html.DisplayFor(modelItem => item.MemberName)
+                    </div>
+                    <img src="@Url.Action("MemberPhoto","Member",new{ItemId = item.MemberId})" />
+
+                </div>
+                <div style="        width: 250px;
+        height: 250px;
+
+    ">
+                    <p style="margin:10px">帳號 : @Html.DisplayFor(modelItem => item.MemberAccount)</p>
+                    <p style="margin:10px">密碼 : @Html.DisplayFor(modelItem => item.MemberPassword)</p>
+                    <p style="margin:10px">生日 : @Html.DisplayFor(modelItem => item.BirthDate)</p>
+                    <p style="margin:10px">電話 : @Html.DisplayFor(modelItem => item.MemberPhone)</p>
+                    <p style="margin:10px">Email: @Html.DisplayFor(modelItem => item.MemberEmail)</p>
+                    @Html.ActionLink("修改", "MemberEdit", new { MemberId = item.MemberId }, new { @class = "btn btn-primary", style = "margin:10px" })
+                    |
+                    @Html.ActionLink("刪除", "MemberDelete", new { MemberId = item.MemberId },
+                                   new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger", style = "margin:10px" })
+                </div>
+            </div>
+
+        } }
 </div>
+
 
 @section scripts
 {
     <script>
         $('#Member').addClass('active');
     </script>
-    
+
 }
 

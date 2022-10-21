@@ -1,4 +1,4 @@
-*{
+/**{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -7,11 +7,11 @@
 
 body {
     background-color: #ffffff;
-}
+}*/
 
 /* NAV BAR */
 
-nav {
+/*nav {
   width: 80%;
   margin: auto;
 }
@@ -22,7 +22,7 @@ nav {
 
 .nav-item {
   margin-right: 1.3rem;
-}
+}*/
 
 /* ROOMS DESCRIPTION */
 
@@ -54,11 +54,17 @@ nav {
 #room-description {
     display: flex;
     margin: auto;
-    width: 80%;
+    width: 100%;
     /*    justify-content: space-between;
 */ margin-top: 6.67rem;
-
 }
+
+    #room-description .description-inner {
+        background-color: floralwhite;
+        margin: 15px;
+        padding: 15px;
+        border-radius: 10px;
+    }
 
 #room-description img{
   width: 308px;
@@ -109,7 +115,14 @@ nav {
   float: right;
 }
 
+#mainbox {
+    background-attachment: fixed;
+    background-position: center;
+}
 
+.breadcrumb-text h2 {
+    color: saddlebrown;
+}
 
 /* FOOTER */
 
