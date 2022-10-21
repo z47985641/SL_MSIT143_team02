@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using PJ_MSIT143_team02.Models;
 using Microsoft.AspNetCore.Http;
 using PJ_MSIT143_team02.ViewModels;
+using System.IO;
 
 namespace PJ_MSIT143_team02.Controllers
 {
@@ -161,10 +162,23 @@ namespace PJ_MSIT143_team02.Controllers
                 db.Orders.Remove(deleteItem);
                 db.SaveChanges();
             }
-
             return RedirectToAction("LikeList");
-
-
+        }
+        public IActionResult MemberPhoto(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
+            if (photoData.MemberImage != null)
+            {
+                using (MemoryStream ms = new MemoryStream()) 
+                {
+                    byte[] b_photo = photoData.MemberImage;
+                    ms.Write(b_photo);
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+            return new EmptyResult();
+            
         }
     }
 }
