@@ -23,8 +23,6 @@ namespace PJ_MSIT143_team02.Controllers
 
             if (!string.IsNullOrEmpty(KW.KW_MemberAccount))
                 datas = datas.Where(p => p.MemberAccount.Contains(KW.KW_MemberAccount));
-            if (!string.IsNullOrEmpty(KW.KW_MemberPassword))
-                datas = datas.Where(p => p.MemberPassword.Contains(KW.KW_MemberPassword));
             if (!string.IsNullOrEmpty(KW.KW_MemberName))
                 datas = datas.Where(p => p.MemberName.Contains(KW.KW_MemberName));
             if (!string.IsNullOrEmpty(KW.KW_MemberPhone))
@@ -52,7 +50,6 @@ namespace PJ_MSIT143_team02.Controllers
             datas.MemberEmail = datasedit.MemberEmail;
             datas.MemberAccount = datasedit.MemberAccount;
             datas.MemberName = datasedit.MemberName;
-            datas.MemberPassword = datasedit.MemberPassword;
             datas.MemberPhone = datasedit.MemberPhone;
             datas.Authority = datasedit.Authority;
             datas.Admins = datasedit.Admins;
