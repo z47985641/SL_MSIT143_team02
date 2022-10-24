@@ -136,6 +136,7 @@ namespace PJ_MSIT143_team02.Controllers
                         where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
                         select new CLikelist 
                         {
+                            RoomID = R.RoomId,
                             RoomName = R.RoomName,
                             RoomPrice = R.RoomPrice,
                             RoomIntrodution = R.RoomIntrodution,
@@ -182,6 +183,35 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return new EmptyResult();
             
+        }
+        public IActionResult LikeListPhoto(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            CLikelist CL = new CLikelist();
+            Image photoData = null;
+            var photoID = (from M in db.ImageReferences
+                            where M.RoomId == ItemId
+                            select M).Take(1);
+
+            
+            if (photoID != null)
+            {
+               foreach(var I in photoID)
+               photoData = db.Images.FirstOrDefault(t => t.ImageId == I.ImageId);
+
+                if (photoData != null)
+                {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        byte[] b_photo = photoData.Image1;
+                        ms.Write(b_photo);
+                        return File(ms.ToArray(), "image/jpeg");
+                    }
+                }
+            }
+            return new EmptyResult();
+
+
         }
     }
 }

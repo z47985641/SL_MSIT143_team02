@@ -13,7 +13,9 @@
     @foreach (var item in Model)
     {
         <div style="border:solid;float: left; padding: 5px;margin: 5px;width: 550px;">
-            <div style="width: 500px;height: 250px;position: relative;"></div>
+            <div style="width: 500px;height: 250px;position: relative;">
+                <img src="@Url.Action("LikeListPhoto","Member",new{ItemId = item.RoomID})" />
+            </div>
             <div style="width: 500px;display: flex;height: 100px;position: relative;">
                 <div>
                     <div style="width:250px ;height:30px">房名 : @Html.DisplayFor(modelItem => item.RoomName)</div>
