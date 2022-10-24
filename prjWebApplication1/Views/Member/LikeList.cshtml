@@ -1,34 +1,30 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Order>
+﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.CLikelist>
 
 @{
     ViewData["Title"] = "LikeList";
 }
 
-<div class="container">
-    <p style="font-size:30px">
-        LikeList
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RoomId)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomId)
-                    </td>
-                    <td>
-                        @Html.ActionLink("刪除", "DeleteLikeList", new { ItemId = item.OrderId })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    </div>
+<h1>LikeList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<div class="container" style="overflow:auto">
+    @foreach (var item in Model)
+    {
+        <div style="border:solid;float: left; padding: 5px;margin: 5px;width: 550px;">
+            <div style="width: 500px;height: 250px;position: relative;"></div>
+            <div style="width: 500px;display: flex;height: 100px;position: relative;">
+                <div>
+                    <div style="width:250px ;height:30px">房名 : @Html.DisplayFor(modelItem => item.RoomName)</div>
+                    <div style="width:250px ;height:30px">地址 : @Html.DisplayFor(modelItem => item.Address)</div>
+                </div>                
+                <div>                 
+                    <div style="width:250px ;height:30px">介紹 : @Html.DisplayFor(modelItem => item.RoomIntrodution)</div>
+                    <div style="width:250px ;height:30px">價格 : @Html.DisplayFor(modelItem => item.RoomPrice)</div>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

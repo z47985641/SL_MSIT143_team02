@@ -20,7 +20,8 @@ namespace PJ_MSIT143_team02.Controllers
                                         //join A in db.Cities
                                         //on I.CityName equals A.CityId
                                         select I;
-
+            if (KW.KW_ID>0)
+                datas = datas.Where(p => p.MemberId.ToString().Contains(KW.KW_ID.ToString()));
             if (!string.IsNullOrEmpty(KW.KW_MemberAccount))
                 datas = datas.Where(p => p.MemberAccount.Contains(KW.KW_MemberAccount));
             if (!string.IsNullOrEmpty(KW.KW_MemberName))
@@ -29,8 +30,6 @@ namespace PJ_MSIT143_team02.Controllers
                datas = datas.Where(p => p.MemberPhone.Contains(KW.KW_MemberPhone));
             if (!string.IsNullOrEmpty(KW.KW_MemberEmail))
                datas = datas.Where(p => p.MemberEmail.Contains(KW.KW_MemberEmail));
-            if (KW.KW_CityId >0)
-               //datas = datas.Where(p => p.CityId.Equals(KW.KW_CityId));
             if (!string.IsNullOrEmpty(KW.KW_Authority))
                datas = datas.Where(p => p.Authority.Contains(KW.KW_Authority));
 
@@ -132,10 +131,17 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult LikeList()
         {
             MingSuContext db = new MingSuContext();
-            Order orderDatas = db.Orders.FirstOrDefault(Order => Order.OrderstatusId == 5);
-            IEnumerable<Order> datas = from I in db.Orders
-                                       where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
-                                       select I;
+            var datas = from I in db.Orders
+                        join R in db.Rooms on I.RoomId equals R.RoomId
+                        where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
+                        select new CLikelist 
+                        {
+                            RoomName = R.RoomName,
+                            RoomPrice = R.RoomPrice,
+                            RoomIntrodution = R.RoomIntrodution,
+                            Address = R.Address,
+                            Qty = R.Qty,
+                        };
             return View(datas);
         }
         public IActionResult AddLikeList(int? ItemId)
