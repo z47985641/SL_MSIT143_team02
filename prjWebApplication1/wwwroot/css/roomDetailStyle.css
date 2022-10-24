@@ -20,3 +20,21 @@
     text-align:right;
 }
 */
+/*.rooms-section .container {
+    position: relative;
+    width: 900px;
+}
+.rooms-section .container #picture-box {
+    display: flex;
+    justify-content: center;
+    width: 900px;
+    margin: 0 auto;
+}
+.rooms-section .container #content {
+    position:absolute;
+    left:0;
+}
+.rooms-section .container #side-right {
+    position:absolute;
+    left:600px;
+}*/
