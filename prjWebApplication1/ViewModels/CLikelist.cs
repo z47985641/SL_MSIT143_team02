@@ -7,6 +7,7 @@ namespace PJ_MSIT143_team02.ViewModels
 {
     public class CLikelist
     {
+        public int OrderId { get; set; }
         public byte[] Image { get; set; }
         public int ImageID { get; set; }
         public int RoomID { get; set; }
