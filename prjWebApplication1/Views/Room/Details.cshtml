@@ -5,6 +5,7 @@
 }
 
 <link href="~/css/roomDetailStyle.css" rel="stylesheet" />
+
 <section class="rooms-section spad">
     <div class="container">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
@@ -24,11 +25,11 @@
                 <img id="imgbox" src="~/Image/單人房3.jpg" class="d-block w-100" alt="...">
             </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
             </button>
@@ -37,6 +38,7 @@
 </section>
 <div id="B">
     <ul>
+        <li>@Html.DisplayFor(model => model.RoomName)</li>
         <li>房間介紹</li>
         <li>設施與服務</li>
         <li>住宿評鑑</li>
@@ -45,8 +47,9 @@
         <li>
             NT @Html.DisplayFor(model => model.RoomPrice)起
         </li>
+
         <li>
-            <a class="bbtn" href="@Url.Action("AddToCart","Order",new { id =  @Html.DisplayFor(model => model.RoomId) })">
+            <a class="bbtn" id="addcart" href="@Url.Action("List","AddHotel",new { id =  @Html.DisplayFor(model => model.RoomId) })">
                 <span>加入購物車</span>
                 <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
             </a>
@@ -110,5 +113,9 @@
 
     @section Scripts{
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+
+
+        </script>
     }
 
