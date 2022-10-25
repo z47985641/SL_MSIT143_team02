@@ -12,5 +12,6 @@ namespace PJ_MSIT143_team02.ViewModels
         public decimal RoomPrice { get; set; }
         public int Qty { get; set; }
 
+
     }
 }

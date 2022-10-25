@@ -42,6 +42,7 @@ namespace PJ_MSIT143_team02.Controllers
             }
             else
                 return RedirectToAction("List");
+
         }
         public IActionResult AddToCart(int? id)
         {
