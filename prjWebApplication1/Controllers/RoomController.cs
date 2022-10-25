@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModels;
 using PJ_MSIT143_team02.ViewModel;
@@ -6,11 +7,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using PagedList;
 
 namespace PJ_MSIT143_team02.Controllers
 {
+    
     public class RoomController : Controller
     {
+       
+        MingSuContext db = new MingSuContext();
+        int pageSize = 10;
+
+        private IWebHostEnvironment _enviro;
+        public RoomController(IWebHostEnvironment p)
+        {
+            _enviro = p;
+        }
+
+
         public IActionResult List(CKeywordViewModel model)
         {
             MingSuContext db = new MingSuContext();
@@ -57,17 +73,17 @@ namespace PJ_MSIT143_team02.Controllers
             return View(cAlls);
         }
        
-        public IActionResult TestListView(CKeywordViewModel model)
+        public IActionResult TestListView(CKeywordViewModel model,int page = 1)
         {
+            int currentPage = page < 1 ? 1 : page;
             MingSuContext db = new MingSuContext();
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
-
                 datas = from r in db.Rooms
-                            //join i in db.ImageReferences on r.RoomId equals i.RoomId
-                            //join k in db.Images on i.ImageId equals k.ImageId
-                            //join m in db.Members on r.MemberId equals m.MemberId
-                            //join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
+                        join i in db.ImageReferences on r.RoomId equals i.RoomId
+                        join k in db.Images on i.ImageId equals k.ImageId
+                        join m in db.Members on r.MemberId equals m.MemberId
+                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
                         select r;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
@@ -78,7 +94,9 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.Address.Contains(model.txtKeyword)
                 || p.CreateDate.ToString().Contains(model.txtKeyword)
                 || p.Qty.ToString().Contains(model.txtKeyword));
+            var result = datas.ToPagedList(currentPage, pageSize);
             return View(datas);
+
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
@@ -99,7 +117,7 @@ namespace PJ_MSIT143_team02.Controllers
             db.SaveChanges();
             return RedirectToAction("List");
         }
-        public IActionResult Delete(int? id)
+         public IActionResult Delete(int? id)
         {
             if (id != null)
             {
@@ -132,13 +150,13 @@ namespace PJ_MSIT143_team02.Controllers
             Room r = db.Rooms.FirstOrDefault(t => t.RoomId == InRoom.RoomId);
             if (r != null)
             {
-                //if (InRoom.photo != null)
-                //{
-                //    string pName = Guid.NewGuid().ToString() + ".jpg";
-                //    r.FImagePath = pName;
-                //    string path = _enviro.WebRootPath + "/images/" + pName;
-                //    InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
-                //}
+                if (InRoom.photo != null)
+                {
+                    string pName = Guid.NewGuid().ToString() + ".jpg";
+                    r.FImagePath = pName;
+                    string path = _enviro.WebRootPath + "/images/" + pName;
+                    InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
+                }
                 r.RoomId = InRoom.RoomId;
                 r.RoomName = InRoom.RoomName;
                 r.RoomPrice = InRoom.RoomPrice;
@@ -147,7 +165,8 @@ namespace PJ_MSIT143_team02.Controllers
                 r.RoomstatusId = InRoom.RoomstatusId;
                 r.Address = InRoom.Address;
                 r.CreateDate = InRoom.CreateDate;
-                r.Qty= InRoom.Qty;
+                r.Qty = InRoom.Qty;
+                r.FImagePath = InRoom.FImagePath;
                 db.SaveChanges();
             }
             return RedirectToAction("List");
@@ -163,6 +182,7 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectPermanent("TestListView");
         }
+        
 
     }
 }

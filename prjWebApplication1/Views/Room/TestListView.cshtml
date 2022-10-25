@@ -1,4 +1,6 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<PJ_MSIT143_team02.Models.Room>
 
 @{
     ViewData["Title"] = "TestListView";
@@ -33,33 +35,33 @@
                     foreach (PJ_MSIT143_team02.Models.Room r in Model)
                     {
                         count++;
-                        <div class="description">
-                            <div class="description-inner">
-                                <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
-                                <p class="room-price" id="priceid">@r.RoomPrice</p>
-                                <p class='room-status'>@r.RoomName</p>
-                                <ul>
-                                    <li>空調</li>
-                                    <li>WIFI</li>
-                                    <li>@r.RoomIntrodution</li>
-                                    <li>@r.Address</li>
-                                </ul>
-                                <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
-                                    <span>立即預訂</span>
-                                    <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                                </a>
-                                <a href="../Member/AddLikeList?ItemId=@r.RoomId">
-                                <img src="~/Image/heart.png" style="width:30px ;height:30px" />
-                            </a>
-                                <br />
-                            </div>
-                        </div>
+                                <div class="description">
+                                    <div class="description-inner">
+                                        <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
+                                        <p class="room-price" id="priceid">@r.RoomPrice</p>
+                                        <p class='room-status'>@r.RoomName</p>
+                                        <ul>
+                                            <li style="color:black">@r.RoomIntrodution</li>
+                                            <li style="color:black">@r.Address</li>
+                                        </ul>
+                                        <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
+                                            <span>立即預訂</span>
+                                            <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+                                        </a>
+                                        <a href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                            <img src="~/Image/heart.png" style="width:30px ;height:30px" />
+                                        </a>
+                                        <br />
+                                    </div>
+                                </div>
+                       @Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))
                     };
-
                 }
             </div>
-        </div>
+        </div> 
+     
     </section>
+   
 </div>
 
 @section Scripts{

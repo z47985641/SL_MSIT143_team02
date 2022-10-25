@@ -26,11 +26,11 @@
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
+           
             </button>
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
+           
             </button>
         </div>
     </div>
@@ -46,7 +46,7 @@
             NT @Html.DisplayFor(model => model.RoomPrice)起
         </li>
         <li>
-            <a class="bbtn" href="@Url.Action("AddToCart","Order",new { id =  @Html.DisplayFor(model => model.RoomId) })">
+            <a class="bbtn" href="@Url.Action("AddToCart","Order",new { id =  @Html.DisplayFor(Model => Model.RoomId) })">
                 <span>加入購物車</span>
                 <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
             </a>
@@ -56,7 +56,8 @@
 <div style=" border: solid; border-color:#E0E0E0; width:800px">
     北海岸海景飯店
     <p @*style="margin-left:30px"*@>
-        <a href="https://goo.gl/maps/D34Roij8t3o3EzgX8" target="_blank">台北市復興南路二段449號</a>
+        <a href="https://goo.gl/maps/D34Roij8t3o3EzgX8" target="_blank">   @Html.DisplayFor(Model => Model.Address)</a>
+
     </p>
     <hr />
     入住完美住宿，是完美旅程的必備要素。快來享受住宿提供的客房免費Wi-Fi吧！ 住宿位於萬華區的絕佳位置，讓您輕鬆探索周遭景點。 離開前，別忘了探訪知名的台北101大樓。 這間高品質飯店被評為5星級，提供客人健身中心、餐廳和室內泳池。

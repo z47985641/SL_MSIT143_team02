@@ -16,6 +16,20 @@
     border: solid;
     border-color: #E0E0E0;
 }
+.carousel-control-prev {
+    background-color:transparent;
+    border:hidden;
+}
+.carousel-control-prev-icon {
+    background-color: transparent;
+    border: hidden;
+}
+.carousel-control-next {
+    background-color: transparent;
+    border: hidden;
+}
+
+
 /*#li1 {
     text-align:right;
 }
