@@ -20,19 +20,16 @@ namespace PJ_MSIT143_team02.Controllers
                                         //join A in db.Cities
                                         //on I.CityName equals A.CityId
                                         select I;
-
+            if (KW.KW_ID>0)
+                datas = datas.Where(p => p.MemberId.ToString().Contains(KW.KW_ID.ToString()));
             if (!string.IsNullOrEmpty(KW.KW_MemberAccount))
                 datas = datas.Where(p => p.MemberAccount.Contains(KW.KW_MemberAccount));
-            if (!string.IsNullOrEmpty(KW.KW_MemberPassword))
-                datas = datas.Where(p => p.MemberPassword.Contains(KW.KW_MemberPassword));
             if (!string.IsNullOrEmpty(KW.KW_MemberName))
                 datas = datas.Where(p => p.MemberName.Contains(KW.KW_MemberName));
             if (!string.IsNullOrEmpty(KW.KW_MemberPhone))
                datas = datas.Where(p => p.MemberPhone.Contains(KW.KW_MemberPhone));
             if (!string.IsNullOrEmpty(KW.KW_MemberEmail))
                datas = datas.Where(p => p.MemberEmail.Contains(KW.KW_MemberEmail));
-            if (KW.KW_CityId >0)
-               //datas = datas.Where(p => p.CityId.Equals(KW.KW_CityId));
             if (!string.IsNullOrEmpty(KW.KW_Authority))
                datas = datas.Where(p => p.Authority.Contains(KW.KW_Authority));
 
@@ -52,7 +49,6 @@ namespace PJ_MSIT143_team02.Controllers
             datas.MemberEmail = datasedit.MemberEmail;
             datas.MemberAccount = datasedit.MemberAccount;
             datas.MemberName = datasedit.MemberName;
-            datas.MemberPassword = datasedit.MemberPassword;
             datas.MemberPhone = datasedit.MemberPhone;
             datas.Authority = datasedit.Authority;
             datas.Admins = datasedit.Admins;
@@ -135,10 +131,19 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult LikeList()
         {
             MingSuContext db = new MingSuContext();
-            Order orderDatas = db.Orders.FirstOrDefault(Order => Order.OrderstatusId == 5);
-            IEnumerable<Order> datas = from I in db.Orders
-                                       where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
-                                       select I;
+            var datas = from I in db.Orders
+                        join R in db.Rooms on I.RoomId equals R.RoomId
+                        where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
+                        select new CLikelist 
+                        {
+                            OrderId =I.OrderId,
+                            RoomID = R.RoomId,
+                            RoomName = R.RoomName,
+                            RoomPrice = R.RoomPrice,
+                            RoomIntrodution = R.RoomIntrodution,
+                            Address = R.Address,
+                            Qty = R.Qty,
+                        };
             return View(datas);
         }
         public IActionResult AddLikeList(int? ItemId)
@@ -179,6 +184,35 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return new EmptyResult();
             
+        }
+        public IActionResult LikeListPhoto(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            CLikelist CL = new CLikelist();
+            byte[] b_photo = null;
+            var photoID = from M in db.ImageReferences
+                           join MI in db.Images 
+                           on M.ImageId equals MI.ImageId
+                           where M.RoomId == ItemId
+                            select new CLikelist
+                          {
+                              Image = MI.Image1
+                          }
+                           ;
+
+            if (photoID != null)
+            {
+                    using (MemoryStream ms = new MemoryStream())
+                    {
+                        foreach (var I in photoID)
+                            b_photo = I.Image;
+                        ms.Write(b_photo);
+                        return File(ms.ToArray(), "image/jpeg");
+                    }
+            }
+            return new EmptyResult();
+
+
         }
     }
 }
