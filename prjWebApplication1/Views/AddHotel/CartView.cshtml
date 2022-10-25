@@ -1,9 +1,8 @@
 ﻿@model IEnumerable<PJ_MSIT143_team02.Models.CShoppingCartItem>
+
 @{
     ViewData["Title"] = "CartView";
 }
-
-<h1>CartView</h1>
 
 @*<p>
         <a asp-action="Create">Create New</a>
@@ -53,11 +52,7 @@
                             <td>
                                 @r.小計
                             </td>
-                            <td>
-                                @Html.ActionLink("修改", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
-                                @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
-                            </td>
+
                         </tr>
                     }
                 </tbody>
@@ -75,15 +70,17 @@
                     <input type="text" class="form-control" placeholder="coupon" name="coupon">
                 </div>
             </div>
-            <div class="col text-right pr-5"> <h5>總計： $@*@ViewBag.Total*@</h5></div>
-        </div>
+            @foreach (PJ_MSIT143_team02.Models.CShoppingCartItem r in Model)
+            {<div class="col text-right pr-5"> <h5>總計：@r.小計 </h5></div> }
+            </div>
+           
     </div>
 </div>
 <p>　</p>
 <div class="container">
     <p class="row justify-content-end" style="margin-top:15px;">
         <a class="btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;margin-right:56px" asp-controller="Room" asp-action="TestListView">繼續購物</a>
-        <a class="btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;" asp-controller="Order" asp-action="Checkout">前往結帳</a>
+        <a class="btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;" asp-controller="AddHotel" asp-action="Checkout">前往結帳</a>
     </p>
 </div>
 
