@@ -28,8 +28,6 @@ namespace PJ_MSIT143_team02.Models
         public string FImagePath { get; set; }
         public byte[] FImage { get; set; }
 
-        public string FImagePath { get; set; }
-
 
         public virtual RoomStatus Roomstatus { get; set; }
         public virtual ICollection<AdminReference> AdminReferences { get; set; }
