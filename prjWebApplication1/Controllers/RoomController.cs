@@ -6,11 +6,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using System.Text.Json;
 
 namespace PJ_MSIT143_team02.Controllers
 {
     public class RoomController : Controller
     {
+        //private MingSuContext MS;
+        //public RoomController(MingSuContext q)
+        //{
+        //    MS = q;
+        //}
         public IActionResult List(CKeywordViewModel model)
         {
             MingSuContext db = new MingSuContext();
@@ -163,6 +170,37 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectPermanent("TestListView");
         }
+        //[HttpPost]
+        //public IActionResult AddToSession(CAddToCartViewModel s)
+        //{
+        //    string jsonBurchased = JsonSerializer.Serialize(s);
+        //    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCTS, jsonBurchased);
+        //    return NoContent();
+        //}
+        //public IActionResult ShoppingCart()
+        //{
+        //    var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCTS);
+        //    var c = JsonSerializer.Deserialize<CAddToCartViewModel>(shopping);
+        //    CGoShoppingCartView go = new CGoShoppingCartView()
+        //    {
+        //        RoomId = c.RoomId,
+        //        RoomName = MS.Rooms.Where(a=>a.RoomId==c.RoomId).FirstOrDefault().RoomName,
+        //        Qty = c.Qty,
+        //        RoomPrice = MS.Rooms.Where(a => a.RoomId == c.RoomId).FirstOrDefault().RoomPrice,
+        //    };
+        //    return View(go);
+        //}
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }

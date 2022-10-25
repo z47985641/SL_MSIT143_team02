@@ -1,10 +1,12 @@
-﻿@*@model IEnumerable<PJ_MSIT143_team02.Models.Room>*@
-@model IEnumerable<PJ_MSIT143_team02.Models.CShoppingCartItem>
+﻿@model PJ_MSIT143_team02.ViewModels.CGoShoppingCartView
 
 @{
-    ViewData["Title"] = "AddtoCart";
+    ViewData["Title"] = "ShoppingCart";
 }
 
+@{
+    decimal TotalPrice = Model.RoomPrice * Model.Qty;
+}
 
 <div>
     <p>　</p>
@@ -34,29 +36,29 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (PJ_MSIT143_team02.Models.CShoppingCartItem r in Model)
-                    {
                     <tr>
 
+                        <td><span id="RoomName"></span>@Model.RoomName</td>
+                        <td><span id="RoomPrice"></span>@Model.RoomPrice</td>
                         <td>
-                            @r.RoomId
+                            <button type="button" id="productMinus" class="btn btn-outline-secondary">
+                                -
+                            </button>
+                            <input type="number" class="productNumber" id="productNum" name="Count" value="1" />
+                            @Model.Qty
+                            <button type="button" id="productPlus" class="btn btn-outline-secondary">
+                                +
+                            </button>
                         </td>
-                        <td>
-                            @r.price
-                        </td>
-                        <td>
-                            @r.count
-                        </td>
-                        <td>
-                            @r.小計
-                        </td>
+
+                        <td><span id="TotalPrice"></span>@TotalPrice</td>
+
                         <td>
                             @Html.ActionLink("修改", "Edit", new { /* id=item.PrimaryKey */ }) |
                             @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
                             @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
                         </td>
                     </tr>
-                    }
                 </tbody>
             </table>
         }
@@ -72,7 +74,7 @@
                     <input type="text" class="form-control" placeholder="coupon" name="coupon">
                 </div>
             </div>
-            <div class="col text-right pr-5"> <h5>總計： $@*@ViewBag.Total*@</h5></div>
+            <div class="col text-right pr-5"> <h5>總計： @TotalPrice</h5><span id="totalPayPrice"></span></div>
         </div>
 
     </div>
@@ -145,6 +147,38 @@
                 }
 </style>
 
+@section Scripts{
+    <script>
+            window.onload = function () {
+                //頁面載入時初始總價
+                let num =
+                $('#RoomPrice').text(num * @Model.RoomPrice)
+                $('#totalPayPrice').text(num * @Model.RoomPrice)
 
+                //點擊加號
+            $('#productPlus').click(function () {
+                let currentNum = parseInt($('#productNum').val())
+                currentNum += 1
+                $('#productNum').val(currentNum)
+                $('#RoomPrice').text(currentNum * @Model.RoomPrice)
+                $('#totalPayPrice').text(currentNum * @Model.RoomPrice)
+            });
+            //點擊減號
+            $('#productMinus').click(function () {
+                let currentNum = parseInt($('#productNum').val())
+                if (currentNum > 1) {
+                    currentNum -= 1
+                    $('#productNum').val(currentNum)
+                }
+                $('#totalPrice').text(currentNum * @Model.RoomPrice)
+                $('#totalPayPrice').text(currentNum * @Model.RoomPrice)
+            });
+            //改變數量
+            $('#productNum').change(function () {
+                let currentNum = $('#productNum').val()
+                $("#postProductNum").val(currentNum)
+                $('#totalPayPrice').text(currentNum * @Model.RoomPrice)
+            })
 
-
+    </script>
+}
