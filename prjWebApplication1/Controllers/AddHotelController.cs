@@ -82,6 +82,12 @@ namespace PJ_MSIT143_team02.Controllers
             return RedirectToAction("List");
         }
 
+        //結帳
+        public IActionResult Checkout(int? id)
+        {
+            return View();
+
+        }
 
 
 
