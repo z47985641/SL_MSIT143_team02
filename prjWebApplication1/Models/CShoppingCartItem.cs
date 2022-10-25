@@ -9,6 +9,7 @@ namespace PJ_MSIT143_team02.Models
     public class CShoppingCartItem
     {
         public int RoomId { get; set; }
+        public string RoomName { get; set; }
         [DisplayName("購買量")]
         public int count { get; set; }
         [DisplayName("採購價")]

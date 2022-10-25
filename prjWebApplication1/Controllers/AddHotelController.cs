@@ -74,7 +74,8 @@ namespace PJ_MSIT143_team02.Controllers
                 count = vModel.Qty,
                 price = (decimal)prod.RoomPrice,
                 RoomId = vModel.RoomId,
-                Room = prod
+                Room = prod,
+                RoomName= vModel.RoomName
             };
             list.Add(item);
             jsonCart = JsonSerializer.Serialize(list);
