@@ -1,0 +1,17 @@
+﻿@model IEnumerable<PJ_MSIT143_team02.Models.Discount>
+
+@{
+    //ViewData["Title"] = "Discount";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+            {
+                <div class="breadcrumb-text">
+                    <p>@item.DiscountName</p>
+                </div>
+            }
+    </div>
+</div>
+
