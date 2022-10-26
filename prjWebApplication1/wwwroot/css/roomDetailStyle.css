@@ -2,10 +2,6 @@
     height: 500px;
 }
 
-#nav {
-    margin-bottom: -25PX;
-}
-
 #nav a {
     color: darkgoldenrod;
 }
@@ -14,6 +10,15 @@
     color: saddlebrown;
     display: inline;
     margin-left: 50PX;
+}
+
+#nav .bbtn {
+    display: inline-block;
+    background: #514525;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    padding: 10px 19.35px 10px 19.35px;
+    min-width: 100px;
 }
 
 #sidebar {
@@ -51,6 +56,21 @@
 #content a {
     color: darkgoldenrod;
 }
+
+#comment {
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#comment h4 {
+    color: saddlebrown;
+}
+
+#comment a {
+    color: darkgoldenrod;
+}
+
 #detail figure {
     display: inline-block;
     margin-left: 35px;
