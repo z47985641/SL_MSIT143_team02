@@ -54,7 +54,11 @@
     <script>
         $(function (){
             $("#setImg").attr("src", "../../Image/act" + @Html.DisplayFor(model => model.ActivityId) + ".jpg")
-            setTimeout(function () {
+                setTimeout(function () {
+                function reloadUsingLocationHash() {
+                    window.location.hash = "reload";
+                }
+                window.onload = reloadUsingLocationHash();
                 $("#textcard").height($("#imgcard").height() - 72);
             }, 5);
         });
