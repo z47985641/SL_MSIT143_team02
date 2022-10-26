@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Discount>
+﻿@model List<PJ_MSIT143_team02.Models.Discount>
 
 @{
     //ViewData["Title"] = "Discount";
@@ -8,10 +8,11 @@
     <div class="row">
         @foreach (var item in Model)
             {
-                <div class="breadcrumb-text">
-                    <p>@item.DiscountName</p>
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text" style="text-align:left">
+                        <a href='@Url.Action("Details","Discount", new { id = item.RoomDiscountId })'>@item.DiscountName</a>
+                    </div>
                 </div>
             }
     </div>
 </div>
-

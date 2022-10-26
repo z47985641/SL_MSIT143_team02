@@ -11,7 +11,10 @@ namespace PJ_MSIT143_team02.ViewComponents
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var data = (from d in (new MingSuContext()).Discounts
-                        select d.DiscountName).Take(3);
+                        select new Discount {
+                            RoomDiscountId = d.RoomDiscountId,
+                            DiscountName = d.DiscountName
+                        }).Take(3).ToList();
             return View(data);
         }
     }
