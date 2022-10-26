@@ -1,24 +1,20 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
-using PJ_MSIT143_team02.ViewModels;
 using PJ_MSIT143_team02.ViewModel;
+using PJ_MSIT143_team02.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using PagedList;
+using System.Linq;
 
 namespace PJ_MSIT143_team02.Controllers
 {
-    
+
     public class RoomController : Controller
     {
-       
+
         MingSuContext db = new MingSuContext();
-        int pageSize = 10;
 
         private IWebHostEnvironment _enviro;
         public RoomController(IWebHostEnvironment p)
@@ -29,18 +25,12 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult List(CKeywordViewModel model)
         {
-           
+
             MingSuContext db = new MingSuContext();
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
                 datas = from p in db.Rooms
-                        select p; 
-            var datas = (from p in db.Rooms
-                                join t2 in db.table2
-                                on new { t1.id, t1.another_id } equals new { t2.id, t2.another_id }
-                                join t3 in db.table3
-                                on new { t2.id, t2.another_id } equals new { t3.id, t3.another_id }
-                                select t2).FirstOrDefault();
+                        select p;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
                 || p.RoomPrice.ToString().Contains(model.txtKeyword)
@@ -78,13 +68,13 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.CreateDate.ToString().Contains(model.txtKeyword));
             return View(cAlls);
         }
-       
-        public IActionResult TestListView(CKeywordViewModel model,int page = 1,int pageSize = 15)
+
+        public IActionResult TestListView(CKeywordViewModel model, int page = 1, int pageSize = 15)
         {
-            
+
             MingSuContext db = new MingSuContext();
-             
-            
+
+
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
                 datas = from r in db.Rooms
@@ -102,9 +92,9 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.Address.Contains(model.txtKeyword)
                 || p.CreateDate.ToString().Contains(model.txtKeyword)
                 || p.Qty.ToString().Contains(model.txtKeyword));
-             //var datas = ListAll.ToList().ToPagedList(page, pageSize);
+            //var datas = ListAll.ToList().ToPagedList(page, pageSize);
             return View(datas);
-          
+
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
@@ -125,7 +115,7 @@ namespace PJ_MSIT143_team02.Controllers
             db.SaveChanges();
             return RedirectToAction("List");
         }
-         public IActionResult Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id != null)
             {
@@ -136,7 +126,7 @@ namespace PJ_MSIT143_team02.Controllers
                     db.Rooms.Remove(r);
                     db.SaveChanges();
                 }
-                
+
             }
             return RedirectToAction("List");
         }
@@ -154,6 +144,7 @@ namespace PJ_MSIT143_team02.Controllers
         [HttpPost]
         public ActionResult Edit(CRoomViewModel InRoom)
         {
+
             MingSuContext db = new MingSuContext();
             Room r = db.Rooms.FirstOrDefault(t => t.RoomId == InRoom.RoomId);
             if (r != null)
@@ -162,9 +153,11 @@ namespace PJ_MSIT143_team02.Controllers
                 {
                     string pName = Guid.NewGuid().ToString() + ".jpg";
                     r.FImagePath = pName;
-                    string path = _enviro.WebRootPath + "/images/" + pName;
+                    string path = _enviro.WebRootPath + "/image/" + pName;
                     InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
                 }
+
+
                 r.RoomId = InRoom.RoomId;
                 r.RoomName = InRoom.RoomName;
                 r.RoomPrice = InRoom.RoomPrice;
@@ -177,7 +170,7 @@ namespace PJ_MSIT143_team02.Controllers
                 r.FImagePath = InRoom.FImagePath;
                 db.SaveChanges();
             }
-            return RedirectToAction("List");
+            return RedirectToAction("List", "path");
         }
         public IActionResult Details(int? Id)
         {
@@ -190,7 +183,27 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectPermanent("TestListView");
         }
-        
+        //public static byte[] GetBytesFromImage(string filename)
+        //{
+        //    try
+        //    {
+        //        FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+        //        int length = (int)fs.Length;
+        //        byte[] image = new byte[length];
+        //        fs.Read(image, 0, length);
+        //        fs.Close();
+        //        return image;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
+        //}
+        //public FileResult Image()
+        //{
+        //    byte[] image = GetBytesFromDB();
+        //    return new FileContentResult(image, "image/jpeg");
+        //}
 
     }
 }
