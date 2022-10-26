@@ -1,0 +1,18 @@
+﻿@model List<PJ_MSIT143_team02.Models.Activity>
+
+@{
+//ViewData["Title"] = "Activity";
+}
+
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-12">
+                <div class="breadcrumb-text" style="text-align:left">
+                    <a href='@Url.Action("Details","Activity", new { id = item.ActivityId })'>@item.ActivityName</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>
