@@ -1,6 +1,6 @@
 ﻿@using PagedList
 @using PagedList.Mvc
-@model IPagedList<PJ_MSIT143_team02.Models.Room>
+@model IEnumerable<PJ_MSIT143_team02.Models.Room>
 
 @{
     ViewData["Title"] = "TestListView";
@@ -54,7 +54,7 @@
                                         <br />
                                     </div>
                                 </div>
-                       @Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))
+                       @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
                     };
                 }
             </div>

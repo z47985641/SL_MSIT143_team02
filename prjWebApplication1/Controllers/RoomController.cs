@@ -29,12 +29,18 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult List(CKeywordViewModel model)
         {
+           
             MingSuContext db = new MingSuContext();
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
-
                 datas = from p in db.Rooms
-                        select p;
+                        select p; 
+            var datas = (from p in db.Rooms
+                                join t2 in db.table2
+                                on new { t1.id, t1.another_id } equals new { t2.id, t2.another_id }
+                                join t3 in db.table3
+                                on new { t2.id, t2.another_id } equals new { t3.id, t3.another_id }
+                                select t2).FirstOrDefault();
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
                 || p.RoomPrice.ToString().Contains(model.txtKeyword)
@@ -73,10 +79,12 @@ namespace PJ_MSIT143_team02.Controllers
             return View(cAlls);
         }
        
-        public IActionResult TestListView(CKeywordViewModel model,int page = 1)
+        public IActionResult TestListView(CKeywordViewModel model,int page = 1,int pageSize = 15)
         {
-            int currentPage = page < 1 ? 1 : page;
+            
             MingSuContext db = new MingSuContext();
+             
+            
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
                 datas = from r in db.Rooms
@@ -94,9 +102,9 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.Address.Contains(model.txtKeyword)
                 || p.CreateDate.ToString().Contains(model.txtKeyword)
                 || p.Qty.ToString().Contains(model.txtKeyword));
-            var result = datas.ToPagedList(currentPage, pageSize);
+             //var datas = ListAll.ToList().ToPagedList(page, pageSize);
             return View(datas);
-
+          
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
