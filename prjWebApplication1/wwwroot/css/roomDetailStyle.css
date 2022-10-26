@@ -1,40 +1,73 @@
 ﻿#imgbox {
     height: 500px;
 }
-#B ul li {
+
+#nav {
+    margin-bottom: -25PX;
+}
+
+#nav a {
+    color: darkgoldenrod;
+}
+
+#nav ul li {
+    color: saddlebrown;
     display: inline;
     margin-left: 50PX;
 }
 
-#C figure {
-    display: inline-block;
-    margin-left:50px;
+#sidebar {
+    background-color:blanchedalmond;
+    border-radius:10px;
+    padding: 20px;
 }
 
-#B {
-    margin-left: 100PX;
-    border: solid;
-    border-color: #E0E0E0;
+#sidebar h4 {
+    color: saddlebrown;
 }
-/*#li1 {
-    text-align:right;
+
+#data a {
+    color: darkgoldenrod;
 }
-*/
-/*.rooms-section .container {
-    position: relative;
-    width: 900px;
+
+#link a {
+    color: peru;
 }
-.rooms-section .container #picture-box {
-    display: flex;
-    justify-content: center;
-    width: 900px;
-    margin: 0 auto;
+
+#link {
+    font-size:14px;
 }
-.rooms-section .container #content {
-    position:absolute;
-    left:0;
+
+#content {
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    padding: 20px;
 }
-.rooms-section .container #side-right {
-    position:absolute;
-    left:600px;
-}*/
+
+#content h4 {
+    color: saddlebrown;
+}
+
+#content a {
+    color: darkgoldenrod;
+}
+#detail figure {
+    display: inline-block;
+    margin-left: 35px;
+    text-align:center;
+}
+
+.carousel-control-prev {
+    background-color: transparent;
+    border: hidden;
+}
+
+.carousel-control-prev-icon {
+    background-color: transparent;
+    border: hidden;
+}
+
+.carousel-control-next {
+    background-color: transparent;
+    border: hidden;
+}
