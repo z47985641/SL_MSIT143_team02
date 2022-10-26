@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModel;
@@ -13,6 +14,12 @@ namespace PJ_MSIT143_team02.Controllers
 {
     public class AddHotelController : Controller
     {
+        //private MingSuContext MS;
+        //public AddHotelController(MingSuContext q)
+        //{
+        //    MS = q;
+        //}
+
         public IActionResult Index()
         {
             return View();
@@ -75,7 +82,7 @@ namespace PJ_MSIT143_team02.Controllers
                 price = (decimal)prod.RoomPrice,
                 RoomId = vModel.RoomId,
                 Room = prod,
-                RoomName= vModel.RoomName
+                RoomName= prod.RoomName
             };
             list.Add(item);
             jsonCart = JsonSerializer.Serialize(list);
@@ -84,10 +91,37 @@ namespace PJ_MSIT143_team02.Controllers
         }
 
         //結帳
-        public IActionResult Checkout(int? id)
+        public IActionResult Checkout(CCheckOutDataViewModel c)
         {
-            return View();
+            MingSuContext db = new MingSuContext();
+            if (HttpContext.Session.GetInt32("MemberID") == null)
+            {
+                return RedirectToAction("Login", "MemberCreate");
+            }
+            else
+            { //int MemberID = HttpContext.Session.GetInt32("MemberID") as Member
+                var UserName = "";
+                var user = JsonSerializer.Deserialize<Member>(UserName);
+                var mem = from M in db.Members
+                          where M.MemberId == HttpContext.Session.GetInt32("MemberID")
+                          select M;
+                CRoomMemberViewModel crm = new CRoomMemberViewModel();
+                crm.房源及會員 = (from a in db.Rooms
+                             where a.RoomId == c.RoomId
+                             select new 房源及會員
+                             {
+                                 RoomId = a.RoomId,
+                                 RoomName = a.RoomName,
+                                 count = a.Qty,
+                                 price = a.RoomPrice,
+                                 MemberId = user.MemberId,
+                                 MemberName = user.MemberName,
+                                 MemberEmail = user.MemberEmail,
+                                 MemberPhone = user.MemberPhone,
 
+                             }).ToList();
+                return View(crm);
+            };
         }
 
 

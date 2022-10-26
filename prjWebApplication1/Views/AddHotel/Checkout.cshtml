@@ -1,8 +1,9 @@
-﻿@model PJ_MSIT143_team02.Models.Order
+﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.CRoomMemberViewModel>
 
 
 @{
     ViewData["Title"] = "Checkout";
+
 }
 
 <div>
@@ -20,83 +21,72 @@
 <h4>訂單資料</h4>
 <hr />
 <form asp-action="CreateOrder">
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="OrderId" />
-    <div class="row">
+    @*<input type="hidden" asp-for="OrderId" />*@
+    @*<div class="row">
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">付款人資料</h5>
                     <div class="form-group">
-                        <label asp-for="Member" class="control-label">付款人ID</label>
+                        <label asp-for="MemberId" class="control-label">付款人ID</label>
                         <input asp-for="MemberId" readonly class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="Member" class="control-label">付款人帳號</label>
-                        <input asp-for="Member" readonly class="form-control" />
+                        <label asp-for="Member.MemberName" class="control-label">付款人姓名</label>
+                        <input asp-for="Member.MemberName" readonly class="form-control" />
                     </div>
                 </div>
             </div>
             <p></p>
-            @*<div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">收貨人資料</h5>
-                        <div class="row">
-                            <div class="form-group col">
-                                <label asp-for="ReceiverName" class="control-label">收貨人姓名</label>
-                                <input asp-for="ReceiverName" class="form-control" />
-                                <span asp-validation-for="ReceiverName" class="text-danger"></span>
-                            </div>
-                            <div class="form-group col">
-                                <label asp-for="ReceiverPhone" class="control-label">收貨人電話</label>
-                                <input asp-for="ReceiverPhone" class="form-control" />
-                                <span asp-validation-for="ReceiverPhone" class="text-danger"></span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="ReceiverAdress" class="control-label">收貨人地址</label>
-                            <input asp-for="ReceiverAdress" class="form-control" />
-                            <span asp-validation-for="ReceiverAdress" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>*@
 
-        </div>
-        <div class="col-4">
-            <div class="card" style="background-color: #f8f9fa">
-                <input type="hidden" asp-for="OrderId" />
-                <div class="card-body">
-                    <h5 class="card-title">訂單內容</h5>
-                    <table class="table table-borderless">
-                        <thead>
-                            <tr>
-                                <th>商品名稱</th>
-                                <th>小計</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @*@foreach (var item in ViewBag.CartItems)
-                            {
-                                <tr>
-                                    <td>@item.Room.Name</td>
-                                    <td>@item.SubTotal</td>
-                                </tr>
-                            }*@
-                        </tbody>
-                    </table>
-                    <hr />
-                    <div class="text-right">
-                        @*<input type="hidden" asp-for="Total" />*@
-                        <p class="card-text font-weight-bolder" style="padding-right:12px">總計:　$ @*@Model.Total*@</p>
-                    </div>
-                    <p></p>
-                    <div class="text-center card-link">
-                        <button type="submit" class="btn btn-success w-75">建立訂單</button>
-                    </div>
+        </div>*@
+    @{
+        //int count = 0;
+        decimal sum = 0;
+        decimal total = 0;
+        //decimal tax = 0;
+    }
+    <div class="col-4">
+        <div class="card" style="background-color: #f8f9fa">
+            @*<input type="hidden" asp-for="OrderId" />*@
+            <div class="card-body">
+                <h5 class="card-title">訂單內容</h5>
+                <table class="table table-borderless">
+                    <thead>
+                        <tr>
+                            <th>商品名稱</th>
+                            <th>間數</th>
+                            <th>小計</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var r in Model)
+                        {
+                            sum += r.房源及會員.FirstOrDefault().price;
+                            total = r.房源及會員.FirstOrDefault().price * r.房源及會員.FirstOrDefault().count;
+                        <tr>
+                            <td>@r.房源及會員.FirstOrDefault().RoomName.</td>
+                            <td>@r.房源及會員.FirstOrDefault().count</td>
+                            <td>@total</td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+                <hr />
+                <div class="text-right">
+                    @*<input type="hidden" asp-for="Total" />*@
+                    <p class="card-text font-weight-bolder" style="padding-right:12px">總計:　$ @sum.ToString("###,###,##0") </p>
+                </div>
+                <p></p>
+                <div class="text-center card-link">
+                    <button type="submit" class="btn btn-success w-75">建立訂單</button>
                 </div>
             </div>
         </div>
     </div>
+    @*</div>*@
 </form>
 <p></p>
 <button class="btn btn-sm btn-outline-secondary" asp-controller="Cart" asp-action="Index"><i class="fas fa-angle-left"></i> 返回購物車</button>

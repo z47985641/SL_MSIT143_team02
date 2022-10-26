@@ -139,6 +139,7 @@ namespace PJ_MSIT143_team02.Controllers
             IEnumerable<Order> datas = from I in db.Orders
                                        where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
                                        select I;
+            
             return View(datas);
         }
         public IActionResult AddLikeList(int? ItemId)
