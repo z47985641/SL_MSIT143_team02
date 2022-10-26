@@ -2,24 +2,25 @@
 
 @{
     ViewData["Title"] = "MemberPersonalEdit";
+
 }
-
-
-
 <hr />
 <h1 style="text-align:center">個人資料修改</h1>
-<form asp-action="MemberPersonalEdit">
+<form asp-action="MemberPersonalEdit"enctype="multipart/form-data">
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-            <div style="height:200px;margin:10px" class="column">
-                <div class="col-md-3" style="height: 139px; float: left"></div>
-                <div class="col-md-6" style=" float: left"><img style=" padding:5px" src="@Url.Action("MemberPhoto","Member",new { ItemId = Model.MemberId })" /></div>
+            <div style="height:240px;margin:10px" class="column">
+                <div class="col-md-3" style="height: 139px; float: left">
+                </div>
+                <div class="col-md-6" style=" float: left">
+                    <img style=" padding:5px; height:200px" id="Photo " src="@Url.Action("MemberPhoto","Member",new { ItemId = Model.MemberId })" />
+                    <div style=" height:30px"><input type="file" name="photoEdit" id="photoEdit1" /></div>
+                </div>
                 <div class="col-md-3" style="height: 139px; float: left"></div>
 
             </div>
             <div style=" height: 300px ">
-
                 <div class="col-md-6" style="float: left">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
@@ -71,4 +72,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+
+        $('#Member').addClass('active');
+        $("#photoEdit1").on("change", function (e) {
+            const file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#Photo').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+
+    </script>
 }

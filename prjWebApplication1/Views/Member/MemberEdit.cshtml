@@ -4,65 +4,99 @@
 
     ViewData["Title"] = "會員管理";
 }
-
 <h1>會員資料編輯</h1>
-
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="MemberEdit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="MemberId" type="hidden" class="form-control" />
+<form asp-action="MemberEdit" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div style="height:200px;margin:10px" class="column">
+                <div class="col-md-3" style="height: 139px; float: left">
+                </div>
+                <div class="col-md-6" style=" float: left">
+                    <img style=" padding:5px; height:200px" id="Photo" src="@Url.Action("MemberPhoto","Member",new { ItemId = Model.MemberId })" />
+                    <div style=" height:30px"><input type="file" name="photoEdit" id="photoEdit1" /></div>
+                </div>
+                <div class="col-md-3" style="height: 139px; float: left"></div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="MemberAccount" class="control-label"></label>
-                <input asp-for="MemberAccount" class="form-control" />
-                <span asp-validation-for="MemberAccount" class="text-danger"></span>
+            <div style=" height: 300px ">
+
+                <div class="col-md-6" style="float: left">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <input type="hidden" name="MemberId" value="@Model.MemberId" />
+                        <label asp-for="MemberName" class="control-label">姓名</label>
+                        <input asp-for="MemberName" class="form-control" />
+                        <span asp-validation-for="MemberName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MemberAccount" class="control-label">帳號</label>
+                        <input asp-for="MemberAccount" class="form-control" />
+                        <span asp-validation-for="MemberAccount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label">生日</label>
+                        <input asp-for="BirthDate" class="form-control" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6" style=" float: left ">
+                    <div class="form-group">
+                        <label asp-for="MemberPhone" class="control-label">電話</label>
+                        <input asp-for="MemberPhone" class="form-control" />
+                        <span asp-validation-for="MemberPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MemberEmail" class="control-label">電子郵件</label>
+                        <input asp-for="MemberEmail" class="form-control" />
+                        <span asp-validation-for="MemberEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CityName" class="control-label">居住地址</label>
+                        <input asp-for="CityName" class="form-control" />
+                        <span asp-validation-for="CityName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Authority" class="control-label"></label>
+                        <input asp-for="Authority" class="form-control" />
+                        <span asp-validation-for="Authority" class="text-danger"></span>
+                    </div>
+                </div>
+
             </div>
-            <div class="form-group">
-                <label asp-for="MemberName" class="control-label"></label>
-                <input asp-for="MemberName" class="form-control" />
-                <span asp-validation-for="MemberName" class="text-danger"></span>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2"><input type="submit" value="Save" class="btn btn-primary" /></div>
+                <div class="col-md-5"></div>
             </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberPhone" class="control-label"></label>
-                <input asp-for="MemberPhone" class="form-control" />
-                <span asp-validation-for="MemberPhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberEmail" class="control-label"></label>
-                <input asp-for="MemberEmail" class="form-control" />
-                <span asp-validation-for="MemberEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CityName" class="control-label"></label>
-                <input asp-for="CityName" class="form-control" />
-                <span asp-validation-for="CityName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Authority" class="control-label"></label>
-                <input asp-for="Authority" class="form-control" />
-                <span asp-validation-for="Authority" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+        <div class="col-md-4"></div>
     </div>
-</div>
+</form>
 
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+
+
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script> $('#Member').addClass('active');</script>
-   
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+
+        $('#Member').addClass('active');
+        $("#photoEdit1").on("change", function (e) {
+            const file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#Photo').attr('src', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+
+    </script>
+
+
 }
