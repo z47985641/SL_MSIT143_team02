@@ -120,7 +120,7 @@
                                             if ((@Accessor.HttpContext.Session.GetString("Power")) != "管理員")
                                             {
                                                 <li>
-                                                    <a asp-area="" asp-controller="MemberCreate" asp-action="Register">會員專區</a>
+                                                    <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerMainPage">會員專區</a>
                                                     <ul class="dropdown">
                                                         <li>
                                                             <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="MemberPasswordEdit">更改密碼</a>
@@ -132,7 +132,7 @@
                                                             <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">購物車</a>
                                                         </li>
                                                         <li>
-                                                            <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="LikeList">喜愛清單</a>
+                                                            <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="LikeList">追蹤清單</a>
                                                         </li>
                                                         <li>
                                                             <a class="nav-link text-dark" asp-area="" asp-controller="" asp-action="">訂單紀錄</a>

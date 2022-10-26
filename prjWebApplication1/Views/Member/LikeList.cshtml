@@ -26,6 +26,8 @@
                         <div style="width: 100px; float: left; height: 70px; ">
                             @Html.ActionLink("刪除", "DeleteLikeList", new { ItemId = item.OrderId },
                                      new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger", style = "margin:10px" })
+                            <br />
+                            @Html.ActionLink("詳細內容", "Details", "Room", new { id = item.RoomID })
                         </div>
                         <div style="width: 100px; float: left; height: 70px; "></div>
 
