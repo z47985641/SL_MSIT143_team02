@@ -12,7 +12,10 @@
         <div class="col-md-4">
             <div style="height: 200px; margin: 10px" class="column">
                 <div class="col-md-3"  style="height: 139px; float: left"></div>
-                <div class="col-md-6" style=" float: left"><img style=" padding:5px" src="@Url.Action("MemberPhoto","Member",new{ItemId = item.MemberId})" /></div>
+                <div class="col-md-6" style=" float: left">
+                    <img style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto","Member",new{ItemId = item.MemberId})" />
+                    <div style=" height:30px"><input type="hidden" name="photoEdit" id="photoEdit1" /></div>
+                </div>
                 <div class="col-md-3"style="height: 139px; float: left"></div>
                
             </div>

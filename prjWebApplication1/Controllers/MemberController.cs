@@ -42,17 +42,25 @@ namespace PJ_MSIT143_team02.Controllers
             return View(datas);
         }
         [HttpPost]
-        public IActionResult MemberEdit(Member datasedit)
+        public IActionResult MemberEdit(Member datasedit, IFormFile photoEdit)
         {
             MingSuContext db = new MingSuContext();
+            
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
             datas.MemberEmail = datasedit.MemberEmail;
             datas.MemberAccount = datasedit.MemberAccount;
             datas.MemberName = datasedit.MemberName;
             datas.MemberPhone = datasedit.MemberPhone;
             datas.Authority = datasedit.Authority;
-            datas.Admins = datasedit.Admins;
+            datas.CityName = datasedit.CityName;
             datas.BirthDate = datasedit.BirthDate;
+            if (photoEdit != null)
+            {
+            var ms = new MemoryStream();
+            photoEdit.CopyTo(ms);
+            datas.MemberImage = ms.ToArray();
+            }
+
             db.SaveChanges();
 
             return RedirectToAction("MemberList");
@@ -89,7 +97,7 @@ namespace PJ_MSIT143_team02.Controllers
             return View(datas);
         }
         [HttpPost]
-        public IActionResult MemberPersonalEdit(Member datasedit)
+        public IActionResult MemberPersonalEdit(Member datasedit,IFormFile photoEdit)
         {
             MingSuContext db = new MingSuContext();
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
@@ -99,6 +107,12 @@ namespace PJ_MSIT143_team02.Controllers
             datas.MemberPhone = datasedit.MemberPhone;
             datas.BirthDate = datasedit.BirthDate;
             datas.CityName = datasedit.CityName;
+            if (photoEdit != null)
+            {
+                var ms = new MemoryStream();
+                photoEdit.CopyTo(ms);
+                datas.MemberImage = ms.ToArray();
+            }
             db.SaveChanges();
 
             return RedirectToAction("MemberPersonalData");
@@ -186,6 +200,23 @@ namespace PJ_MSIT143_team02.Controllers
             return new EmptyResult();
 
         }
+        public IActionResult MemberPhotoEdit(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
+            if (photoData.MemberImage != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    byte[] b_photo = photoData.MemberImage;
+                    ms.Write(b_photo);
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+            
+            return new EmptyResult();
+
+        }
         public IActionResult LikeListPhoto(int? ItemId)
         {
             MingSuContext db = new MingSuContext();
@@ -212,9 +243,7 @@ namespace PJ_MSIT143_team02.Controllers
                 }
             }
             return new EmptyResult();
-
-
         }
-        
-    }
+        //System.Drawing.Image.FromFile
+        }
 }
