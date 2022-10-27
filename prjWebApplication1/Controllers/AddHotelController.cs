@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PJ_MSIT143_team02.Helpers;
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModel;
 using PJ_MSIT143_team02.ViewModels;
@@ -12,6 +14,7 @@ using System.Threading.Tasks;
 
 namespace PJ_MSIT143_team02.Controllers
 {
+    [Authorize]
     public class AddHotelController : Controller
     {
         //private MingSuContext MS;
@@ -89,47 +92,84 @@ namespace PJ_MSIT143_team02.Controllers
             HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCTS, jsonCart);
             return RedirectToAction("List");
         }
+        public  MingSuContext _context;
+        public  UserManager<IdentityUser> _userManager;
+
+        public AddHotelController(MingSuContext context, UserManager<IdentityUser> userManager)
+        {
+            _context = context;
+            _userManager = userManager;
+        }
 
         //結帳
         public IActionResult Checkout(CCheckOutDataViewModel c)
         {
             MingSuContext db = new MingSuContext();
-            if (HttpContext.Session.GetInt32("MemberID") == null)
+            //if (HttpContext.Session.GetInt32("MemberID") == null)
+            //{
+            //    return RedirectToAction("Login", "MemberCreate");
+            //}
+            //else
+            //{ 
+            //    var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
+            //    var user = JsonSerializer.Deserialize<Member>(Name);
+            //    CRoomMemberViewModel crm = new CRoomMemberViewModel();
+            //    crm.房源及會員 = (from a in db.Rooms
+            //                 where a.RoomId == c.RoomId
+            //                 select new 房源及會員
+            //                 {
+            //                     RoomId = a.RoomId,
+            //                     RoomName = a.RoomName,
+            //                     count = a.Qty,
+            //                     price = a.RoomPrice,
+            //                     MemberId = user.MemberId,
+            //                     MemberName = user.MemberName,
+            //                     MemberEmail = user.MemberEmail,
+            //                     MemberPhone = user.MemberPhone,
+
+            //                 }).ToList();
+            //    return View(crm);
+            //};
+            while (HttpContext.Session.GetInt32("MemberID") == null)
             {
                 return RedirectToAction("Login", "MemberCreate");
-            }
-            else
-            { //int MemberID = HttpContext.Session.GetInt32("MemberID") as Member
-                var UserName = "";
-                var user = JsonSerializer.Deserialize<Member>(UserName);
-                var mem = from M in db.Members
-                          where M.MemberId == HttpContext.Session.GetInt32("MemberID")
-                          select M;
-                CRoomMemberViewModel crm = new CRoomMemberViewModel();
-                crm.房源及會員 = (from a in db.Rooms
-                             where a.RoomId == c.RoomId
-                             select new 房源及會員
-                             {
-                                 RoomId = a.RoomId,
-                                 RoomName = a.RoomName,
-                                 count = a.Qty,
-                                 price = a.RoomPrice,
-                                 MemberId = user.MemberId,
-                                 MemberName = user.MemberName,
-                                 MemberEmail = user.MemberEmail,
-                                 MemberPhone = user.MemberPhone,
-
-                             }).ToList();
-                return View(crm);
             };
+            //確認 Session 內存在購物車
+            if (SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart") == null)
+            {
+                return RedirectToAction("CartView", "AddHotel");
+            }
+            ////建立新的訂單
+            var myOrder = new Order()
+            {
+                OrderId = Convert.ToInt32(_userManager.GetUserId(User)),
+                OrderRemark= _userManager.GetUserName(User),
+                房源及會員 = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart")
+            };
+            myOrder.OrderId = myOrder.房源及會員.Sum(m => m.OrderId);
+            ViewBag.CartItems = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
+
+            return View(myOrder);
         }
 
-
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

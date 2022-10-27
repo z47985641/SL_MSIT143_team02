@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.CRoomMemberViewModel>
+﻿@model PJ_MSIT143_team02.Models.Order
 
 
 @{
@@ -23,8 +23,8 @@
 <form asp-action="CreateOrder">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    @*<input type="hidden" asp-for="OrderId" />*@
-    @*<div class="row">
+    <input type="hidden" asp-for="OrderId" />
+    <div class="row">
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
@@ -41,7 +41,7 @@
             </div>
             <p></p>
 
-        </div>*@
+        </div>
     @{
         //int count = 0;
         decimal sum = 0;
@@ -50,26 +50,33 @@
     }
     <div class="col-4">
         <div class="card" style="background-color: #f8f9fa">
-            @*<input type="hidden" asp-for="OrderId" />*@
+            <input type="hidden" asp-for="OrderId" />
             <div class="card-body">
                 <h5 class="card-title">訂單內容</h5>
                 <table class="table table-borderless">
                     <thead>
                         <tr>
-                            <th>商品名稱</th>
-                            <th>間數</th>
+                            <th>房間名稱</th>
+                            <th>房間數量</th>
+                            <th>房間金額</th>
                             <th>小計</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var r in Model)
+                        @foreach (var r in ViewBag.CartItems)
                         {
-                            sum += r.房源及會員.FirstOrDefault().price;
-                            total = r.房源及會員.FirstOrDefault().price * r.房源及會員.FirstOrDefault().count;
+                            sum += r.price;
+                            total = r.price * r.count;
                         <tr>
-                            <td>@r.房源及會員.FirstOrDefault().RoomName.</td>
-                            <td>@r.房源及會員.FirstOrDefault().count</td>
+                            @*<td>@r.房源及會員.FirstOrDefault().RoomName.</td>
+         <td>@r.房源及會員.FirstOrDefault().count</td>
+        <td>@total</td>*@
+
+                            <td>@r.RoomName</td>
+                            <td>@r.count</td>
+                            <td>@r.price</td>
                             <td>@total</td>
+
                         </tr>
                         }
                     </tbody>
@@ -86,7 +93,7 @@
             </div>
         </div>
     </div>
-    @*</div>*@
+    </div>
 </form>
 <p></p>
 <button class="btn btn-sm btn-outline-secondary" asp-controller="Cart" asp-action="Index"><i class="fas fa-angle-left"></i> 返回購物車</button>
