@@ -106,6 +106,7 @@
                                     <li>
                                         <a asp-area="" asp-controller="AddHotel" asp-action="Index">刊登旅宿</a>
                                     </li>
+
                                     @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
                                         {
                                             <li>
