@@ -48,6 +48,10 @@
         $(function (){
             $("#setImg").attr("src", "../../Image/dis" + @Html.DisplayFor(model => model.RoomDiscountId) + ".jpg")
             setTimeout(function () {
+                function reloadUsingLocationHash() {
+                    window.location.hash = "reload";
+                }
+                window.onload = reloadUsingLocationHash();
                 $("#textcard").height($("#imgcard").height() - 72);
             }, 5);
         });

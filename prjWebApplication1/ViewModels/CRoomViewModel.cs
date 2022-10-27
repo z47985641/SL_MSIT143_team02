@@ -64,6 +64,16 @@ namespace PJ_MSIT143_team02.ViewModel
             get { return _Room.Qty; }
             set { _Room.Qty = value; }
         }
+        public string FImagePath
+        {
+            get { return _Room.FImagePath; }
+            set { _Room.FImagePath = value; }
+        }
+        public byte[] FImage
+        {
+            get { return _Room.FImage; }
+            set { _Room.FImage = value; }
+        }
         public IFormFile photo { get; set; }
     }
 }

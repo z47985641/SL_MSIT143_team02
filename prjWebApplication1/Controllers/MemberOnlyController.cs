@@ -16,25 +16,10 @@ namespace PJ_MSIT143_team02.Controllers
         {
             return View();
         }
-        //todo 尚未建立 
-        public IActionResult PersonalMainPage()
+        public IActionResult MemnerMainPage()
         {
             return View();
         }
-        //todo 尚未建立 
-        public IActionResult PersonalDataeEdit()
-        {
-            return View();
-        }
-        //todo 尚未建立 
-        public IActionResult Shoppingcart()
-        {
-            return View();
-        }
-        //todo 尚未建立 
-        public IActionResult LikeList()
-        {
-            return View();
-        }
+        
     }
 }
