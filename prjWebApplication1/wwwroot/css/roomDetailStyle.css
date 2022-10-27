@@ -1,22 +1,107 @@
 ﻿#imgbox {
     height: 500px;
 }
-#B ul li {
+
+#nav a {
+    color: darkgoldenrod;
+}
+
+#nav ul li {
+    color: saddlebrown;
     display: inline;
     margin-left: 50PX;
 }
 
-#C figure {
+#nav .bbtn {
     display: inline-block;
-    margin-left:50px;
+    background: #514525;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    padding: 10px 19.35px 10px 19.35px;
+    min-width: 100px;
 }
 
-#B {
-    margin-left: 100PX;
-    border: solid;
-    border-color: #E0E0E0;
+#sidebar {
+    background-color:blanchedalmond;
+    border-radius:10px;
+    padding: 20px;
 }
-/*#li1 {
-    text-align:right;
+
+#sidebar h4 {
+    color: saddlebrown;
 }
-*/
+
+#data a {
+    color: darkgoldenrod;
+}
+
+#link a {
+    color: peru;
+}
+
+#link {
+    font-size:14px;
+}
+
+#content {
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#content h4 {
+    color: saddlebrown;
+}
+
+#content a {
+    color: darkgoldenrod;
+}
+
+#comment {
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+#comment textarea{
+    padding-right: 8px;
+}
+
+#comment h4 {
+    color: saddlebrown;
+}
+
+#comment a {
+    color: darkgoldenrod;
+}
+
+#comment .bbtn {
+    display: inline-block;
+    background: #514525;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    padding: 10px 19.35px 10px 19.35px;
+    margin-top:10px;
+    min-width: 52px;
+}
+
+#detail figure {
+    display: inline-block;
+    margin-left: 35px;
+    text-align:center;
+}
+
+.carousel-control-prev {
+    background-color: transparent;
+    border: hidden;
+}
+
+.carousel-control-prev-icon {
+    background-color: transparent;
+    border: hidden;
+}
+
+.carousel-control-next {
+    background-color: transparent;
+    border: hidden;
+}

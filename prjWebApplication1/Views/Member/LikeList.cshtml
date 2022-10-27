@@ -1,34 +1,40 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Order>
+﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.CLikelist>
 
 @{
     ViewData["Title"] = "LikeList";
 }
 
-<div class="container">
-    <p style="font-size:30px">
-        LikeList
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.RoomId)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomId)
-                    </td>
-                    <td>
-                        @Html.ActionLink("刪除", "DeleteLikeList", new { ItemId = item.OrderId })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    </div>
+
+
+<div class="container" style="overflow:auto">
+    <h3 style="text-align:center">喜愛清單</h3>
+        @foreach (var item in Model)
+        {
+            <div style="border:solid;float: left; padding: 5px;margin: 5px;width: 350px;">
+                <div style="width: 320px;height: 250px;position: relative;margin:auto">
+                    <img style="" src="@Url.Action("LikeListPhoto","Member",new{ItemId = item.RoomID})" />
+                </div>
+                <div style="width: 320px;height: 200px;position: relative">
+                    <div>
+                        <div style="width: 150px; float: left; height: 30px; margin: 2px">房名 : @Html.DisplayFor(modelItem => item.RoomName)</div>
+                        
+                        <div style="width: 1500px; float: left; height: 30px; margin: 2px">價格 : @Html.DisplayFor(modelItem => item.RoomPrice)</div>
+                    </div>
+                    <div>
+                        <div style="width: 300px; float: left; height: 30px; margin: 2px">地址 : @Html.DisplayFor(modelItem => item.Address)</div>
+                    </div>
+                    <div style="width: 300px; height: 50px; margin: 2px; overflow: auto">介紹 : @Html.DisplayFor(modelItem => item.RoomIntrodution)</div>
+                    <div style="width: 300px; height: 70px; margin: auto ">
+                        <div style="width: 100px; float: left; height: 35px; "></div>
+                        <div style="width: 200px; float: left; height: 35px; ">
+                            @Html.ActionLink("移除", "DeleteLikeList", new { ItemId = item.OrderId },
+                                     new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger", style = "margin:10px" })
+                            @Html.ActionLink("詳細內容", "Details", "Room", new { id = item.RoomID })
+                        </div>
+                        <div style="width: 100px; float: left; height: 70px; "></div>
+
+                    </div>
+                </div>
+            </div>
+        }
+</div>

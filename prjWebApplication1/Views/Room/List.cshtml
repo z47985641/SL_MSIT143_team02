@@ -41,15 +41,14 @@
                     房間地址
                 </th>
                 <th>
-                    照片
-                </th>
-                <th>
                     日期
                 </th>
                 <th>
-                    數量
+                    庫存
                 </th>
-                @*<th></th>*@
+                <th>
+                    照片
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -77,23 +76,26 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Address)
                     </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => Model.imageReference.Image)
-                        </td>*@
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateDate)
                     </td>
                     <td>
-                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }) |
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FImagePath)
+                    </td>
+                    <td>
+                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }, new { @class = "btn btn-success" }) |
 
-                    @Html.ActionLink("刪除", "Delete", new { id = item.RoomId }, new { onclick = "return confirm('確定要刪除嗎?')" })
-                </td>
-            </tr>
+                        @Html.ActionLink("刪除", "Delete", new { id = item.RoomId },new { onclick = "return confirm('確定要刪除嗎?')", @class = "btn btn-danger" })
+                    </td>
+                </tr>
             }
         </tbody>
     </table>
-
     
+
 </div>
 @section Scripts {
     <script>$('#Room').addClass('active');</script>

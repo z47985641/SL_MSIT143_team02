@@ -3,58 +3,63 @@
 @{
     ViewData["Title"] = "MemberPersonalData";
 }
-<div class="container">
-    <h3 style="text-align:center">個人資料</h3>
+<hr />
+<h1 style="text-align:center">個人資料</h1>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div style="height: 200px; margin: 10px" class="column">
+                <div class="col-md-3"  style="height: 139px; float: left"></div>
+                <div class="col-md-6" style=" float: left">
+                    <img style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto","Member",new{ItemId = item.MemberId})" />
+                    <div style=" height:30px"><input type="hidden" name="photoEdit" id="photoEdit1" /></div>
+                </div>
+                <div class="col-md-3"style="height: 139px; float: left"></div>
+               
+            </div>
+            <div style=" height: 300px ">
+                <div class="text-danger"></div>
+                <div  class="col-md-6"style="float: left">
+                    <div class="form-group" >
+                        <input type="hidden" name="MemberId" value="@item.MemberId" />
+                        <label class="control-label">姓名</label>
+                        <p style="padding: 6px; margin: 0px 0px 0px 10px">@Html.DisplayFor(modelItem => item.MemberName)</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">帳號</label>
+                        <p style="padding: 6px; margin: 0px 0px 0px 10px ">@Html.DisplayFor(modelItem => item.MemberAccount)</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">生日</label>
+                        <p style="padding: 6px; margin: 0px 0px 0px 10px ">@Html.DisplayFor(modelItem => item.BirthDate)</p>
+                    </div>
+                </div>
+                <div class="col-md-6" style=" float: left ">
+                    <div class="form-group">
+                        <label class="control-label">電話</label>
+                        <p style="padding: 6px; margin: 0px 0px 0px 10px ">@Html.DisplayFor(modelItem => item.MemberPhone)</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">電子郵件</label>
+                        <p style="padding: 6px; margin: 0px 0px 0px 10px ">@Html.DisplayFor(modelItem => item.MemberEmail)</p>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">居住地址</label>
+                        <p style="padding: 6px; margin: 0px 0px 0px 10px ">@Html.DisplayFor(modelItem => item.CityName)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-5"></div>
+                <div class="col-md-2">@Html.ActionLink("編輯", "MemberPersonalEdit", new { id = item.MemberId }, new { Class = "btn btn-primary" })</div>
+                <div class="col-md-5"></div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.MemberName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BirthDate)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MemberPhone)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MemberEmail)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CityName)
-                </th>
-                <th>
-                    功能
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MemberName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BirthDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MemberPhone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MemberEmail)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CityName)
-                    </td>
-                    <td>
-                        @Html.ActionLink("編輯", "MemberPersonalEdit", new {id=item.MemberId}) |
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    }
 </div>
+<hr />
 
-    

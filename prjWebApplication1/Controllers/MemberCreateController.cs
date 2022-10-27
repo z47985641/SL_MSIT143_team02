@@ -52,6 +52,9 @@ namespace PJ_MSIT143_team02.Controllers
                     string jsonUser = JsonSerializer.Serialize(cust);
                     HttpContext.Session.SetString("Power", cust.Authority);
                     HttpContext.Session.SetInt32("MemberID", cust.MemberId);
+                    HttpContext.Session.SetString(CDictionary.SK_LOGINED_USER, jsonUser);
+
+
                     if (cust.Authority.Equals("管理員"))
                         return RedirectToAction("AdminMainPage", "MemberOnly");
 

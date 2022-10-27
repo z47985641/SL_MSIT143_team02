@@ -1,4 +1,5 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
+﻿@*@model IEnumerable<PJ_MSIT143_team02.Models.Room>*@
+@model IEnumerable<PJ_MSIT143_team02.Models.CShoppingCartItem>
 
 @{
     ViewData["Title"] = "AddtoCart";
@@ -33,21 +34,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (PJ_MSIT143_team02.Models.Room r in Model)
+                    @foreach (PJ_MSIT143_team02.Models.CShoppingCartItem r in Model)
                     {
                     <tr>
-                        @*<td class="text-center"><img src="@Html.DisplayFor(modelItem => item.imageSrc)" height="30" /></td>*@
-                        <td>
-                            @r.RoomName
-                        </td>
-                        <td>
-                            @r.RoomPrice
-                        </td>
-                        <td>
-                            @r.Qty
-                        </td>
-                        <td>
 
+                        <td>
+                            @r.RoomId
+                        </td>
+                        <td>
+                            @r.price
+                        </td>
+                        <td>
+                            @r.count
+                        </td>
+                        <td>
+                            @r.小計
+                        </td>
+                        <td>
+                            @Html.ActionLink("修改", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |*@
+                            @Html.ActionLink("刪除", "Delete", new { /* id=item.PrimaryKey */ })
                         </td>
                     </tr>
                     }

@@ -17,24 +17,21 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
             IEnumerable<Member> datas = from I in db.Members
-                                        //join A in db.Cities
-                                        //on I.CityName equals A.CityId
+                                            //join A in db.Cities
+                                            //on I.CityName equals A.CityId
                                         select I;
-
+            if (KW.KW_ID > 0)
+                datas = datas.Where(p => p.MemberId.ToString().Contains(KW.KW_ID.ToString()));
             if (!string.IsNullOrEmpty(KW.KW_MemberAccount))
                 datas = datas.Where(p => p.MemberAccount.Contains(KW.KW_MemberAccount));
-            if (!string.IsNullOrEmpty(KW.KW_MemberPassword))
-                datas = datas.Where(p => p.MemberPassword.Contains(KW.KW_MemberPassword));
             if (!string.IsNullOrEmpty(KW.KW_MemberName))
                 datas = datas.Where(p => p.MemberName.Contains(KW.KW_MemberName));
             if (!string.IsNullOrEmpty(KW.KW_MemberPhone))
-               datas = datas.Where(p => p.MemberPhone.Contains(KW.KW_MemberPhone));
+                datas = datas.Where(p => p.MemberPhone.Contains(KW.KW_MemberPhone));
             if (!string.IsNullOrEmpty(KW.KW_MemberEmail))
-               datas = datas.Where(p => p.MemberEmail.Contains(KW.KW_MemberEmail));
-            if (KW.KW_CityId >0)
-               //datas = datas.Where(p => p.CityId.Equals(KW.KW_CityId));
+                datas = datas.Where(p => p.MemberEmail.Contains(KW.KW_MemberEmail));
             if (!string.IsNullOrEmpty(KW.KW_Authority))
-               datas = datas.Where(p => p.Authority.Contains(KW.KW_Authority));
+                datas = datas.Where(p => p.Authority.Contains(KW.KW_Authority));
 
             return View(datas);
         }
@@ -45,18 +42,25 @@ namespace PJ_MSIT143_team02.Controllers
             return View(datas);
         }
         [HttpPost]
-        public IActionResult MemberEdit(Member datasedit)
+        public IActionResult MemberEdit(Member datasedit, IFormFile photoEdit)
         {
             MingSuContext db = new MingSuContext();
+
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
             datas.MemberEmail = datasedit.MemberEmail;
             datas.MemberAccount = datasedit.MemberAccount;
             datas.MemberName = datasedit.MemberName;
-            datas.MemberPassword = datasedit.MemberPassword;
             datas.MemberPhone = datasedit.MemberPhone;
             datas.Authority = datasedit.Authority;
-            datas.Admins = datasedit.Admins;
+            datas.CityName = datasedit.CityName;
             datas.BirthDate = datasedit.BirthDate;
+            if (photoEdit != null)
+            {
+                var ms = new MemoryStream();
+                photoEdit.CopyTo(ms);
+                datas.MemberImage = ms.ToArray();
+            }
+
             db.SaveChanges();
 
             return RedirectToAction("MemberList");
@@ -72,7 +76,7 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("MemberList");
         }
-        
+
         public IActionResult MemberCreate()
         {
             return View();
@@ -93,15 +97,22 @@ namespace PJ_MSIT143_team02.Controllers
             return View(datas);
         }
         [HttpPost]
-        public IActionResult MemberPersonalEdit(Member datasedit)
+        public IActionResult MemberPersonalEdit(Member datasedit, IFormFile photoEdit)
         {
             MingSuContext db = new MingSuContext();
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == datasedit.MemberId);
             datas.MemberEmail = datasedit.MemberEmail;
+            datas.MemberAccount = datasedit.MemberAccount;
             datas.MemberName = datasedit.MemberName;
             datas.MemberPhone = datasedit.MemberPhone;
             datas.BirthDate = datasedit.BirthDate;
             datas.CityName = datasedit.CityName;
+            if (photoEdit != null)
+            {
+                var ms = new MemoryStream();
+                photoEdit.CopyTo(ms);
+                datas.MemberImage = ms.ToArray();
+            }
             db.SaveChanges();
 
             return RedirectToAction("MemberPersonalData");
@@ -118,16 +129,16 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult MemberPasswordEdit()
         {
-                return View();
+            return View();
         }
         [HttpPost]
         public IActionResult MemberPasswordEdit(CMemberPassword datasedit)
         {
             MingSuContext db = new MingSuContext();
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == HttpContext.Session.GetInt32("MemberID"));
-            if (datasedit.MemberPassword != datas.MemberPassword) 
-               return View(); 
-                
+            if (datasedit.MemberPassword != datas.MemberPassword)
+                return View();
+
             datas.MemberPassword = datasedit.MemberNewPassword;
             db.SaveChanges();
             return RedirectToAction("MemberPersonalData");
@@ -135,10 +146,19 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult LikeList()
         {
             MingSuContext db = new MingSuContext();
-            Order orderDatas = db.Orders.FirstOrDefault(Order => Order.OrderstatusId == 5);
-            IEnumerable<Order> datas = from I in db.Orders
-                                       where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
-                                       select I;
+            var datas = from I in db.Orders
+                        join R in db.Rooms on I.RoomId equals R.RoomId
+                        where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
+                        select new CLikelist
+                        {
+                            OrderId = I.OrderId,
+                            RoomID = R.RoomId,
+                            RoomName = R.RoomName,
+                            RoomPrice = R.RoomPrice,
+                            RoomIntrodution = R.RoomIntrodution,
+                            Address = R.Address,
+                            Qty = R.Qty,
+                        };
             return View(datas);
         }
         public IActionResult AddLikeList(int? ItemId)
@@ -151,7 +171,7 @@ namespace PJ_MSIT143_team02.Controllers
             db.Orders.Add(Likeitem);
             db.SaveChanges();
 
-            return  RedirectToAction("TestListView","Room");
+            return RedirectToAction("TestListView", "Room");
         }
         public IActionResult DeleteLikeList(int? ItemId)
         {
@@ -170,7 +190,7 @@ namespace PJ_MSIT143_team02.Controllers
             var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
             if (photoData.MemberImage != null)
             {
-                using (MemoryStream ms = new MemoryStream()) 
+                using (MemoryStream ms = new MemoryStream())
                 {
                     byte[] b_photo = photoData.MemberImage;
                     ms.Write(b_photo);
@@ -178,7 +198,52 @@ namespace PJ_MSIT143_team02.Controllers
                 }
             }
             return new EmptyResult();
-            
+
         }
+        public IActionResult MemberPhotoEdit(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
+            if (photoData.MemberImage != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    byte[] b_photo = photoData.MemberImage;
+                    ms.Write(b_photo);
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+
+            return new EmptyResult();
+
+        }
+        public IActionResult LikeListPhoto(int? ItemId)
+        {
+            MingSuContext db = new MingSuContext();
+            CLikelist CL = new CLikelist();
+            byte[] b_photo = null;
+            var photoID = from M in db.ImageReferences
+                          join MI in db.Images
+                          on M.ImageId equals MI.ImageId
+                          where M.RoomId == ItemId
+                          select new CLikelist
+                          {
+                              Image = MI.Image1
+                          }
+                           ;
+
+            if (photoID != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    foreach (var I in photoID)
+                        b_photo = I.Image;
+                    ms.Write(b_photo);
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+            return new EmptyResult();
+        }
+        //System.Drawing.Image.FromFile
     }
 }
