@@ -135,14 +135,22 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult LikeList()
         {
             MingSuContext db = new MingSuContext();
-            Order orderDatas = db.Orders.FirstOrDefault(Order => Order.OrderstatusId == 5);
-            IEnumerable<Order> datas = from I in db.Orders
-                                       where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
-                                       select I;
-            
+            var datas = from I in db.Orders
+                        join R in db.Rooms on I.RoomId equals R.RoomId
+                        where I.OrderstatusId == 5 && I.MemberId == HttpContext.Session.GetInt32("MemberID")
+                        select new CLikelist
+                        {
+                            OrderId = I.OrderId,
+                            RoomID = R.RoomId,
+                            RoomName = R.RoomName,
+                            RoomPrice = R.RoomPrice,
+                            RoomIntrodution = R.RoomIntrodution,
+                            Address = R.Address,
+                            Qty = R.Qty,
+                        };
             return View(datas);
         }
-        public IActionResult AddLikeList(int? ItemId)
+            public IActionResult AddLikeList(int? ItemId)
         {
             MingSuContext db = new MingSuContext();
             Order Likeitem = new Order();
