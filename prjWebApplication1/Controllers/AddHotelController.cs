@@ -101,35 +101,35 @@ namespace PJ_MSIT143_team02.Controllers
         //}
 
         //結帳
-        public IActionResult Checkout(/*CCheckOutDataViewModel c*/)
+        public IActionResult Checkout(CCheckOutDataViewModel c)
         {
             MingSuContext db = new MingSuContext();
-            //if (HttpContext.Session.GetInt32("MemberID") == null)
-            //{
-            //    return RedirectToAction("Login", "MemberCreate");
-            //}
-            //else
-            //{
-            //    var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
-            //    var user = JsonSerializer.Deserialize<Member>(Name);
-            //    CRoomMemberViewModel crm = new CRoomMemberViewModel();
-            //    crm.房源及會員 = (from a in db.Rooms
-            //                 where a.RoomId == c.RoomId
-            //                 select new 房源及會員
-            //                 {
-            //                     RoomId = a.RoomId,
-            //                     RoomName = a.RoomName,
-            //                     count = a.Qty,
-            //                     price = a.RoomPrice,
-            //                     MemberId = user.MemberId,
-            //                     MemberName = user.MemberName,
-            //                     MemberEmail = user.MemberEmail,
-            //                     MemberPhone = user.MemberPhone,
-
-            //                 }).ToList();
-                return View(/*crm*/);
+            if (HttpContext.Session.GetInt32("MemberID") == null)
+            {
+                return RedirectToAction("Login", "MemberCreate");
             }
-            //    while (HttpContext.Session.GetInt32("MemberID") == null)
+            else
+            {
+                var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
+                var user = JsonSerializer.Deserialize<Member>(Name);
+
+                CRoomMemberViewModel crm = new CRoomMemberViewModel();
+                crm.房源及會員 = (from a in db.Rooms
+                             where a.RoomId == c.RoomId
+                             select new 房源及會員
+                             {
+                                 RoomId = a.RoomId,
+                                 RoomName = a.RoomName,
+                                 count = a.Qty,
+                                 price = a.RoomPrice,
+                                 MemberId = user.MemberId,
+                                 MemberName = user.MemberName,
+                                 MemberEmail = user.MemberEmail,
+                                 MemberPhone = user.MemberPhone,
+                             }).ToList();
+                return View(crm);
+            }
+            //    if (HttpContext.Session.GetInt32("MemberID") == null)
             //    {
             //        return RedirectToAction("Login", "MemberCreate");
             //    };
@@ -151,11 +151,11 @@ namespace PJ_MSIT143_team02.Controllers
             //    return View(myOrder);
             //}
 
-        
+
+        }
+
+
     }
-
-
-
 
 
 
