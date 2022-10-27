@@ -8,7 +8,7 @@ namespace PJ_MSIT143_team02.Models
 {
     public partial class Order
     {
-        internal List<房源及會員> 房源及會員;
+        //internal List<房源及會員> 房源及會員;
 
         public Order()
         {

@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 
 namespace PJ_MSIT143_team02.Controllers
 {
-    [Authorize]
     public class AddHotelController : Controller
     {
         //private MingSuContext MS;
@@ -92,17 +91,17 @@ namespace PJ_MSIT143_team02.Controllers
             HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCTS, jsonCart);
             return RedirectToAction("List");
         }
-        public  MingSuContext _context;
-        public  UserManager<IdentityUser> _userManager;
+        //public  MingSuContext _context;
+        //public  UserManager<IdentityUser> _userManager;
 
-        public AddHotelController(MingSuContext context, UserManager<IdentityUser> userManager)
-        {
-            _context = context;
-            _userManager = userManager;
-        }
+        //public AddHotelController(MingSuContext context, UserManager<IdentityUser> userManager)
+        //{
+        //    _context = context;
+        //    _userManager = userManager;
+        //}
 
         //結帳
-        public IActionResult Checkout(CCheckOutDataViewModel c)
+        public IActionResult Checkout(/*CCheckOutDataViewModel c*/)
         {
             MingSuContext db = new MingSuContext();
             //if (HttpContext.Session.GetInt32("MemberID") == null)
@@ -110,7 +109,7 @@ namespace PJ_MSIT143_team02.Controllers
             //    return RedirectToAction("Login", "MemberCreate");
             //}
             //else
-            //{ 
+            //{
             //    var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
             //    var user = JsonSerializer.Deserialize<Member>(Name);
             //    CRoomMemberViewModel crm = new CRoomMemberViewModel();
@@ -128,32 +127,32 @@ namespace PJ_MSIT143_team02.Controllers
             //                     MemberPhone = user.MemberPhone,
 
             //                 }).ToList();
-            //    return View(crm);
-            //};
-            while (HttpContext.Session.GetInt32("MemberID") == null)
-            {
-                return RedirectToAction("Login", "MemberCreate");
-            };
-            //確認 Session 內存在購物車
-            if (SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart") == null)
-            {
-                return RedirectToAction("CartView", "AddHotel");
+                return View(/*crm*/);
             }
-            ////建立新的訂單
-            var myOrder = new Order()
-            {
-                OrderId = Convert.ToInt32(_userManager.GetUserId(User)),
-                OrderRemark= _userManager.GetUserName(User),
-                房源及會員 = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart")
-            };
-            myOrder.OrderId = myOrder.房源及會員.Sum(m => m.OrderId);
-            ViewBag.CartItems = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
+            //    while (HttpContext.Session.GetInt32("MemberID") == null)
+            //    {
+            //        return RedirectToAction("Login", "MemberCreate");
+            //    };
+            //    //確認 Session 內存在購物車
+            //    if (SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart") == null)
+            //    {
+            //        return RedirectToAction("CartView", "AddHotel");
+            //    }
+            //    ////建立新的訂單
+            //    var myOrder = new Order()
+            //    {
+            //        OrderId = Convert.ToInt32(_userManager.GetUserId(User)),
+            //        OrderRemark= _userManager.GetUserName(User),
+            //        房源及會員 = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart")
+            //    };
+            //    myOrder.OrderId = myOrder.房源及會員.Sum(m => m.OrderId);
+            //    ViewBag.CartItems = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
 
-            return View(myOrder);
-        }
+            //    return View(myOrder);
+            //}
 
+        
     }
-
 
 
 
