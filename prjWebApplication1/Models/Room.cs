@@ -13,7 +13,6 @@ namespace PJ_MSIT143_team02.Models
             Comments = new HashSet<Comment>();
             EquipmentReferences = new HashSet<EquipmentReference>();
             ImageReferences = new HashSet<ImageReference>();
-            Orders = new HashSet<Order>();
         }
 
         public int RoomId { get; set; }
@@ -24,16 +23,14 @@ namespace PJ_MSIT143_team02.Models
         public int RoomstatusId { get; set; }
         public string Address { get; set; }
         public DateTime? CreateDate { get; set; }
-        public int Qty { get; set; }
-        public string FImagePath { get; set; }
-        public byte[] FImage { get; set; }
-
+        public string FimagePath { get; set; }
+        public int? Qty { get; set; }
+        public byte[] Fimage { get; set; }
 
         public virtual RoomStatus Roomstatus { get; set; }
         public virtual ICollection<AdminReference> AdminReferences { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<EquipmentReference> EquipmentReferences { get; set; }
         public virtual ICollection<ImageReference> ImageReferences { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

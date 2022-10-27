@@ -122,7 +122,7 @@ namespace PJ_MSIT143_team02.Controllers
                              {
                                  RoomId = a.RoomId,
                                  RoomName = a.RoomName,
-                                 count = a.Qty,
+                                 count = (int)a.Qty,
                                  price = a.RoomPrice,
                                  MemberId = user.MemberId,
                                  MemberName = user.MemberName,

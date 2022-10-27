@@ -59,20 +59,20 @@ namespace PJ_MSIT143_team02.ViewModel
             get { return _Room.CreateDate; }
             set { _Room.CreateDate = value; }
         }
-        public int Qty
+        public int? Qty
         {
             get { return _Room.Qty; }
             set { _Room.Qty = value; }
         }
-        public string FImagePath
+        public string FimagePath
         {
-            get { return _Room.FImagePath; }
-            set { _Room.FImagePath = value; }
+            get { return _Room.FimagePath; }
+            set { _Room.FimagePath = value; }
         }
-        public byte[] FImage
+        public byte[] Fimage
         {
-            get { return _Room.FImage; }
-            set { _Room.FImage = value; }
+            get { return _Room.Fimage; }
+            set { _Room.Fimage = value; }
         }
         public IFormFile photo { get; set; }
     }

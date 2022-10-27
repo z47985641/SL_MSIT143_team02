@@ -213,6 +213,8 @@ namespace PJ_MSIT143_team02.Models
                     .ValueGeneratedNever()
                     .HasColumnName("CommentID");
 
+                entity.Property(e => e.CommentStatus).HasMaxLength(50);
+
                 entity.Property(e => e.RoomId).HasColumnName("RoomID");
 
                 entity.HasOne(d => d.Room)
@@ -332,7 +334,9 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.BirthDate).HasColumnType("datetime");
 
-                //entity.Property(e => e.CityId).HasColumnName("CityID");
+                entity.Property(e => e.CityName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.MemberAccount)
                     .IsRequired()
@@ -353,12 +357,6 @@ namespace PJ_MSIT143_team02.Models
                 entity.Property(e => e.MemberPhone)
                     .IsRequired()
                     .HasMaxLength(15);
-
-                //entity.HasOne(d => d.City)
-                //    //.WithMany(p => p.Members)
-                //    .HasForeignKey(d => d.CityId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_Member_City");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -366,6 +364,8 @@ namespace PJ_MSIT143_team02.Models
                 entity.ToTable("Order");
 
                 entity.Property(e => e.OrderId).HasColumnName("OrderID");
+
+                entity.Property(e => e.ActivityId).HasColumnName("ActivityID");
 
                 entity.Property(e => e.MemberId).HasColumnName("MemberID");
 
@@ -384,23 +384,15 @@ namespace PJ_MSIT143_team02.Models
                     .HasForeignKey(d => d.OrderstatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Order_OrderStatus");
-
-                entity.HasOne(d => d.Room)
-                    .WithMany(p => p.Orders)
-                    .HasForeignKey(d => d.RoomId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Order_Room");
             });
 
             modelBuilder.Entity<OrderDetail>(entity =>
             {
-                entity.HasKey(e => e.OrderDetailId);
-
                 entity.Property(e => e.OrderDetailId)
                     .ValueGeneratedNever()
                     .HasColumnName("OrderDetailID");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.Property(e => e.ActivityId).HasColumnName("ActivityID");
 
                 entity.Property(e => e.OrderEndDate).HasColumnType("datetime");
 
@@ -410,25 +402,19 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.OrderStartDate).HasColumnType("datetime");
 
-                //entity.Property(e => e.PayId).HasColumnName("PayID");
+                entity.Property(e => e.Payment)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.RoomDiscountId).HasColumnName("RoomDiscountID");
 
-                entity.Property(e => e.RoomId)
-                    .ValueGeneratedOnAdd()
-                    .HasColumnName("RoomID");
+                entity.Property(e => e.RoomId).HasColumnName("RoomID");
 
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_OrderDetails_Order");
-
-                //entity.HasOne(d => d.Pay)
-                //    .WithMany(p => p.OrderDetails)
-                //    .HasForeignKey(d => d.PayId)
-                //    .OnDelete(DeleteBehavior.ClientSetNull)
-                //    .HasConstraintName("FK_OrderDetails_Payment");
 
                 entity.HasOne(d => d.RoomDiscount)
                     .WithMany(p => p.OrderDetails)
@@ -449,7 +435,9 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.ToTable("Payment");
 
-                entity.Property(e => e.PayId).HasColumnName("PayID");
+                entity.Property(e => e.PayId)
+                    .HasMaxLength(50)
+                    .HasColumnName("PayID");
 
                 entity.Property(e => e.Payment1)
                     .IsRequired()
@@ -469,6 +457,14 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.CreateDate).HasDefaultValueSql("(getdate())");
 
+                entity.Property(e => e.Fimage)
+                    .HasColumnType("image")
+                    .HasColumnName("FImage");
+
+                entity.Property(e => e.FimagePath)
+                    .HasMaxLength(200)
+                    .HasColumnName("FImagePath");
+
                 entity.Property(e => e.MemberId).HasColumnName("MemberID");
 
                 entity.Property(e => e.RoomIntrodution)
@@ -482,7 +478,6 @@ namespace PJ_MSIT143_team02.Models
                 entity.Property(e => e.RoomPrice).HasColumnType("money");
 
                 entity.Property(e => e.RoomstatusId).HasColumnName("RoomstatusID");
-                entity.Property(e => e.Qty).HasColumnName("Qty");
 
                 entity.HasOne(d => d.Roomstatus)
                     .WithMany(p => p.Rooms)

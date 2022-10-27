@@ -157,7 +157,7 @@ namespace PJ_MSIT143_team02.Controllers
                             RoomPrice = R.RoomPrice,
                             RoomIntrodution = R.RoomIntrodution,
                             Address = R.Address,
-                            Qty = R.Qty,
+                            Qty = (int)R.Qty,
                         };
             return View(datas);
         }

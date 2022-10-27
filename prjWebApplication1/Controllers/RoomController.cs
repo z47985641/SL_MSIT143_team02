@@ -152,7 +152,7 @@ namespace PJ_MSIT143_team02.Controllers
                 if (InRoom.photo != null)
                 {
                     string pName = Guid.NewGuid().ToString() + ".jpg";
-                    r.FImagePath = pName;
+                    r.FimagePath = pName;
                     string path = _enviro.WebRootPath + "/image/" + pName;
                     InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
                 }
@@ -167,7 +167,7 @@ namespace PJ_MSIT143_team02.Controllers
                 r.Address = InRoom.Address;
                 r.CreateDate = InRoom.CreateDate;
                 r.Qty = InRoom.Qty;
-                r.FImagePath = InRoom.FImagePath;
+                r.FimagePath = InRoom.FimagePath;
                 db.SaveChanges();
             }
             return RedirectToAction("List", "path");
