@@ -1,29 +1,34 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
-using PJ_MSIT143_team02.ViewModels;
 using PJ_MSIT143_team02.ViewModel;
+using PJ_MSIT143_team02.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using System.Text.Json;
 
 namespace PJ_MSIT143_team02.Controllers
 {
+
     public class RoomController : Controller
     {
-        //private MingSuContext MS;
-        //public RoomController(MingSuContext q)
-        //{
-        //    MS = q;
-        //}
+
+        MingSuContext db = new MingSuContext();
+
+        private IWebHostEnvironment _enviro;
+        public RoomController(IWebHostEnvironment p)
+        {
+            _enviro = p;
+        }
+
+
         public IActionResult List(CKeywordViewModel model)
         {
+
             MingSuContext db = new MingSuContext();
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
-
                 datas = from p in db.Rooms
                         select p;
             else
@@ -63,18 +68,20 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.CreateDate.ToString().Contains(model.txtKeyword));
             return View(cAlls);
         }
-       
-        public IActionResult TestListView(CKeywordViewModel model)
+
+        public IActionResult TestListView(CKeywordViewModel model, int page = 1, int pageSize = 15)
         {
+
             MingSuContext db = new MingSuContext();
+
+
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
-
                 datas = from r in db.Rooms
-                            //join i in db.ImageReferences on r.RoomId equals i.RoomId
-                            //join k in db.Images on i.ImageId equals k.ImageId
-                            //join m in db.Members on r.MemberId equals m.MemberId
-                            //join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
+                        join i in db.ImageReferences on r.RoomId equals i.RoomId
+                        join k in db.Images on i.ImageId equals k.ImageId
+                        join m in db.Members on r.MemberId equals m.MemberId
+                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
                         select r;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
@@ -85,7 +92,9 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.Address.Contains(model.txtKeyword)
                 || p.CreateDate.ToString().Contains(model.txtKeyword)
                 || p.Qty.ToString().Contains(model.txtKeyword));
+            //var datas = ListAll.ToList().ToPagedList(page, pageSize);
             return View(datas);
+
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
@@ -117,7 +126,7 @@ namespace PJ_MSIT143_team02.Controllers
                     db.Rooms.Remove(r);
                     db.SaveChanges();
                 }
-                
+
             }
             return RedirectToAction("List");
         }
@@ -135,17 +144,20 @@ namespace PJ_MSIT143_team02.Controllers
         [HttpPost]
         public ActionResult Edit(CRoomViewModel InRoom)
         {
+
             MingSuContext db = new MingSuContext();
             Room r = db.Rooms.FirstOrDefault(t => t.RoomId == InRoom.RoomId);
             if (r != null)
             {
-                //if (InRoom.photo != null)
-                //{
-                //    string pName = Guid.NewGuid().ToString() + ".jpg";
-                //    r.FImagePath = pName;
-                //    string path = _enviro.WebRootPath + "/images/" + pName;
-                //    InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
-                //}
+                if (InRoom.photo != null)
+                {
+                    string pName = Guid.NewGuid().ToString() + ".jpg";
+                    r.FImagePath = pName;
+                    string path = _enviro.WebRootPath + "/image/" + pName;
+                    InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
+                }
+
+
                 r.RoomId = InRoom.RoomId;
                 r.RoomName = InRoom.RoomName;
                 r.RoomPrice = InRoom.RoomPrice;
@@ -154,10 +166,11 @@ namespace PJ_MSIT143_team02.Controllers
                 r.RoomstatusId = InRoom.RoomstatusId;
                 r.Address = InRoom.Address;
                 r.CreateDate = InRoom.CreateDate;
-                r.Qty= InRoom.Qty;
+                r.Qty = InRoom.Qty;
+                r.FImagePath = InRoom.FImagePath;
                 db.SaveChanges();
             }
-            return RedirectToAction("List");
+            return RedirectToAction("List", "path");
         }
         public IActionResult Details(int? Id)
         {
@@ -170,37 +183,27 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectPermanent("TestListView");
         }
-        //[HttpPost]
-        //public IActionResult AddToSession(CAddToCartViewModel s)
+        //public static byte[] GetBytesFromImage(string filename)
         //{
-        //    string jsonBurchased = JsonSerializer.Serialize(s);
-        //    HttpContext.Session.SetString(CDictionary.SK_PURCHASED_PRODUCTS, jsonBurchased);
-        //    return NoContent();
-        //}
-        //public IActionResult ShoppingCart()
-        //{
-        //    var shopping = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCTS);
-        //    var c = JsonSerializer.Deserialize<CAddToCartViewModel>(shopping);
-        //    CGoShoppingCartView go = new CGoShoppingCartView()
+        //    try
         //    {
-        //        RoomId = c.RoomId,
-        //        RoomName = MS.Rooms.Where(a=>a.RoomId==c.RoomId).FirstOrDefault().RoomName,
-        //        Qty = c.Qty,
-        //        RoomPrice = MS.Rooms.Where(a => a.RoomId == c.RoomId).FirstOrDefault().RoomPrice,
-        //    };
-        //    return View(go);
+        //        FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
+        //        int length = (int)fs.Length;
+        //        byte[] image = new byte[length];
+        //        fs.Read(image, 0, length);
+        //        fs.Close();
+        //        return image;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return null;
+        //    }
         //}
-
-
-
-
-
-
-
-
-
-
-
+        //public FileResult Image()
+        //{
+        //    byte[] image = GetBytesFromDB();
+        //    return new FileContentResult(image, "image/jpeg");
+        //}
 
     }
 }

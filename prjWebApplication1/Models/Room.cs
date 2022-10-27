@@ -25,8 +25,8 @@ namespace PJ_MSIT143_team02.Models
         public string Address { get; set; }
         public DateTime? CreateDate { get; set; }
         public int Qty { get; set; }
-
         public string FImagePath { get; set; }
+        public byte[] FImage { get; set; }
 
 
         public virtual RoomStatus Roomstatus { get; set; }
