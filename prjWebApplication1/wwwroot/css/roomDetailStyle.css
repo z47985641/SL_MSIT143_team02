@@ -63,12 +63,26 @@
     padding: 20px;
 }
 
+#comment textarea{
+    padding-right: 8px;
+}
+
 #comment h4 {
     color: saddlebrown;
 }
 
 #comment a {
     color: darkgoldenrod;
+}
+
+#comment .bbtn {
+    display: inline-block;
+    background: #514525;
+    color: #ffffff;
+    font-family: 'Playfair Display', serif;
+    padding: 10px 19.35px 10px 19.35px;
+    margin-top:10px;
+    min-width: 52px;
 }
 
 #detail figure {
