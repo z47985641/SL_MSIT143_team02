@@ -100,14 +100,14 @@ namespace PJ_MSIT143_team02.Controllers
             }
             else
             { //int MemberID = HttpContext.Session.GetInt32("MemberID") as Member
-                var UserName = "";
-                var user = JsonSerializer.Deserialize<Member>(UserName);
-                var mem = from M in db.Members
-                          where M.MemberId == HttpContext.Session.GetInt32("MemberID")
-                          select M;
+                var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
+                var user = JsonSerializer.Deserialize<Member>(Name);
+                var Name1 = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCTS);
+                var user1= JsonSerializer.Deserialize<CShoppingCartItem>(Name1);
+
                 CRoomMemberViewModel crm = new CRoomMemberViewModel();
                 crm.房源及會員 = (from a in db.Rooms
-                             where a.RoomId == c.RoomId
+                             where a.RoomId == user1.RoomId
                              select new 房源及會員
                              {
                                  RoomId = a.RoomId,
