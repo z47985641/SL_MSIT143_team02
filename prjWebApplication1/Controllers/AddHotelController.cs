@@ -101,7 +101,7 @@ namespace PJ_MSIT143_team02.Controllers
         //}
 
         //結帳
-        public IActionResult Checkout(CCheckOutDataViewModel c)
+        public IActionResult Checkout(CAddToCartViewModel c)
         {
             MingSuContext db = new MingSuContext();
             if (HttpContext.Session.GetInt32("MemberID") == null)
@@ -112,12 +112,12 @@ namespace PJ_MSIT143_team02.Controllers
             { //int MemberID = HttpContext.Session.GetInt32("MemberID") as Member
                 var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
                 var user = JsonSerializer.Deserialize<Member>(Name);
-                var Name1 = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCTS);
-                var user1= JsonSerializer.Deserialize<CShoppingCartItem>(Name1);
+                //var Name1 = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCTS);
+                //var user1= JsonSerializer.Deserialize<CShoppingCartItem>(Name1);
 
                 CRoomMemberViewModel crm = new CRoomMemberViewModel();
                 crm.房源及會員 = (from a in db.Rooms
-                             where a.RoomId == user1.RoomId
+                             where a.RoomId == c.RoomId
                              select new 房源及會員
                              {
                                  RoomId = a.RoomId,
