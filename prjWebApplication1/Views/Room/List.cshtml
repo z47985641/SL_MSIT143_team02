@@ -86,15 +86,15 @@
                         @Html.DisplayFor(modelItem => item.FImagePath)
                     </td>
                     <td>
-                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }) |
+                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }, new { @class = "btn btn-success" }) |
 
-                        @Html.ActionLink("刪除", "Delete", new { id = item.RoomId }, new { onclick = "return confirm('確定要刪除嗎?')" })
+                        @Html.ActionLink("刪除", "Delete", new { id = item.RoomId },new { onclick = "return confirm('確定要刪除嗎?')", @class = "btn btn-danger" })
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-
+    
 
 </div>
 @section Scripts {
