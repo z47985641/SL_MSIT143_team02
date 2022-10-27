@@ -19,7 +19,23 @@
                         <h2>房間一覽</h2>
                         @using (Html.BeginForm())
                         {
-                            @:關鍵字 @Html.TextBox("txtKeyword", "", new { @class = "form-control" }) <input type="submit" value="查詢" class="btn btn-secondary" />
+                            @:關鍵字 @Html.TextBox("txtKeyword", "", new { @class = "form-control;col-lg-3" }) 
+                            <label for="date-in">入住時間:</label>
+                            <input type="text" class="date-input" id="date-in" name="mydatein">
+                            <i class="icon_calendar"></i>
+                            <label for="date-out">退房時間:</label>
+                            <input type="text" class="date-input" id="date-out" name="mydateout">
+                            <i class="icon_calendar"></i>
+                            <br />
+                            <label for="date-in">旅客:</label>
+                            <button type="button" class="btn btn-secondary" id="minus">-</button>
+                            <input type="text" id="num" style="text-align:right;width:50px" value="1">
+                            <button type="button" class="btn btn-secondary" id="plus">+</button>
+                            <label for="date-in">客房:</label>
+                            <button type="button" class="btn btn-secondary" id="roomminus">-</button>
+                            <input type="text" id="roomnum" style="text-align:right;width:50px" value="1">
+                            <button type="button" class="btn btn-secondary" id="roomplus">+</button>
+                            <input type="submit" value="查詢" class="btn btn-secondary" />
                         }
                     </div>
                 </div>
@@ -35,26 +51,26 @@
                     foreach (PJ_MSIT143_team02.Models.Room r in Model)
                     {
                         count++;
-                                <div class="description">
-                                    <div class="description-inner">
-                                        <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
-                                        <p class="room-price" id="priceid">@r.RoomPrice</p>
-                                        <p class='room-status'>@r.RoomName</p>
-                                        <ul>
-                                            <li style="color:black">@r.RoomIntrodution</li>
-                                            <li style="color:black">@r.Address</li>
-                                        </ul>
-                                        <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
-                                            <span>立即預訂</span>
-                                            <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                                        </a>
-                                        <a href="../Member/AddLikeList?ItemId=@r.RoomId">
-                                            <img src="~/Image/heart.png" style="width:30px ;height:30px" />
-                                        </a>
-                                        <br />
+                                    <div class="description">
+                                        <div class="description-inner">
+                                            <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
+                                            <p class="room-price" id="priceid">@r.RoomPrice</p>
+                                            <p class='room-status'>@r.RoomName</p>
+                                            <ul>
+                                                <li style="color:black">@r.RoomIntrodution</li>
+                                                <li style="color:black">@r.Address</li>
+                                            </ul>
+                                            <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
+                                                <span>立即預訂</span>
+                                                <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+                                            </a>
+                                            <a href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                                <img src="~/Image/heart.png" style="width:30px ;height:30px" />
+                                            </a>
+                                            <br />
+                                        </div>
                                     </div>
-                                </div>
-                       @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
+                           @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
                     };
                 }
             </div>
