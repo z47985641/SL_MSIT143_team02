@@ -1,4 +1,4 @@
-﻿@model PJ_MSIT143_team02.Models.Order
+﻿@model PJ_MSIT143_team02.ViewModels.CRoomMemberViewModel
 
 
 @{
@@ -23,19 +23,19 @@
 <form asp-action="CreateOrder">
 
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="OrderId" />
+    <input type="hidden" asp-for="房源及會員.FirstOrDefault().OrderId" />
     <div class="row">
         <div class="col-8">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">付款人資料</h5>
                     <div class="form-group">
-                        <label asp-for="MemberId" class="control-label">付款人ID</label>
-                        <input asp-for="MemberId" readonly class="form-control" />
+                        <label asp-for="房源及會員.FirstOrDefault().MemberId" class="control-label">付款人ID</label>
+                        <input asp-for="房源及會員.FirstOrDefault().MemberId" readonly class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="Member.MemberName" class="control-label">付款人姓名</label>
-                        <input asp-for="Member.MemberName" readonly class="form-control" />
+                        <label asp-for="房源及會員.FirstOrDefault().MemberName" class="control-label">付款人姓名</label>
+                        <input asp-for="房源及會員.FirstOrDefault().MemberName" readonly class="form-control" />
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
         }
         <div class="col-4">
             <div class="card" style="background-color: #f8f9fa">
-                <input type="hidden" asp-for="OrderDetails" />
+                <input type="hidden" asp-for="房源及會員.FirstOrDefault().OrderId" />
                 <div class="card-body">
                     <h5 class="card-title">訂單內容</h5>
                     <table class="table table-borderless">
@@ -61,13 +61,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @*@foreach (var item in ViewBag.CartItems)
-                            {*@
+                            @foreach (var item in Model.房源及會員)
+                            {
                                 <tr>
-                                    @*<td>@item.Product.Name</td>
-                                    <td>@item.SubTotal</td>*@
+                                    <td>@item.RoomName</td>
+                                    <td>@item.price</td>
                                 </tr>
-                            @*}*@
+                            }
                         </tbody>
                     </table>
                     <hr />
