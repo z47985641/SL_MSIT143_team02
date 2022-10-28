@@ -18,6 +18,7 @@ namespace PJ_MSIT143_team02.Models
         public string ActivityInfo { get; set; }
         public int? ActivityCapacity { get; set; }
         public string ActivityStatus { get; set; }
+        public string ActivityLocation { get; set; }
 
         public virtual ICollection<ActivityReference> ActivityReferences { get; set; }
     }
