@@ -61,6 +61,8 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.ActivityDate).HasColumnType("datetime");
 
+                entity.Property(e => e.ActivityLocation).HasMaxLength(50);
+
                 entity.Property(e => e.ActivityName)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -237,6 +239,8 @@ namespace PJ_MSIT143_team02.Models
                 entity.Property(e => e.DiscountName)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.DiscountValue).HasColumnType("decimal(18, 2)");
             });
 
             modelBuilder.Entity<Equipment>(entity =>

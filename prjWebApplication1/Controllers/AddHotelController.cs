@@ -109,11 +109,9 @@ namespace PJ_MSIT143_team02.Controllers
                 return RedirectToAction("Login", "MemberCreate");
             }
             else
-            { //int MemberID = HttpContext.Session.GetInt32("MemberID") as Member
+            { 
                 var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
                 var user = JsonSerializer.Deserialize<Member>(Name);
-                //var Name1 = HttpContext.Session.GetString(CDictionary.SK_PURCHASED_PRODUCTS);
-                //var user1= JsonSerializer.Deserialize<CShoppingCartItem>(Name1);
 
                 CRoomMemberViewModel crm = new CRoomMemberViewModel();
                 crm.房源及會員 = (from a in db.Rooms
