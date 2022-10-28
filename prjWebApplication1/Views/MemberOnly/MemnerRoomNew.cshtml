@@ -1,0 +1,61 @@
+﻿@model PJ_MSIT143_team02.ViewModels.CRoomNew
+
+@{
+    ViewData["Title"] = "MemnerRoomNew";
+}
+
+<h1>MemnerRoomNew</h1>
+
+<h4>CRoomNew</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="MemnerRoomNew" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoomName" class="control-label"></label>
+                <input asp-for="RoomName" class="form-control" />
+                <span asp-validation-for="RoomName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomPrice" class="control-label"></label>
+                <input asp-for="RoomPrice" class="form-control" />
+                <span asp-validation-for="RoomPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomIntrodution" class="control-label"></label>
+                <input asp-for="RoomIntrodution" class="form-control" />
+                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomstatusId" class="control-label"></label>
+                <input asp-for="RoomstatusId" class="form-control" />
+                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Qty" class="control-label"></label>
+                <input asp-for="Qty" class="form-control" />
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div>
+                <input type="file" name="img" id="img" multiple accept="image/*" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
