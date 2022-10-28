@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.ViewModel.CRoomViewModel>
+﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.CroomView>
 
 @{
     ViewData["Title"] = "List";
@@ -42,16 +42,17 @@
                         <td>
                             @*<img src="~/images/@item.FImagePath" width="180" height="140" />*@
                             <br />
-                            <h2>@Html.DisplayFor(modelItem => item.RoomName)</h2>
+                            <h2>@Html.DisplayFor(modelItem => item.房源.FirstOrDefault().RoomName)</h2>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Qty)
+                            @Html.DisplayFor(modelItem => item.房源.FirstOrDefault().Qty)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.RoomPrice)
+                            @Html.DisplayFor(modelItem => item.房源.FirstOrDefault().RoomPrice)
+                       )
                         </td>
                         <td>
-                            @Html.ActionLink("加入購物車", "AddToCart", new { id = item.RoomId })
+                            @Html.ActionLink("加入購物車", "AddToCart", new { id = item.房源.FirstOrDefault().RoomId })
                         </td>
                     </tr>
                 }

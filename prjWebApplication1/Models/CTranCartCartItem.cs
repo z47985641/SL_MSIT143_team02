@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PJ_MSIT143_team02.Models
 {
-    public class CShoppingCartItem
+    public class CTranCartCartItem
     {
         public int RoomId { get; set; }
         public string RoomName { get; set; }
