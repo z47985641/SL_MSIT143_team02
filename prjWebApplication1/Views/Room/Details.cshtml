@@ -42,9 +42,14 @@
                     <li><a href="#roomfacility">設施與服務</a></li>
                     <li><a href="#comment">住宿評鑑</a></li>
                     <li><a href="#roomlocation">地點</a></li>
-                    <li style="margin-right:30px"><a href="">注意事項</a></li>
                     <li>
                         NT @Html.DisplayFor(model => model.RoomPrice)起
+                    </li>
+                    <li>
+                        客房:
+                        <button type="button" class="btn btn-secondary" id="roomminus">-</button>
+                        <input type="text" id="roomnum" style="text-align:center;width:30px" value="@Html.DisplayFor(model => model.Qty)">
+                        <button type="button" class="btn btn-secondary" id="roomplus">+</button>
                     </li>
                     <li>
                         @if (Model.Qty > 1)
@@ -54,7 +59,7 @@
                         }
                         else
                         {
-                            <div class="text-muted">商品缺貨中</div>
+                            <span class="text-muted">商品缺貨中</span>
                         }
                     </li>
                     @*<li>
@@ -143,10 +148,11 @@
                     <div id="comment">
                         <h4>評論</h4>
                         <br />
-                        <textarea rows="3" cols="81"></textarea>
+                        <textarea rows="3" cols="83"></textarea>
                         <a class="bbtn" id="addcomment" href="@Url.Action()">
                             <span>送出</span>
                         </a>
+                        <br /><br /><br />
                         <hr />
                         <label style="margin-left:315px;font-size:13.5px;color:dimgray">(暫無評論)</label>
                     </div>
@@ -158,6 +164,19 @@
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        $(function (){
+            $("#roomminus").click(function () { 
+                var i = Number($("#roomnum").val());
+                if(i > 1)
+                    i -= 1;
+                $("#roomnum").val(i);
+            });
+            $("#roomplus").click(function () { 
+                var i = Number($("#roomnum").val());
+                i += 1;
+                $("#roomnum").val(i);
+            });
+        })
         function ShowMessage() {
             toastr["success"]("商品已加入購物車！");
         }
