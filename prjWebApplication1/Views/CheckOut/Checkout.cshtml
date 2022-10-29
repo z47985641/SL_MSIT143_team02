@@ -20,6 +20,12 @@
 
 <h4>訂單資料</h4>
 <hr />
+@{
+    //int count = 0;
+    decimal sum = 0;
+    //decimal total = 0;
+    //decimal tax = 0;
+}
 <form asp-action="CreateOrder">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="OrderId" />
@@ -29,11 +35,11 @@
                 <div class="card-body">
                     <h5 class="card-title">付款人資料</h5>
                     <div class="form-group">
-                        <label asp-for="MemberId" class="control-label">付款人ID</label>
+                        <label asp-for="MemberId" class="control-label">訂房人ID</label>
                         <input asp-for="MemberId" readonly class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label asp-for="Member.MemberAccount" class="control-label">付款人帳號</label>
+                        <label asp-for="Member.MemberAccount" class="control-label">訂房人帳號</label>
                         <input asp-for="Member.MemberAccount" readonly class="form-control" />
                     </div>
                 </div>
@@ -72,23 +78,29 @@
                         <thead>
                             <tr>
                                 <th>商品名稱</th>
+                                <th>數量</th>
+                                <th>單價</th>
                                 <th>小計</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach (var item in ViewBag.CartItems)
                             {
-                                <tr>
-                                    <td>@item.RoomName</td>
-                                    <td>@item.RoomPrice</td>
-                                </tr>
+                                sum += item.小計;
+
+                            <tr>
+                                <td>@item.RoomName</td>
+                                <td>@item.count</td>
+                                <td>@item.RoomPrice</td>
+                                <td>@item.小計</td>
+                            </tr>
                             }
                         </tbody>
                     </table>
                     <hr />
                     <div class="text-right">
                         @*<input type="hidden" asp-for="Total" />*@
-                        <p class="card-text font-weight-bolder" style="padding-right:12px">總計:　$ @*@Model.Total*@</p>
+                        <p class="card-text font-weight-bolder" style="padding-right:12px">總計:$ @sum.ToString("###,###,##0")</p>
                     </div>
                     <p></p>
                     <div class="text-center card-link">
