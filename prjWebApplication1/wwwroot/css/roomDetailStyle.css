@@ -83,6 +83,7 @@
     padding: 10px 19.35px 10px 19.35px;
     margin-top:10px;
     min-width: 52px;
+    float:right;
 }
 
 #detail figure {
