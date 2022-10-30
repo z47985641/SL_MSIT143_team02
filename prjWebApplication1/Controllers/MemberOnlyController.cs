@@ -27,12 +27,37 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult MemnerRoomNew()
         {
-            return View();
+            MingSuContext db = new MingSuContext();
+            CRoomNew roomnew = new CRoomNew();
+            var item = from I in db.Equipment
+                       select new {
+                           I.EquipmentId,
+                           I.EquipmentName,
+                       I.EquipmentCatergoryId
+                       };
+            List<int> list = new List<int>();
+            List<string> listname = new List<string>();
+            List<int> listC = new List<int>();
+            foreach (var i in item)
+            {
+                int count = 0;
+                list.Add( i.EquipmentId);
+                listname.Add( i.EquipmentName) ;
+                listC.Add(i.EquipmentCatergoryId);
+                count++;
+            }
+            roomnew.EquipmentIdlist = list;
+            roomnew.EquipmentNamelist = listname;
+            roomnew.EquipmentCatergoryIdlist = listC;
+            return View(roomnew);
         }
         [HttpPost]
         public IActionResult MemnerRoomNew(CRoomNew NewRoom)
         {
+            int count = 0;
             MingSuContext db = new MingSuContext();
+
+            //加入房源資訊
             Room room = new Room();
             room.RoomName = NewRoom.RoomName;
             room.RoomPrice = NewRoom.RoomPrice;
@@ -42,39 +67,44 @@ namespace PJ_MSIT143_team02.Controllers
             room.Address = NewRoom.Address;
             room.CreateDate = DateTime.Now;
             room.Qty = NewRoom.Qty;
-
-            Image img = new Image();
-            var ms = new MemoryStream();
-            NewRoom.img.CopyTo(ms);
-            img.Image1 = ms.ToArray();
-
-            
+            int XX = NewRoom.EquipmentId.Count;
             db.Rooms.Add(room);
-            db.Images.Add(img);
-            db.SaveChanges();
-            ImageReference imgRef = new ImageReference();
-            imgRef.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId + 1;
-            imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId ;
 
+            //迴圈加入多圖
+            var ms = new MemoryStream();
+            foreach (var imgindex in 
+                NewRoom.img)
+            {
+                count++;
+                Image img = new Image();
+                imgindex.CopyTo(ms);
+                img.Image1 = ms.ToArray();
+                db.Images.Add(img);
+                db.SaveChanges();
+            }
 
-            db.ImageReferences.Add(imgRef);
-            db.SaveChanges();
+            //迴圈加入ImageReferences
+            for (int i = 1; i <= count; i++)
+            {
+                ImageReference imgRef = new ImageReference();
+                imgRef.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId;
+                imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId -count + i;
+                db.ImageReferences.Add(imgRef);
+                db.SaveChanges();
+            }
 
-            return RedirectToAction("TestListView","Room");
+            //迴圈加入設備References
+            foreach (var Eitem in NewRoom.EquipmentId)
+            {
+                EquipmentReference item = new EquipmentReference();
+                item.EquipmentId = Eitem;
+                item.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId;
+                db.EquipmentReferences.Add(item);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("TestListView", "Room");
         }
-        //public IActionResult PhotoCreateEdit(int? ItemId)
-        //{
-        //    MingSuContext db = new MingSuContext();
-        //    if (photoData.MemberImage != null)
-        //    {
-        //        using (MemoryStream ms = new MemoryStream())
-        //        {
-        //            byte[] b_photo = photoData.MemberImage;
-        //            ms.Write(b_photo);
-        //            return File(ms.ToArray(), "image/jpeg");
-        //        }
-        //    }
-        //    return new EmptyResult();
-        //}
+        
     }
 }
