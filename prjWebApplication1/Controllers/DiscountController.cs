@@ -42,7 +42,8 @@ namespace PJ_MSIT143_team02.Controllers
             else
                 data = from d in (new MingSuContext()).Discounts
                        where (d.DiscountInfo.Contains(model.txtKey) ||
-                       d.DiscountName.Contains(model.txtKey))
+                       d.DiscountName.Contains(model.txtKey) ||
+                       d.DiscountValue.ToString().Contains(model.txtKey))
                        select d;
             return View(data);
         }
@@ -54,7 +55,8 @@ namespace PJ_MSIT143_team02.Controllers
         [HttpPost]
         public IActionResult Create(Discount d)
         {
-            if (string.IsNullOrEmpty(d.DiscountInfo) || string.IsNullOrEmpty(d.DiscountName))
+            if (string.IsNullOrEmpty(d.DiscountInfo) || string.IsNullOrEmpty(d.DiscountName)
+                || string.IsNullOrEmpty(d.DiscountValue.ToString()))
                 return View();
             MingSuContext db = new MingSuContext();
             db.Discounts.Add(d);

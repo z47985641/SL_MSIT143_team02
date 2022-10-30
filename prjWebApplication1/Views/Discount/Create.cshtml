@@ -19,9 +19,14 @@
                 <span asp-validation-for="DiscountName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label">優惠折扣</label>
+                <label class="control-label">折扣資訊</label>
                 <input asp-for="DiscountInfo" class="form-control" />
                 <span asp-validation-for="DiscountInfo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">折數</label>
+                <input asp-for="DiscountValue" class="form-control" />
+                <span asp-validation-for="DiscountValue" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="新增資料" class="btn btn-primary" />
