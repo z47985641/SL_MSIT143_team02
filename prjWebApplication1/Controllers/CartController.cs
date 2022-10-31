@@ -18,7 +18,7 @@ namespace PJ_MSIT143_team02.Controllers
         {
             List<房源及會員> CartItems = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
 
-            if (CartItems.Count > 0)
+            if (CartItems != null)
             {
                 ViewBag.Total = CartItems.Sum(m => m.小計); // 計算商品總額
             }
