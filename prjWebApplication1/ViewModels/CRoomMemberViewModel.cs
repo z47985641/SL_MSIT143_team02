@@ -30,7 +30,13 @@ namespace PJ_MSIT143_team02.ViewModels
         public string OrderRemark { get; set; }
         public int OrderstatusId { get; set; }
         public Order order { get; set; }
+        public int ActivityId { get; set; }
+        public string ActivityName { get; set; }
 
+        //public DateTime? ActivityDate { get; set; }
+        public int? ActivityCapacity { get; set; }
+
+        //public string ActivityLocation { get; set; }
 
 
 

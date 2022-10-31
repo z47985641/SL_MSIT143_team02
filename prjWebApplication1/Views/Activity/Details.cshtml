@@ -61,7 +61,7 @@
                                     }
                                     else
                                     {
-                                        <button class="btn btn-light" id="add" style="text-decoration: none;">
+                                        <button class="btn btn-light" id="unable" style="text-decoration: none;">
                                             <span>無法加入購物車</span>
                                         </button>
                                     }
@@ -101,4 +101,42 @@
             }, 5);
         });
     </script>
+
+    <script>
+        $(function (){
+            if (@Html.DisplayFor(model => model.ActivityCapacity) < 1) {
+                $("#actminus").attr("disabled", true);
+                $("#actnum").attr("disabled", true);
+                $("#actplus").attr("disabled", true);
+            }
+        })
+        $("#actminus").click(function () {
+            var i = Number($("#actmnum").val());
+            if(i > 1)
+                i -= 1;
+            $("#actnum").val(i);
+        });
+        $("#actplus").click(function () {
+            var i = Number($("#actnum").val());
+            if(i < @Html.DisplayFor(model => model.ActivityCapacity))
+                i += 1;
+            $("#actnum").val(i);
+        });
+        $("#add").click(function(){
+            var s = {
+                "ActivityId": Number(@Html.DisplayFor(model => model.ActivityId)),
+                "count": Number($("#actnum").val()),
+            };
+            let data = JSON.stringify(s);
+            $.ajax({
+                 type: "GET",
+                 url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
+                 success: ShowMessage()
+            })
+        });
+        function ShowMessage() {
+            toastr["success"]("活動已加入購物車！");
+        }
+    </script>
+
 }
