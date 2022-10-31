@@ -54,18 +54,17 @@
                     <li>
                         @if (Model.Qty > 0)
                         {
-                            <a class="bbtn" style="text-decoration: none;" onclick="ShowMessage()"
-                               asp-controller="Cart" asp-action="Index" asp-route-Id="@Model.RoomId">加入購物車</a>
+                            <button class="bbtn" id="add" style="text-decoration: none;">
+                                <span>加入購物車</span>
+                            </button>
                         }
                         else
                         {
                             <span id="cart" class="text-muted">商品缺貨中</span>
                         }
                     </li>
-                    @*<li>
-                            <a class="bbtn" id="addcart" href="@Url.Action("Index","Cart",new { id =  @Html.DisplayFor(model => model.RoomId) })">
-                                <span>加入購物車</span>
-                            </a>
+                    @*<li><a class="bbtn" id="addcart" style="text-decoration: none;" onclick="ShowMessage()"
+                               asp-controller="Cart" asp-action="Index" asp-route-Id="@Model.RoomId">加入購物車</a>
                         </li>*@
                 </ul>
             </div>
@@ -170,27 +169,36 @@
                 $("#roomnum").attr("disabled", true);
                 $("#roomplus").attr("disabled", true);
             }
-            $("#roomminus").click(function () {
-                var i = Number($("#roomnum").val());
-                if(i > 1)
-                    i -= 1;
-                $("#roomnum").val(i);
-            });
-            $("#roomplus").click(function () {
-                var i = Number($("#roomnum").val());
-                if(i < @Html.DisplayFor(model => model.Qty))
-                    i += 1;
-                $("#roomnum").val(i);
-            });
         })
+        $("#roomminus").click(function () { 
+            var i = Number($("#roomnum").val());
+            if(i > 1)
+                i -= 1;
+            $("#roomnum").val(i);
+        });
+        $("#roomplus").click(function () { 
+            var i = Number($("#roomnum").val());
+            if(i < @Html.DisplayFor(model => model.Qty))
+                i += 1;
+            $("#roomnum").val(i);
+        });
+        $("#add").click(function(){
+            var s = {
+                "RoomId": Number(@Html.DisplayFor(model => model.RoomId)),
+                "count": Number($("#roomnum").val()),
+            };
+            let data = JSON.stringify(s);
+            $.ajax({
+                 type: "GET",
+                 url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
+                 success: ShowMessage()
+            })
+        });
+        function ShowMessage() {
+            toastr["success"]("商品已加入購物車！");
+        }
     </script>
 }
-<script>
-    function ShowMessage() {
-        toastr["success"]("商品已加入購物車！");
-    }
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
 <style>
     .row {
         display: flex;
