@@ -37,6 +37,9 @@
                 <th>
                     活動狀態
                 </th>
+                <th>
+                    活動地點
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -46,35 +49,43 @@
                 foreach (var item in Model)
                 {
                     count++;
-                    <tr>
-                        <td>
-                            @count
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ActivityName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ActivityDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ActivityInfo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ActivityCapacity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ActivityStatus)
-                        </td>
-                        <td>
-                            @Html.ActionLink("修改", "Edit", new { id = item.ActivityId }, new { @class = "btn btn-primary" })  |
-                            @Html.ActionLink("刪除", "Delete", new { id = item.ActivityId },
-                           new { onclick = "return confirm('確定要刪除這項活動嗎?')", Class = "btn btn-danger" })
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityDate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityInfo)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityCapacity)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityStatus)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityLocation)
+                            </td>
+                            <td>
+                                @Html.ActionLink("修改", "Edit", new { id = item.ActivityId }, new { @class = "btn btn-primary" })  |
+                                @Html.ActionLink("刪除", "Delete", new { id = item.ActivityId },
+                               new { onclick = "return confirm('確定要刪除這項活動嗎?')", Class = "btn btn-danger" })
+                            </td>
+                        </tr>
                 }
             }
         </tbody>
     </table>
+</div>
+<div>
+    <br />
+    <br />
+    <br />
 </div>
 @section Scripts {
     <script>$('#Activity').addClass('active');</script>

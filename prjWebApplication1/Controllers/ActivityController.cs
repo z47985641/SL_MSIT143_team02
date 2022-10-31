@@ -53,7 +53,8 @@ namespace PJ_MSIT143_team02.Controllers
                 || p.ActivityDate.ToString().Contains(model.txtKeyword)
                 || p.ActivityCapacity.ToString().Contains(model.txtKeyword)
                 || p.ActivityStatus.Contains(model.txtKeyword)
-                || p.ActivityInfo.Contains(model.txtKeyword));
+                || p.ActivityInfo.Contains(model.txtKeyword)
+                || p.ActivityLocation.Contains(model.txtKeyword));
 
             return View(datas);
         }
@@ -108,6 +109,7 @@ namespace PJ_MSIT143_team02.Controllers
                 act.ActivityCapacity = inAct.ActivityCapacity;
                 act.ActivityStatus = inAct.ActivityStatus;
                 act.ActivityInfo = inAct.ActivityInfo;
+                act.ActivityLocation = inAct.ActivityLocation;
 
                 db.SaveChanges();
             }

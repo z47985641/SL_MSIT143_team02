@@ -47,6 +47,11 @@ namespace PJ_MSIT143_team02.ViewModel
         {
             get { return _activity.ActivityInfo; }
             set { _activity.ActivityInfo = value; }
-        }        
+        }
+        public string ActivityLocation
+        {
+            get { return _activity.ActivityLocation; }
+            set { _activity.ActivityLocation = value; }
+        }
     }
 }

@@ -5,53 +5,58 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>活動管理頁面</h1>
 
-<h4>Activity</h4>
+<h4>修改活動</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
-                <label asp-for="ActivityId" class="control-label"></label>*@
+        <label asp-for="ActivityId" class="control-label"></label>*@
             <input type="hidden" asp-for="ActivityId" class="form-control" />
             @*<span asp-validation-for="ActivityId" class="text-danger"></span>
-                </div>*@
+        </div>*@
             <div class="form-group">
-                <label asp-for="ActivityName" class="control-label"></label>
+                <label asp-for="ActivityName" class="control-label">活動名稱</label>
                 <input asp-for="ActivityName" class="form-control" />
                 <span asp-validation-for="ActivityName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityDate" class="control-label"></label>
+                <label asp-for="ActivityDate" class="control-label">活動日期</label>
                 <input asp-for="ActivityDate" class="form-control" />
                 <span asp-validation-for="ActivityDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityInfo" class="control-label"></label>
+                <label asp-for="ActivityInfo" class="control-label">活動資訊</label>
                 <input asp-for="ActivityInfo" class="form-control" />
                 <span asp-validation-for="ActivityInfo" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityCapacity" class="control-label"></label>
+                <label asp-for="ActivityCapacity" class="control-label">人數上限</label>
                 <input asp-for="ActivityCapacity" class="form-control" />
                 <span asp-validation-for="ActivityCapacity" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ActivityStatus" class="control-label"></label>
+                <label asp-for="ActivityStatus" class="control-label">活動狀態</label>
                 <input asp-for="ActivityStatus" class="form-control" />
                 <span asp-validation-for="ActivityStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <label asp-for="ActivityLocation" class="control-label">活動地點</label>
+                <input asp-for="ActivityLocation" class="form-control" />
+                <span asp-validation-for="ActivityLocation" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="儲存變更" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="List">Back to List</a>
+    <a asp-action="List">回上頁</a>
 </div>
 
 @section Scripts {
