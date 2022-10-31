@@ -18,7 +18,7 @@ namespace PJ_MSIT143_team02.Controllers
 
             if (CartItems != null)
             {
-                ViewBag.Total = CartItems.Sum(m => m.SubTotal); // 計算商品總額
+                ViewBag.Total = CartItems.Sum(m => m.room.RoomPrice*m.room.Qty); // 計算商品總額
             }
             else
             {
@@ -43,6 +43,7 @@ namespace PJ_MSIT143_team02.Controllers
             //    Room= product
 
             //};
+
             //取得商品資料
             CartItem item = new CartItem
             {
