@@ -14,11 +14,11 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult Index()
         {
-            List<房源及會員> CartItems = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
+            List<CartItem> CartItems = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
 
             if (CartItems != null)
             {
-                ViewBag.Total = CartItems.Sum(m => m.小計); // 計算商品總額
+                ViewBag.Total = CartItems.Sum(m => m.SubTotal); // 計算商品總額
             }
             else
             {
@@ -33,36 +33,42 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
 
-            var product = db.Rooms.Single(x => x.RoomId.Equals(id));
-            房源及會員 item = new 房源及會員()
-            {
-                RoomId = product.RoomId,
-                RoomName = product.RoomName,
-                count = 1,
-                price = product.RoomPrice,
-                Room= product
+            //var product = db.Rooms.Single(x => x.RoomId.Equals(id));
+            //房源及會員 item = new 房源及會員()
+            //{
+            //    RoomId = product.RoomId,
+            //    RoomName = product.RoomName,
+            //    count = 1,
+            //    price = product.RoomPrice,
+            //    Room= product
 
+            //};
+            //取得商品資料
+            CartItem item = new CartItem
+            {
+                room = db.Rooms.Single(x => x.RoomId.Equals(id)),
+                Amount = 1,
+                SubTotal = Convert.ToInt32(db.Rooms.Single(m => m.RoomId == id).RoomPrice)
             };
 
-
-            if (SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart") == null)
+            if (SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart") == null)
             {
                 //如果沒有已存在購物車: 建立新的購物車
-                List<房源及會員> cart = new List<房源及會員>();
+                List<CartItem> cart = new List<CartItem>();
                 cart.Add(item);
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
             }
             else
             {
                 //如果已存在購物車: 檢查有無相同的商品，有的話只調整數量
-                List<房源及會員> cart = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
+                List<CartItem> cart = SessionHelper.GetObjectFromJson<List<CartItem>>(HttpContext.Session, "cart");
 
-                int index = cart.FindIndex(m => m.Room.RoomId.Equals(id)); // FindIndex查詢位置
+                int index = cart.FindIndex(m => m.RoomId.Equals(id)); // FindIndex查詢位置
 
                 if (index != -1)
                 {
-                    cart[index].count += item.count;
-                    cart[index].price += item.price;
+                    cart[index].Amount += item.Amount;
+                    cart[index].SubTotal += item.SubTotal;
                 }
                 else
                 {
