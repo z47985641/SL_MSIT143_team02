@@ -25,7 +25,10 @@
                     優惠名稱
                 </th>
                 <th>
-                    優惠折扣
+                    折扣資訊
+                </th>
+                <th>
+                    折數
                 </th>
                 <th></th>
             </tr>
@@ -44,6 +47,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DiscountInfo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DiscountValue)
                         </td>
                         <td>
                             @Html.ActionLink("編輯", "Edit", new { id = item.RoomDiscountId }, new { @class = "btn btn-primary" }) |

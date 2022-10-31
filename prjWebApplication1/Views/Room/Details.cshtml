@@ -32,6 +32,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </button>
         </div>
+
         <div class="col-lg-12">
             <hr />
             <div id="nav" class="col-lg-12">
@@ -41,15 +42,30 @@
                     <li><a href="#roomfacility">設施與服務</a></li>
                     <li><a href="#comment">住宿評鑑</a></li>
                     <li><a href="#roomlocation">地點</a></li>
-                    <li style="margin-right:30px"><a href="">注意事項</a></li>
                     <li>
                         NT @Html.DisplayFor(model => model.RoomPrice)起
                     </li>
                     <li>
-                        <a class="bbtn" id="addcart" href="@Url.Action("List","AddHotel",new { id =  @Html.DisplayFor(model => model.RoomId) })">
-                            <span>加入購物車</span>
-                        </a>
+                        房間數:
+                        <button type="button" class="btn btn-secondary" id="roomminus">-</button>
+                        <input type="text" id="roomnum" style="text-align:center;width:30px" value="1">
+                        <button type="button" class="btn btn-secondary" id="roomplus">+</button>
                     </li>
+                    <li>
+                        @if (Model.Qty > 0)
+                        {
+                            <button class="bbtn" id="add" style="text-decoration: none;">
+                                <span>加入購物車</span>
+                            </button>
+                        }
+                        else
+                        {
+                            <span id="cart" class="text-muted">商品缺貨中</span>
+                        }
+                    </li>
+                    @*<li><a class="bbtn" id="addcart" style="text-decoration: none;" onclick="ShowMessage()"
+                               asp-controller="Cart" asp-action="Index" asp-route-Id="@Model.RoomId">加入購物車</a>
+                        </li>*@
                 </ul>
             </div>
             <hr />
@@ -112,7 +128,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>  
+                </div>
                 <div class="col-lg-4">
                     <div id="sidebar">
                         <h4>優惠</h4>
@@ -135,6 +151,7 @@
                         <a class="bbtn" id="addcomment" href="@Url.Action()">
                             <span>送出</span>
                         </a>
+                        <br /><br /><br />
                         <hr />
                         <label style="margin-left:315px;font-size:13.5px;color:dimgray">(暫無評論)</label>
                     </div>
@@ -146,8 +163,59 @@
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
-
+        $(function (){
+            if (@Html.DisplayFor(model => model.Qty) < 1) {
+                $("#roomminus").attr("disabled", true);
+                $("#roomnum").attr("disabled", true);
+                $("#roomplus").attr("disabled", true);
+            }
+        })
+        $("#roomminus").click(function () { 
+            var i = Number($("#roomnum").val());
+            if(i > 1)
+                i -= 1;
+            $("#roomnum").val(i);
+        });
+        $("#roomplus").click(function () { 
+            var i = Number($("#roomnum").val());
+            if(i < @Html.DisplayFor(model => model.Qty))
+                i += 1;
+            $("#roomnum").val(i);
+        });
+        $("#add").click(function(){
+            var s = {
+                "RoomId": Number(@Html.DisplayFor(model => model.RoomId)),
+                "count": Number($("#roomnum").val()),
+            };
+            let data = JSON.stringify(s);
+            $.ajax({
+                 type: "GET",
+                 url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
+                 success: ShowMessage()
+            })
+        });
+        function ShowMessage() {
+            toastr["success"]("商品已加入購物車！");
+        }
     </script>
 }
+<style>
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .col {
+        flex-grow: 0;
+        margin: 7px;
+        padding: 5px;
+    }
+
+    .overflow-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        overflow: hidden;
+    }
+</style>
 

@@ -26,5 +26,10 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return _discount.DiscountName; }
             set { _discount.DiscountName = value; }
         }
+        public decimal DiscountValue
+        {
+            get { return (decimal)_discount.DiscountValue; }
+            set { _discount.DiscountValue = value; }
+        }
     }
 }
