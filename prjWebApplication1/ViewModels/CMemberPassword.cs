@@ -1,6 +1,7 @@
 ﻿using PJ_MSIT143_team02.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -34,6 +35,7 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return _member.MemberPassword; }
             set { _member.MemberPassword = value; }
         }
+        
         public string MemberNewPassword
         {
             get;
@@ -44,6 +46,7 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return _member.MemberName; }
             set { _member.MemberName = value; }
         }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime BirthDate
         {
             get { return _member.BirthDate; }
