@@ -39,6 +39,41 @@
                             活動介紹: @Html.DisplayFor(model => model.ActivityInfo)
                         </p>
                     </div>
+                    <div>
+                        <ul>
+                            @if(Model.ActivityStatus == "開放報名") {
+                            <li>
+                                加入人數:
+                                <button type="button" class="btn btn-secondary" id="actminus">-</button>
+                                <input type="text" id="actnum" style="text-align:center;width:30px" value="1">
+                                <button type="button" class="btn btn-secondary" id="actplus">+</button>
+                            </li>
+                            }
+                            <li>
+                                @if (Model.ActivityCapacity > 0)
+                                {
+                                    if (Model.ActivityStatus == "開放報名")
+                                    {
+
+                                        <button class="btn btn-light" id="add" style="text-decoration: none;">
+                                            <span>加入購物車</span>
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-light" id="add" style="text-decoration: none;">
+                                            <span>無法加入購物車</span>
+                                        </button>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <span id="cart" class="text-muted">商品缺貨中</span>
+                                }
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div id="imgcard" class="col-lg-6 col-md-6 mb-4">
