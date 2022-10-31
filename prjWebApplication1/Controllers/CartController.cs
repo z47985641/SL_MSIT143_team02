@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Helpers;
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace PJ_MSIT143_team02.Controllers
@@ -28,17 +30,17 @@ namespace PJ_MSIT143_team02.Controllers
             return View(CartItems);
         }
 
-
-        public IActionResult AddtoCart(int id)
+        public IActionResult AddtoCart(string input)
         {
+            CCartCartItem CartItems = JsonSerializer.Deserialize<CCartCartItem>(input);
             MingSuContext db = new MingSuContext();
 
-            var product = db.Rooms.Single(x => x.RoomId.Equals(id));
+            var product = db.Rooms.Single(x => x.RoomId.Equals(CartItems.RoomId));
             房源及會員 item = new 房源及會員()
             {
                 RoomId = product.RoomId,
                 RoomName = product.RoomName,
-                count = 1,
+                count = CartItems.count,
                 price = product.RoomPrice,
                 Room= product
 
@@ -57,7 +59,7 @@ namespace PJ_MSIT143_team02.Controllers
                 //如果已存在購物車: 檢查有無相同的商品，有的話只調整數量
                 List<房源及會員> cart = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
 
-                int index = cart.FindIndex(m => m.Room.RoomId.Equals(id)); // FindIndex查詢位置
+                int index = cart.FindIndex(m => m.Room.RoomId.Equals(CartItems.RoomId)); // FindIndex查詢位置
 
                 if (index != -1)
                 {
