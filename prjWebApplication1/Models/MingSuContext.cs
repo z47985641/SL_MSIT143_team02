@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using PJ_MSIT143_team02.ViewModels;
 
 #nullable disable
 
@@ -40,7 +41,9 @@ namespace PJ_MSIT143_team02.Models
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomStatus> RoomStatuses { get; set; }
-        public DbSet<OrderItem> OrderItem { get; set; }
+        //public DbSet<OrderItem> OrderItem { get; set; }
+        //public DbSet<房源及會員> CartItem { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
