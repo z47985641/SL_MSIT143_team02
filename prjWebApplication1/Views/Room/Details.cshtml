@@ -5,6 +5,7 @@
 }
 
 <link href="~/css/roomDetailStyle.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
 
 <section class="rooms-section spad">
     <div class="container">
@@ -183,16 +184,27 @@
             $("#roomnum").val(i);
         });
         $("#add").click(function(){
-            var s = {
-                "RoomId": Number(@Html.DisplayFor(model => model.RoomId)),
-                "count": Number($("#roomnum").val()),
-            };
-            let data = JSON.stringify(s);
-            $.ajax({
-                 type: "GET",
-                 url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
-                 success: ShowMessage()
-            })
+            if ($("#roomnum").val() > @Html.DisplayFor(model => model.Qty)) {
+                alert("加入購物車數量大於庫存數");
+            } else if ($("#roomnum").val() < 1) {
+                alert("加入購物車數量小於1");
+            } else {
+                var s = {
+                    "RoomId": Number(@Html.DisplayFor(model => model.RoomId)),
+                    "count": Number($("#roomnum").val()),
+                };
+                let data = JSON.stringify(s);
+                $.ajax({
+                     type: "GET",
+                     url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
+                     success: ShowMessage()
+                })            
+                var i = Number($("#roomnum").val());
+                i += i;
+                if (i > @Html.DisplayFor(model => model.Qty)) { 
+                    $("#add").attr("disabled", true);
+                }
+            }
         });
         function ShowMessage() {
             toastr["success"]("商品已加入購物車！");
