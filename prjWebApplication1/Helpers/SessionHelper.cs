@@ -11,18 +11,18 @@ namespace PJ_MSIT143_team02.Helpers
     {
         public static void SetObjectAsJson(this ISession session, string key, object value)
         {
-            session.SetString(key, JsonConvert.SerializeObject(value));
+            session.SetString(key, JsonConvert.SerializeObject(value)); //設定session內容
         }
 
-        public static T GetObjectFromJson<T>(this ISession session, string key)
+        public static T GetObjectFromJson<T>(this ISession session, string key) 
         {
             var value = session.GetString(key);
-            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value);
+            return value == null ? default(T) : JsonConvert.DeserializeObject<T>(value); //取得
         }
 
         public static void Remove(this ISession session, string key)
         {
-            session.Remove(key);
+            session.Remove(key);  //移除
         }
     }
 }

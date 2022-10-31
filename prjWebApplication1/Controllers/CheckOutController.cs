@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PJ_MSIT143_team02.Helpers;
 using PJ_MSIT143_team02.Models;
+using PJ_MSIT143_team02.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,59 @@ namespace PJ_MSIT143_team02.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager;
 
-        public IActionResult Index()
+        //
+        public async Task<IActionResult> Index()
         {
-            return View();
+            MingSuContext db = new MingSuContext();
+
+            List<OrderViewModel> orderVM = new List<OrderViewModel>();
+
+            var userId = _userManager.GetUserId(User);
+            var orders = await db.Orders.
+                OrderByDescending(k => k.OrderId).            //用OrderId排序
+                Where(m => m.MemberId == Convert.ToInt32(userId)).ToListAsync();   //取得屬於當前登入者的訂單
+
+            foreach (var item in orders)
+            {
+                item.OrderItem = await db.OrderItem.
+                    Where(p => p.OrderId == item.OrderId).ToListAsync(); //取得訂單內的商品項目
+
+                var ovm = new OrderViewModel()
+                {
+                    Order = item,
+                    CartItems = GetOrderItems(item.OrderId)
+                };
+
+                orderVM.Add(ovm);
+            }
+
+            return View(orderVM);
         }
+
+        // 訂單資訊
+        public async Task<IActionResult> Details(int? Id)
+        {
+            MingSuContext db = new MingSuContext();
+
+            if (Id == null)
+            {
+                return NotFound();
+            }
+
+            var order = await db.Orders.FirstOrDefaultAsync(m => m.OrderId == Id);
+            if (order.MemberId != Convert.ToInt32(_userManager.GetUserId(User)))
+            {
+                return NotFound();
+            }
+            else
+            {
+                order.OrderItem = await db.OrderItem.Where(p => p.OrderId == Id).ToListAsync();
+                ViewBag.orderItems = GetOrderItems(order.OrderId);
+            }
+
+            return View(order);
+        }
+
         // 結帳
         public IActionResult Checkout()
         {
