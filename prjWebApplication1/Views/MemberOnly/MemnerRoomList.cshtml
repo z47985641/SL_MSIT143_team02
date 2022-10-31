@@ -1,0 +1,73 @@
+﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
+
+@{
+    ViewData["Title"] = "MemnerRoomEdit";
+}
+
+<h1>MemnerRoomEdit</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                房名
+            </th>
+            <th>
+                狀態
+            </th>
+            <th>
+                價格
+            </th>
+            <th>
+                房間數
+            </th>
+            <th>
+                位置
+            </th>
+            <th>
+                建立時間
+            </th>
+            <th>
+                功能
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomstatusId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoomPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreateDate)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

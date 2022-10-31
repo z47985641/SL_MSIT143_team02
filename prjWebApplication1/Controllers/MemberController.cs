@@ -200,23 +200,23 @@ namespace PJ_MSIT143_team02.Controllers
             return new EmptyResult();
 
         }
-        public IActionResult MemberPhotoEdit(int? ItemId)
-        {
-            MingSuContext db = new MingSuContext();
-            var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
-            if (photoData.MemberImage != null)
-            {
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    byte[] b_photo = photoData.MemberImage;
-                    ms.Write(b_photo);
-                    return File(ms.ToArray(), "image/jpeg");
-                }
-            }
+        //public IActionResult MemberPhotoEdit(int? ItemId)
+        //{
+        //    MingSuContext db = new MingSuContext();
+        //    var photoData = db.Members.FirstOrDefault(t => t.MemberId == ItemId);
+        //    if (photoData.MemberImage != null)
+        //    {
+        //        using (MemoryStream ms = new MemoryStream())
+        //        {
+        //            byte[] b_photo = photoData.MemberImage;
+        //            ms.Write(b_photo);
+        //            return File(ms.ToArray(), "image/jpeg");
+        //        }
+        //    }
 
-            return new EmptyResult();
+        //    return new EmptyResult();
 
-        }
+        //}
         public IActionResult LikeListPhoto(int? ItemId)
         {
             MingSuContext db = new MingSuContext();
