@@ -16,11 +16,11 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult Index()
         {
-            List<CRoomMemberViewModel> CartItems = SessionHelper.GetObjectFromJson<List<CRoomMemberViewModel>>(HttpContext.Session, "cart");
+            List<房源及會員> CartItems = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
 
-            if (CartItems != null)
+            if (CartItems.Count > 0)
             {
-                ViewBag.Total = CartItems.Sum(m => m.房源及會員.FirstOrDefault().小計); // 計算商品總額
+                ViewBag.Total = CartItems.Sum(m => m.小計); // 計算商品總額
             }
             else
             {

@@ -183,17 +183,14 @@
             $("#roomnum").val(i);
         });
         $("#add").click(function(){
-            var data = {
-                "RoomId": @Html.DisplayFor(model => model.RoomId),
-                "count": $("#roomnum").val(),
+            var s = {
+                "RoomId": Number(@Html.DisplayFor(model => model.RoomId)),
+                "count": Number($("#roomnum").val()),
             };
+            let data = JSON.stringify(s);
             $.ajax({
-                 type: "POST",
+                 type: "GET",
                  url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
-                 contentType: false,
-		         processData: false,
-		         dataType: "json",
-                 data: JSON.stringify(data),
                  success: ShowMessage()
             })
         });
