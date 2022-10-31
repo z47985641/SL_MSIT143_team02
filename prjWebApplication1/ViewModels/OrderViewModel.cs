@@ -10,5 +10,7 @@ namespace PJ_MSIT143_team02.ViewModels
     public class OrderViewModel
     {
         public Order Order { get; set; }
+        public List<CartItem> CartItems { get; set; }
+
     }
 }
