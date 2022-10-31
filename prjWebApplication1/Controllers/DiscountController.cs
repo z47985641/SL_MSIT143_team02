@@ -96,6 +96,7 @@ namespace PJ_MSIT143_team02.Controllers
             {
                 d.DiscountInfo = input.DiscountInfo;
                 d.DiscountName = input.DiscountName;
+                d.DiscountValue = input.DiscountValue;
                 db.SaveChanges();
             }
             return RedirectToAction("DiscountAdmin");
