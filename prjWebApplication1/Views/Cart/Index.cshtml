@@ -40,14 +40,15 @@
                         sum += item.小計;
 
                         <tr>
+                            <a class="RoomId d-none">@item.RoomId</a>
                             @*<td class="text-center"><img src="@Html.DisplayFor(modelItem => item.imageSrc)" height="30" /></td>*@
-                            <td>
+                            <td class="RoomName">
                                 @Html.DisplayFor(modelItem => item.RoomName)
                             </td>
-                            <td>
+                            <td class="RoomPrice">
                                 @Html.DisplayFor(modelItem => item.price)
                             </td>
-                            <td>
+                            <td class="Qty">
                                 @Html.DisplayFor(modelItem => item.count)
                             </td>
                             <td>
@@ -82,10 +83,33 @@
 <div class="container">
     <p class="row justify-content-end" style="margin-top:15px;">
         <a class="btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;margin-right:56px" asp-controller="Room" asp-action="TestListView">繼續購物</a>
-        <a class="btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;" asp-controller="Checkout" asp-action="PayData">前往結帳</a>
+        <a class="GoCheckout btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;" asp-controller="Checkout" asp-action="PayData">前往結帳</a>
+        @*<button class="GoCheckout btn btn-primary btn-sm text-white" style="padding-left:56px;padding-right:56px;">前往結帳</button>*@
     </p>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script>
+    $(".GoCheckout").click(async function(){
+        const RoomId = Number($(".RoomId").html());
+        const json = {
+            "RoomId": RoomId,
+            "RoomName": RoomName,
+            "RoomPrice": RoomPrice,
+            "Qty": Qty,
+            "count": count,
+        }
+        const jsonString = JSON.stringify(json);
+        const response = await fetch("@Url.Content("~/CheckOut/GetPayData")" + `?jsonString=${jsonString}`);
+        const data = await response.text();
+        if (data == "1") {
+            window.location.href = ('@Url.Content("~/CheckOut/PayData")')
+        }
+        console.log(data);
 
+    })
+
+
+</script>
 
 <style>
 
