@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -40,7 +39,6 @@ namespace PJ_MSIT143_team02.Models
         public virtual DbSet<Payment> Payments { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomStatus> RoomStatuses { get; set; }
-        public DbSet<OrderItem> OrderItem { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -68,6 +66,8 @@ namespace PJ_MSIT143_team02.Models
                 entity.Property(e => e.ActivityName)
                     .IsRequired()
                     .HasMaxLength(50);
+
+                entity.Property(e => e.ActivityPrice).HasColumnType("money");
 
                 entity.Property(e => e.ActivityStatus)
                     .IsRequired()

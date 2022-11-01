@@ -99,6 +99,52 @@ namespace PJ_MSIT143_team02.Controllers
         //    string base64String = Convert.ToBase64String(arrayImage, 0, arrayImage.Length);
         //    return "data:image/png;base64," + base64String;
         //}
+
+        public IActionResult AddActtoCart(string inputact)
+        {
+            CCartCartItem CartItems = JsonSerializer.Deserialize<CCartCartItem>(inputact);
+            MingSuContext db = new MingSuContext();
+
+            var actproduct = db.Activities.Single(x => x.ActivityId.Equals(CartItems.ActivityId));
+            房源及會員 item = new 房源及會員()
+            {
+                ActivityId = actproduct.ActivityId,
+                ActivityName = actproduct.ActivityName,
+                count = CartItems.count,
+                //ActivityPrice = actproduct.ActivityPrice,
+                Activity = actproduct
+
+            };
+
+
+            if (SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart") == null)
+            {
+                //如果沒有已存在購物車: 建立新的購物車
+                List<房源及會員> cart = new List<房源及會員>();
+                cart.Add(item);
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+            else
+            {
+                //如果已存在購物車: 檢查有無相同的商品，有的話只調整數量
+                List<房源及會員> cart = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
+
+                int index = cart.FindIndex(m => m.Room.RoomId.Equals(CartItems.RoomId)); // FindIndex查詢位置
+
+                if (index != -1)
+                {
+                    cart[index].count += item.count;
+                    //cart[index].SubTotal += item.SubTotal;
+                }
+                else
+                {
+                    cart.Add(item);
+                }
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+
+            return NoContent(); // HttpStatus 204: 請求成功但不更新畫面
+        }
     }
 
 }

@@ -17,5 +17,12 @@ namespace PJ_MSIT143_team02.Models
         public decimal 小計 { get { return this.count * this.price; } }
         public Room Room { get; set; }
 
+        public int ActivityId { get; set; }
+        public string ActivityName { get; set; }
+
+        //public DateTime? ActivityDate { get; set; }
+        public int? ActivityCapacity { get; set; }
+
+        //public string ActivityLocation { get; set; }
     }
 }
