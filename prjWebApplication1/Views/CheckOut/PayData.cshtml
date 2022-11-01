@@ -61,8 +61,12 @@
 
     </div>
 
+    @*@{
+            decimal TotalPrice = Model.房源及會員.FirstOrDefault().price * Model.房源及會員.FirstOrDefault().count;
+        }*@
     @{
-        decimal TotalPrice = Model.房源及會員.FirstOrDefault().price * Model.房源及會員.FirstOrDefault().count;
+        decimal sum = 0;
+        sum += Model.房源及會員.FirstOrDefault().小計;
     }
     <div class="col-4">
         <div class="card" style="background-color: #f8f9fa">
@@ -86,7 +90,7 @@
                 <hr />
                 <div class="text-right">
                     @*<input type="hidden" asp-for="TotalPrice" />*@
-                    <p class="card-text font-weight-bolder" style="padding-right:12px">總計:　$ @TotalPrice.ToString("###,###,##0")</p>
+                    <p class="card-text font-weight-bolder" style="padding-right:12px">總計:　$ @sum.ToString("###,###,##0")</p>
                 </div>
                 <p></p>
                 <div class="text-center card-link">

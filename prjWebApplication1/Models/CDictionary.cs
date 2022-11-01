@@ -4,5 +4,6 @@
     {
         public static readonly string SK_PURCHASED_PRODUCTS = "SK_PURCHASED_PRODUCTS";
         public static readonly string SK_LOGINED_USER= "SK_LOGINED_USER";
+        public static readonly string SK_CHECK_OUT = "SK_CHECK_OUT";
     }
 }
