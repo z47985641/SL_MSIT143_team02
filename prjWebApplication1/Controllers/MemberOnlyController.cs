@@ -177,7 +177,7 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult MemnerRoomDelete(int? roomId)
         {
             MingSuContext db = new MingSuContext();
-            var Room
+            //var Room
 
 
             return View();
