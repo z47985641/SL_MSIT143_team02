@@ -3,6 +3,8 @@
 @{ ViewData["Title"] = "Details"; }
 
 <link href="~/css/acti-and-disc.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+
 <div id="mainbox">
     <div class="breadcrumb-section">
         <div class="container">
@@ -52,29 +54,35 @@
                                 <button type="button" class="btn btn-secondary" id="actplus">+</button>
                             </li>
                             }
-                            <li>
-                                @if (Model.ActivityCapacity > 0)
+                        <li>
+                            @if (Model.ActivityCapacity > 0)
+                            {
+                                if (Model.ActivityStatus == "開放報名")
                                 {
-                                    if (Model.ActivityStatus == "開放報名")
-                                    {
 
-                                        <button class="btn btn-light" id="add" style="text-decoration: none;">
-                                            <span>加入購物車</span>
-                                        </button>
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-light" id="unable" style="text-decoration: none;">
-                                            <span>無法加入購物車</span>
-                                        </button>
-                                    }
-
+                                    <button class="btn btn-light" id="add" style="text-decoration: none;">
+                                        <span>我要參加</span>
+                                    </button>
+                                }
+                                else if(Model.ActivityStatus == "已結束")
+                                {
+                                    <button class="btn btn-light" id="unable" style="text-decoration: none;">
+                                        <span>活動已結束</span>
+                                    </button>
                                 }
                                 else
                                 {
-                                    <span id="cart" class="text-muted">商品缺貨中</span>
+                                    <button class="btn btn-light" id="unable" style="text-decoration: none;">
+                                        <span>無法參加</span>
+                                    </button>
                                 }
-                            </li>
+
+                            }
+                            else
+                            {
+                                <span id="cart" class="text-muted">商品缺貨中</span>
+                            }
+                        </li>
                         </ul>
                     </div>
                 </div>
@@ -133,7 +141,7 @@
             let data = JSON.stringify(s);
             $.ajax({
                  type: "GET",
-                 url: "@Url.Content("~/Cart/AddtoCart")"+`?input=${data}`,
+                 url: "@Url.Content("~/Cart/AddActtoCart")"+`?inputact=${data}`,
                  success: ShowMessage()
             })
         });

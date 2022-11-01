@@ -44,6 +44,7 @@
                             @*<td class="text-center"><img src="@Html.DisplayFor(modelItem => item.imageSrc)" height="30" /></td>*@
                             <td class="RoomName">
                                 @Html.DisplayFor(modelItem => item.RoomName)
+                                @Html.DisplayFor(modelItem => item.ActivityName)
                             </td>
                             <td class="RoomPrice">
                                 @Html.DisplayFor(modelItem => item.price)
@@ -55,7 +56,15 @@
                                 @Html.DisplayFor(modelItem => item.小計)
                             </td>
                             <td>
-                                <a class="btn btn-sm btn-danger" asp-action="RemoveItem" asp-route-Id="@item.RoomId">Delete</a>
+                                @*@if (item.ActivityId == null)
+                                {*@
+                                    <a class="btn btn-sm btn-danger" asp-action="RemoveItem" asp-route-Id="@item.RoomId">Delete</a>
+                                @*}
+                                else
+                                {
+                                    <a class="btn btn-sm btn-danger" asp-action="RemoveActItem" asp-route-Id="@item.ActivityId">Delete</a>
+                                }*@
+
                             </td>
                         </tr>
                     }
