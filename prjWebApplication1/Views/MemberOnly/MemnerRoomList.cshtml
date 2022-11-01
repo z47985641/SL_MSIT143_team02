@@ -7,7 +7,7 @@
 <h1>MemnerRoomEdit</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="MemnerRoomNew">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -64,8 +64,8 @@
                 </td>
 
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("編輯", "MemnerRoomEdit", new {  roomId=item.RoomId }) |
+                    @Html.ActionLink("刪除", "MemnerRoomDelete", new { roomId = item.RoomId })
                 </td>
             </tr>
         }

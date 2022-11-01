@@ -172,11 +172,16 @@ namespace PJ_MSIT143_team02.Controllers
             //讀取圖片
             //var imgedit = from img in db.Images
 
-
-
-
             return View(roomNew);
         }
+        public IActionResult MemnerRoomDelete(int? roomId)
+        {
+            MingSuContext db = new MingSuContext();
+            var Room
 
-    }
+
+            return View();
+        }
+
+        }
 }
