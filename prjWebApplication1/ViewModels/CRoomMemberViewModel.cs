@@ -40,7 +40,7 @@ namespace PJ_MSIT143_team02.ViewModels
 
         //public string ActivityLocation { get; set; }
 
-
+        public Activity Activity { get; set; }
 
     }
 }

@@ -40,6 +40,9 @@
                 <th>
                     活動地點
                 </th>
+                <th>
+                    活動價格
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -70,6 +73,9 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ActivityLocation)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ActivityPrice)
                             </td>
                             <td>
                                 @Html.ActionLink("修改", "Edit", new { id = item.ActivityId }, new { @class = "btn btn-primary" })  |

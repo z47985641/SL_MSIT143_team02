@@ -53,5 +53,10 @@ namespace PJ_MSIT143_team02.ViewModel
             get { return _activity.ActivityLocation; }
             set { _activity.ActivityLocation = value; }
         }
+        public decimal ?ActivityPrice
+        {
+            get { return _activity.ActivityPrice; }
+            set { _activity.ActivityPrice = value; }
+        }
     }
 }
