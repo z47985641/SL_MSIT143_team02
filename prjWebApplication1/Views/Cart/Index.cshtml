@@ -91,6 +91,12 @@
 <script>
     $(".GoCheckout").click(async function(){
         const RoomId = Number($(".RoomId").html());
+        const RoomName = ($(".RoomName").html());
+        const RoomPrice = Number($(".RoomPrice").html());
+        const Qty = Number($(".Qty").html());
+        const count = Number($(".count").html());
+
+
         const json = {
             "RoomId": RoomId,
             "RoomName": RoomName,

@@ -198,7 +198,7 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
 
             var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
-            var p = JsonSerializer.Deserialize<Room>(checkout);
+            var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
 
             var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
             var v = JsonSerializer.Deserialize<Member>(Name);
@@ -223,8 +223,8 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult GetPayData(string jsonString)
         {
             
-            var a = JsonSerializer.Deserialize<CAddToCartViewModel>(jsonString);
-            HttpContext.Session.SetString(CDictionary.SK_CHECK_OUT, "var a = JsonSerializer.Deserialize<CAddToCartViewModel>(jsonString);");
+            //var a = JsonSerializer.Deserialize<CAddToCartViewModel>(jsonString);
+            HttpContext.Session.SetString(CDictionary.SK_CHECK_OUT, jsonString);
             return Content("1");
         }
 
