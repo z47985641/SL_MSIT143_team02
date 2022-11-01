@@ -12,7 +12,7 @@ namespace PJ_MSIT143_team02.Models
             public string RoomName { get; set; }
             public decimal RoomPrice { get; set; }
             public int Qty { get; set; }
-            public int count { get; set; }
+            public int? count { get; set; }
 
 
 

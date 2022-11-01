@@ -103,16 +103,17 @@
         const RoomName = ($(".RoomName").html());
         const RoomPrice = Number($(".RoomPrice").html());
         const Qty = Number($(".Qty").html());
-        const count = Number($(".count").html());
+        //const count = Number($(".count").html());
 
 
         const json = {
             "RoomId": RoomId,
             "RoomName": RoomName,
             "RoomPrice": RoomPrice,
-            "Qty": Qty,
-            "count": count,
+            "Qty": Qty
+            //"count": count,
         }
+        debugger
         const jsonString = JSON.stringify(json);
         const response = await fetch("@Url.Content("~/CheckOut/GetPayData")" + `?jsonString=${jsonString}`);
         const data = await response.text();

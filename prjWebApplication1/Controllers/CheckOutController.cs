@@ -209,6 +209,7 @@ namespace PJ_MSIT143_team02.Controllers
                         where c.RoomId == p.RoomId
                          select new 房源及會員
                         {
+                            
                             MemberName = v.MemberName,
                             MemberEmail = v.MemberEmail,
                             MemberPhone = v.MemberPhone,
