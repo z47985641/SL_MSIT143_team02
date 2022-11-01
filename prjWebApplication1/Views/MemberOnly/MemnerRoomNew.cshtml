@@ -1,0 +1,162 @@
+﻿@model PJ_MSIT143_team02.ViewModels.CRoomNew
+
+@{
+    ViewData["Title"] = "MemnerRoomNew";
+}
+
+
+<hr />
+<h1 style="text-align:center">刊登房源</h1>
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <form asp-action="MemnerRoomNew" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="RoomName" class="control-label"></label>
+                <input asp-for="RoomName" class="form-control" />
+                <span asp-validation-for="RoomName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomPrice" class="control-label"></label>
+                <input asp-for="RoomPrice" class="form-control" />
+                <span asp-validation-for="RoomPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomIntrodution" class="control-label"></label>
+                <input asp-for="RoomIntrodution" class="form-control" />
+                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomstatusId" class="control-label"></label>
+                <input asp-for="RoomstatusId" class="form-control" />
+                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Qty" class="control-label"></label>
+                <input asp-for="Qty" class="form-control" />
+                <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 基礎設施 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    @{
+                        int id = 0;
+                        foreach (var i in Model.EquipmentNamelist)
+                        {
+                            if (Model.EquipmentCatergoryIdlist[id] == 1)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@id">
+                                    <label class="form-check-label stretched-link" for="@id">@i</label>
+                                </div>
+                            }
+
+                            id++;
+                        }
+                    }
+                </div>
+                <div class="col-md-1"></div>
+
+            </div>
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 獨特設施 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    @{
+                        int id2 = 0;
+                        foreach (var i in Model.EquipmentNamelist)
+                        {
+                            if (@Model.EquipmentCatergoryIdlist[id2] == 2)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@id2">
+                                    <label class="form-check-label stretched-link" for="@id2">@i</label>
+                                </div>}
+                            id2++;
+                        }
+                    }
+                </div>
+                <div class="col-md-1"></div>
+
+            </div>
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 安全設施 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10">
+                    @{
+                        int id3 = 0;
+                        foreach (var i in Model.EquipmentNamelist)
+                        {
+                            if (@Model.EquipmentCatergoryIdlist[id3] == 3)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@id3">
+                                    <label class="form-check-label stretched-link" for="@id3">@i</label>
+                                </div>
+                            }
+                            id3++;
+                        }
+                    }
+                </div>
+                <div class="col-md-1"></div>
+
+            </div>
+
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 房源圖片 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10 ">
+                    <div id="img_div"></div>
+                    <input type="file" name="img" id="img" multiple accept="image/*" />
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+            <div class="col-md-4"></div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+        var divimg = document.getElementById("img_div")
+
+        $("#img").on("change", function (e) {
+            var count = 0;
+            //divimg.innerHTML = "";
+            //divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo"  />`
+            //const file = this.files[0];
+            //var reader = new FileReader();
+            //reader.onload = function (e) {
+            //    $(`#Photo`).attr('src', e.target.result);
+            //};
+            //reader.readAsDataURL(file);
+            for (count; count < 10; count++) {
+                if (this.files[count] != null) {
+                    divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo${count}"  />`
+                    var file = this.files[count];
+                    var obj = URL.createObjectURL(file);
+                    $(`#Photo${count}`).attr('src', obj);
+                };
+            };
+
+        });
+
+    </script>
+}

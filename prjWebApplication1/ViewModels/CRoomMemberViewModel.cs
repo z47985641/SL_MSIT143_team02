@@ -22,6 +22,8 @@ namespace PJ_MSIT143_team02.ViewModels
         public decimal 小計 { get { return this.count * this.price; } }
         public Room Room { get; set; }
         public int MemberId { get; set; }
+        public string MemberAccount { get; set; }
+
         public string MemberName { get; set; }
         public string MemberEmail { get; set; }
         public string MemberPhone { get; set; }
