@@ -36,12 +36,17 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
 
             var product = db.Rooms.Single(x => x.RoomId.Equals(CartItems.RoomId));
+            Activity try02 = new Activity();
+            try02.ActivityId = 0;
+            try02.ActivityName = "0";
+            try02.ActivityPrice = 0;
             房源及會員 item = new 房源及會員()
             {
                 RoomId = product.RoomId,
                 RoomName = product.RoomName,
                 count = CartItems.count,
                 price = product.RoomPrice,
+                Activity = try02,
                 Room= product
 
             };
@@ -106,14 +111,18 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
 
             var actproduct = db.Activities.Single(x => x.ActivityId.Equals(CartItems.ActivityId));
+            Room try01 = new Room();
+            try01.RoomId = 0;
+            try01.RoomName = "0";
+            try01.RoomPrice = 0;
             房源及會員 item = new 房源及會員()
             {
                 ActivityId = actproduct.ActivityId,
                 ActivityName = actproduct.ActivityName,
                 count = CartItems.count,
-                //ActivityPrice = actproduct.ActivityPrice,
+                price = (decimal)actproduct.ActivityPrice,
+                Room = try01,
                 Activity = actproduct
-
             };
 
 
@@ -128,8 +137,8 @@ namespace PJ_MSIT143_team02.Controllers
             {
                 //如果已存在購物車: 檢查有無相同的商品，有的話只調整數量
                 List<房源及會員> cart = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
-
-                int index = cart.FindIndex(m => m.Room.RoomId.Equals(CartItems.RoomId)); // FindIndex查詢位置
+                var error = HttpContext.Session.GetString("cart");
+                int index = cart.FindIndex(m => m.Activity.ActivityId.Equals(CartItems.ActivityId)); // FindIndex查詢位置
 
                 if (index != -1)
                 {
@@ -144,6 +153,23 @@ namespace PJ_MSIT143_team02.Controllers
             }
 
             return NoContent(); // HttpStatus 204: 請求成功但不更新畫面
+        }
+        public IActionResult RemoveActItem(int id)
+        {
+            List<房源及會員> cart = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
+            int index = cart.FindIndex(m => m.Activity.ActivityId.Equals(id)); //FindIndex查詢位置
+            cart.RemoveAt(index);
+
+            if (cart.Count < 1)
+            {
+                SessionHelper.Remove(HttpContext.Session, "cart");
+            }
+            else
+            {
+                SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", cart);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 
