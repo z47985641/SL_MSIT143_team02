@@ -78,10 +78,10 @@ namespace PJ_MSIT143_team02.Controllers
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
                 datas = from r in db.Rooms
-                        join i in db.ImageReferences on r.RoomId equals i.RoomId
-                        join k in db.Images on i.ImageId equals k.ImageId
-                        join m in db.Members on r.MemberId equals m.MemberId
-                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
+                        //join i in db.ImageReferences on r.RoomId equals i.RoomId
+                        //join k in db.Images on i.ImageId equals k.ImageId
+                        //join m in db.Members on r.MemberId equals m.MemberId
+                        //join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
                         select r;
             else
                 datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
