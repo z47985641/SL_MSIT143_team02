@@ -45,7 +45,7 @@
                 <p style="text-align:center"> 基礎設施 </p>
                 <div class="col-md-1"></div>
                 <div class="col-md-10">
-
+                    @* 未選取設備的房源會空白 *@
                     @{
                         int id = 0;
                         foreach (var i in Model.EquipmentNamelist)
@@ -64,7 +64,7 @@
                                         </div>
                                         break;
                                     }
-                                    if(Model.EquipmentId.Count== count)
+                                    if (Model.EquipmentId.Count == count)
                                     {
                                         <div style="float:left " class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@id">
@@ -189,7 +189,8 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
 
-    var check = document.getElementsByName('EquipmentId')
+        var check = document.getElementsByName('EquipmentId')
+        //圖片修改之功能
     </script>
 
 }

@@ -139,15 +139,9 @@
 
         $("#img").on("change", function (e) {
             var count = 0;
-            //divimg.innerHTML = "";
-            //divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo"  />`
-            //const file = this.files[0];
-            //var reader = new FileReader();
-            //reader.onload = function (e) {
-            //    $(`#Photo`).attr('src', e.target.result);
-            //};
-            //reader.readAsDataURL(file);
-            for (count; count < 10; count++) {
+            //丟值進另一個list紀錄圖片
+            //新增刪除功能
+            //解決只能一次選擇的問題            for (count; count < 10; count++) {
                 if (this.files[count] != null) {
                     divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo${count}"  />`
                     var file = this.files[count];
