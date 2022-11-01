@@ -17,7 +17,8 @@
                         <h2>房間一覽</h2>
                         @using (Html.BeginForm())
                         {
-                            @:關鍵字 @Html.TextBox("txtKeyword", "", new { @class = "form-control;col-lg-3" }) 
+                            <label>關鍵字:</label>
+                            <input type="text" id="keyword" name="txtKeyword">
                             <label for="date-in">入住時間:</label>
                             <input type="text" class="date-input" id="date-in" name="mydatein">
                             <i class="icon_calendar"></i>
@@ -27,11 +28,11 @@
                             <br />
                             <label for="date-in">旅客:</label>
                             <button type="button" class="btn btn-secondary" id="minus">-</button>
-                            <input type="text" id="num" style="text-align:right;width:50px" value="1">
+                            <input type="text" id="num" style="text-align:right;width:30px">
                             <button type="button" class="btn btn-secondary" id="plus">+</button>
-                            <label for="date-in">客房:</label>
+                            <label for="date-in">剩餘客房間數:</label>
                             <button type="button" class="btn btn-secondary" id="roomminus">-</button>
-                            <input type="text" id="roomnum" style="text-align:right;width:50px" value="1">
+                            <input type="text" id="roomnum" name="txtQty" style="text-align:right;width:30px">
                             <button type="button" class="btn btn-secondary" id="roomplus">+</button>
                             <input type="submit" value="查詢" class="btn btn-secondary" />
                         }
@@ -81,4 +82,28 @@
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
+    <script>
+        $("#minus").click(function () { 
+            var i = Number($("#num").val());
+            if(i > 1)
+                i -= 1;
+            $("#num").val(i);
+        });
+        $("#plus").click(function () { 
+            var i = Number($("#num").val());
+            i += 1;
+            $("#num").val(i);
+        });
+        $("#roomminus").click(function () { 
+            var i = Number($("#roomnum").val());
+            if(i > 1)
+                i -= 1;
+            $("#roomnum").val(i);
+        });
+        $("#roomplus").click(function () { 
+            var i = Number($("#roomnum").val());
+            i += 1;
+            $("#roomnum").val(i);
+        });
+    </script>
 }
