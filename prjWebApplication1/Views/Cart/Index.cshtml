@@ -113,14 +113,14 @@
             "Qty": Qty
             //"count": count,
         }
-        debugger
+        
         const jsonString = JSON.stringify(json);
         const response = await fetch("@Url.Content("~/CheckOut/GetPayData")" + `?jsonString=${jsonString}`);
         const data = await response.text();
         if (data == "1") {
             window.location.href = ('@Url.Content("~/CheckOut/PayData")')
         }
-        console.log(data);
+        //console.log(data);
 
     })
 

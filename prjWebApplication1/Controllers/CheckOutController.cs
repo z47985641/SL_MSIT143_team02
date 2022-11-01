@@ -197,6 +197,7 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
 
+
             var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
             var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
 
@@ -209,7 +210,8 @@ namespace PJ_MSIT143_team02.Controllers
                         where c.RoomId == p.RoomId
                          select new 房源及會員
                         {
-                            
+                            MemberId=v.MemberId,
+                             MemberAccount=v.MemberAccount,
                             MemberName = v.MemberName,
                             MemberEmail = v.MemberEmail,
                             MemberPhone = v.MemberPhone,
