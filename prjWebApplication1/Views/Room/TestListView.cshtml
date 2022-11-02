@@ -76,7 +76,7 @@
                     <div class="form-check mb-2">
                         <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
                         <label class="form-check-label" for="swimming-pool">
-                            冰箱
+                            浴缸
                         </label>
                     </div>
                     <div class="form-check mb-2">
@@ -96,27 +96,13 @@
 
                 <h3 class="mb-3">每晚預算</h3>
                 <form class="mb-3" id="price-range-form">
-                    @*<div class="form-group">
-            <input type="range" class="form-control-range" id="formControlRange" style="width: 100%">
-        </div>
-        <ul class="list-unstyled d-flex justify-content-between align-items-center">
-            <li>
-                <p class="m-0 bg-white p-2 px-3 rounded">
-                    下限<br><small class="text-black-50">TWD 0+</small>
-                </p>
-            </li>
-            <li>
-                <p class="m-0 bg-white p-2 px-3 rounded">
-                    上限<br><small class="text-black-50">TWD 100000</small>
-                </p>
-            </li>
-        </ul>*@
                     <label for="min-price" class="form-label">下限: </label>
-                    <span id="min-price-txt">$100</span>
-                    <input type="range" class="form-range" min="0" max="99" id="min-price" step="1" value="0"><br />
+                    <span id="min-price-txt">$1000</span>
+                    <input type="range" class="form-range" min="0" max="99999" id="min-price" step="1" value="0">
+                    <br />
                     <label for="max-price" class="form-label">上限: </label>
-                    <span id="max-price-txt">$1000000</span>
-                    <input type="range" class="form-range" min="1" max="100" id="max-price" step="1" value="100">
+                    <span id="max-price-txt">$100000</span>
+                    <input type="range" class="form-range" min="1" max="100000" id="max-price" step="1" value="100">
                 </form>
                 <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -267,8 +253,8 @@
                                             </li>
                                             <li>
                                                 @*<p class="card-text text-black-80 m-0">
-                                @r.RoomIntrodution
-                            </p>*@
+                                                        @r.RoomIntrodution
+                                                    </p>*@
                                             </li>
                                             <li>
                                                 <p class="card-text small text-black-50">
@@ -277,7 +263,7 @@
                                         </ul>
                                         <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none">
                                             <li>
-                                                <span class="badge badge-pill badge-primary text-black-50 mr-3">
+                                                <span class="badge badge-pill badge-primary text-black-50 mr-3" >
                                                     @r.RoomIntrodution
                                                 </span>
                                             </li>
@@ -287,7 +273,7 @@
                                         </ul>
                                         <div class="money-block text-right d-flex flex-column">
                                             <small class="text-black-50 d-lg-block d-none">每晚價錢</small>
-                                            <p class="h3 m-0">@r.RoomPrice</p>
+                                            <p class="h3 m-0" id="RoomPrice">@r.RoomPrice</p>
                                         </div>
                                         <!-- badge樣式沒有作用??另外寫css的 -->
                                     </div>
@@ -307,67 +293,61 @@
                 };
             }
         </div>
-                
-        </div>
 
-        </div>
+    </div>
 
-
-                @*//-----------------------------------------------------------------------------------------------------*@
+</div>
 
 
-
-
-        @section Scripts{
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
-            <script>
-                $("#minus").click(function () {
-                    var i = Number($("#num").val());
-                    if (i > 1)
-                        i -= 1;
-                    $("#num").val(i);
-                });
-                $("#plus").click(function () {
-                    var i = Number($("#num").val());
-                    i += 1;
-                    $("#num").val(i);
-                });
-                $("#roomminus").click(function () {
-                    var i = Number($("#roomnum").val());
-                    if (i > 1)
-                        i -= 1;
-                    $("#roomnum").val(i);
-                });
-                $("#roomplus").click(function () {
-                    var i = Number($("#roomnum").val());
-                    i += 1;
-                    $("#roomnum").val(i);
-                });
-            </script>
-<script>
-    let min_price = 100;
-    let max_price = $1000000;
-    $(document).ready(function () {
-        showAllItems();//Display all items with no filter applied
-    });
-    $('#min-price').on("change mousemove", function () {
-        min_price = parseInt($('#min-price').val());
-        $('#min-price-txt').text('$' + min_price);
-        showItemsFiltered();
-    });
-    $('#max-price').on("change mousemove", function () {
-        max_price = parseInt($('#max-price').val());
-        $('#max-price-txt').text('$' + max_price);
-        showItemsFiltered();
-    });
+@*//-----------------------------------------------------------------------------------------------------*@
 
 
 
 
+@section Scripts{
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
+    <script>
+        $("#minus").click(function () {
+            var i = Number($("#num").val());
+            if (i > 1)
+                i -= 1;
+            $("#num").val(i);
+        });
+        $("#plus").click(function () {
+            var i = Number($("#num").val());
+            i += 1;
+            $("#num").val(i);
+        });
+        $("#roomminus").click(function () {
+            var i = Number($("#roomnum").val());
+            if (i > 1)
+                i -= 1;
+            $("#roomnum").val(i);
+        });
+        $("#roomplus").click(function () {
+            var i = Number($("#roomnum").val());
+            i += 1;
+            $("#roomnum").val(i);
+        });
+    </script>
 
+    <script>
+        let min_price =1000;
+        let max_price =100000;
+        $(document).ready(function () {
+            showAllItems();//Display all items with no filter applied
+        });
+        $('#min-price').on("change mousemove", function () {
+            min_price = parseInt($('#min-price').val());
+            $('#min-price-txt').text('$' + min_price);
+            showItemsFiltered();
+        });
+        $('#max-price').on("change mousemove", function () {
+            max_price = parseInt($('#max-price').val());
+            $('#max-price-txt').text('$' + max_price);
+            showItemsFiltered();
+        });
+    </script>
+}
 
-
-
-</script>
-        }
