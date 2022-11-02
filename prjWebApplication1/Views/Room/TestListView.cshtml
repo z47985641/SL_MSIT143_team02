@@ -95,22 +95,28 @@
                 <div class="dropdown-divider mb-3 border-white"></div>
 
                 <h3 class="mb-3">每晚預算</h3>
-                <form class="mb-3">
-                    <div class="form-group">
-                        <input type="range" class="form-control-range" id="formControlRange" style="width: 100%">
-                    </div>
-                    <ul class="list-unstyled d-flex justify-content-between align-items-center">
-                        <li>
-                            <p class="m-0 bg-white p-2 px-3 rounded">
-                                下限<br><small class="text-black-50">TWD 0+</small>
-                            </p>
-                        </li>
-                        <li>
-                            <p class="m-0 bg-white p-2 px-3 rounded">
-                                上限<br><small class="text-black-50">TWD 100000</small>
-                            </p>
-                        </li>
-                    </ul>
+                <form class="mb-3" id="price-range-form">
+                    @*<div class="form-group">
+            <input type="range" class="form-control-range" id="formControlRange" style="width: 100%">
+        </div>
+        <ul class="list-unstyled d-flex justify-content-between align-items-center">
+            <li>
+                <p class="m-0 bg-white p-2 px-3 rounded">
+                    下限<br><small class="text-black-50">TWD 0+</small>
+                </p>
+            </li>
+            <li>
+                <p class="m-0 bg-white p-2 px-3 rounded">
+                    上限<br><small class="text-black-50">TWD 100000</small>
+                </p>
+            </li>
+        </ul>*@
+                    <label for="min-price" class="form-label">下限: </label>
+                    <span id="min-price-txt">$100</span>
+                    <input type="range" class="form-range" min="0" max="99" id="min-price" step="1" value="0"><br />
+                    <label for="max-price" class="form-label">上限: </label>
+                    <span id="max-price-txt">$1000000</span>
+                    <input type="range" class="form-range" min="1" max="100" id="max-price" step="1" value="100">
                 </form>
                 <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -339,4 +345,29 @@
                     $("#roomnum").val(i);
                 });
             </script>
+<script>
+    let min_price = 100;
+    let max_price = $1000000;
+    $(document).ready(function () {
+        showAllItems();//Display all items with no filter applied
+    });
+    $('#min-price').on("change mousemove", function () {
+        min_price = parseInt($('#min-price').val());
+        $('#min-price-txt').text('$' + min_price);
+        showItemsFiltered();
+    });
+    $('#max-price').on("change mousemove", function () {
+        max_price = parseInt($('#max-price').val());
+        $('#max-price-txt').text('$' + max_price);
+        showItemsFiltered();
+    });
+
+
+
+
+
+
+
+
+</script>
         }
