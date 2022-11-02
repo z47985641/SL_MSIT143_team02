@@ -202,6 +202,7 @@
                 var i = Number($("#roomnum").val());
                 i += i;
                 if (i > @Html.DisplayFor(model => model.Qty)) { 
+                    toastr["warning"]("已達庫存上限！");
                     $("#add").attr("disabled", true);
                 }
             }
