@@ -9,8 +9,8 @@ namespace PJ_MSIT143_team02.ViewModels
     public class CKeywordViewModel
     {
         public string txtKeyword { get; set; }
-        public string mydatein { get; set; }
-        public string mydateout { get; set; }
+        public DateTime mydatein { get; set; }
+        public DateTime mydateout { get; set; }
         public int txtQty { get; set; }
     }
 }
