@@ -197,7 +197,6 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
 
-
             var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
             var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
 
@@ -210,6 +209,7 @@ namespace PJ_MSIT143_team02.Controllers
                         where c.RoomId == p.RoomId
                          select new 房源及會員
                         {
+                            
                             MemberId=v.MemberId,
                              MemberAccount=v.MemberAccount,
                             MemberName = v.MemberName,
@@ -231,12 +231,12 @@ namespace PJ_MSIT143_team02.Controllers
             return Content("1");
         }
 
-
-
-
-        public IActionResult PayCheckout(CAddToCartViewModel p)
+        public IActionResult CreateOrder()
         {
             MingSuContext db = new MingSuContext();
+
+            var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
+            var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
 
             var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
             var v = JsonSerializer.Deserialize<Member>(Name);
@@ -247,24 +247,32 @@ namespace PJ_MSIT143_team02.Controllers
                          where c.RoomId == p.RoomId
                          select new 房源及會員
                          {
+                             MemberId = v.MemberId,
+                             MemberAccount = v.MemberAccount,
                              MemberName = v.MemberName,
                              MemberEmail = v.MemberEmail,
                              MemberPhone = v.MemberPhone,
-                             RoomId = c.RoomId,
-                             RoomName = c.RoomName,
-                             price = c.RoomPrice,
-                             count = p.Qty,
+                             RoomId = p.RoomId,
+                             RoomName = p.RoomName,
+                             price = p.RoomPrice,
+                             count = Convert.ToInt32(p.Qty),
                          }).ToList();
             return View(crv);
         }
-        public IActionResult PayEnd(CAddToCartViewModel p)
+        [HttpPost]
+        public IActionResult PayEnd()
         {
+            var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
+            var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
+
+
             MingSuContext db = new MingSuContext();
 
             var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
             var v = JsonSerializer.Deserialize<Member>(Name);
             Order od = new Order()
             {
+                
                 MemberId = v.MemberId,
                 RoomId = p.RoomId,
                 OrderstatusId = 4,   //1已成立  4加入購物車
