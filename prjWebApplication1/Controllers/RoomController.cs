@@ -73,29 +73,51 @@ namespace PJ_MSIT143_team02.Controllers
         {
 
             MingSuContext db = new MingSuContext();
-
-
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword))
                 datas = from r in db.Rooms
                         select r;
+            else if (string.IsNullOrEmpty(model.mydatein) || string.IsNullOrEmpty(model.mydateout))
+                datas = from r in db.Rooms
+                        join o in db.OrderDetails on r.RoomId equals o.RoomId
+                        into subGrp
+                        from s in subGrp.DefaultIfEmpty()
+                        where (r.RoomName.Contains(model.txtKeyword)
+                        || r.RoomPrice.ToString().Contains(model.txtKeyword)
+                        || r.RoomIntrodution.Contains(model.txtKeyword)
+                        || r.MemberId.ToString().Contains(model.txtKeyword)
+                        || r.RoomstatusId.ToString().Contains(model.txtKeyword)
+                        || r.Address.Contains(model.txtKeyword)
+                        || r.Qty.Equals(model.txtQty))
+                        select r;
+            else if ((string.IsNullOrEmpty(model.txtKeyword)
+                || string.IsNullOrEmpty(model.txtQty.ToString()))
+                && (string.IsNullOrEmpty(model.mydatein)
+                || string.IsNullOrEmpty(model.mydateout)))
+                datas = from r in db.Rooms
+                        join o in db.OrderDetails on r.RoomId equals o.RoomId
+                        into subGrp
+                        from s in subGrp.DefaultIfEmpty()
+                        where (r.RoomName.Contains(model.txtKeyword)
+                        || r.RoomPrice.ToString().Contains(model.txtKeyword)
+                        || r.RoomIntrodution.Contains(model.txtKeyword)
+                        || r.MemberId.ToString().Contains(model.txtKeyword)
+                        || r.RoomstatusId.ToString().Contains(model.txtKeyword)
+                        || r.Address.Contains(model.txtKeyword)
+                        || r.Qty.Equals(model.txtQty))
+                        select r;
             else
                 datas = from r in db.Rooms
-                join o in db.OrderDetails on r.RoomId equals o.RoomId
-                into subGrp from s in subGrp.DefaultIfEmpty()
-                where (r.RoomName.Contains(model.txtKeyword)
-                || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                || r.RoomIntrodution.Contains(model.txtKeyword)
-                || r.MemberId.ToString().Contains(model.txtKeyword)
-                || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                || r.Address.Contains(model.txtKeyword)
-                || s.OrderStartDate.ToString().Contains(model.txtKeyword)
-                || s.OrderEndDate.ToString().Contains(model.txtKeyword)
-                || r.Qty.ToString().Contains(model.txtKeyword))
-                select r;
+                        where (r.RoomName.Contains(model.txtKeyword)
+                        || r.RoomPrice.ToString().Contains(model.txtKeyword)
+                        || r.RoomIntrodution.Contains(model.txtKeyword)
+                        || r.MemberId.ToString().Contains(model.txtKeyword)
+                        || r.RoomstatusId.ToString().Contains(model.txtKeyword)
+                        || r.Address.Contains(model.txtKeyword)
+                        || r.Qty.Equals(model.txtQty))
+                        select r;
             //var datas = ListAll.ToList().ToPagedList(page, pageSize);
             return View(datas);
-
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
