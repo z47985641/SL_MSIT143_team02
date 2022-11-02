@@ -101,7 +101,7 @@
                     <input type="range" class="form-range" min="0" max="99999" id="min-price" step="1" value="0">
                     <br />
                     <label for="max-price" class="form-label">上限: </label>
-                    <span id="max-price-txt">$100000</span>
+                    <span id="max-price-txt">100000</span>
                     <input type="range" class="form-range" min="1" max="100000" id="max-price" step="1" value="100">
                 </form>
                 <div class="dropdown-divider mb-3 border-white"></div>
@@ -210,7 +210,7 @@
             </div>
         </div>
 
-        <div class="col-sm-8 col-12 room-card">
+        <div class="col-sm-8 col-12 room-card" id="display-items-div">
             @{
                 int count = 0;
                 foreach (PJ_MSIT143_team02.Models.Room r in Model)
@@ -230,13 +230,13 @@
                             <div class="row no-gutters">
 
                                 <div class="col-4">
-                                    <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
+                                    <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">  @*如果有成功可以上傳照片 就修改這段，改完再註解拿掉~*@
                                 </div>
                                 <div class="col-8">
                                     <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
                                         <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
                                             <small class="text-primary d-flex">
-                                                @r.RoomName
+                                                
                                                 <span class="text-black-50 d-lg-block d-none"></span>
                                             </small>
                                             <ul class="list-unstyled d-flex align-items-center m-0">
@@ -244,17 +244,11 @@
                                                 <li class="mr-1"><i class="fas fa-star"></i></li>
                                                 <li class="mr-1"><i class="fas fa-star"></i></li>
                                                 <li class="mr-1"><i class="fas fa-star"></i></li>
-                                                @*<p class="text-black-50">4.0 (283)</p>*@
                                             </ul>
                                         </div>
                                         <ul class="list-unstyled m-sm-0 m-1">
                                             <li>
                                                 <h3 class="card-title">@r.RoomName</h3>
-                                            </li>
-                                            <li>
-                                                @*<p class="card-text text-black-80 m-0">
-                                                        @r.RoomIntrodution
-                                                    </p>*@
                                             </li>
                                             <li>
                                                 <p class="card-text small text-black-50">
@@ -263,28 +257,27 @@
                                         </ul>
                                         <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none">
                                             <li>
-                                                <span class="badge badge-pill badge-primary text-black-50 mr-3" >
+                                                <span class="badge badge-pill badge-info text-black mr-3" >
                                                     @r.RoomIntrodution
                                                 </span>
                                             </li>
                                             <li>
-                                                <span class="badge badge-pill badge-primary text-black-50">@r.Address</span>
+                                                <span class="badge badge-pill badge-info text-black-50">@r.Address</span>
                                             </li>
                                         </ul>
                                         <div class="money-block text-right d-flex flex-column">
                                             <small class="text-black-50 d-lg-block d-none">每晚價錢</small>
                                             <p class="h3 m-0" id="RoomPrice">@r.RoomPrice</p>
                                         </div>
-                                        <!-- badge樣式沒有作用??另外寫css的 -->
+                                        <!-- badge樣式沒有作用另外寫css的 -->
                                     </div>
-                                    <a href="../Member/AddLikeList?ItemId=@r.RoomId">
-                                        <img src="~/Image/heart.png" style="width:30px ;height:30px" />
+                                    <a  class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                        <img src="~/Image/heart.png" style="width:45px ;height:45px" />
                                     </a>
                                 </div>
                             </div>
-                            <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId})">
-                                <span>立即預訂</span>
-                                <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
+                            <a  class="d-flex justify-content-end" href="@Url.Action("Details", new { id = r.RoomId})" style="font-size:24px">
+                                立即預訂
                             </a>
                         </div>
                         <div class="dropdown-divider d-lg-block d-none"></div>
@@ -334,9 +327,9 @@
 
     <script>
         let min_price =1000;
-        let max_price =100000;
+        let max_price = 100000;
         $(document).ready(function () {
-            showAllItems();//Display all items with no filter applied
+            showAllItems();
         });
         $('#min-price').on("change mousemove", function () {
             min_price = parseInt($('#min-price').val());
@@ -348,6 +341,24 @@
             $('#max-price-txt').text('$' + max_price);
             showItemsFiltered();
         });
+
+        let room_items = [
+            {
+                "RoomId": $(".RoomId").html(),
+                "RoomIntrodution": $(".RoomIntrodution").html(),
+                "RoomIPrice": $(".RoomIPrice").html(),
+                "Address": $(".Address").html(),
+            //    "thumbnail":<img src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" />,
+            }
+
+        ]
+
+
+
+
+
+
+
     </script>
 }
 
