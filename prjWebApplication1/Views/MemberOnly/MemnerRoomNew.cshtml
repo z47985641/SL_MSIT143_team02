@@ -141,16 +141,16 @@
             var count = 0;
             //丟值進另一個list紀錄圖片
             //新增刪除功能
-            //解決只能一次選擇的問題            for (count; count < 10; count++) {
+            //解決只能一次選擇的問題            
+            for (count; count < 10; count++) {
                 if (this.files[count] != null) {
                     divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo${count}"  />`
                     var file = this.files[count];
                     var obj = URL.createObjectURL(file);
                     $(`#Photo${count}`).attr('src', obj);
                 };
-            };
+            }
 
-        });
 
     </script>
 }

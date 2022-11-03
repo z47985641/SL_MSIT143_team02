@@ -193,7 +193,7 @@ namespace PJ_MSIT143_team02.Controllers
         //=========================================================================================
 
 
-        public IActionResult PayData()
+        public IActionResult PayData()     //訂單資料
         {
             MingSuContext db = new MingSuContext();
 
@@ -231,7 +231,7 @@ namespace PJ_MSIT143_team02.Controllers
             return Content("1");
         }
 
-        public IActionResult CreateOrder()
+        public IActionResult CreateOrder()   //建立訂單入資料庫
         {
             MingSuContext db = new MingSuContext();
 
@@ -258,9 +258,10 @@ namespace PJ_MSIT143_team02.Controllers
                              count = Convert.ToInt32(p.Qty),
                          }).ToList();
             return View(crv);
+
         }
         [HttpPost]
-        public IActionResult PayEnd()
+        public IActionResult PayEnd()   //付款
         {
             var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
             var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
