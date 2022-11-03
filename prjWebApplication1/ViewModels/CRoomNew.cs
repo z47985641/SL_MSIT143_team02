@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,7 @@ namespace PJ_MSIT143_team02.ViewModels
         public string ImageCaption { get; set; }
 
         public List<IFormFile> img { get; set; }
+        public List<int> imgId { get; set; }
 
 
         public List<int> EquipmentIdlist { get; set; }
@@ -38,6 +40,7 @@ namespace PJ_MSIT143_team02.ViewModels
         public int EquipmentCatergoryId { get; set; }
 
         public List<int> EquipmentId { get; set; }
+        
         public string EquipmentName { get; set; }
 
         //public int EquipmentId

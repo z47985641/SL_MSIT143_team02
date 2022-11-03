@@ -7,7 +7,8 @@
 <h3>訂單詳細資訊</h3>
 <hr />
 @{
-    decimal TotalPrice = Model.房源及會員.FirstOrDefault().price * Model.房源及會員.FirstOrDefault().count;
+    decimal sum = 0;
+    sum += Model.房源及會員.FirstOrDefault().小計;
 }
 <p></p>
 <div class="card shadow-sm rounded">
@@ -38,7 +39,7 @@
                 </tbody>
             </table>
             <div class="text-right pr-5">
-                <p style="padding-right:12px">總計：$ @TotalPrice.ToString("###,###,##0")</p>
+                <p style="padding-right:12px">總計:　$ @sum.ToString("###,###,##0")</p>
             </div>
         </div>
         <hr />
@@ -50,16 +51,16 @@
             </div>
             <div class="col-5">
                 @*<p>
-                    訂單狀態：
-                    @if (@Model.isPaid)
-                    {
-                        <span>已付款</span>
-                    }
-                    else
-                    {
-                        <span>未付款</span>
-                    }
-                </p>*@
+                        訂單狀態：
+                        @if (@Model.isPaid)
+                        {
+                            <span>已付款</span>
+                        }
+                        else
+                        {
+                            <span>未付款</span>
+                        }
+                    </p>*@
                 <div class="row">
                     <p class="col-3">立即付款：</p>
                     <div class="col-9">
@@ -84,14 +85,14 @@
             shape: 'rect',
             size: 'small',
         },
-        createOrder: function (data, actions) {
+        PayEnd: function (data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: @TotalPrice.ToString("###,###,##0"),
+                        value: 總計:　$ @sum.ToString("###,###,##0"),
                         currency_code: 'TWD',
                         breakdown: {
-                            item_total: { value: @TotalPrice.ToString("###,###,##0"), currency_code: 'TWD' }
+                            item_total: { value: 總計:　$ @sum.ToString("###,###,##0"), currency_code: 'TWD' }
                         }
                     },
                     invoice_id: 'muesli_invoice_id',

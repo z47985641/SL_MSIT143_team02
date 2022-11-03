@@ -39,71 +39,333 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <section id="room-description">
-        <div class="container">
+            <div class="dropdown-divider d-lg-block d-none"></div>
             <div class="row">
-                @{
+                <div class="col-sm-3 d-sm-block d-none" style="border-radius:12px">
+                    <div class="bg-white px-4 py-2 rounded">
+                        <div class="dropdown-divider mb-3 border-white"></div>
+                        <h3 class="mb-3">客房設施</h3>
+                        <form class="mb-3">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="breakfast-included">
+                                <label class="form-check-label" for="breakfast-included">
+                                    電視
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="free-wi-fi">
+                                <label class="form-check-label" for="free-wi-fi">
+                                    免費 Wi-Fi
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                <label class="form-check-label" for="swimming-pool">
+                                    空調
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                <label class="form-check-label" for="swimming-pool">
+                                    冰箱
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                <label class="form-check-label" for="swimming-pool">
+                                    浴缸
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                <label class="form-check-label" for="swimming-pool">
+                                    陽台/露臺
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                <label class="form-check-label" for="swimming-pool">
+                                    暖氣
+                                </label>
+                            </div>
+                        </form>
+                        <div class="dropdown-divider mb-3 border-white"></div>
 
-                    int count = 0;
-                    foreach (PJ_MSIT143_team02.Models.Room r in Model)
-                    {
-                        count++;
-                                    <div class="description">
-                                        <div class="description-inner">
-                                            <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">
-                                            <p class="room-price" id="priceid">@r.RoomPrice</p>
-                                            <p class='room-status'>@r.RoomName</p>
-                                            <ul>
-                                                <li style="color:black">@r.RoomIntrodution</li>
-                                                <li style="color:black">@r.Address</li>
-                                            </ul>
-                                            <a class="bbtn" href="@Url.Action("Details", new { id = r.RoomId })">
-                                                <span>立即預訂</span>
-                                                <img class="arrow" src='~/assets/img2/Icon ionic-ios-arrow-round-forward.svg' alt='#'>
-                                            </a>
-                                            <a href="../Member/AddLikeList?ItemId=@r.RoomId">
-                                                <img src="~/Image/heart.png" style="width:30px ;height:30px" />
-                                            </a>
-                                            <br />
+                        <h3 class="mb-3">每晚預算</h3>
+                        <form class="mb-3" id="price-range-form">
+                            <label for="min-price" class="form-label">下限: </label>
+                            <span id="min-price-txt">$1000</span><br />
+                            <input type="range" class="form-range" min="0" max="99999" id="min-price" step="1" value="0">
+                            <br />
+                            <label for="max-price" class="form-label">上限: </label>
+                            <span id="max-price-txt">100000</span><br />
+                            <input type="range" class="form-range" min="1" max="100000" id="max-price" step="1" value="100">
+                        </form>
+                        <div class="dropdown-divider mb-3 border-white"></div>
+
+                        <h3 class="mb-3">星級</h3>
+                        <form class="mb-3">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option1" type="radio" id="five-star">
+                                <label class="form-check-label" for="five-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">5.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option2" type="radio" id="four-star">
+                                <label class="form-check-label" for="four-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">4.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option3" type="radio" id="three-star">
+                                <label class="form-check-label" for="three-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">3.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option4" type="radio" id="two-star">
+                                <label class="form-check-label" for="two-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">2.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option5" type="radio" id="one-star">
+                                <label class="form-check-label" for="one-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">1.0</span>
+                                </label>
+                            </div>
+                        </form>
+                        <div class="dropdown-divider mb-3 border-white"></div>
+
+                        <h3 class="mb-3">住宿類型</h3>
+                        <form class="mb-3">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hotel">
+                                <label class="form-check-label" for="hotel">
+                                    飯店
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="apartment">
+                                <label class="form-check-label" for="apartment">
+                                    渡假村
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="unique">
+                                <label class="form-check-label" for="unique">
+                                    汽車旅館/摩鐵
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    民宿
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    青年旅館
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    飯店式公寓
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    度假別墅
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    私人別墅
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-9 col-12 room-card" id="display-items-div" style="border-radius:12px">
+                    @{
+                        int count = 0;
+                        foreach (PJ_MSIT143_team02.Models.Room r in Model)
+                        {
+                            count++;
+                                <h2 class="d-sm-none d-block text-center mb-4">@r.RoomName<sup class="text-primary small">@r.RoomName</sup></h2>
+                                <div class="btn-group btn-group-lg d-flex justify-content-around mb-3 d-sm-none d-block">
+                                    <button type="button" class="btn border-right">
+                                        <i class="fas fa-align-left mr-4"></i>Filter
+                                    </button>
+                                    <button type="button" class="btn">
+                                        <i class="fas fa-align-left mr-4"></i>sort
+                                    </button>
+                                </div>
+                                <div class="mobile-bg-secondary">
+                                    <div class="card border-0 mb-sm-4 mb-2">
+                                        <div class="row no-gutters">
+
+                                            <div class="col-4" style="padding-top:25px;padding-left:15px">
+                                                <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">  @*如果有成功可以上傳照片 就修改這段，改完再註解拿掉~*@
+                                            </div>
+                                            <div class="col-8">
+                                                <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
+                                                    <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
+                                                        <small class="text-primary d-flex">
+                                                                            
+                                                            <span class="text-black-50 d-lg-block d-none"></span>
+                                                        </small>
+                                                        <ul class="list-unstyled d-flex align-items-center m-0">
+                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        </ul>
+                                                    </div>
+                                                    <ul class="list-unstyled m-sm-0 m-1" style="padding-left:10px;">
+                                                        <li>
+                                                            <h3 class="card-title">@r.RoomName</h3>
+                                                        </li>
+                                                        <li>
+                                                            <p class="card-text small text-black-50">
+                                                            </p>
+                                                        </li>
+                                                    </ul>
+                                                    <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
+                                                        <li>
+                                                            <span class="badge badge-pill badge-info text-black mr-3" >
+                                                                @r.RoomIntrodution
+                                                            </span>
+                                                        </li>
+                                                        <li>
+                                                            <span class="badge badge-pill badge-info text-black-50">@r.Address</span>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="money-block text-right d-flex flex-column">
+                                                        <small class="text-black-50 d-lg-block d-none">每晚價錢</small>
+                                                        <p class="h3 m-0" id="RoomPrice">@r.RoomPrice</p>
+                                                    </div>
+                                                    <!-- badge樣式沒有作用另外寫css的 -->
+                                                </div>
+                                                <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
+                                                    <span>
+                                                        <a  class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                                            <img src="~/Image/heart.png" style="width:45px ;height:45px" />
+                                                        </a>
+                                                    </span>
+                                                </button>
+                                                <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
+                                                    <span>
+                                                        <a href="@Url.Action("Details", new { id = r.RoomId})" style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
+                                                            立即預訂
+                                                        </a>
+                                                    </span>
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
-                           @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
-                    };
-                }
+                                    <div class="dropdown-divider d-lg-block d-none"></div>
+                                </div>
+                                @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
+                        };
+                    }
+                </div>
+
             </div>
-        </div> 
-     
-    </section>
-   
+
+        </div>
+    </div>
 </div>
+
+
+@*//-----------------------------------------------------------------------------------------------------*@
+
+
+
 
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
     <script>
-        $("#minus").click(function () { 
+        $("#minus").click(function () {
             var i = Number($("#num").val());
-            if(i > 1)
+            if (i > 1)
                 i -= 1;
             $("#num").val(i);
         });
-        $("#plus").click(function () { 
+        $("#plus").click(function () {
             var i = Number($("#num").val());
             i += 1;
             $("#num").val(i);
         });
-        $("#roomminus").click(function () { 
+        $("#roomminus").click(function () {
             var i = Number($("#roomnum").val());
-            if(i > 1)
+            if (i > 1)
                 i -= 1;
             $("#roomnum").val(i);
         });
-        $("#roomplus").click(function () { 
+        $("#roomplus").click(function () {
             var i = Number($("#roomnum").val());
             i += 1;
             $("#roomnum").val(i);
         });
     </script>
+
+    <script>
+        let min_price =1000;
+        let max_price = 100000;
+        $(document).ready(function () {
+            showAllItems();
+        });
+        $('#min-price').on("change mousemove", function () {
+            min_price = parseInt($('#min-price').val());
+            $('#min-price-txt').text('$' + min_price);
+            showItemsFiltered();
+        });
+        $('#max-price').on("change mousemove", function () {
+            max_price = parseInt($('#max-price').val());
+            $('#max-price-txt').text('$' + max_price);
+            showItemsFiltered();
+        });
+
+        let room_items = [
+            {
+                "RoomId": $(".RoomId").html(),
+                "RoomIntrodution": $(".RoomIntrodution").html(),
+                "RoomIPrice": $(".RoomIPrice").html(),
+                "Address": $(".Address").html(),
+            //    "thumbnail":<img src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" />,
+            }
+
+        ]
+
+
+
+
+
+
+
+    </script>
 }
+

@@ -9,9 +9,10 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form asp-action="MemnerRoomNew" enctype="multipart/form-data">
+        <form asp-action="MemnerRoomEdit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
+                <input type="hidden" name="RoomId" value="@Model.RoomId" />
                 <label asp-for="RoomName" class="control-label"></label>
                 <input asp-for="RoomName" class="form-control" />
                 <span asp-validation-for="RoomName" class="text-danger"></span>
@@ -50,7 +51,7 @@
                         int id = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
-                            var count = 1;
+                            var count = 0;
                             foreach (var j in Model.EquipmentId)
                             {
 
@@ -64,7 +65,7 @@
                                         </div>
                                         break;
                                     }
-                                    if (Model.EquipmentId.Count == count)
+                                    if (Model.EquipmentId.Count == count )
                                     {
                                         <div style="float:left " class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@id">
@@ -74,6 +75,14 @@
                                     }
                                 }
                                 count++;
+                            }
+                            if (Model.EquipmentId.Count == 0)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@id">
+                                    <label class="form-check-label stretched-link" for="@id">@i</label>
+                                </div>
+                                break;
                             }
                             id++;
                         }
@@ -91,7 +100,7 @@
                         foreach (var i in Model.EquipmentNamelist)
                         {
 
-                            var count = 1;
+                            var count = 0;
                             foreach (var j in Model.EquipmentId)
                             {
 
@@ -116,6 +125,14 @@
                                 }
                                 count++;
                             }
+                            if (Model.EquipmentId.Count == 0)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@id">
+                                    <label class="form-check-label stretched-link" for="@id">@i</label>
+                                </div>
+                                break;
+                            }
                             id2++;
                         }
                     }
@@ -131,7 +148,7 @@
                         int id3 = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
-                            var count = 1;
+                            var count = 0;
                             foreach (var j in Model.EquipmentId)
                             {
 
@@ -145,7 +162,7 @@
                                         </div>
                                         break;
                                     }
-                                    if (Model.EquipmentId.Count == count)
+                                    if (Model.EquipmentId.Count == count )
                                     {
                                         <div style="float:left " class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@id">
@@ -156,8 +173,18 @@
                                 }
                                 count++;
                             }
+                            if (Model.EquipmentId.Count == 0)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@id">
+                                    <label class="form-check-label stretched-link" for="@id">@i</label>
+                                </div>
+                                break;
+                            }
                             id3++;
                         }
+
+
                     }
                 </div>
                 <div class="col-md-1"></div>
@@ -169,6 +196,12 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-10 ">
                     <div id="img_div"></div>
+                    @{
+                        foreach (var item in Model.imgId)
+                        {
+                            <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px" />
+                        }
+                    }
                     <input type="file" name="img" id="img" multiple accept="image/*" />
                 </div>
                 <div class="col-md-1"></div>
@@ -188,9 +221,6 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-
-        var check = document.getElementsByName('EquipmentId')
-        //圖片修改之功能
     </script>
 
 }

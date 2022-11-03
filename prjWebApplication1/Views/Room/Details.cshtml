@@ -1,4 +1,4 @@
-﻿@model PJ_MSIT143_team02.Models.Room
+﻿@model List<PJ_MSIT143_team02.Models.Room>
 
 @{
     ViewData["Title"] = "Details";
@@ -9,6 +9,7 @@
 
 <section class="rooms-section spad">
     <div class="container">
+        @foreach (var item in Model){
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -33,7 +34,6 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
             </button>
         </div>
-
         <div class="col-lg-12">
             <hr />
             <div id="nav" class="col-lg-12">
@@ -44,7 +44,7 @@
                     <li><a href="#comment">住宿評鑑</a></li>
                     <li><a href="#roomlocation">地點</a></li>
                     <li>
-                        NT @Html.DisplayFor(model => model.RoomPrice)起
+                        NT @Html.DisplayFor(model => item.RoomPrice)起
                     </li>
                     <li>
                         房間數:
@@ -53,10 +53,10 @@
                         <button type="button" class="btn btn-secondary" id="roomplus">+</button>
                     </li>
                     <li>
-                        @if (Model.Qty > 0)
+                        @if (item.Qty > 0)
                         {
                             <button class="bbtn" id="add" style="text-decoration: none;">
-                                <span>加入購物車</span>
+                                <span>立即訂房</span>
                             </button>
                         }
                         else
@@ -154,18 +154,19 @@
                         </a>
                         <br /><br /><br />
                         <hr />
-                        <label style="margin-left:315px;font-size:13.5px;color:dimgray">(暫無評論)</label>
+                        @await Component.InvokeAsync("Comment", new { id = item.RoomId})
                     </div>
                 </div>
             </div>
         </div>
+        }
     </div>
 </section>
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(function (){
-            if (@Html.DisplayFor(model => model.Qty) < 1) {
+            if (@Html.DisplayFor(model => model[0].Qty) < 1) {
                 $("#roomminus").attr("disabled", true);
                 $("#roomnum").attr("disabled", true);
                 $("#roomplus").attr("disabled", true);
@@ -179,18 +180,18 @@
         });
         $("#roomplus").click(function () { 
             var i = Number($("#roomnum").val());
-            if(i < @Html.DisplayFor(model => model.Qty))
+            if(i < @Html.DisplayFor(model => model[0].Qty))
                 i += 1;
             $("#roomnum").val(i);
         });
         $("#add").click(function(){
-            if ($("#roomnum").val() > @Html.DisplayFor(model => model.Qty)) {
+            if ($("#roomnum").val() > @Html.DisplayFor(model => model[0].Qty)) {
                 alert("加入購物車數量大於庫存數");
             } else if ($("#roomnum").val() < 1) {
                 alert("加入購物車數量小於1");
             } else {
                 var s = {
-                    "RoomId": Number(@Html.DisplayFor(model => model.RoomId)),
+                    "RoomId": Number(@Html.DisplayFor(model => model[0].RoomId)),
                     "count": Number($("#roomnum").val()),
                 };
                 let data = JSON.stringify(s);
@@ -201,7 +202,8 @@
                 })            
                 var i = Number($("#roomnum").val());
                 i += i;
-                if (i > @Html.DisplayFor(model => model.Qty)) { 
+                if (i > @Html.DisplayFor(model => model[0].Qty)) { 
+                    toastr["warning"]("已達庫存上限！");
                     $("#add").attr("disabled", true);
                 }
             }
