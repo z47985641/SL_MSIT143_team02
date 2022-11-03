@@ -195,12 +195,18 @@
                 <p style="text-align:center"> 房源圖片 </p>
                 <div class="col-md-1"></div>
                 <div class="col-md-10 ">
-                    <div id="img_div"></div>
+
                     @{
                         foreach (var item in Model.imgId)
                         {
-                            <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px" />
+                            <div id="img_div">
+                                <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px"  />
+                                <div id="img_div1">
+                                    @Html.ActionLink("刪除", "MemnerRoomPhotoDelete", new { ImageId = item }, new { @id = "img_delete" });
+                                </div>
+                            </div>
                         }
+
                     }
                     <input type="file" name="img" id="img" multiple accept="image/*" />
                 </div>
@@ -221,6 +227,10 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
+
+        $('#img_delete').on('change', function () {
+            $('img_div').attr('hidden', 'hidden')
+        })
     </script>
 
 }
