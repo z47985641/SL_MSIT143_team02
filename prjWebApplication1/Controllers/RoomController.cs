@@ -75,7 +75,7 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(model.txtKeyword)) {
-                if ((0.Equals(model.txtQty))
+                if (0.Equals(model.txtQty)
                     && (thisDate.Equals(model.mydatein)
                     && thisDate.Equals(model.mydateout)))
                     datas = from r in db.Rooms
@@ -109,7 +109,7 @@ namespace PJ_MSIT143_team02.Controllers
                             select r;
             }
             else {
-                if ((0.Equals(model.txtQty))
+                if (0.Equals(model.txtQty)
                     && thisDate.Equals(model.mydatein)
                     && thisDate.Equals(model.mydateout))
                     datas = from r in db.Rooms
@@ -187,7 +187,6 @@ namespace PJ_MSIT143_team02.Controllers
                             || s.OrderEndDate != model.mydateout
                             select r;
             }
-            //var datas = ListAll.ToList().ToPagedList(page, pageSize);
             return View(datas);
         }
         public IActionResult AddRoom(CKeywordViewModel model)
