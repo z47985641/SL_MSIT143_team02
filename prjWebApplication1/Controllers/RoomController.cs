@@ -271,9 +271,9 @@ namespace PJ_MSIT143_team02.Controllers
             if (Id != null)
             {
                 MingSuContext db = new MingSuContext();
-                Room d = db.Rooms.FirstOrDefault(d => d.RoomId == Id);
-                if (d != null)
-                    return View(d);
+                IEnumerable<Room> r = db.Rooms.Where(r => r.RoomId == Id);
+                if (r != null)                    
+                    return View(r.ToList());
             }
             return RedirectPermanent("TestListView");
         }
