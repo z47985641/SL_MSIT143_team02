@@ -46,7 +46,7 @@
                 </thead>
                 <tbody>
                     @*@foreach (var item in ViewBag.orderItems)
-                    {*@
+                        {*@
                     <tr>
                         <td>@Model.房源及會員.FirstOrDefault().RoomName</td>
                         <td>@Model.房源及會員.FirstOrDefault().count</td>
@@ -86,63 +86,63 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AU451OA3fxJVgEkOSsVvzC4MIHadHRk8KNO5ItbjkD3Q25k9MJ_4I4QyQZE9LNvSYG4py5EzwgBOFdH_"></script>
 
 <script>
-    paypal.Buttons({
-        createOrder: function (data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: '88.44'
-                    }
-                }]
-            });
-        },
-        onApprove: function (data, actions) {
-            return actions.order.capture().then(function (orderData) {
-                console.log('Capture result', orderData,
-                    JSON.stringify(orderData, null, 2));
-            });
-        }
-    }).render('#payment-button');
+        paypal.Buttons({
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value:'@Model.房源及會員.FirstOrDefault().小計'
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (orderData) {
+                    console.log('Capture result', orderData,
+                        JSON.stringify(orderData, null, 2));
+                });
+            }
+        }).render('#payment-button');
 </script>
-
-
 
 @*<script>
     paypal.Buttons({
-        style: {
-            shape: 'rect',
-            size: 'small',
-        },
-        createOrder: function (data, actions) {
+        //style: {
+        //    shape: 'rect',
+        //    size: 'small',
+        //},
+                createOrder: function (data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
                         value: @sum.ToString("###,###,##0"),
                         currency_code: 'TWD',
                         breakdown: {
-                            item_total: { value: @sum.ToString("###,###,##0"), currency_code: 'TWD' }
+                            item_total: { value: @sum.ToString("###,###,##0"), currency_code: 'TWD' }     //訂單金額
                         }
                     },
+                    invoice_id: 'muesli_invoice_id',
                     items: [
-                        
                         {
-                             name: '@Model.房源及會員.FirstOrDefault().RoomName', unit_amount: { value: '@sum.ToString("###,###,##0")', currency_code: 'TWD' }, quantity: '@Model.房源及會員.FirstOrDefault().count' ,
-                        }
-                    ]
-                }]
+                            name: '@Model.房源及會員.FirstOrDefault().MemberName',
+                            unit_amount: { value:@Model.房源及會員.FirstOrDefault().小計, currency_code: 'TWD' },   //商品項目
+                        quantity:@Model.房源及會員.FirstOrDefault().count}
+                ]
+            }]
             });
         },
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
                 console.log(details),
-                    window.location.replace("/CheckOut/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSuccess=true");
+                    window.location.replace("/checkout/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSuccess=true");
             })
         },
         onCancel: function (data) {
-            window.location.replace("/CheckOut/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSussess=false");
+            window.location.replace("/checkout/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSussess=false");
         }
     }).render('#payment-button')
 </script>*@
+
 
 
 <style>
