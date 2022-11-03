@@ -67,17 +67,10 @@
                 <p>訂房人信箱：@Model.房源及會員.FirstOrDefault().MemberEmail</p>
             </div>
             <div class="col-5">
-                @*<p>
+                <p>
                     訂單狀態：
-                    @if (@Model.isPaid)
-                    {
-                        <span>已付款</span>
-                    }
-                    else
-                    {
-                        <span>未付款</span>
-                    }
-                </p>*@
+                    <span>未付款</span>
+                </p>
                 <div class="row">
                     <p class="col-3">立即付款：</p>
                     <div class="col-9">
@@ -90,9 +83,31 @@
     </div>
 </div>
 <p></p>
+<script src="https://www.paypal.com/sdk/js?client-id=AU451OA3fxJVgEkOSsVvzC4MIHadHRk8KNO5ItbjkD3Q25k9MJ_4I4QyQZE9LNvSYG4py5EzwgBOFdH_"></script>
 
-<script src="https://www.paypal.com/sdk/js?client-id=AROOEAjq-CEdjN74SU6zEGiQIc-1CKe_Cloaeuudb9ZCZZeAF3dVdqkeqO4fhFOM035egHsnUlK86pk1&currency=TWD"></script>
 <script>
+    paypal.Buttons({
+        createOrder: function (data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '88.44'
+                    }
+                }]
+            });
+        },
+        onApprove: function (data, actions) {
+            return actions.order.capture().then(function (orderData) {
+                console.log('Capture result', orderData,
+                    JSON.stringify(orderData, null, 2));
+            });
+        }
+    }).render('#payment-button');
+</script>
+
+
+
+@*<script>
     paypal.Buttons({
         style: {
             shape: 'rect',
@@ -127,7 +142,7 @@
             window.location.replace("/CheckOut/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSussess=false");
         }
     }).render('#payment-button')
-</script>
+</script>*@
 
 
 <style>
