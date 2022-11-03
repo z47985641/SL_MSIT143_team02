@@ -187,7 +187,8 @@ namespace PJ_MSIT143_team02.Controllers
                             || s.OrderEndDate != model.mydateout
                             select r;
             }
-            return View(datas);
+            
+            return View(datas.Where(e => e.RoomstatusId != 5));
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
@@ -275,6 +276,23 @@ namespace PJ_MSIT143_team02.Controllers
                     return View(r.ToList());
             }
             return RedirectPermanent("TestListView");
+        }
+        public FileResult ShowPhoto(int roomId)
+        {
+            byte[] content;
+            MingSuContext db = new MingSuContext();
+            ImageReference imgref = db.ImageReferences.FirstOrDefault(img => img.RoomId == roomId);
+            if (imgref == null)
+            {
+                content = null;
+            }
+            else
+            {
+            Image img = db.Images.FirstOrDefault(img => img.ImageId == imgref.ImageId);
+            content = img.Image1;
+            }
+            
+            return File(content, "image/jpeg");
         }
         //public static byte[] GetBytesFromImage(string filename)
         //{

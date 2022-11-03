@@ -13,34 +13,35 @@
         <form asp-action="MemnerRoomNew" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="RoomName" class="control-label"></label>
+                <label asp-for="RoomName" class="control-label">房間名稱</label>
                 <input asp-for="RoomName" class="form-control" />
                 <span asp-validation-for="RoomName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoomPrice" class="control-label"></label>
+                <label asp-for="RoomPrice" class="control-label">價格</label>
                 <input asp-for="RoomPrice" class="form-control" />
                 <span asp-validation-for="RoomPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoomIntrodution" class="control-label"></label>
+                <label asp-for="RoomIntrodution" class="control-label">房間介紹</label>
                 <input asp-for="RoomIntrodution" class="form-control" />
                 <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="RoomstatusId" class="control-label"></label>
-                <input asp-for="RoomstatusId" class="form-control" />
-                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
+                <label asp-for="Address" class="control-label">地址</label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Qty" class="control-label"></label>
+                <label asp-for="Qty" class="control-label">數量</label>
                 <input asp-for="Qty" class="form-control" />
                 <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomstatusId" class="control-label">狀態</label>
+                <input asp-for="RoomstatusId" class="form-control" />
+                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
             </div>
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 基礎設施 </p>

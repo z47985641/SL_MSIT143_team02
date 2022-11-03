@@ -5,7 +5,7 @@
 }
 
 <hr />
-<h1 style="text-align:center">刊登房源</h1>
+<h1 style="text-align:center">房源編輯</h1>
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
@@ -13,34 +13,35 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <input type="hidden" name="RoomId" value="@Model.RoomId" />
-                <label asp-for="RoomName" class="control-label"></label>
+                <label asp-for="RoomName" class="control-label">房間名稱</label>
                 <input asp-for="RoomName" class="form-control" />
                 <span asp-validation-for="RoomName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoomPrice" class="control-label"></label>
+                <label asp-for="RoomPrice" class="control-label">價格</label>
                 <input asp-for="RoomPrice" class="form-control" />
                 <span asp-validation-for="RoomPrice" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="RoomIntrodution" class="control-label"></label>
+                <label asp-for="RoomIntrodution" class="control-label">介紹</label>
                 <input asp-for="RoomIntrodution" class="form-control" />
                 <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="RoomstatusId" class="control-label"></label>
-                <input asp-for="RoomstatusId" class="form-control" />
-                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
+                <label asp-for="Address" class="control-label">地址</label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Qty" class="control-label"></label>
+                <label asp-for="Qty" class="control-label">數量</label>
                 <input asp-for="Qty" class="form-control" />
                 <span asp-validation-for="Qty" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
+                <input asp-for="RoomstatusId" class="form-control" />
+                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
             </div>
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 基礎設施 </p>
@@ -51,7 +52,15 @@
                         int id = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
-                            var count = 0;
+                            if (Model.EquipmentId.Count == 0&& @Model.EquipmentCatergoryIdlist[id] == 1)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
+                                    <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
+                                </div>
+                            }
+
+                            var count = 1;
                             foreach (var j in Model.EquipmentId)
                             {
 
@@ -65,24 +74,16 @@
                                         </div>
                                         break;
                                     }
-                                    if (Model.EquipmentId.Count == count )
+                                    if (Model.EquipmentId.Count == count)
                                     {
                                         <div style="float:left " class="col-md-6">
-                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@id">
-                                            <label class="form-check-label stretched-link" for="@id">@i</label>
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
                                         </div>
                                         break;
                                     }
                                 }
                                 count++;
-                            }
-                            if (Model.EquipmentId.Count == 0)
-                            {
-                                <div style="float:left " class="col-md-6">
-                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@id">
-                                    <label class="form-check-label stretched-link" for="@id">@i</label>
-                                </div>
-                                break;
                             }
                             id++;
                         }
@@ -99,8 +100,14 @@
                         int id2 = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
-
-                            var count = 0;
+                            if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id2] == 2)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]">
+                                    <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
+                                </div>
+                            }
+                            var count = 1;
                             foreach (var j in Model.EquipmentId)
                             {
 
@@ -117,21 +124,13 @@
                                     if (Model.EquipmentId.Count == count)
                                     {
                                         <div style="float:left " class="col-md-6">
-                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@id">
-                                            <label class="form-check-label stretched-link" for="@id">@i</label>
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]">
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
                                         </div>
                                         break;
                                     }
                                 }
                                 count++;
-                            }
-                            if (Model.EquipmentId.Count == 0)
-                            {
-                                <div style="float:left " class="col-md-6">
-                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@id">
-                                    <label class="form-check-label stretched-link" for="@id">@i</label>
-                                </div>
-                                break;
                             }
                             id2++;
                         }
@@ -148,7 +147,14 @@
                         int id3 = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
-                            var count = 0;
+                            if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id3] == 3)
+                            {
+                                <div style="float:left " class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
+                                    <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
+                                </div>
+                            }
+                            var count = 1;
                             foreach (var j in Model.EquipmentId)
                             {
 
@@ -162,25 +168,25 @@
                                         </div>
                                         break;
                                     }
-                                    if (Model.EquipmentId.Count == count )
+                                    if (Model.EquipmentId.Count == count)
                                     {
                                         <div style="float:left " class="col-md-6">
-                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@id">
-                                            <label class="form-check-label stretched-link" for="@id">@i</label>
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
                                         </div>
                                         break;
                                     }
                                 }
                                 count++;
                             }
-                            if (Model.EquipmentId.Count == 0)
-                            {
-                                <div style="float:left " class="col-md-6">
-                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@id">
-                                    <label class="form-check-label stretched-link" for="@id">@i</label>
-                                </div>
-                                break;
-                            }
+                            @*if (key == 0)
+                {
+                    <div style="float:left " class="col-md-6">
+                        <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
+                        <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
+                    </div>
+                    break;
+                }*@
                             id3++;
                         }
 
@@ -199,7 +205,7 @@
                         foreach (var item in Model.imgId)
                         {
                             <div id="img_div">
-                                <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px"  />
+                                <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px" />
                                 <div id="img_div1">
                                     @Html.ActionLink("刪除", "MemnerRoomPhotoDelete", new { ImageId = item }, new { @id = "img_delete" });
                                 </div>

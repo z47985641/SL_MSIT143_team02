@@ -196,8 +196,10 @@ namespace PJ_MSIT143_team02.Controllers
                 item.EquipmentId = Eitem;
                 item.RoomId = roomedit.RoomId;
                 db.EquipmentReferences.Add(item);
+                db.SaveChanges();
             }
-
+            if (roomedit.img != null)
+            {
             var ms = new MemoryStream();
             foreach (var imgindex in roomedit.img)
             {
@@ -206,16 +208,19 @@ namespace PJ_MSIT143_team02.Controllers
                 img.Image1 = ms.ToArray();
                 db.Images.Add(img);
                 count++;
-            }
-
-            //迴圈加入ImageReferences
+            }//迴圈加入ImageReferences
             for (int i = 1; i <= roomedit.img.Count; i++)
             {
                 ImageReference imgRef = new ImageReference();
                 imgRef.RoomId = roomedit.RoomId;
                 imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId - count + i;
                 db.ImageReferences.Add(imgRef);
+
             }
+            }
+            
+
+            
 
             db.SaveChanges();
             return RedirectToAction("MemnerRoomList");
