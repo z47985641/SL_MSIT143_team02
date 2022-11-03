@@ -195,7 +195,6 @@
                 <p style="text-align:center"> 房源圖片 </p>
                 <div class="col-md-1"></div>
                 <div class="col-md-10 ">
-
                     @{
                         foreach (var item in Model.imgId)
                         {
@@ -227,8 +226,7 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-
-        $('#img_delete').on('change', function () {
+            $('#img_div1').on('click', function () {
             $('img_div').attr('hidden', 'hidden')
         })
     </script>

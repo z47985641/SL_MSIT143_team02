@@ -239,7 +239,7 @@ namespace PJ_MSIT143_team02.Controllers
             //db.Images.Remove(img);
             //db.SaveChanges();
 
-            return new EmptyResult();
+            return NoContent();
         }
 
         public FileResult ShowPhoto(int imgId)
