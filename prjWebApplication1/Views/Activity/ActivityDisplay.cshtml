@@ -29,19 +29,25 @@
                             <p class="card-text">
                                 活動日期: @Html.DisplayFor(modelItem => item.ActivityDate)
                             </p>
-                            @*<p class="card-text">
-                                人數上限: @Html.DisplayFor(modelItem => item.ActivityCapacity) 人
-                            </p>
                             <p class="card-text">
-                                活動狀態: @Html.DisplayFor(modelItem => item.ActivityStatus)
-                            </p>
-                            <p class="card-text">
-                                簡介: @Html.DisplayFor(modelItem => item.ActivityInfo)
-                            </p>*@
-                            <p class="card-text" style="text-align:right">
-                                @Html.ActionLink("查看更多", "Details", new { id = item.ActivityId }, new { @class = "btn btn-secondary" })
-                            </p>
-                        </div>
+                                剩餘名額: @Html.DisplayFor(modelItem => item.ActivityCapacity) 人
+                                @if (item.ActivityCapacity < 20)
+                                {
+                                <p class="">即將額滿，報名從速!</p>
+                                }
+                                else
+                                { <p><br/></p>}
+                                </p>
+                                @*<p class="card-text">
+                活動狀態: @Html.DisplayFor(modelItem => item.ActivityStatus)
+            </p>
+            <p class="card-text">
+                簡介: @Html.DisplayFor(modelItem => item.ActivityInfo)
+            </p>*@
+                                <p class="card-text" style="text-align:right">
+                                    @Html.ActionLink("查看更多", "Details", new { id = item.ActivityId }, new { @class = "btn btn-secondary" })
+                                </p>
+                            </div>
                     </div>
                 </div>}
             </div>
