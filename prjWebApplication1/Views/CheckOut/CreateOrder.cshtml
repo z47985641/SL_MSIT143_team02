@@ -105,7 +105,7 @@
     }).render('#payment-button');
 </script>
 
-<script>
+@*<script>
     paypal.Buttons({
         style: {
             shape: 'rect',
@@ -132,7 +132,7 @@
                 }
             );
         }
-        @*//付款成功後重導向
+        //付款成功後重導向
         onApprove: function (data, actions) {
             return actions.order.capture().then(function (details) {
                 console.log(details),
@@ -145,8 +145,8 @@
             window.location.
                 replace("/order/payment/?Id=@Model.Id&isSussess=false");
         }
-    }).*@render('#payment-button')
-</script>
+    }).render('#payment-button')
+</script>*@
 
 
 <style>
