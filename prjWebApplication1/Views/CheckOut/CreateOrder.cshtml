@@ -85,13 +85,13 @@
 <p></p>
 <script src="https://www.paypal.com/sdk/js?client-id=AU451OA3fxJVgEkOSsVvzC4MIHadHRk8KNO5ItbjkD3Q25k9MJ_4I4QyQZE9LNvSYG4py5EzwgBOFdH_"></script>
 
-@*<script>
+<script>
         paypal.Buttons({
             createOrder: function (data, actions) {
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value: '88.44'
+                            value:'@Model.房源及會員.FirstOrDefault().小計'
                         }
                     }]
                 });
@@ -103,15 +103,15 @@
                 });
             }
         }).render('#payment-button');
-    </script>*@
+</script>
 
-<script>
+@*<script>
     paypal.Buttons({
-        style: {
-            shape: 'rect',
-            size: 'small',
-        },
-        createOrder: function (data, actions) {
+        //style: {
+        //    shape: 'rect',
+        //    size: 'small',
+        //},
+                createOrder: function (data, actions) {
             return actions.order.create({
                 purchase_units: [{
                     amount: {
@@ -125,7 +125,7 @@
                     items: [
                         {
                             name: '@Model.房源及會員.FirstOrDefault().MemberName',
-                        unit_amount: { value:, currency_code: 'TWD' },  //商品項目
+                            unit_amount: { value:@Model.房源及會員.FirstOrDefault().小計, currency_code: 'TWD' },   //商品項目
                         quantity:@Model.房源及會員.FirstOrDefault().count}
                 ]
             }]
@@ -141,7 +141,7 @@
             window.location.replace("/checkout/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSussess=false");
         }
     }).render('#payment-button')
-</script>
+</script>*@
 
 
 
