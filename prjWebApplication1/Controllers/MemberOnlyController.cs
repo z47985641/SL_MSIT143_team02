@@ -71,8 +71,7 @@ namespace PJ_MSIT143_team02.Controllers
 
             //迴圈加入多圖
             var ms = new MemoryStream();
-            foreach (var imgindex in 
-                NewRoom.img)
+            foreach (var imgindex in NewRoom.img)
             {
                 count++;
                 Image img = new Image();
@@ -111,7 +110,7 @@ namespace PJ_MSIT143_team02.Controllers
 
             MingSuContext db = new MingSuContext();
             var roomItem = from r in db.Rooms
-                           where r.MemberId == HttpContext.Session.GetInt32("MemberID")
+                           where r.MemberId == HttpContext.Session.GetInt32("MemberID")&& r.RoomstatusId != 5
                            select r;
             return View(roomItem);
         }
@@ -120,68 +119,123 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
             CRoomNew roomNew = new CRoomNew();
             //加入房間資料
-            var roomData = from r in db.Rooms
-                           where r.RoomId == roomId
-                           select r;
-            foreach(var room in roomData)
-            {
-                roomNew.RoomName = room.RoomName;
-                roomNew.RoomPrice = room.RoomPrice;
-                roomNew.RoomIntrodution = room.RoomIntrodution;
-                roomNew.MemberId = room.MemberId;
-                roomNew.RoomstatusId = room.RoomstatusId;
-                roomNew.Address = room.Address;
-                roomNew.CreateDate = room.CreateDate;
-                roomNew.Qty = room.Qty;
-            }
+            var roomData = db.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+            roomNew.RoomId = roomData.RoomId;
+                roomNew.RoomName = roomData.RoomName;
+                roomNew.RoomPrice = roomData.RoomPrice;
+                roomNew.RoomIntrodution = roomData.RoomIntrodution;
+                roomNew.MemberId = roomData.MemberId;
+                roomNew.RoomstatusId = roomData.RoomstatusId;
+                roomNew.Address = roomData.Address;
+                roomNew.CreateDate = roomData.CreateDate;
+                roomNew.Qty = roomData.Qty;
+
 
             //加入設備選項
-            var item = from I in db.Equipment
-                       select new
-                       {
-                           I.EquipmentId,
-                           I.EquipmentName,
-                           I.EquipmentCatergoryId
-                       };
             List<int> list = new List<int>();
             List<string> listname = new List<string>();
             List<int> listC = new List<int>();
-            foreach (var i in item)
+
+            foreach (var i in db.Equipment)
             {
-                int count = 0;
                 list.Add(i.EquipmentId);
                 listname.Add(i.EquipmentName);
                 listC.Add(i.EquipmentCatergoryId);
-                count++;
             }
+
             roomNew.EquipmentIdlist = list;
             roomNew.EquipmentNamelist = listname;
             roomNew.EquipmentCatergoryIdlist = listC;
 
-            //設定設備狀態
+            //帶入設備狀態
+            List<int> idlist = new List<int>();
             var EquipmentRE = from e in db.EquipmentReferences
                               where e.RoomId == roomId
                               select e;
-            List<int> idlist = new List<int>();
-            foreach (var Eitem in EquipmentRE)
+            foreach(var e in EquipmentRE)
             {
-               idlist.Add(Eitem.EquipmentId);
+                idlist.Add(e.EquipmentId);
+                db.EquipmentReferences.Remove(e);
             }
-            roomNew.EquipmentId = idlist;
 
-            //讀取圖片
-            //var imgedit = from img in db.Images
+            roomNew.EquipmentId = idlist;
+            db.SaveChanges();
+
+
+            //加入圖片
+            var imgedit = from i in db.ImageReferences
+                          where i.RoomId == roomId
+                          select i.ImageId;
+            List<int> IDlist = new List<int>();
+            IDlist = imgedit.ToList();
+            roomNew.imgId = IDlist;
 
             return View(roomNew);
         }
-        public IActionResult MemnerRoomDelete(int? roomId)
+        [HttpPost]
+        public IActionResult MemnerRoomEdit(CRoomNew roomedit)
+        {
+
+            int count = 0;
+            MingSuContext db = new MingSuContext();
+
+            //加入房源資訊
+            var roomData = db.Rooms.FirstOrDefault(r => r.RoomId == roomedit.RoomId);
+
+            roomData.RoomName = roomedit.RoomName;
+            roomData.RoomPrice = roomedit.RoomPrice;
+            roomData.RoomIntrodution = roomedit.RoomIntrodution;
+            roomData.RoomstatusId = roomedit.RoomstatusId;
+            roomData.Address = roomedit.Address;
+            roomData.Qty = roomedit.Qty;
+
+            //迴圈加入設備References
+            foreach (var Eitem in roomedit.EquipmentId)
+            {
+                EquipmentReference item = new EquipmentReference();
+                item.EquipmentId = Eitem;
+                item.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId;
+                db.EquipmentReferences.Add(item);
+            }
+
+            var ms = new MemoryStream();
+            foreach (var imgindex in roomedit.img)
+            {
+                Image img = new Image();
+                imgindex.CopyTo(ms);
+                img.Image1 = ms.ToArray();
+                db.Images.Add(img);
+            }
+
+            //迴圈加入ImageReferences
+            for (int i = 1; i <= roomedit.img.Count; i++)
+            {
+                ImageReference imgRef = new ImageReference();
+                imgRef.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId;
+                imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId - count + i;
+                db.ImageReferences.Add(imgRef);
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("MemnerRoomList");
+        }
+            public IActionResult MemnerRoomDelete(int? roomId)
         {
             MingSuContext db = new MingSuContext();
-            //var Room
+            var v = db.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+            v.RoomstatusId = 5;
+            db.SaveChanges();
 
-
-            return View();
+            return RedirectToAction("MemnerRoomList");
         }
 
+        public FileResult ShowPhoto(int imgId)
+        { 
+            MingSuContext db = new MingSuContext();
+            Image img = db.Images.FirstOrDefault(img =>img.ImageId == imgId);
+            byte[] content =img.Image1;
+            return File(content, "image/jpeg");
         }
+
+    }
 }
