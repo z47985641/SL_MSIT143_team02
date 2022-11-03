@@ -194,7 +194,7 @@ namespace PJ_MSIT143_team02.Controllers
             {
                 EquipmentReference item = new EquipmentReference();
                 item.EquipmentId = Eitem;
-                item.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId;
+                item.RoomId = roomedit.RoomId;
                 db.EquipmentReferences.Add(item);
             }
 
@@ -205,13 +205,14 @@ namespace PJ_MSIT143_team02.Controllers
                 imgindex.CopyTo(ms);
                 img.Image1 = ms.ToArray();
                 db.Images.Add(img);
+                count++;
             }
 
             //迴圈加入ImageReferences
             for (int i = 1; i <= roomedit.img.Count; i++)
             {
                 ImageReference imgRef = new ImageReference();
-                imgRef.RoomId = db.Rooms.OrderByDescending(i => i.RoomId).FirstOrDefault().RoomId;
+                imgRef.RoomId = roomedit.RoomId;
                 imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId - count + i;
                 db.ImageReferences.Add(imgRef);
             }
@@ -227,6 +228,18 @@ namespace PJ_MSIT143_team02.Controllers
             db.SaveChanges();
 
             return RedirectToAction("MemnerRoomList");
+        }
+        public IActionResult MemnerRoomPhotoDelete(int? ImageId)
+        {
+            MingSuContext db = new MingSuContext();
+            ImageReference imgRe = db.ImageReferences.FirstOrDefault(img => img.ImageId == ImageId);
+            Image img =  db.Images.FirstOrDefault(img => img.ImageId == ImageId);
+            db.ImageReferences.Remove(imgRe);
+            db.SaveChanges();
+            //db.Images.Remove(img);
+            //db.SaveChanges();
+
+            return NoContent();
         }
 
         public FileResult ShowPhoto(int imgId)
