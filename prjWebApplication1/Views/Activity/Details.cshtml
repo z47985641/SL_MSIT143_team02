@@ -1,6 +1,10 @@
 ﻿@model PJ_MSIT143_team02.Models.Activity
 
-@{ ViewData["Title"] = "Details"; }
+@{ 
+    ViewData["Title"] = "Details";
+    int count = 10;
+    int left = Model.ActivityCapacity - count;
+ }
 
 <link href="~/css/acti-and-disc.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
@@ -32,7 +36,7 @@
                             活動地點: @Html.DisplayFor(model => model.ActivityLocation)
                         </p>
                         <p class="col-sm-10 card-text">
-                            人數上限: @Html.DisplayFor(model => model.ActivityCapacity) 人
+                            剩餘人數 / 人數上限: @left / @Html.DisplayFor(model => model.ActivityCapacity) 人
                         </p>
                         <p class="col-sm-10 card-text">
                             活動價格: 新台幣 @Html.DisplayFor(model => model.ActivityPrice) 元
