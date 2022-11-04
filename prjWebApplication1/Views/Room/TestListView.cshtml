@@ -213,80 +213,80 @@
                         foreach (PJ_MSIT143_team02.Models.Room r in Model)
                         {
                             count++;
-                                <h2 class="d-sm-none d-block text-center mb-4">@r.RoomName<sup class="text-primary small">@r.RoomName</sup></h2>
-                                <div class="btn-group btn-group-lg d-flex justify-content-around mb-3 d-sm-none d-block">
-                                    <button type="button" class="btn border-right">
-                                        <i class="fas fa-align-left mr-4"></i>Filter
-                                    </button>
-                                    <button type="button" class="btn">
-                                        <i class="fas fa-align-left mr-4"></i>sort
-                                    </button>
-                                </div>
-                                <div class="mobile-bg-secondary">
-                                    <div class="card border-0 mb-sm-4 mb-2">
-                                        <div class="row no-gutters">
-
-                                            <div class="col-4" style="padding-top:25px;padding-left:15px">
-                                                <img src="@Url.Action("ShowPhoto","Room", new {roomId= r.RoomId })" style=" padding:5px; height:200px" />                                            </div>
-                                            <div class="col-8">
-                                                <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
-                                                    <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
-                                                        <small class="text-primary d-flex">
-                                                                            
-                                                            <span class="text-black-50 d-lg-block d-none"></span>
-                                                        </small>
-                                                        <ul class="list-unstyled d-flex align-items-center m-0">
-                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
-                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
-                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
-                                                            <li class="mr-1"><i class="fas fa-star"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <ul class="list-unstyled m-sm-0 m-1" style="padding-left:10px;">
-                                                        <li>
-                                                            <h3 class="card-title">@r.RoomName</h3>
-                                                        </li>
-                                                        <li>
-                                                            <p class="card-text small text-black-50">
-                                                            </p>
-                                                        </li>
-                                                    </ul>
-                                                    <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
-                                                        <li>
-                                                            <span class="badge badge-pill badge-info text-black mr-3" >
-                                                                @r.RoomIntrodution
-                                                            </span>
-                                                        </li>
-                                                        <li>
-                                                            <span class="badge badge-pill badge-info text-black-50">@r.Address</span>
-                                                        </li>
-                                                    </ul>
-                                                    <div class="money-block text-right d-flex flex-column">
-                                                        <small class="text-black-50 d-lg-block d-none">每晚價錢</small>
-                                                        <p class="h3 m-0" id="RoomPrice">@r.RoomPrice</p>
-                                                    </div>
-                                                    <!-- badge樣式沒有作用另外寫css的 -->
-                                                </div>
-                                                <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
-                                                    <span>
-                                                        <a  class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
-                                                            <img src="~/Image/heart.png" style="width:45px ;height:45px" />
-                                                        </a>
-                                                    </span>
+                                            <h2 class="d-sm-none d-block text-center mb-4">@r.RoomName<sup class="text-primary small">@r.RoomName</sup></h2>
+                                            <div class="btn-group btn-group-lg d-flex justify-content-around mb-3 d-sm-none d-block">
+                                                <button type="button" class="btn border-right">
+                                                    <i class="fas fa-align-left mr-4"></i>Filter
                                                 </button>
-                                                <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
-                                                    <span>
-                                                        <a href="@Url.Action("Details", new { id = r.RoomId})" style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
-                                                            立即預訂
-                                                        </a>
-                                                    </span>
+                                                <button type="button" class="btn">
+                                                    <i class="fas fa-align-left mr-4"></i>sort
                                                 </button>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="dropdown-divider d-lg-block d-none"></div>
-                                </div>
-                                @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
+                                            <div class="mobile-bg-secondary">
+                                                <div class="card border-0 mb-sm-4 mb-2">
+                                                    <div class="row no-gutters">
+
+                                                        <div class="col-4" style="padding-top:25px;padding-left:11px;padding-bottom:25px">
+                                                            <img src="@Url.Action("ShowPhoto","Room", new {roomId= r.RoomId })" style=" padding:5px; height:200px" />                                            </div>
+                                                        <div class="col-8">
+                                                            <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
+                                                                <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
+                                                                    <small class="text-primary d-flex">
+                                                                                        
+                                                                        <span class="text-black-50 d-lg-block d-none"></span>
+                                                                    </small>
+                                                                    <ul class="list-unstyled d-flex align-items-center m-0">
+                                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <ul class="list-unstyled m-sm-0 m-1" style="padding-left:10px;">
+                                                                    <li>
+                                                                        <h3 class="card-title">@r.RoomName</h3>
+                                                                    </li>
+                                                                    <li>
+                                                                        <p class="card-text small text-black-50">
+                                                                        </p>
+                                                                    </li>
+                                                                </ul>
+                                                                <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
+                                                                    <li>
+                                                                        <span class="badge badge-pill badge-info text-black mr-3" >
+                                                                            @r.RoomIntrodution
+                                                                        </span>
+                                                                    </li>
+                                                                    <li>
+                                                                        <span class="badge badge-pill badge-info text-black mr-3">@r.Address</span>
+                                                                    </li>
+                                                                </ul>
+                                                                <div class="money-block text-right d-flex flex-column">
+                                                                    <small class="text-black-50 d-lg-block d-none">每晚價錢</small>
+                                                                    <p class="h3 m-0" id="RoomPrice">@r.RoomPrice</p>
+                                                                </div>
+                                                                <!-- badge樣式沒有作用另外寫css的 -->
+                                                            </div>
+                                                            <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
+                                                                <span>
+                                                                    <a  class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                                                        <img src="~/Image/heart.png" style="width:45px ;height:45px" />
+                                                                    </a>
+                                                                </span>
+                                                            </button>
+                                                            <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
+                                                                <span>
+                                                                    <a href="@Url.Action("Details", new { id = r.RoomId})" style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
+                                                                        立即預訂
+                                                                    </a>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="dropdown-divider d-lg-block d-none"></div>
+                                            </div>
+                                            @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
                         };
                     }
                 </div>
@@ -335,7 +335,7 @@
         let min_price =1000;
         let max_price = 100000;
         $(document).ready(function () {
-            showAllItems();
+            //showAllItems();
         });
         $('#min-price').on("change mousemove", function () {
             min_price = parseInt($('#min-price').val());
