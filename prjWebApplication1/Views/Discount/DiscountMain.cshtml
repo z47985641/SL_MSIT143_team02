@@ -27,9 +27,18 @@
                                 <h5 class="card-title">
                                     @Html.DisplayFor(modelItem => item.DiscountName)
                                 </h5>
-                                @*<p class="card-text">
-                                    @Html.DisplayFor(modelItem => item.DiscountInfo)
-                                </p>*@
+                                    @if (string.IsNullOrEmpty(item.Coupon))
+                                    {
+                                        <p class="card-text">
+                                            直接使用信用卡結帳享此優惠
+                                        </p>
+                                    }
+                                    else
+                                    {
+                                        <p class="card-text">
+                                            優惠碼: @Html.DisplayFor(modelItem => item.Coupon)
+                                        </p>
+                                    }
                                 <p class="card-text" style="text-align:right">
                                     @Html.ActionLink("查看更多", "Details", new { id = item.RoomDiscountId }, new { @class = "btn btn-secondary" })
                                 </p>

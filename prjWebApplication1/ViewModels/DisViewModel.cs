@@ -31,5 +31,10 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return (decimal)_discount.DiscountValue; }
             set { _discount.DiscountValue = value; }
         }
+        public string Coupon
+        {
+            get { return _discount.Coupon; }
+            set { _discount.Coupon = value; }
+        }
     }
 }
