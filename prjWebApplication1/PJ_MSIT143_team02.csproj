@@ -9,6 +9,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="00_DataBase\DataBase_FinHotel_20221014.bak" />
+    <None Remove="00_DataBase\DataBase_FinHotel_20221019.bak" />
+    <None Remove="00_DataBase\DataBase_FinHotel_20221021.bak" />
+    <None Remove="00_DataBase\DataBase_FinHotel_20221027.bak" />
+    <None Remove="00_DataBase\DataBase_FinHotel_20221028.bak" />
+    <None Remove="00_DataBase\DataBase_FinHotel_20221028NEW.bak" />
+    <None Remove="00_DataBase\DataBase_FinHotel_2022102NEW.bak" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="Views\CheckOut\Checkout.cshtml" />
     <None Include="Views\CheckOut\Details.cshtml" />
     <None Include="Views\CheckOut\Index.cshtml" />

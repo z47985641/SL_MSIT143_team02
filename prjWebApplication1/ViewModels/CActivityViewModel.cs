@@ -33,7 +33,7 @@ namespace PJ_MSIT143_team02.ViewModel
             get { return _activity.ActivityDate; }
             set { _activity.ActivityDate = value; }
         }
-        public int? ActivityCapacity
+        public int ActivityCapacity
         {
             get { return _activity.ActivityCapacity; }
             set { _activity.ActivityCapacity = value; }
