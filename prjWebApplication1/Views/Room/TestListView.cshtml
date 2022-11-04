@@ -93,13 +93,15 @@
 
                         <h3 class="mb-3">每晚預算</h3>
                         <form class="mb-3" id="price-range-form">
-                            <label for="min-price" class="form-label">下限: </label>
-                            <span id="min-price-txt">$1000</span><br />
-                            <input type="range" class="form-range" min="0" max="99999" id="min-price" step="1" value="0">
+                            預算區間:<span id="spanOutput"></span>
+                            <br /><br />
+                            <div id="slider"></div>
                             <br />
-                            <label for="max-price" class="form-label">上限: </label>
-                            <span id="max-price-txt">100000</span><br />
-                            <input type="range" class="form-range" min="1" max="100000" id="max-price" step="1" value="100">
+                            <label for="txtMinAge">下限:</label>
+                            <input type="text" id="txtMinAge" />
+                            <br /><br />
+                            <label for="txtMaxAge">上限:</label>
+                            <input type="text" id="txtMaxAge" />
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -332,38 +334,29 @@
     </script>
 
     <script>
-        let min_price =1000;
-        let max_price = 100000;
         $(document).ready(function () {
-            showAllItems();
+            var outputSpan = $('#spanOutput');
+            var sliderDiv = $('#slider');
+
+            sliderDiv.slider({
+                range: true,
+                min: 10,
+                max: 1000000,
+                values: [10, 1000000],
+                slide: function (event, ui) {
+                    outputSpan.html(ui.values[0] + ' - ' + ui.values[1]);
+                },
+                stop: function (event, ui) {
+                    $('#txtMinAge').val(ui.values[0]);
+                    $('#txtMaxAge').val(ui.values[1]);
+                }
+            });
+
+            outputSpan.html(sliderDiv.slider('values', 0) + ' - '
+                + sliderDiv.slider('values', 1));
+            $('#txtMinAge').val(sliderDiv.slider('values', 0));
+            $('#txtMaxAge').val(sliderDiv.slider('values', 1));
         });
-        $('#min-price').on("change mousemove", function () {
-            min_price = parseInt($('#min-price').val());
-            $('#min-price-txt').text('$' + min_price);
-            showItemsFiltered();
-        });
-        $('#max-price').on("change mousemove", function () {
-            max_price = parseInt($('#max-price').val());
-            $('#max-price-txt').text('$' + max_price);
-            showItemsFiltered();
-        });
-
-        let room_items = [
-            {
-                "RoomId": $(".RoomId").html(),
-                "RoomIntrodution": $(".RoomIntrodution").html(),
-                "RoomIPrice": $(".RoomIPrice").html(),
-                "Address": $(".Address").html(),
-            //    "thumbnail":<img src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" />,
-            }
-
-        ]
-
-
-
-
-
-
 
     </script>
 }
