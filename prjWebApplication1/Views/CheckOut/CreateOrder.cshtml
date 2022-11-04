@@ -91,7 +91,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value:'@Model.房源及會員.FirstOrDefault().小計'
+                            value:'@Model.房源及會員.FirstOrDefault().小計'   //訂單ㄉ金額
                         }
                     }]
                 });
@@ -118,7 +118,7 @@
                         value: @sum.ToString("###,###,##0"),
                         currency_code: 'TWD',
                         breakdown: {
-                            item_total: { value: @sum.ToString("###,###,##0"), currency_code: 'TWD' }     //訂單金額
+                            item_total: { value: @sum.ToString("###,###,##0"), currency_code: 'TWD' }     //訂單ㄉ金額
                         }
                     },
                     invoice_id: 'muesli_invoice_id',
