@@ -227,8 +227,7 @@
                                         <div class="row no-gutters">
 
                                             <div class="col-4" style="padding-top:25px;padding-left:15px">
-                                                <img class="img1" src="~/assets/img2/steven-ungermann-aRT5UCf2MYY-unsplash.jpg" alt="#">  @*如果有成功可以上傳照片 就修改這段，改完再註解拿掉~*@
-                                            </div>
+                                                <img src="@Url.Action("ShowPhoto","Room", new {roomId= r.RoomId })" style=" padding:5px; height:200px" />                                            </div>
                                             <div class="col-8">
                                                 <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
                                                     <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
