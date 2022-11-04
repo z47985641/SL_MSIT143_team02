@@ -23,9 +23,9 @@
                     int count = 10;
                     int left = 0;
                     if (item.ActivityStatus == "開放報名") { left = item.ActivityCapacity - count; }
-                    //else if (item.ActivityStatus == "額滿" || item.ActivityStatus == "已結束") { left = 0; }
+                    else if (item.ActivityStatus == "額滿" || item.ActivityStatus == "已結束") { left = 0; }
                     else if (item.ActivityStatus == "未開放報名") { left = item.ActivityCapacity; }
-                    //else { left = 0; }
+                    else { left = 0; }
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="room-item card">
                         @*<img src=""
