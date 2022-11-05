@@ -69,126 +69,146 @@ namespace PJ_MSIT143_team02.Controllers
             return View(cAlls);
         }
 
-        public IActionResult TestListView(CKeywordViewModel model)
+        public IActionResult TestListView(/*CKeywordViewModel model*/)
         {
             DateTime thisDate = new DateTime(0001, 1, 1);
             MingSuContext db = new MingSuContext();
+
+            CKeywordViewModel ck = new CKeywordViewModel();
+            var Equipment = db.Equipment;
+            var EquipmentReference = db.EquipmentReferences;
+            var Room = db.Rooms;
+            ck.Equipment = Equipment;  //EquipmentID
+            ck.EquipmentReference = EquipmentReference;  //EquipmentID RoomID
+            ck.Room = Room; //RoomID
+
+            IEnumerable<Equipment> eq = null;
+            if (string.IsNullOrEmpty(ck.txtKeyword))
+                eq = (from r in db.Equipment
+                     join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
+                     join k in db.Rooms on i.RoomId equals k.RoomId
+                     select r).ToList();
+
+
+
             IEnumerable<Room> datas = null;
-            if (string.IsNullOrEmpty(model.txtKeyword)) {
-                if (0.Equals(model.txtQty)
-                    && (thisDate.Equals(model.mydatein)
-                    && thisDate.Equals(model.mydateout)))
-                    datas = from r in db.Rooms
-                            select r;
-                else if (thisDate.Equals(model.mydatein)
-                    && thisDate.Equals(model.mydateout))
-                    datas = from r in db.Rooms
-                            where r.Qty.Equals(model.txtQty)
-                            select r;
-                else if (0.Equals(model.txtQty) && thisDate.Equals(model.mydateout))
-                    datas = from r in db.Rooms
+            if (string.IsNullOrEmpty(ck.txtKeyword)) {
+                if (0.Equals(ck.txtQty)
+                    && (thisDate.Equals(ck.mydatein)
+                    && thisDate.Equals(ck.mydateout)))
+                    datas = (from r in db.Rooms
+                            select r).ToList();
+                else if (thisDate.Equals(ck.mydatein)
+                    && thisDate.Equals(ck.mydateout))
+                    datas = (from r in db.Rooms
+                            where r.Qty.Equals(ck.txtQty)
+                            select r).ToList();
+                else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydateout))
+                    datas =(from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where s.OrderStartDate != model.mydatein
-                            select r;
-                else if (0.Equals(model.txtQty) && thisDate.Equals(model.mydatein))
-                    datas = from r in db.Rooms
+                            where s.OrderStartDate != ck.mydatein
+                            select r).ToList();
+                else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydatein))
+                    datas = (from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where s.OrderEndDate != model.mydateout
-                            select r;
-                else if (0.Equals(model.txtQty))
-                    datas = from r in db.Rooms
+                            where s.OrderEndDate != ck.mydateout
+                            select r).ToList();
+                else if (0.Equals(ck.txtQty))
+                    datas = (from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where s.OrderStartDate != model.mydatein
-                            && s.OrderEndDate != model.mydateout
-                            select r;
+                            where s.OrderStartDate != ck.mydatein
+                            && s.OrderEndDate != ck.mydateout
+                            select r).ToList();
             }
             else {
-                if (0.Equals(model.txtQty)
-                    && thisDate.Equals(model.mydatein)
-                    && thisDate.Equals(model.mydateout))
+                if (0.Equals(ck.txtQty)
+                    && thisDate.Equals(ck.mydatein)
+                    && thisDate.Equals(ck.mydateout))
                     datas = from r in db.Rooms
-                            where r.RoomName.Contains(model.txtKeyword)
-                            || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                            || r.RoomIntrodution.Contains(model.txtKeyword)
-                            || r.MemberId.ToString().Contains(model.txtKeyword)
-                            || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                            || r.Address.Contains(model.txtKeyword)
+                            where r.RoomName.Contains(ck.txtKeyword)
+                            || r.RoomPrice.ToString().Contains(ck.txtKeyword)
+                            || r.RoomIntrodution.Contains(ck.txtKeyword)
+                            || r.MemberId.ToString().Contains(ck.txtKeyword)
+                            || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
+                            || r.Address.Contains(ck.txtKeyword)
                             select r;
-                else if (thisDate.Equals(model.mydatein)
-                    && thisDate.Equals(model.mydateout))
+                else if (thisDate.Equals(ck.mydatein)
+                    && thisDate.Equals(ck.mydateout))
                     datas = from r in db.Rooms
-                            where r.RoomName.Contains(model.txtKeyword)
-                            || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                            || r.RoomIntrodution.Contains(model.txtKeyword)
-                            || r.MemberId.ToString().Contains(model.txtKeyword)
-                            || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                            || r.Address.Contains(model.txtKeyword)
-                            || r.Qty.Equals(model.txtQty)
+                            where r.RoomName.Contains(ck.txtKeyword)
+                            || r.RoomPrice.ToString().Contains(ck.txtKeyword)
+                            || r.RoomIntrodution.Contains(ck.txtKeyword)
+                            || r.MemberId.ToString().Contains(ck.txtKeyword)
+                            || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
+                            || r.Address.Contains(ck.txtKeyword)
+                            || r.Qty.Equals(ck.txtQty)
                             select r;
-                else if (0.Equals(model.txtQty) && thisDate.Equals(model.mydateout))
+                else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydateout))
                     datas = from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where r.RoomName.Contains(model.txtKeyword)
-                            || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                            || r.RoomIntrodution.Contains(model.txtKeyword)
-                            || r.MemberId.ToString().Contains(model.txtKeyword)
-                            || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                            || r.Address.Contains(model.txtKeyword)
-                            || s.OrderEndDate != model.mydatein
+                            where r.RoomName.Contains(ck.txtKeyword)
+                            || r.RoomPrice.ToString().Contains(ck.txtKeyword)
+                            || r.RoomIntrodution.Contains(ck.txtKeyword)
+                            || r.MemberId.ToString().Contains(ck.txtKeyword)
+                            || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
+                            || r.Address.Contains(ck.txtKeyword)
+                            || s.OrderEndDate != ck.mydatein
                             select r;
-                else if (0.Equals(model.txtQty) && thisDate.Equals(model.mydatein))
+                else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydatein))
                     datas = from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where r.RoomName.Contains(model.txtKeyword)
-                            || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                            || r.RoomIntrodution.Contains(model.txtKeyword)
-                            || r.MemberId.ToString().Contains(model.txtKeyword)
-                            || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                            || r.Address.Contains(model.txtKeyword)
-                            || s.OrderEndDate != model.mydateout
+                            where r.RoomName.Contains(ck.txtKeyword)
+                            || r.RoomPrice.ToString().Contains(ck.txtKeyword)
+                            || r.RoomIntrodution.Contains(ck.txtKeyword)
+                            || r.MemberId.ToString().Contains(ck.txtKeyword)
+                            || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
+                            || r.Address.Contains(ck.txtKeyword)
+                            || s.OrderEndDate != ck.mydateout
                             select r;
-                else if (0.Equals(model.txtQty))
+                else if (0.Equals(ck.txtQty))
                     datas = from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where r.RoomName.Contains(model.txtKeyword)
-                            || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                            || r.RoomIntrodution.Contains(model.txtKeyword)
-                            || r.MemberId.ToString().Contains(model.txtKeyword)
-                            || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                            || r.Address.Contains(model.txtKeyword)
-                            || (s.OrderStartDate != model.mydatein
-                            && s.OrderEndDate != model.mydateout)
+                            where r.RoomName.Contains(ck.txtKeyword)
+                            || r.RoomPrice.ToString().Contains(ck.txtKeyword)
+                            || r.RoomIntrodution.Contains(ck.txtKeyword)
+                            || r.MemberId.ToString().Contains(ck.txtKeyword)
+                            || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
+                            || r.Address.Contains(ck.txtKeyword)
+                            || (s.OrderStartDate != ck.mydatein
+                            && s.OrderEndDate != ck.mydateout)
                             select r;
                 else
                     datas = from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
-                            where r.RoomName.Contains(model.txtKeyword)
-                            || r.RoomPrice.ToString().Contains(model.txtKeyword)
-                            || r.RoomIntrodution.Contains(model.txtKeyword)
-                            || r.MemberId.ToString().Contains(model.txtKeyword)
-                            || r.RoomstatusId.ToString().Contains(model.txtKeyword)
-                            || r.Address.Contains(model.txtKeyword)
-                            || r.Qty.Equals(model.txtQty)
-                            || s.OrderStartDate != model.mydatein
-                            || s.OrderEndDate != model.mydateout
+                            where r.RoomName.Contains(ck.txtKeyword)
+                            || r.RoomPrice.ToString().Contains(ck.txtKeyword)
+                            || r.RoomIntrodution.Contains(ck.txtKeyword)
+                            || r.MemberId.ToString().Contains(ck.txtKeyword)
+                            || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
+                            || r.Address.Contains(ck.txtKeyword)
+                            || r.Qty.Equals(ck.txtQty)
+                            || s.OrderStartDate != ck.mydatein
+                            || s.OrderEndDate != ck.mydateout
                             select r;
             }
             
-            return View(datas.Where(e => e.RoomstatusId != 5));
+            //return View("TestListView", datas.Where(e => e.RoomstatusId != 5));
+            return View("TestListView", ck);
+
         }
         public IActionResult AddRoom(CKeywordViewModel model)
         {
