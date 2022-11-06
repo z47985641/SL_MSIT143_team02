@@ -61,41 +61,41 @@
                                         </label>
                                     </div>
                                     @*<div class="form-check mb-2">
-                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="free-wi-fi">
-                    <label class="form-check-label" for="free-wi-fi">
-                        免費 Wi-Fi
-                    </label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                    <label class="form-check-label" for="swimming-pool">
-                        空調
-                    </label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                    <label class="form-check-label" for="swimming-pool">
-                        冰箱
-                    </label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                    <label class="form-check-label" for="swimming-pool">
-                        浴缸
-                    </label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                    <label class="form-check-label" for="swimming-pool">
-                        陽台/露臺
-                    </label>
-                </div>
-                <div class="form-check mb-2">
-                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                    <label class="form-check-label" for="swimming-pool">
-                        暖氣
-                    </label>
-                </div>*@ 
+                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="free-wi-fi">
+                                            <label class="form-check-label" for="free-wi-fi">
+                                                免費 Wi-Fi
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                            <label class="form-check-label" for="swimming-pool">
+                                                空調
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                            <label class="form-check-label" for="swimming-pool">
+                                                冰箱
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                            <label class="form-check-label" for="swimming-pool">
+                                                浴缸
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                            <label class="form-check-label" for="swimming-pool">
+                                                陽台/露臺
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
+                                            <label class="form-check-label" for="swimming-pool">
+                                                暖氣
+                                            </label>
+                                        </div>*@
                                 };
                             }
                         </form>
@@ -308,6 +308,9 @@
 
         </div>
     </div>
+    <div>
+        <input type="button" id="ok" value="確定">
+    </div>
 </div>
 
 
@@ -370,5 +373,22 @@
         });
 
     </script>
+
+    <script>
+           function cartcar() {
+            var shopUrl = "@Url.Action("TestListView", "Room")";
+            $.ajax({
+                type: "GET",
+                url: shopUrl
+            }).done(function (result) {
+                $("#TestListView").html(result);
+            }).fail(function (e) {
+            });
+        }
+
+
+
+    </script>
+
 }
 
