@@ -39,7 +39,7 @@ namespace PJ_MSIT143_team02.ViewModels
         public int ActivityCapacity { get; set; }
 
         //public string ActivityLocation { get; set; }
-        public decimal ActivityPrice { get; set; }
+        public decimal? ActivityPrice { get; set; }
 
         public Activity Activity { get; set; }
 

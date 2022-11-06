@@ -124,6 +124,19 @@ namespace PJ_MSIT143_team02.Controllers
                 Room = try01,
                 Activity = actproduct
             };
+            //CRoomMemberViewModel crv = new CRoomMemberViewModel();
+            //crv.房源及會員 = (from c in db.Activities where c.ActivityId == CartItems.ActivityId
+            //             select new 房源及會員
+            //             {
+            //                 ActivityId = c.ActivityId,
+            //                 ActivityName = c.ActivityName,
+            //                 count = CartItems.count,
+            //                 price = (decimal)c.ActivityPrice,
+            //                 Room = CartItems.Room,
+            //                 Activity = CartItems.Activity
+            //             }).ToList();
+            //return View(crv);
+
 
 
             if (SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart") == null)
