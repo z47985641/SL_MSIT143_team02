@@ -11,38 +11,49 @@
     <div class="col-md-4">
         <form asp-action="MemnerRoomEdit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input type="hidden" name="RoomId" value="@Model.RoomId" />
-                <label asp-for="RoomName" class="control-label">房間名稱</label>
-                <input asp-for="RoomName" class="form-control" />
-                <span asp-validation-for="RoomName" class="text-danger"></span>
+            <div class="form-group row">
+                <div class=" col-md-4">
+                    <input type="hidden" name="RoomId" value="@Model.RoomId" />
+                    <label asp-for="RoomName" class="control-label">房間名稱</label>
+                    <input asp-for="RoomName" class="form-control" />
+                    <span asp-validation-for="RoomName" class="text-danger"></span>
+                </div>
+                <div class=" col-md-4">
+                    <label asp-for="Qty" class="control-label">數量</label>
+                    <input asp-for="Qty" class="form-control" />
+                    <span asp-validation-for="Qty" class="text-danger"></span>
+                </div>
+                <div class=" col-md-4">
+                    <label asp-for="RoomPrice" class="control-label">價格</label>
+                    <input asp-for="RoomPrice" class="form-control" />
+                    <span asp-validation-for="RoomPrice" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RoomPrice" class="control-label">價格</label>
-                <input asp-for="RoomPrice" class="form-control" />
-                <span asp-validation-for="RoomPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomIntrodution" class="control-label">介紹</label>
-                <input asp-for="RoomIntrodution" class="form-control" />
-                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
-            </div>
-
             <div class="form-group">
                 <label asp-for="Address" class="control-label">地址</label>
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Qty" class="control-label">數量</label>
-                <input asp-for="Qty" class="form-control" />
-                <span asp-validation-for="Qty" class="text-danger"></span>
+                <label asp-for="RoomIntrodution" class="control-label">介紹</label>
+                <textarea asp-for="RoomIntrodution" class="form-control"></textarea>
+                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group row">
                 <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
-                <input asp-for="RoomstatusId" class="form-control" />
                 <span asp-validation-for="RoomstatusId" class="text-danger"></span>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4" checked>
+                        <label class="form-check-label" for="4">未上架</label>
+                    </li>
+                    <li class="list-group-item">
+                        <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2">
+                        <label class="form-check-label" for="2">已上架</label>
+                    </li>
+                </ul>
             </div>
+
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 基礎設施 </p>
                 <div class="col-md-1"></div>
@@ -52,7 +63,7 @@
                         int id = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
-                            if (Model.EquipmentId.Count == 0&& @Model.EquipmentCatergoryIdlist[id] == 1)
+                            if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id] == 1)
                             {
                                 <div style="float:left " class="col-md-6">
                                     <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
@@ -180,13 +191,13 @@
                                 count++;
                             }
                             @*if (key == 0)
-                {
-                    <div style="float:left " class="col-md-6">
-                        <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
-                        <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
-                    </div>
-                    break;
-                }*@
+                        {
+                            <div style="float:left " class="col-md-6">
+                                <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
+                                <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
+                            </div>
+                            break;
+                        }*@
                             id3++;
                         }
 
@@ -231,10 +242,21 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
+<script>
             $('#img_div1').on('click', function () {
             $('img_div').attr('hidden', 'hidden')
-        })
-    </script>
+            })
+    $("list-group").load(function () {
+
+    })
+    $("list-group").load
+            if (@Model.RoomstatusId == 4)
+            {
+                    $("4").attr("checked", "checked")
+            }
+
+
+
+</script>
 
 }
