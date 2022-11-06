@@ -421,48 +421,22 @@
 
         //-----------------------------------------------------------------------------
 
-        let eqq = [];
-        $("#eq").click(function (event) {
-            SortOrder = 1;
-            let target = $(event.target);
-            let ischecked = target.prop('checked');
-            let targetvalue = target.siblings("input").val();
+ //選設備
+        $("#eq").click(function () {
+            var shopUrl = "@Url.Action("forEquipment", "Room")" + "/" + $(this).attr("value")+"/0";
+            $.ajax({
+                type: "GET",
+                url: shopUrl
 
-            $(".active").removeClass("active");
-            sort1.classList.add("active");
-            if (menu.classList.contains("active")) {
-                menu.textContent = "價格排序";
-            }
+            }).done(function (result) {
+                $("TestListView").html(result);
+                alert(resutlt);
+                bindshop();
+            }).fail(function (e) {
+                alert(e.responseText);
+            });
 
-            if (ischecked) {
-                eqq.push(targetvalue);
-                CallgetJSON();
-            }
-            else {
-                let targetindex = eqq.indexOf(targetvalue);
-                if (targetindex > -1) {
-                    eqq.splice(targetindex, 1);
-                }
-                CallgetJSON();
-            }
-        });
-        jQuery.postJSON = function (url, data, callback) {
-            jQuery.post(url, data, callback, "json");
-        };
-        //function CallgetJSON() {
-        //    $.postJSON(`/Room/SortOrder`, { BigTypeId: BigtypeId, filter: filter, SortOrder: SortOrder, priceMin: priceMin, priceMax: priceMax }, function (data) {
-        //        $("#OriginShowItem").html("");
-        //        if (data.length > 0) {
-        //            //console.log(data);
-        //            $("#OriginShowItem").append(Items(data));
-        //            //ItemsComponent(data);
-        //        }
-        //        else {
-        //            $("#OriginShowItem").html("<div>暫待新增商品</div>");
-        //        }
-        //    })
-        //}
-
+              });
 
 
 

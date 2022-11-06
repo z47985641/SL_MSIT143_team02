@@ -211,22 +211,34 @@ namespace PJ_MSIT143_team02.Controllers
 
         }
 
-        //public IActionResult foreq(string e設備)
-        //{
-        //    MingSuContext db = new MingSuContext();
+        public ActionResult forEquipment(int? RoomId, int? EquipmentID)
+        {           
+            //eq = (from r in db.Equipment
+            //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
+            //      join k in db.Rooms on i.RoomId equals k.RoomId
+            //      select r).ToList();
 
-        //    if (e設備 == null)
-        //    {
-        //        var q = from p in db.Equipment
-        //                select p;
-        //        return ViewComponent("TestListView", q.ToList());
-        //    }
-        //    string[] aaaa = e設備.Split(",");
+            IQueryable<EquipmentReference> eq = null;
+            if (RoomId == 0)
+            {
+                eq = from s in db.EquipmentReferences
+                         where s.EquipmentId == EquipmentID
+                         select s;
+                ViewBag.name = (eq.ToList().Count() != 0) ? "設備>>>>>" + eq.FirstOrDefault().Room.RoomName : "查無此設備";
+            }
+            else if (EquipmentID == 0)
+            {
+                eq = from s in db.EquipmentReferences
+                     where s.RoomId == RoomId
+                           select s;
+                ViewBag.name = (eq.ToList().Count() != 0) ? "商品>>>>>" + eq.FirstOrDefault().Room.RoomName : "查無此商品";
+            }
+            CKeywordViewModel ck = new CKeywordViewModel();
+            ck.EquipmentReference = eq;
+            return PartialView("forEquipment", ck);
+        }
 
-        //    var pp = db.Equipment.Where(c => aaaa.Contains(c.EquipmentReferences)).Select(bb => bb).ToList();
-        //    return ViewComponent("TestListView", pp);
 
-        //}
 
 
         public IActionResult AddRoom(CKeywordViewModel model)
