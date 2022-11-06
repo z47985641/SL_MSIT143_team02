@@ -82,16 +82,25 @@ namespace PJ_MSIT143_team02.Controllers
             ck.EquipmentReference = EquipmentReference;  //EquipmentID RoomID
             ck.Room = Room; //RoomID
 
-            IEnumerable<Equipment> eq = null;
+            //IEnumerable<Equipment> eq = null;
+            //if (string.IsNullOrEmpty(ck.txtKeyword))
+            //    eq = (from r in db.Equipment
+            //         join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
+            //         join k in db.Rooms on i.RoomId equals k.RoomId
+            //         select r).ToList();
+            IEnumerable<EquipmentReference> eqr = null;
             if (string.IsNullOrEmpty(ck.txtKeyword))
-                eq = (from r in db.Equipment
-                     join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
-                     join k in db.Rooms on i.RoomId equals k.RoomId
-                     select r).ToList();
+                eqr = (from r in db.EquipmentReferences
+                       join i in db.Equipment on r.EquipmentId equals i.EquipmentId
+                       join k in db.Rooms on r.RoomId equals k.RoomId
+                       select r).ToList();
 
 
 
-            IEnumerable<Room> datas = null;
+
+
+
+                IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(ck.txtKeyword)) {
                 if (0.Equals(ck.txtQty)
                     && (thisDate.Equals(ck.mydatein)
@@ -211,13 +220,17 @@ namespace PJ_MSIT143_team02.Controllers
 
         }
 
-        public ActionResult forEquipment(int? RoomId, int? EquipmentID)
-        {           
+
+        [HttpGet]
+        public ActionResult forEquipment(string Equipment)
+        {
+            int EquipmentID=0;
+            EquipmentID= int.Parse(Equipment) ;
             //eq = (from r in db.Equipment
             //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
             //      join k in db.Rooms on i.RoomId equals k.RoomId
             //      select r).ToList();
-
+            int RoomId=0;
             IQueryable<EquipmentReference> eq = null;
             if (RoomId == 0)
             {
@@ -231,11 +244,15 @@ namespace PJ_MSIT143_team02.Controllers
                 eq = from s in db.EquipmentReferences
                      where s.RoomId == RoomId
                            select s;
-                ViewBag.name = (eq.ToList().Count() != 0) ? "商品>>>>>" + eq.FirstOrDefault().Room.RoomName : "查無此商品";
+                ViewBag.name = (eq.ToList().Count() != 0) ? "設備>>>>>" + eq.FirstOrDefault().Room.RoomName : "查無此商品";
             }
             CKeywordViewModel ck = new CKeywordViewModel();
             ck.EquipmentReference = eq;
             return PartialView("forEquipment", ck);
+
+
+
+
         }
 
 

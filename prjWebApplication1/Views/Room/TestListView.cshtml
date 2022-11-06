@@ -55,7 +55,7 @@
                                 {
                                     count++;
                                     <div class="form-check mb-2" id="dxbox">
-                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="eq">
+                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="calc(@r.EquipmentId);">
                                         <label class="form-check-label" for="@r.EquipmentId">
                                             @r.EquipmentName
                                         </label>
@@ -422,7 +422,7 @@
         //-----------------------------------------------------------------------------
 
  //選設備
-        $("#eq").click(function () {
+        @*$("#eq").click(function () {
             var shopUrl = "@Url.Action("forEquipment", "Room")" + "/" + $(this).attr("value")+"/0";
             $.ajax({
                 type: "GET",
@@ -436,9 +436,22 @@
                 alert(e.responseText);
             });
 
-              });
+              });*@
 
+        function calc(eqID) {
+            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
+            $.ajax({
+                type: "GET",
+                url: shopUrl,
+            }).done(function (result) {
+                $("TestListView").html(result);
+                alert(resutlt);
+                bindshop();
+            }).fail(function (e) {
+                alert(e.responseText);
+            });
 
+        }
 
     </script>
 
