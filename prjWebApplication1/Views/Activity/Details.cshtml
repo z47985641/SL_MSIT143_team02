@@ -139,7 +139,7 @@
         });
         $("#actplus").click(function () {
             var i = Number($("#actnum").val());
-            if(i < @Html.DisplayFor(model => model.ActivityCapacity))
+            if(i < @left)
                 i += 1;
             $("#actnum").val(i);
         });

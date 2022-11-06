@@ -36,10 +36,10 @@ namespace PJ_MSIT143_team02.ViewModels
         public string ActivityName { get; set; }
 
         //public DateTime? ActivityDate { get; set; }
-        public int? ActivityCapacity { get; set; }
+        public int ActivityCapacity { get; set; }
 
         //public string ActivityLocation { get; set; }
-        //public decimal ActivityPrice { get; set; }
+        public decimal ActivityPrice { get; set; }
 
         public Activity Activity { get; set; }
 
