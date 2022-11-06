@@ -255,5 +255,26 @@ namespace PJ_MSIT143_team02.Controllers
             return File(content, "image/jpeg");
         }
 
-    }
+        public IActionResult OrderDetailList()
+        {
+            MingSuContext db = new MingSuContext();
+            IEnumerable<OrderDetail> orderDetail = null;
+            IEnumerable<Order> order = (from o in db.Orders
+                                       where o.MemberId == HttpContext.Session.GetInt32("MemberID")
+                                       select o).ToList();
+            foreach (var item in order)
+            {
+                orderDetail = from o in db.OrderDetails
+                              where o.OrderId == item.OrderId
+                              select o;
+            }
+            COrderdetailViewModel vb = new COrderdetailViewModel();
+            vb.order = order;
+            vb.orderdetail = orderDetail;
+
+            return View(vb);
+        }
+       
+
+        }
 }
