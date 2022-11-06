@@ -258,7 +258,8 @@ namespace PJ_MSIT143_team02.Controllers
             ImageReference imgref = db.ImageReferences.FirstOrDefault(img => img.RoomId == roomId);
             if (imgref == null)
             {
-                content = null;
+                Image img = db.Images.FirstOrDefault(img => img.ImageId == 102);
+                content = img.Image1;
             }
             else
             {
