@@ -69,7 +69,7 @@ namespace PJ_MSIT143_team02.Controllers
             return View(cAlls);
         }
 
-        public IActionResult TestListView(/*CKeywordViewModel model*/)
+        public IActionResult TestListView(/*CKeywordViewModel model*/int number)
         {
             DateTime thisDate = new DateTime(0001, 1, 1);
             MingSuContext db = new MingSuContext();
@@ -210,6 +210,25 @@ namespace PJ_MSIT143_team02.Controllers
             return View("TestListView", ck);
 
         }
+
+        //public IActionResult foreq(string e設備)
+        //{
+        //    MingSuContext db = new MingSuContext();
+
+        //    if (e設備 == null)
+        //    {
+        //        var q = from p in db.Equipment
+        //                select p;
+        //        return ViewComponent("TestListView", q.ToList());
+        //    }
+        //    string[] aaaa = e設備.Split(",");
+
+        //    var pp = db.Equipment.Where(c => aaaa.Contains(c.EquipmentReferences)).Select(bb => bb).ToList();
+        //    return ViewComponent("TestListView", pp);
+
+        //}
+
+
         public IActionResult AddRoom(CKeywordViewModel model)
         {
             return View();
