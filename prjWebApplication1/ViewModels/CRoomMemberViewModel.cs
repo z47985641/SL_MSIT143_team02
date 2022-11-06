@@ -32,6 +32,9 @@ namespace PJ_MSIT143_team02.ViewModels
         public string OrderRemark { get; set; }
         public int OrderstatusId { get; set; }
         public Order order { get; set; }
+        public decimal DiscountValue { get; set; }
+        public string Coupon { get; set; }
+        public Discount Discount { get; set; }
         public int ActivityId { get; set; }
         public string ActivityName { get; set; }
 

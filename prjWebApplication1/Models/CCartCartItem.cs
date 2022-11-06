@@ -16,7 +16,9 @@ namespace PJ_MSIT143_team02.Models
         public decimal price { get; set; }
         public decimal 小計 { get { return this.count * this.price; } }
         public Room Room { get; set; }
-
+        public decimal DiscountValue { get; set; }
+        public string Coupon { get; set; }
+        public Discount Discount { get; set; }
         public int ActivityId { get; set; }
         public string ActivityName { get; set; }
 
