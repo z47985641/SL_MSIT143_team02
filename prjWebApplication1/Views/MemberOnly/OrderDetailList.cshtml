@@ -1,0 +1,101 @@
+﻿@model PJ_MSIT143_team02.ViewModels.COrderdetailViewModel
+
+@{
+    ViewData["Title"] = "OrderDetailList";
+}
+
+<h1>OrderDetailList</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderstatusId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ActivityId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderDetailId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomDiscountId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderStartDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderEndDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Payment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qty)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.order)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderstatusId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ActivityId)
+            </td>
+            @foreach (var detail in Model.orderdetail)
+            {
+                if (item.OrderId == detail.OrderId)
+                {
+
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.OrderPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.RoomDiscountId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.OrderStartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.OrderEndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.Payment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => detail.Qty)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+
+                }
+
+            }
+        </tr> }
+            </tbody>
+</table>
