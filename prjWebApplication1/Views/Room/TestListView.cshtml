@@ -55,47 +55,12 @@
                                 {
                                     count++;
                                     <div class="form-check mb-2" id="dxbox">
-                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="calc(@r.EquipmentId);">
+                                        @*<input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="calc(@r.EquipmentId">*@
+                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="@Url.Action("forEquipment","Room",new {id=r.EquipmentId});">
                                         <label class="form-check-label" for="@r.EquipmentId">
                                             @r.EquipmentName
                                         </label>
                                     </div>
-                                    @*<div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="free-wi-fi">
-                                            <label class="form-check-label" for="free-wi-fi">
-                                                免費 Wi-Fi
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                空調
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                冰箱
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                浴缸
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                陽台/露臺
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                暖氣
-                                            </label>
-                                        </div>*@
                                 };
                             }
                         </form>
@@ -299,7 +264,6 @@
                                 </div>
                                 <div class="dropdown-divider d-lg-block d-none"></div>
                             </div>
-                            @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
                         };
                     }
                 </div>
@@ -312,11 +276,6 @@
 <div>
     <input type="button" id="ok" value="確定">
 </div>
-
-
-@*//-----------------------------------------------------------------------------------------------------*@
-
-
 
 
 @section Scripts{
@@ -383,6 +342,7 @@
                 type: "GET",
                 url: shopUrl,
             }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
+                
                 $(".col-lg-9 col-12 room-card").html(result);
                 //alert(resutlt);
                 console.log(result)
