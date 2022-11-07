@@ -171,7 +171,7 @@ namespace PJ_MSIT143_team02.Controllers
             db.Orders.Add(Likeitem);
             db.SaveChanges();
 
-            return RedirectToAction("TestListView", "Room");
+            return NoContent();
         }
         public IActionResult DeleteLikeList(int? ItemId)
         {
