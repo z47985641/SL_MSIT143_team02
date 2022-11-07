@@ -25,7 +25,8 @@ namespace PJ_MSIT143_team02.Controllers
                        c.CommentDetail.Contains(model.txtKey) ||
                        c.CommentStatus.Contains(model.txtKey) ||
                        c.CommentPoint.ToString().Contains(model.txtKey) ||
-                       c.RoomId.ToString().Contains(model.txtKey))
+                       c.RoomId.ToString().Contains(model.txtKey) ||
+                       c.MemberAccount.Contains(model.txtKey))
                        select c;
             return View(data);
         }
@@ -65,6 +66,7 @@ namespace PJ_MSIT143_team02.Controllers
                 c.CommentDetail = input.CommentDetail;
                 c.CommentPoint = input.CommentPoint;
                 c.CommentStatus = input.CommentStatus;
+                c.MemberAccount = input.MemberAccount;
                 db.SaveChanges();
             }
             return RedirectToAction("List");

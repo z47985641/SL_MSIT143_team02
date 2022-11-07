@@ -219,7 +219,8 @@ namespace PJ_MSIT143_team02.Controllers
                             MemberPhone = v.MemberPhone,
                             RoomId = p.RoomId,
                             RoomName = p.RoomName,
-                             price= p.RoomPrice,
+                             RoomPrice= p.RoomPrice,
+                             price = p.price,
                             count = Convert.ToInt32(p.Qty),
                         }).ToList();
             return View(crv);
@@ -258,7 +259,8 @@ namespace PJ_MSIT143_team02.Controllers
                              MemberPhone = v.MemberPhone,
                              RoomId = p.RoomId,
                              RoomName = p.RoomName,
-                             price = p.RoomPrice,
+                             RoomPrice = p.RoomPrice,
+                             price = p.price,
                              count = Convert.ToInt32(p.Qty),
                          }).ToList();
 
