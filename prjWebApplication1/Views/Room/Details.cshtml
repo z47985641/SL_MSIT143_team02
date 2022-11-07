@@ -138,7 +138,7 @@
                         <hr />
                         <h4>活動</h4>
                         <br />
-                        @await Component.InvokeAsync("Activity")
+                        @await Component.InvokeAsync("Activity", new { RoomID = item.RoomId })
                     </div>
                 </div>
             </div>

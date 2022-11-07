@@ -6,6 +6,13 @@
     int left = Model.ActivityCapacity - count;
  }
 
+<style>
+    .none {
+        list-style-type: none;
+        padding: 15px 0px 0px 15px;
+    }
+</style>
+
 <link href="~/css/acti-and-disc.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
 
@@ -53,35 +60,38 @@
                         <p class="col-sm-10 card-text">
                             活動介紹: @Html.DisplayFor(model => model.ActivityInfo)
                         </p>
-                    </div>
-                    <div>
-                        <ul>
+                        <br />
+                    @*</div>
+                    <div>*@
+                        <ul class="ap-services">
                             @if(Model.ActivityStatus == "開放報名") {
-                            <li>
+                            <li class="none">
                                 加入人數:
                                 <button type="button" class="btn btn-secondary" id="actminus">-</button>
                                 <input type="text" id="actnum" style="text-align:center;width:30px" value="1">
                                 <button type="button" class="btn btn-secondary" id="actplus">+</button>
                             </li>
                             }
-                        <li>
+                        <li class="none">
                             @if (Model.ActivityCapacity > 0)
                             {
                                 if (Model.ActivityStatus == "開放報名")
                                 {
 
-                                    <button class="btn btn-light" id="add" style="text-decoration: none;">
+                                    <button class="btn btn-secondary" id="add" style="text-decoration: none;">
                                         <span>我要參加</span>
                                     </button>
                                 }
-                                else if(Model.ActivityStatus == "已結束")
+                                else if (Model.ActivityStatus == "已結束")
                                 {
+                                    <br />
                                     <button class="btn btn-light" id="unable" style="text-decoration: none;">
                                         <span>活動已結束</span>
                                     </button>
                                 }
                                 else
                                 {
+                                    <br />
                                     <button class="btn btn-light" id="unable" style="text-decoration: none;">
                                         <span>無法參加</span>
                                     </button>
