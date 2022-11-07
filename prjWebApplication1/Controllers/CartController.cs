@@ -90,9 +90,7 @@ namespace PJ_MSIT143_team02.Controllers
             {
                 var discount = db.Discounts.Single(x => x.Coupon.Equals(couponItem.Coupon));
             
-                //如果已存在購物車: 檢查有無使用相同的優惠碼，沒有的話再加入
-                房源及會員 item = new 房源及會員();
-                item = new 房源及會員()
+                房源及會員 item = new 房源及會員()
                 {
                     price = couponItem.price * discount.DiscountValue,
                     count = couponItem.count,

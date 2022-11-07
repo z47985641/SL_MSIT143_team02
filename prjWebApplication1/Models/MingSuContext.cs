@@ -221,6 +221,10 @@ namespace PJ_MSIT143_team02.Models
 
                 entity.Property(e => e.RoomId).HasColumnName("RoomID");
 
+                entity.Property(e => e.CommentDetail).IsRequired();
+
+                entity.Property(e => e.MemberAccount).HasMaxLength(50);
+
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Comments)
                     .HasForeignKey(d => d.RoomId)
@@ -243,6 +247,9 @@ namespace PJ_MSIT143_team02.Models
                     .HasMaxLength(50);
 
                 entity.Property(e => e.DiscountValue).HasColumnType("decimal(18, 2)");
+
+                entity.Property(e => e.Coupon)
+                    .HasMaxLength(25);
             });
 
             modelBuilder.Entity<Equipment>(entity =>
@@ -484,6 +491,9 @@ namespace PJ_MSIT143_team02.Models
                 entity.Property(e => e.RoomPrice).HasColumnType("money");
 
                 entity.Property(e => e.RoomstatusId).HasColumnName("RoomstatusID");
+
+                entity.Property(e => e.Cities)
+                    .HasMaxLength(10);
 
                 entity.HasOne(d => d.Roomstatus)
                     .WithMany(p => p.Rooms)

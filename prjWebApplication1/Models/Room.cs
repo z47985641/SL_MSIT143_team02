@@ -26,7 +26,7 @@ namespace PJ_MSIT143_team02.Models
         public string FimagePath { get; set; }
         public int? Qty { get; set; }
         public byte[] Fimage { get; set; }
-
+        public string Cities { get; set; }
         public virtual RoomStatus Roomstatus { get; set; }
         public virtual ICollection<AdminReference> AdminReferences { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }

@@ -9,9 +9,10 @@
             @foreach (var item in Model)
             {
                 <div class="breadcrumb-text" style="text-align:left">
-                    <h5>評分:</h5>
+                    <h5 style="font-size:17px">評論者:</h5>
+                    <p>@Html.DisplayFor(model => item.MemberAccount)</p>
+                    <h5 style="font-size:17px">評分:</h5>
                     <p>@Html.DisplayFor(model => item.CommentPoint) / 5</p>
-                    <h5>評論:</h5>
                     <p>@Html.DisplayFor(model => item.CommentDetail)</p>
                 </div>
                 <hr />

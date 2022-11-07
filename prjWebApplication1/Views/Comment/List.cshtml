@@ -18,7 +18,10 @@
         <thead>
             <tr>
                 <th>
-                    評論編號
+                    序列
+                </th>
+                <th>
+                    評論者
                 </th>
                 <th>
                     評分
@@ -27,33 +30,39 @@
                     是否隱藏
                 </th>
                 <th colspan="4">
-                    評論
+                    評論內容
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommentId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommentPoint)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CommentStatus)
-                    </td>
-                    <td colspan="4">
-                        @Html.DisplayFor(modelItem => item.CommentDetail)
-                    </td>
-                    <td>
-                        @Html.ActionLink("編輯", "Edit", new { id = item.CommentId }, new { @class = "btn btn-primary" }) |
-                        @Html.ActionLink("刪除", "Delete", "Comment", new { id = item.CommentId },
-                        new { onclick = "return confirm('確定要刪除嗎?')", @class = "btn btn-danger" })
-                    </td>
-                </tr>
+            @{int i = 0;
+                foreach (var item in Model)
+                {
+                    i++;
+                    <tr>
+                        <td>
+                            @i
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MemberAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CommentPoint)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CommentStatus)
+                        </td>
+                        <td colspan="4">
+                            @Html.DisplayFor(modelItem => item.CommentDetail)
+                        </td>
+                        <td>
+                            @Html.ActionLink("編輯", "Edit", new { id = item.CommentId }, new { @class = "btn btn-primary" }) |
+                            @Html.ActionLink("刪除", "Delete", "Comment", new { id = item.CommentId },
+                            new { onclick = "return confirm('確定要刪除嗎?')", @class = "btn btn-danger" })
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>
