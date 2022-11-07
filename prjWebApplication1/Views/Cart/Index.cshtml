@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
 <div>
     <p>　</p>
     <ul class="progressbar">
@@ -75,10 +76,11 @@
             <div class="col-4 justify-content-around">
                 <div class="input-group input-group-sm mb-2">
                     <span style="padding-top:6px">優惠碼：</span>
-                    <input type="text" class="form-control" placeholder="coupon" name="coupon">
+                    <input type="text" id="coupon" class="form-control" placeholder="coupon" name="coupon">
+                    <a id="couponBtn" class="btn btn-primary btn-sm text-white" style="padding-left:14px;padding-right:14px;margin-left:56px">使用此優惠碼</a>
                 </div>
             </div>
-            <div class="col text-right pr-5"> <h5>總計： $ @sum.ToString("###,###,##0")</h5></div>
+            <div class="col text-right pr-5"> <h5>總計： $ <span id="price">@sum.ToString("###,###,##0")</span></h5></div>
         </div>
 
     </div>
@@ -97,7 +99,7 @@
         const RoomName = ($(".RoomName").html());
         const RoomPrice = Number($(".RoomPrice").html());
         //const ActivityName = Number($(".ActivityName").html());
-
+        const price = Number($("#price").html());
         const Qty = Number($(".Qty").html());
         //const count = Number($(".count").html());
 
@@ -107,6 +109,7 @@
             //"ActivityName": ActivityName,
             "RoomName": RoomName,
             "RoomPrice": RoomPrice,
+            "price": price,
             "Qty": Qty
             //"count": count,
         }
@@ -120,7 +123,25 @@
 
     })
 
-
+    $("#couponBtn").click(async function () {
+        var s = {
+            "price": @sum,
+            "count": Number($(".Qty").html()),
+            "Coupon": $("#coupon").val(),
+        };
+        let data = JSON.stringify(s);
+        $.ajax({
+            type: "GET",
+            url: "@Url.Content("~/Cart/AddCouponToCart")"+`?input=${data}`,
+        }).done(function(result) {
+            if (result != @sum) {
+                toastr["success"]("已使用優惠碼！");
+            } else { 
+                toastr["error"]("無此優惠碼！");
+            }
+            $("#price").html(result);
+        })
+    });
 </script>
 
 <style>

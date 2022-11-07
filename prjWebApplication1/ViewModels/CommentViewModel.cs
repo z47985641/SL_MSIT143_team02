@@ -38,5 +38,11 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return _comment.RoomId; }
             set { _comment.RoomId = value; }
         }
+
+        public string MemberAccount
+        {
+            get { return _comment.MemberAccount; }
+            set { _comment.MemberAccount = value; }
+        }
     }
 }

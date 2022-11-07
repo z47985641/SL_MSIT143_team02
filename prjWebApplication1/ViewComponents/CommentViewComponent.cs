@@ -15,7 +15,8 @@ namespace PJ_MSIT143_team02.ViewComponents
                         select new Comment {
                             RoomId = c.RoomId,
                             CommentPoint = c.CommentPoint, 
-                            CommentDetail = c.CommentDetail
+                            CommentDetail = c.CommentDetail,
+                            MemberAccount = c.MemberAccount,
                         }).ToList();
             return View(data);
         }
