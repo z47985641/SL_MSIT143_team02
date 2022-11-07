@@ -13,9 +13,13 @@ namespace PJ_MSIT143_team02.Models
             public decimal RoomPrice { get; set; }
             public int Qty { get; set; }
             public int? count { get; set; }
+            public int ActivityId { get; set; }
+        public string ActivityName { get; set; }
+        public decimal? ActivityPrice { get; set; }
 
 
 
-        
+
+
     }
 }

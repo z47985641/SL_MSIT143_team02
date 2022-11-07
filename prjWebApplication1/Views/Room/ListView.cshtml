@@ -1,0 +1,92 @@
+﻿@*@model IEnumerable<PJ_MSIT143_team02.Models.Room>*@
+@model List<PJ_MSIT143_team02.ViewModel.CAllViewModel>
+@{
+    ViewData["Title"] = "List";
+}
+
+    <div class="breadcrumb-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-text">
+                        <h2>搜好房</h2>
+                        @using (Html.BeginForm())
+                        {
+                            @:關鍵字 @Html.TextBox("txtKeyword", "", new { @class = "form-control" }) <input type="submit" value="查詢" />
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<section class="rooms-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="room-item">
+                    <img src="~/Image/光之旅-1602655934.jpg" >
+                    <div class="ri-text" style="height:250px">
+                        <h5 class="card-title">
+                        </h5>
+                        <p class="card-text">
+                            海景房
+                        </p>
+                        <p class="card-text">
+                            房價: 1600$/天
+                        </p>
+                        <p class="card-text">
+                            房間介紹:面海氣氛絕佳
+                        </p>
+                        <p class="card-text">
+                            地址:台東市
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="room-item">
+                    <img src="~/Image/山景房jpg.jpg">
+                    <div class="ri-text" style="height:250px">
+                        <h5 class="card-title">
+                        </h5>
+                        <p class="card-text">
+                            山景房
+                        </p>
+                        <p class="card-text">
+                            房價: 1800$/天
+                        </p>
+                        <p class="card-text">
+                            房間介紹:山中聆聽蟲鳴鳥叫
+                        </p>
+                        <p class="card-text">
+                            地址:花蓮縣
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="room-item">
+                    <img src="~/Image/工地.jpg">
+                    <div class="ri-text" style="height:250px">
+                        <h5 class="card-title">
+                        </h5>
+                        <p class="card-text">
+                            工地房
+                        </p>
+                        <p class="card-text">
+                            房價: 300$/天
+                        </p>
+                        <p class="card-text">
+                            房間介紹:建議攜帶帳篷
+                        </p>
+                        <p class="card-text">
+                            地址:苗栗縣
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

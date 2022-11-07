@@ -209,8 +209,10 @@ namespace PJ_MSIT143_team02.Controllers
                         where c.RoomId == p.RoomId
                          select new 房源及會員
                         {
-                            
-                            MemberId=v.MemberId,
+                             ActivityId = p.ActivityId,
+                             ActivityName = p.ActivityName,
+                             ActivityPrice=p.ActivityPrice,
+                             MemberId =v.MemberId,
                              MemberAccount=v.MemberAccount,
                             MemberName = v.MemberName,
                             MemberEmail = v.MemberEmail,
@@ -221,6 +223,8 @@ namespace PJ_MSIT143_team02.Controllers
                             count = Convert.ToInt32(p.Qty),
                         }).ToList();
             return View(crv);
+
+
         }
 
         public IActionResult GetPayData(string jsonString)
