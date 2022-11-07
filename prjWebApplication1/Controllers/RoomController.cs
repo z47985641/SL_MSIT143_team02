@@ -227,7 +227,7 @@ namespace PJ_MSIT143_team02.Controllers
 
             string jsonString = JsonSerializer.Serialize(q);
 
-            return Json(jsonString);
+            return Json(q);
 
 
 

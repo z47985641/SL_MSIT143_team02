@@ -378,20 +378,21 @@
 
 
         function calc(eqID) {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID; 
+            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
             $.ajax({
                 type: "GET",
                 url: shopUrl,
             }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
                 $(".col-lg-9 col-12 room-card").html(result);
-                alert(resutlt);
+                //alert(resutlt);
                 console.log(result)
-                bindshop();
             }).fail(function (e) {
                 alert(e.responseText);
             });
 
         }
+
+
 
         @*function calc(eqID)
        {
