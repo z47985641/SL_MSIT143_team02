@@ -211,20 +211,20 @@
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 房源圖片 </p>
                 <div class="col-md-1"></div>
-                <div class="col-md-10 ">
+                <div class="col-md-10 " id="div_img">
+                    <input type="file" name="img" id="img" multiple accept="image/*" />
                     @{
                         foreach (var item in Model.imgId)
                         {
                             <div id="img_div">
                                 <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px" />
                                 <div id="img_div1">
-                                    @Html.ActionLink("刪除", "MemnerRoomPhotoDelete", new { ImageId = item }, new { @id = "img_delete" });
+                                    @Html.ActionLink("刪除", "MemnerRoomPhotoDelete", new { ImageId = item }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger", @id = "img_delete" })
                                 </div>
                             </div>
                         }
 
                     }
-                    <input type="file" name="img" id="img" multiple accept="image/*" />
                 </div>
                 <div class="col-md-1"></div>
             </div>
@@ -243,18 +243,22 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-            $('#img_div1').on('click', function () {
-            $('img_div').attr('hidden', 'hidden')
-            })
-    $("list-group").load(function () {
-
+    $('#img_div1>a').on('click', function () {
+        $(this).parents('#img_div').attr('hidden', 'hidden')
     })
-    $("list-group").load
-            if (@Model.RoomstatusId == 4)
-            {
-                    $("4").attr("checked", "checked")
-            }
+    var divimg = document.getElementById("div_img")
 
+    $("#img").on("change", function (e) {
+        var count = 0;
+        for (count; count < 10; count++) {
+            if (this.files[count] != null) {
+                divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo${count}"  />`
+                var file = this.files[count];
+                var obj = URL.createObjectURL(file);
+                $(`#Photo${count}`).attr('src', obj);
+            };
+        };
+    });
 
 
 </script>

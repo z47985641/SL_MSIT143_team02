@@ -2,6 +2,12 @@
 
 @{ ViewData["Title"] = "ActivityDisplay";}
 
+<style>
+    .text-red{
+        color: red;
+    }
+</style>
+
 <link href="~/css/acti-and-disc.css" rel="stylesheet" />
 <div id="mainbox">
     <div class="breadcrumb-section">
@@ -40,7 +46,7 @@
                                 @if (left < 20 && left >0)
                                 {
                                 <p>剩餘名額: @left 人</p>
-                                <p class="">即將額滿，報名從速!</p>
+                                <p class="text-red">即將額滿，報名從速 !</p>
                                 }
                                 else if (left >= 20) { <p>剩餘名額: @left 人</p><p><br /></p>}
                                 else if (left == 0) { <p>活動額滿或已結束</p><p><br /></p>}

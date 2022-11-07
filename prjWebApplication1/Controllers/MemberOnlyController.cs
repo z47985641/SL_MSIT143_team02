@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModels;
@@ -12,6 +13,11 @@ namespace PJ_MSIT143_team02.Controllers
 {
     public class MemberOnlyController : Controller
     {
+        private readonly IWebHostEnvironment _hostinEnvironment;
+        public MemberOnlyController(IWebHostEnvironment hostinEnvironment)
+        {
+            _hostinEnvironment = hostinEnvironment;
+        }
         public IActionResult Index()
         {
             return View();
@@ -29,26 +35,13 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
             CRoomNew roomnew = new CRoomNew();
-            var item = from I in db.Equipment
-                       select new {
-                           I.EquipmentId,
-                           I.EquipmentName,
-                           I.EquipmentCatergoryId
-                       };
-            List<int> list = new List<int>();
-            List<string> listname = new List<string>();
-            List<int> listC = new List<int>();
-            foreach (var i in item)
-            {
-                int count = 0;
-                list.Add( i.EquipmentId);
-                listname.Add( i.EquipmentName) ;
-                listC.Add(i.EquipmentCatergoryId);
-                count++;
-            }
-            roomnew.EquipmentIdlist = list;
-            roomnew.EquipmentNamelist = listname;
-            roomnew.EquipmentCatergoryIdlist = listC;
+            var eId = db.Equipment.Select(e => e.EquipmentId);
+            var eName = db.Equipment.Select(e => e.EquipmentName);
+            var eCate = db.Equipment.Select(e => e.EquipmentCatergoryId);
+           
+            roomnew.EquipmentIdlist = eId.ToList();
+            roomnew.EquipmentNamelist = eName.ToList(); 
+            roomnew.EquipmentCatergoryIdlist = eCate.ToList();
             return View(roomnew);
         }
         [HttpPost]
@@ -58,29 +51,21 @@ namespace PJ_MSIT143_team02.Controllers
             MingSuContext db = new MingSuContext();
 
             //加入房源資訊
-            Room room = new Room();
-            room.RoomName = NewRoom.RoomName;
-            room.RoomPrice = NewRoom.RoomPrice;
-            room.RoomIntrodution = NewRoom.RoomIntrodution;
-            room.MemberId = (int)HttpContext.Session.GetInt32("MemberID");
-            room.RoomstatusId = 4;
-            room.Address = NewRoom.Address;
-            room.CreateDate = DateTime.Now;
-            room.Qty = NewRoom.Qty;
-            db.Rooms.Add(room);
+            db.Rooms.Add(NewRoom.room);
 
             //迴圈加入多圖
-            var ms = new MemoryStream();
             foreach (var imgindex in NewRoom.img)
             {
                 count++;
                 Image img = new Image();
-                imgindex.CopyTo(ms);
-                img.Image1 = ms.ToArray();
+                using(var ms1 = new MemoryStream())
+                {
+                    imgindex.CopyTo(ms1);
+                    img.Image1 = ms1.ToArray();
+                }
                 db.Images.Add(img);
                 db.SaveChanges();
             }
-
             //迴圈加入ImageReferences
             for (int i = 1; i <= count; i++)
             {
@@ -90,7 +75,6 @@ namespace PJ_MSIT143_team02.Controllers
                 db.ImageReferences.Add(imgRef);
                 db.SaveChanges();
             }
-
             //迴圈加入設備References
             foreach (var Eitem in NewRoom.EquipmentId)
             {
@@ -118,57 +102,29 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
             CRoomNew roomNew = new CRoomNew();
+
             //加入房間資料
             var roomData = db.Rooms.FirstOrDefault(r => r.RoomId == roomId);
-            roomNew.RoomId = roomData.RoomId;
-                roomNew.RoomName = roomData.RoomName;
-                roomNew.RoomPrice = roomData.RoomPrice;
-                roomNew.RoomIntrodution = roomData.RoomIntrodution;
-                roomNew.MemberId = roomData.MemberId;
-                roomNew.RoomstatusId = roomData.RoomstatusId;
-                roomNew.Address = roomData.Address;
-                roomNew.CreateDate = roomData.CreateDate;
-                roomNew.Qty = roomData.Qty;
-
+            roomNew.room = roomData;
 
             //加入設備選項
-            List<int> list = new List<int>();
-            List<string> listname = new List<string>();
-            List<int> listC = new List<int>();
-
-            foreach (var i in db.Equipment)
-            {
-                list.Add(i.EquipmentId);
-                listname.Add(i.EquipmentName);
-                listC.Add(i.EquipmentCatergoryId);
-            }
-
-            roomNew.EquipmentIdlist = list;
-            roomNew.EquipmentNamelist = listname;
-            roomNew.EquipmentCatergoryIdlist = listC;
+            var eId = db.Equipment.Select(e => e.EquipmentId);
+            var eName = db.Equipment.Select(e => e.EquipmentName);
+            var eCate = db.Equipment.Select(e => e.EquipmentCatergoryId);
+            roomNew.EquipmentIdlist = eId.ToList();
+            roomNew.EquipmentNamelist = eName.ToList();
+            roomNew.EquipmentCatergoryIdlist = eCate.ToList();
 
             //帶入設備狀態
             List<int> idlist = new List<int>();
-            var EquipmentRE = from e in db.EquipmentReferences
-                              where e.RoomId == roomId
-                              select e;
-            foreach(var e in EquipmentRE)
-            {
-                idlist.Add(e.EquipmentId);
-                db.EquipmentReferences.Remove(e);
-            }
-
-            roomNew.EquipmentId = idlist;
+            var EE = db.EquipmentReferences.Where(e => e.RoomId == roomId).Select(e => e.EquipmentId);
+            roomNew.EquipmentId = EE.ToList();
             db.SaveChanges();
 
 
             //加入圖片
-            var imgedit = from i in db.ImageReferences
-                          where i.RoomId == roomId
-                          select i.ImageId;
-            List<int> IDlist = new List<int>();
-            IDlist = imgedit.ToList();
-            roomNew.imgId = IDlist;
+            var imgedit = db.ImageReferences.Where(i => i.RoomId == roomId).Select(i=>i.ImageId);
+            roomNew.imgId = imgedit.ToList();
 
             return View(roomNew);
         }
@@ -196,32 +152,32 @@ namespace PJ_MSIT143_team02.Controllers
                 item.EquipmentId = Eitem;
                 item.RoomId = roomedit.RoomId;
                 db.EquipmentReferences.Add(item);
-                db.SaveChanges();
             }
             if (roomedit.img != null)
             {
-            var ms = new MemoryStream();
-            foreach (var imgindex in roomedit.img)
-            {
-                Image img = new Image();
-                imgindex.CopyTo(ms);
-                img.Image1 = ms.ToArray();
-                db.Images.Add(img);
-                count++;
-            }//迴圈加入ImageReferences
-            for (int i = 1; i <= roomedit.img.Count; i++)
-            {
-                ImageReference imgRef = new ImageReference();
-                imgRef.RoomId = roomedit.RoomId;
-                imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId - count + i;
-                db.ImageReferences.Add(imgRef);
+                foreach (var imgindex in roomedit.img)
+                {
+                    count++;
+                    Image img = new Image();
+                    using (var ms1 = new MemoryStream())
+                    {
+                        imgindex.CopyTo(ms1);
+                        img.Image1 = ms1.ToArray();
+                    }
+                    db.Images.Add(img);
+                    db.SaveChanges();
+                }
+                //迴圈加入ImageReferences
+                for (int i = 1; i <= roomedit.img.Count; i++)
+                {
+                    ImageReference imgRef = new ImageReference();
+                    imgRef.RoomId = roomedit.RoomId;
+                    imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId - count + i;
+                    db.ImageReferences.Add(imgRef);
 
-            }
+                }
             }
             
-
-            
-
             db.SaveChanges();
             return RedirectToAction("MemnerRoomList");
         }

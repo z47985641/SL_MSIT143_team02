@@ -29,7 +29,7 @@
                 <thead class="table-borderless">
                     <tr>
                         <th>商品名稱</th>
-                        <th>活動名稱</th>
+                        @*<th>活動名稱</th>*@
                         <th>單價</th>
                         <th>數量</th>
                         <th>小計</th>
@@ -44,12 +44,22 @@
                     <tr>
                         <a class="RoomId d-none">@item.RoomId</a>
                         @*<td class="text-center"><img src="@Html.DisplayFor(modelItem => item.imageSrc)" height="30" /></td>*@
-                        <td class="RoomName">
-                            @Html.DisplayFor(modelItem => item.RoomName)
-                        </td>
+                        @if (item.ActivityId == 0)
+                        {
+                            <td class="RoomName">
+                                @Html.DisplayFor(modelItem => item.RoomName)
+                            </td>
+}
+                        else if (item.RoomId == 0)
+                        {
+                            <td class="RoomName">
+                                活動:   @Html.DisplayFor(modelItem => item.ActivityName)
+                            </td>
+}
+
                         @*<td class="ActivityName">
-                            @Html.DisplayFor(modelItem => item.ActivityName)
-                        </td>*@
+            @Html.DisplayFor(modelItem => item.ActivityName)
+        </td>*@
                         <td class="RoomPrice">
                             @Html.DisplayFor(modelItem => item.price)
                         </td>
