@@ -21,9 +21,9 @@ namespace PJ_MSIT143_team02.Controllers
             if (Id != null)
             {
                 MingSuContext db = new MingSuContext();
-                Discount d = db.Discounts.FirstOrDefault(d => d.RoomDiscountId == Id);
+                var d = db.Discounts.Where(d => d.RoomDiscountId == Id);
                 if (d != null)
-                    return View(d);
+                    return View(d.ToList());
             }
             return RedirectPermanent("DiscountMain");
         }

@@ -1,4 +1,4 @@
-﻿@model PJ_MSIT143_team02.Models.Discount
+﻿@model List<PJ_MSIT143_team02.Models.Discount>
 
 @{
     ViewData["Title"] = "Details";
@@ -23,14 +23,26 @@
                 <div class="room-item card">
                     <div id="textcard" class="card-body">
                         <h4 class="col-sm-10 card-title">
-                            @Html.DisplayFor(model => model.DiscountName)
+                            @Html.DisplayFor(model => model[0].DiscountName)
                         </h4>
                         <p class="col-sm-10 card-text">
-                            @Html.DisplayFor(model => model.DiscountInfo)
+                            @Html.DisplayFor(model => model[0].DiscountInfo)
                         </p>
-                        <p class="col-sm-10 card-text">
-                            優惠碼: @Html.DisplayFor(model => model.Coupon)
-                        </p>
+                        @foreach (var item in Model){
+                            @if (string.IsNullOrEmpty(item.Coupon))
+                            {
+                                <p class="col-sm-10 card-text">
+                                    結帳時請使用相對應之信用卡以享此優惠
+                                </p>
+                            }
+                            else
+                            {
+                                <p class="col-sm-10 card-text">
+                                    優惠碼: @Html.DisplayFor(model => item.Coupon)
+                                </p>                                
+                            }
+
+                        }
                     </div>
                 </div>
             </div>
@@ -49,7 +61,7 @@
 @section Scripts {
     <script>
         $(function (){
-            $("#setImg").attr("src", "../../Image/dis" + @Html.DisplayFor(model => model.RoomDiscountId) + ".jpg")
+            $("#setImg").attr("src", "../../Image/dis" + @Html.DisplayFor(model => model[0].RoomDiscountId) + ".jpg")
             setTimeout(function () {
                 function reloadUsingLocationHash() {
                     window.location.hash = "reload";
