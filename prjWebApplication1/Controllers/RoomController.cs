@@ -82,12 +82,6 @@ namespace PJ_MSIT143_team02.Controllers
             ck.EquipmentReference = EquipmentReference;  //EquipmentID RoomID
             ck.Room = Room; //RoomID
 
-            //IEnumerable<Equipment> eq = null;
-            //if (string.IsNullOrEmpty(ck.txtKeyword))
-            //    eq = (from r in db.Equipment
-            //         join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
-            //         join k in db.Rooms on i.RoomId equals k.RoomId
-            //         select r).ToList();
             IEnumerable<EquipmentReference> eqr = null;
             if (string.IsNullOrEmpty(ck.txtKeyword))
                 eqr = (from r in db.EquipmentReferences
@@ -224,34 +218,41 @@ namespace PJ_MSIT143_team02.Controllers
         [HttpGet]
         public ActionResult forEquipment(string Equipment)
         {
-            int EquipmentID=0;
-            EquipmentID= int.Parse(Equipment) ;
+            int EquipmentID = 0;
+            EquipmentID = int.Parse(Equipment);
+
+            var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room);
+            //if (q.Count() > 0) { 
+
+            //}
             //eq = (from r in db.Equipment
             //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
             //      join k in db.Rooms on i.RoomId equals k.RoomId
             //      select r).ToList();
-            int RoomId=0;
-            IQueryable<EquipmentReference> eq = null;
-            if (RoomId == 0)
-            {
-                eq = from s in db.EquipmentReferences
-                         where s.EquipmentId == EquipmentID
-                         select s;
-                ViewBag.name = (eq.ToList().Count() != 0) ? "設備>>>>>" + eq.FirstOrDefault().Room.RoomName : "查無此設備";
-            }
-            else if (EquipmentID == 0)
-            {
-                eq = from s in db.EquipmentReferences
-                     where s.RoomId == RoomId
-                           select s;
-                ViewBag.name = (eq.ToList().Count() != 0) ? "設備>>>>>" + eq.FirstOrDefault().Room.RoomName : "查無此商品";
-            }
+            //int RoomId=0;
+            //IQueryable<Equipment> eq = null;
+            //if (RoomId == 0)
+            //{
+            //    eq = from s in db.EquipmentReferences
+            //         join k in db.Rooms on s.RoomId equals k.RoomId
+            //         where s.RoomId == RoomId
+            //         select s;
+            //    ViewBag.name = (eq.ToList().Count() != 0)
+            //        ? "設備>>>>>" + eq.FirstOrDefault().EquipmentName;
+            //}
+            //else if (EquipmentID == 0)
+            //{
+            //    eq = from s in db.Equipment
+            //         join i in db.EquipmentReferences on s.EquipmentId equals i.EquipmentId
+            //         where s.EquipmentId == EquipmentID
+            //         select s;
+
+            //    ViewBag.name = (eq.ToList().Count() != 0)
+            //        ? "設備>>>>>" + eq.FirstOrDefault().EquipmentName;
+            //}
             CKeywordViewModel ck = new CKeywordViewModel();
-            ck.EquipmentReference = eq;
-            return PartialView("forEquipment", ck);
-
-
-
+            //ck.EquipmentReference = q;
+            return PartialView("forEquipment", q);
 
         }
 
