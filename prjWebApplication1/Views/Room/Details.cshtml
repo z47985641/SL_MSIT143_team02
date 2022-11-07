@@ -136,9 +136,9 @@
                         <br />
                         @await Component.InvokeAsync("Discount")
                         <hr />
-                        <h4>活動</h4>
+                        <h4>探索房源附近的活動</h4>
                         <br />
-                        @await Component.InvokeAsync("Activity")
+                        @await Component.InvokeAsync("Activity", new { RoomID = item.RoomId })
                     </div>
                 </div>
             </div>

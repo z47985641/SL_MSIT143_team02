@@ -118,5 +118,11 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("List");
         }
+
+        public IActionResult testABC()
+        {
+            
+            return View();
+        }
     }
 }
