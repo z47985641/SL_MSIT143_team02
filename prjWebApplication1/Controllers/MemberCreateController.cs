@@ -25,6 +25,7 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult Register(Member member)
         {
             MingSuContext db = new MingSuContext();
+            member.Authority = "一般會員";
             db.Members.Add(member);
             db.SaveChanges();
 
