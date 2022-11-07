@@ -81,6 +81,32 @@ namespace PJ_MSIT143_team02.Controllers
             return NoContent(); // HttpStatus 204: 請求成功但不更新畫面
         }
 
+        public IActionResult AddCouponToCart(string input)
+        {
+            CCartCartItem couponItem = JsonSerializer.Deserialize<CCartCartItem>(input);
+            MingSuContext db = new MingSuContext();
+
+            try
+            {
+                var discount = db.Discounts.Single(x => x.Coupon.Equals(couponItem.Coupon));
+            
+                //如果已存在購物車: 檢查有無使用相同的優惠碼，沒有的話再加入
+                房源及會員 item = new 房源及會員();
+                item = new 房源及會員()
+                {
+                    price = couponItem.price * discount.DiscountValue,
+                    count = couponItem.count,
+                    Discount = discount,
+                };
+
+                return Content(item.price.ToString());
+            }
+            catch (InvalidOperationException e)
+            {
+                return Content(couponItem.price.ToString());
+            }
+        }
+
         public IActionResult RemoveItem(int id)
         {
             List<房源及會員> cart = SessionHelper.GetObjectFromJson<List<房源及會員>>(HttpContext.Session, "cart");
