@@ -148,11 +148,22 @@
                     <div id="comment">
                         <h4>評論</h4>
                         <br />
+                        <h5>評分</h5>
+                        <div class="imgbox">
+                            <img id="id1" src="~/img/star.gif" />
+                            <img id="id2" src="~/img/star.gif" />
+                            <img id="id3" src="~/img/star.gif" />
+                            <img id="id4" src="~/img/star.gif" />
+                            <img id="id5" src="~/img/star.gif" />
+                        </div>
+                        <br />
+                        <h5>留言</h5>
                         <textarea rows="3" cols="81"></textarea>
+                        <br /><br />
                         <a class="bbtn" id="addcomment" href="@Url.Action()">
                             <span>送出</span>
                         </a>
-                        <br /><br /><br />
+                        <br /><br />
                         <hr />
                         @await Component.InvokeAsync("Comment", new { id = item.RoomId})
                     </div>
@@ -211,6 +222,30 @@
         });
         function ShowMessage() {
             toastr["success"]("商品已加入購物車！");
+        }
+
+        $(".imgbox img").mouseenter(mouseover);
+        $(".imgbox img").mouseleave(mouseout);
+        $(".imgbox img").click(click);
+        $(".imgbox img").dblclick(dblclick);
+
+        function mouseover() {
+            if (isClick) return;
+            let selected = $(this).index()+1;
+            $(`.imgbox img:lt(${selected})`).attr("src", "../../img/starhover.gif");
+        }
+        function mouseout() {
+            if (isClick) return;
+            $(".imgbox img").attr("src", "../../img/star.gif");
+        }
+        function click() {
+            isClick = true;
+            let selected = $(this).index()+1;
+            $(this.nextSibling).prevAll().attr("src", "../../img/starhover.gif").end().nextAll().attr("src", "../../img/star.gif");
+        }
+        function dblclick() {
+            isClick = false;
+            $(".imgbox img").attr("src", "../../img/star.gif");
         }
     </script>
 }
