@@ -305,20 +305,5 @@ namespace PJ_MSIT143_team02.Controllers
         //    return RedirectToAction("Index", "Home");
         //}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }
