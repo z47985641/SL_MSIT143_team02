@@ -222,7 +222,7 @@ namespace PJ_MSIT143_team02.Controllers
             int EquipmentID = 0;
             EquipmentID = int.Parse(Equipment);
 
-            var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room);
+            var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room).ToList();
             //return PartialView("forEquipment", q);
 
             string jsonString = JsonSerializer.Serialize(q);
