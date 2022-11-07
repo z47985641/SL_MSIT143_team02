@@ -375,16 +375,17 @@
     </script>
 
     <script>
-        
+
 
         function calc(eqID) {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
+            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID; 
             $.ajax({
                 type: "GET",
                 url: shopUrl,
-            }).done(function (result) {
-                $("TestListView").html(result);
+            }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
+                $(".col-lg-9 col-12 room-card").html(result);
                 alert(resutlt);
+                console.log(result)
                 bindshop();
             }).fail(function (e) {
                 alert(e.responseText);
@@ -392,12 +393,26 @@
 
         }
 
-                    @*$(function () {
-                var qq = $(".viewBag").html();
-                var url = "@Url.Content("~/Room/forEquipment")"
-                var name = `?Equipment=` + qq
-                $("#calc").load(url + name)
-            })*@
+        @*function calc(eqID)
+       {
+            $.ajax({
+                url: '@Url.Action("forEquipment", "Room")' + "?Equipment=" + eqID,
+                type: 'GET',
+        //    data:{},
+        }).then(function () {
+
+            $('.col-lg-9 col-12 room-card').load('@Url.Action("forEquipment", "Room")')//右邊的房間列表，讀取選取設備後後新ㄉ房間
+        })
+
+         $.get('@Url.Action("TestListView", "Room")',
+           function (data) {
+                console.log(data)
+            }
+
+         )
+    }*@
+
+
 
     </script>
 

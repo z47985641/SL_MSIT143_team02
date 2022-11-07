@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
 
 namespace PJ_MSIT143_team02.Controllers
 {
@@ -222,8 +223,15 @@ namespace PJ_MSIT143_team02.Controllers
             EquipmentID = int.Parse(Equipment);
 
             var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room);
+            //return PartialView("forEquipment", q);
 
-            ViewBag.name = q.ToList().Count;
+            string jsonString = JsonSerializer.Serialize(q);
+
+            return Json(jsonString);
+
+
+
+            //ViewBag.name = q.ToList().Count;
             //eq = (from r in db.Equipment
             //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
             //      join k in db.Rooms on i.RoomId equals k.RoomId
@@ -249,9 +257,8 @@ namespace PJ_MSIT143_team02.Controllers
             //    ViewBag.name = (eq.ToList().Count() != 0)
             //        ? "設備>>>>>" + eq.FirstOrDefault().EquipmentName;
             //}
-            CKeywordViewModel ck = new CKeywordViewModel();
+            //CKeywordViewModel ck = new CKeywordViewModel();
             //ck.EquipmentReference = q;
-            return PartialView("forEquipment", q);
 
         }
 
