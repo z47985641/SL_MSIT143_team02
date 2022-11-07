@@ -375,68 +375,7 @@
     </script>
 
     <script>
-        //選擇設備
-
-
-           @*function cartcar() {
-            var eqUrl = "@Url.Action("TestListView", "Room")";
-            $.ajax({
-                type: "GET",
-                url: eqpUrl
-            }).done(function (result) {
-                $("#TestListView").html(result);
-            }).fail(function (e) {
-            });
-        }*@
-
-        @* $("eq").click(function () {
-            var eqUrl = "@Url.Action("TestListView", "Room")" + "/" + $(this).attr("value") + "/0";
-            $.ajax({
-                type: "GET",
-                url: eqUrl
-
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-            });*@
-
-
-
-        @* $(function () {
-            $("#dxbox").click(function () {
-                if ($(this).find("input[type=checkbox]:checked").val() != undefined) {
-                    var result = $(this).find("input[type=checkbox]:checked").val();
-                    alert(result);
-                    //$.post("TestListView", { number: number }, function (data) { console.log(data) })
-                    $.ajax({
-                        type: "POST",
-                        url: "@Url.Action("TestListView", "Room")"+ result
-                    }).done(function (result) {
-                        $("TestListView").html(result);
-                    });
-                }
-            });
-        });*@
-
-
-        //-----------------------------------------------------------------------------
-
- //選設備
-        @*$("#eq").click(function () {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "/" + $(this).attr("value")+"/0";
-            $.ajax({
-                type: "GET",
-                url: shopUrl
-
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-                bindshop();
-            }).fail(function (e) {
-                alert(e.responseText);
-            });
-
-              });*@
+        
 
         function calc(eqID) {
             var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
@@ -452,6 +391,13 @@
             });
 
         }
+
+                    @*$(function () {
+                var qq = $(".viewBag").html();
+                var url = "@Url.Content("~/Room/forEquipment")"
+                var name = `?Equipment=` + qq
+                $("#calc").load(url + name)
+            })*@
 
     </script>
 

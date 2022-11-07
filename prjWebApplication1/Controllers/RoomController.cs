@@ -222,9 +222,8 @@ namespace PJ_MSIT143_team02.Controllers
             EquipmentID = int.Parse(Equipment);
 
             var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room);
-            //if (q.Count() > 0) { 
 
-            //}
+            ViewBag.name = q.ToList().Count;
             //eq = (from r in db.Equipment
             //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
             //      join k in db.Rooms on i.RoomId equals k.RoomId
