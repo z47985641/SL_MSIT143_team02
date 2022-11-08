@@ -397,63 +397,89 @@
                 type: "GET",
                 url: eqUrl
 
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-            });*@
+                let qq = document.querySelector("#hhh");
+                qq.innerHTML="";
+                let div = document.createElement("div");
+                div.className = "mobile-bg-secondary";
+                result.forEach(function (data) {
+                    let roomdatas =
+                        ` <div class="card border-0 mb-sm-4 mb-2">
+                                    <div class="row no-gutters">
+                                        <div class="col-4" style="padding-top:25px;padding-left:11px;padding-bottom:25px">
+                                            <img src='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}'  style=" padding:5px; height:200px" />
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
+                                                <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
+                                                    <small class="text-primary d-flex">
 
+                                                        <span class="text-black-50 d-lg-block d-none"></span>
+                                                    </small>
+                                                    <ul class="list-unstyled d-flex align-items-center m-0">
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <ul class="list-unstyled m-sm-0 m-1" style="padding-left:10px;">
+                                                    <li>
+                                                        <h3 class="card-title">${data.roomName}</h3>
+                                                    </li>
+                                                    <li>
+                                                        <p class="card-text small text-black-50">
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
+                                                    <li>
+                                                        <span class="badge badge-pill badge-info text-black mr-3">
+                                                            ${data.roomIntrodution}
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
+                                                    </li>
+                                                </ul>
+                                                <div class="money-block text-right d-flex flex-column">
+                                                    <small class="text-black-50 d-lg-block d-none" style="font-size:20px">每晚價錢</small>
+                                                    <p class="h3 m-0" id="RoomPrice">NT$${data.roomPrice}</p>
+                                                </div>
+                                                <!-- badge樣式沒有作用另外寫css的 -->
+                                            </div>
+                                            <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
+                                                <span>
+                                                    <a class="d-flex justify-content-end" href='@Url.Content("~/Member/AddLikeList/?ItemId=..")'>
+                                                        < img src="/Image/heart.png" style="width:45px ;height:45px" />
+                                                    </a>
+                                                </span>
+                                            </button>
+                                            <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
+                                                <span>
+                                                    <a href='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}' style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
+                                                        立即預訂
 
-
-        @* $(function () {
-            $("#dxbox").click(function () {
-                if ($(this).find("input[type=checkbox]:checked").val() != undefined) {
-                    var result = $(this).find("input[type=checkbox]:checked").val();
-                    alert(result);
-                    //$.post("TestListView", { number: number }, function (data) { console.log(data) })
-                    $.ajax({
-                        type: "POST",
-                        url: "@Url.Action("TestListView", "Room")"+ result
-                    }).done(function (result) {
-                        $("TestListView").html(result);
-                    });
-                }
-            });
-        });*@
-
-
-        //-----------------------------------------------------------------------------
-
- //選設備
-        @*$("#eq").click(function () {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "/" + $(this).attr("value")+"/0";
-            $.ajax({
-                type: "GET",
-                url: shopUrl
-
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-                bindshop();
-            }).fail(function (e) {
-                alert(e.responseText);
-            });
-
-              });*@
-
-        function calc(eqID) {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
-            $.ajax({
-                type: "GET",
-                url: shopUrl,
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-                bindshop();
+                                                    </a>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider d-lg-block d-none"></div>
+                                </div>`
+                    div.innerHTML += roomdatas;
+                    @*var qqq = `@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}`;
+                    console.log(qqq)*@
+                })
+                qq.append(div);
             }).fail(function (e) {
                 alert(e.responseText);
             });
 
         }
+
+
+
 
     </script>
 
