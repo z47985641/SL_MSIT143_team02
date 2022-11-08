@@ -81,7 +81,7 @@ namespace PJ_MSIT143_team02.Controllers
             var Room = db.Rooms;
             ck.Equipment = Equipment;  //EquipmentID
             ck.EquipmentReference = EquipmentReference;  //EquipmentID RoomID
-            ck.Room = Room.Where(e => e.RoomstatusId == 2); //RoomID
+            ck.Room = Room; //RoomID
 
             IEnumerable<EquipmentReference> eqr = null;
             if (string.IsNullOrEmpty(ck.txtKeyword))
@@ -95,42 +95,44 @@ namespace PJ_MSIT143_team02.Controllers
 
 
 
-                IEnumerable<Room> datas = null;
-            if (string.IsNullOrEmpty(ck.txtKeyword)) {
+            IEnumerable<Room> datas = null;
+            if (string.IsNullOrEmpty(ck.txtKeyword))
+            {
                 if (0.Equals(ck.txtQty)
                     && (thisDate.Equals(ck.mydatein)
                     && thisDate.Equals(ck.mydateout)))
                     datas = (from r in db.Rooms
-                            select r).ToList();
+                             select r).ToList();
                 else if (thisDate.Equals(ck.mydatein)
                     && thisDate.Equals(ck.mydateout))
                     datas = (from r in db.Rooms
-                            where r.Qty.Equals(ck.txtQty)
-                            select r).ToList();
+                             where r.Qty.Equals(ck.txtQty)
+                             select r).ToList();
                 else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydateout))
-                    datas =(from r in db.Rooms
-                            join o in db.OrderDetails on r.RoomId equals o.RoomId
-                            into subGrp
-                            from s in subGrp.DefaultIfEmpty()
-                            where s.OrderStartDate != ck.mydatein
-                            select r).ToList();
+                    datas = (from r in db.Rooms
+                             join o in db.OrderDetails on r.RoomId equals o.RoomId
+                             into subGrp
+                             from s in subGrp.DefaultIfEmpty()
+                             where s.OrderStartDate != ck.mydatein
+                             select r).ToList();
                 else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydatein))
                     datas = (from r in db.Rooms
-                            join o in db.OrderDetails on r.RoomId equals o.RoomId
-                            into subGrp
-                            from s in subGrp.DefaultIfEmpty()
-                            where s.OrderEndDate != ck.mydateout
-                            select r).ToList();
+                             join o in db.OrderDetails on r.RoomId equals o.RoomId
+                             into subGrp
+                             from s in subGrp.DefaultIfEmpty()
+                             where s.OrderEndDate != ck.mydateout
+                             select r).ToList();
                 else if (0.Equals(ck.txtQty))
                     datas = (from r in db.Rooms
-                            join o in db.OrderDetails on r.RoomId equals o.RoomId
-                            into subGrp
-                            from s in subGrp.DefaultIfEmpty()
-                            where s.OrderStartDate != ck.mydatein
-                            && s.OrderEndDate != ck.mydateout
-                            select r).ToList();
+                             join o in db.OrderDetails on r.RoomId equals o.RoomId
+                             into subGrp
+                             from s in subGrp.DefaultIfEmpty()
+                             where s.OrderStartDate != ck.mydatein
+                             && s.OrderEndDate != ck.mydateout
+                             select r).ToList();
             }
-            else {
+            else
+            {
                 if (0.Equals(ck.txtQty)
                     && thisDate.Equals(ck.mydatein)
                     && thisDate.Equals(ck.mydateout))
@@ -209,7 +211,7 @@ namespace PJ_MSIT143_team02.Controllers
                             || s.OrderEndDate != ck.mydateout
                             select r;
             }
-            
+
             //return View("TestListView", datas.Where(e => e.RoomstatusId != 5));
             return View("TestListView", ck);
 
@@ -281,8 +283,6 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult Create(Room p)
         {
             MingSuContext db = new MingSuContext();
-            //給活動取值用
-            p.Cities = p.Address.Substring(0,3);
             db.Rooms.Add(p);
             db.SaveChanges();
             return RedirectToAction("List");
@@ -350,7 +350,7 @@ namespace PJ_MSIT143_team02.Controllers
             {
                 MingSuContext db = new MingSuContext();
                 IEnumerable<Room> r = db.Rooms.Where(r => r.RoomId == Id);
-                if (r != null)                    
+                if (r != null)
                     return View(r.ToList());
             }
             return RedirectPermanent("TestListView");
@@ -367,10 +367,10 @@ namespace PJ_MSIT143_team02.Controllers
             }
             else
             {
-            Image img = db.Images.FirstOrDefault(img => img.ImageId == imgref.ImageId);
-            content = img.Image1;
+                Image img = db.Images.FirstOrDefault(img => img.ImageId == imgref.ImageId);
+                content = img.Image1;
             }
-            
+
             return File(content, "image/jpeg");
         }
         //public static byte[] GetBytesFromImage(string filename)
