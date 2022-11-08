@@ -57,7 +57,7 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult Create(Discount d)
         {
             if (string.IsNullOrEmpty(d.DiscountInfo) || string.IsNullOrEmpty(d.DiscountName)
-                || string.IsNullOrEmpty(d.DiscountValue.ToString()) || string.IsNullOrEmpty(d.Coupon))
+                || string.IsNullOrEmpty(d.DiscountValue.ToString()))
                 return View();
             MingSuContext db = new MingSuContext();
             db.Discounts.Add(d);

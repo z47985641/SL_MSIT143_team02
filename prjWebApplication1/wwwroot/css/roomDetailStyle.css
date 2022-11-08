@@ -68,6 +68,11 @@
     padding-right: 8px;
 }
 
+.imgbox img{
+    width:30px;
+    height:30px;
+}
+
 #comment h4, h5 {
     color: saddlebrown;
 }
