@@ -11,42 +11,57 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label class="control-label">優惠名稱</label>
-                <input asp-for="DiscountName" class="form-control" />
-                <span asp-validation-for="DiscountName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">折扣資訊</label>
-                <input asp-for="DiscountInfo" class="form-control" />
-                <span asp-validation-for="DiscountInfo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">折數</label>
-                <input asp-for="DiscountValue" class="form-control" />
-                <span asp-validation-for="DiscountValue" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">優惠碼</label>
-                <input asp-for="DiscountValue" class="form-control" />
-                <span asp-validation-for="Coupon" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="新增資料" class="btn btn-primary" />
-            </div>
-        </form>
+        <div class="container">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label class="control-label">優惠名稱</label>
+                    <input asp-for="DiscountName" id="DiscountName" class="form-control" />
+                    <span asp-validation-for="DiscountName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">折扣資訊</label>
+                    <input asp-for="DiscountInfo" id="DiscountInfo" class="form-control" />
+                    <span asp-validation-for="DiscountInfo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">折數</label>
+                    <input asp-for="DiscountValue" id="DiscountValue" class="form-control" />
+                    <span asp-validation-for="DiscountValue" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">優惠碼</label>
+                    <input asp-for="Coupon" id="Coupon" class="form-control" />
+                    <span asp-validation-for="Coupon" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="新增資料" class="btn btn-primary" />
+                </div>
+            </form>
+            <button id="demo" class="btn btn-primary" style="float:right;margin-top:-54px;margin-right:350px">Demo鍵</button>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="DiscountAdmin">回上頁</a>
+<div class="row">
+    <div class="col-md-4 ">
+        <div class="container">
+            <div>
+                <a asp-action="DiscountAdmin">回上頁</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>$('#Discount').addClass('active');</script>
-
+    <script>
+        $("#demo").click(function () {
+            $("#DiscountName").val("匯豐信用卡優惠");
+            $("#DiscountInfo").val("使用匯豐旅人輕旅卡，享9折優惠價");
+            $("#DiscountValue").val("0.90");
+            $("#Coupon").val("");
+        })
+    </script>
 }
 
