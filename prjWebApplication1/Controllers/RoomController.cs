@@ -273,6 +273,8 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult Create(Room p)
         {
             MingSuContext db = new MingSuContext();
+            //給活動取值用
+            p.Cities = p.Address.Substring(0,3);
             db.Rooms.Add(p);
             db.SaveChanges();
             return RedirectToAction("List");
