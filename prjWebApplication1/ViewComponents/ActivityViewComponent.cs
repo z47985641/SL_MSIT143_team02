@@ -20,15 +20,16 @@ namespace PJ_MSIT143_team02.ViewComponents
                         select new Room { 
                         Cities = c.Cities}).ToString();
             string ca = ms.Rooms.Where(p => p.RoomId == RoomID).Select(c => c.Cities).First();
+            string all = "全國適用";
             var data = (from d in ms.Activities
-                        where d.ActivityLocation.Equals(ca)
+                        where ((d.ActivityLocation.Contains(ca) || d.ActivityLocation.Contains(all) )&& d.ActivityStatus.Equals("開放報名"))
                         select new Activity
                         {
                             ActivityId = d.ActivityId,
                             ActivityName = d.ActivityName
                         })
                         //.Where(d => d.ActivityLocation.Equals(rcity.ToString()))
-                        .Take(3).ToList();
+                        .Take(4).ToList();
 
             return View(data);
         }
