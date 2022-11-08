@@ -1,4 +1,6 @@
 ﻿@model PJ_MSIT143_team02.ViewModels.CRoomNew
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
 
 @{
     ViewData["Title"] = "MemnerRoomNew";
@@ -15,18 +17,20 @@
         <hr />
         <form asp-action="MemnerRoomNew" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group row" >
-                <div class=" col-md-4" >
+            <div class="form-group row">
+                <input type="hidden" name="MemberId" value="@Accessor.HttpContext.Session.GetInt32("MemberID")" />
+                <input type="hidden" name="RoomstatusId" value="4" />
+                <div class=" col-md-4">
                     <label asp-for="RoomName" class="control-label">房間名稱</label>
                     <input asp-for="RoomName" class="form-control" />
                     <span asp-validation-for="RoomName" class="text-danger"></span>
                 </div>
-                <div class=" col-md-4" >
+                <div class=" col-md-4">
                     <label asp-for="Qty" class="control-label">數量</label>
                     <input asp-for="Qty" class="form-control" />
                     <span asp-validation-for="Qty" class="text-danger"></span>
                 </div>
-                <div class=" col-md-4" >
+                <div class=" col-md-4">
                     <label asp-for="RoomPrice" class="control-label">價格</label>
                     <input asp-for="RoomPrice" class="form-control" />
                     <span asp-validation-for="RoomPrice" class="text-danger"></span>
@@ -39,7 +43,7 @@
             </div>
             <div class="form-group ">
                 <label asp-for="RoomIntrodution" class="control-label">房間介紹</label>
-                <textarea asp-for="RoomIntrodution" class="form-control" ></textarea>
+                <textarea asp-for="RoomIntrodution" class="form-control"></textarea>
                 <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
             <br />
@@ -128,6 +132,7 @@
             </div>
             <div class="col-md-4"></div>
         </form>
+        <button class="btn btn-primary" style="margin:5px" onclick="Demo()">Demo</button>
     </div>
 </div>
 
@@ -144,9 +149,6 @@
 
         $("#img").on("change", function (e) {
             var count = 0;
-            //丟值進另一個list紀錄圖片
-            //新增刪除功能
-            //解決只能一次選擇的問題            
             for (count; count < 10; count++) {
                 if (this.files[count] != null) {
                     divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo${count}"  />`
@@ -155,7 +157,14 @@
                     $(`#Photo${count}`).attr('src', obj);
                 };
             }
-
+        })
+            function Demo() {
+                $('#RoomName').val('黑鰭飲冰宿');
+                $('#Qty').val('8');
+                $('#RoomPrice').val('1500');
+                $('#Address').val('蘭嶼鄉漁人 143-3 號, 蘭嶼鄉, 台東縣, 952');
+                $('#RoomIntrodution').val('住宿現採取加強清潔和旅客安全等措施。住宿使用消毒劑進行清潔，且經常接觸的位置會以消毒用品清潔。定期測量員工體溫，且提供旅客手部清潔用品。');
+            }
 
     </script>
 }

@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="MemberAccount" class="control-label">會員帳號</label>
-                <input asp-for="MemberAccount" class="form-control" />
+                <input asp-for="MemberAccount" class="form-control"  />
                 <span asp-validation-for="MemberAccount" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -58,17 +58,13 @@
                 <span asp-validation-for="CityName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Authority" class="control-label">會員權限</label>
-                <input asp-for="Authority" class="form-control" />
-                <span asp-validation-for="Authority" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <input type="submit" value="註冊 " class="btn btn-primary" />
             </div>
-            <div>
-                <a asp-action="Login">登入</a>
-            </div>
-        </form>
+
+        </form> 
+        <div>
+            <button class="btn btn-primary" onclick="RegisterDemo()">DEMO</button>
+        </div>
     </div>
     <div class="col-md-4"></div>
 </div>
@@ -76,4 +72,15 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    function RegisterDemo() {
+        $('#MemberAccount').val("asdf1234")
+        $('#MemberPassword').val("asdf1234")
+        $('#MemberName').val("方大同")
+        $('#BirthDate').val("1985/08/15")
+        $('#MemberPhone').val("0956823478")
+        $('#MemberEmail').val("z47985641@gmail.com")
+        $('#CityName').val("新北市")
+    }
+</script>
 }
