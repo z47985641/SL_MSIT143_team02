@@ -50,53 +50,20 @@
 
                         <form class="mb-3">
                             @{
+
                                 int count = 0;
                                 foreach (var r in Model.Equipment)
                                 {
                                     count++;
-                                    <div class="form-check mb-2" id="dxbox">
-                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="calc(@r.EquipmentId);">
-                                        <label class="form-check-label" for="@r.EquipmentId">
-                                            @r.EquipmentName
-                                        </label>
-                                    </div>
-                                    @*<div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="free-wi-fi">
-                                            <label class="form-check-label" for="free-wi-fi">
-                                                免費 Wi-Fi
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                空調
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                冰箱
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                浴缸
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                陽台/露臺
-                                            </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input class="form-check-input rounded-0 border-dark" type="checkbox" id="swimming-pool">
-                                            <label class="form-check-label" for="swimming-pool">
-                                                暖氣
-                                            </label>
-                                        </div>*@
+                                <div class="form-check mb-2" id="dxbox">
+                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="calc(@r.EquipmentId)">
+                                    <!--<input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" @*onclick="@Url.Action("forEquipment","Room",new {id=r.EquipmentId});"*@<!-->
+                                    <label class="form-check-label" for="@r.EquipmentId">
+                                        @r.EquipmentName
+                                    </label>
+                                </div>
                                 };
+                            
                             }
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
@@ -224,7 +191,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-9 col-12 room-card" id="display-items-div" style="border-radius:12px">
+                <div class="col-lg-9 col-12 room-card" @*id="display-items-div"*@  id="hhh"  style="border-radius:12px">
                     @{
                         int q = 0;
                         foreach (var r in Model.Room)
@@ -287,7 +254,7 @@
                                             </div>
                                             <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
                                                 <span>
-                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=..">
                                                         <img src="~/Image/heart.png" style="width:45px ;height:45px" />
                                                     </a>
                                                 </span>
@@ -304,7 +271,6 @@
                                 </div>
                                 <div class="dropdown-divider d-lg-block d-none"></div>
                             </div>
-                            @*@Html.PagedListPager(Model, PagedList => Url.Action("TestListView", new { page }))*@
                         };
                     }
                 </div>
@@ -314,11 +280,6 @@
         </div>
     </div>
 </div>
-
-
-@*//-----------------------------------------------------------------------------------------------------*@
-
-
 
 
 @section Scripts{
@@ -377,83 +338,192 @@
     </script>
 
     <script>
-        //選擇設備
 
-
-           @*function cartcar() {
-            var eqUrl = "@Url.Action("TestListView", "Room")";
-            $.ajax({
-                type: "GET",
-                url: eqpUrl
-            }).done(function (result) {
-                $("#TestListView").html(result);
-            }).fail(function (e) {
-            });
-        }*@
-
-        @* $("eq").click(function () {
-            var eqUrl = "@Url.Action("TestListView", "Room")" + "/" + $(this).attr("value") + "/0";
-            $.ajax({
-                type: "GET",
-                url: eqUrl
-
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-            });*@
-
-
-
-        @* $(function () {
-            $("#dxbox").click(function () {
-                if ($(this).find("input[type=checkbox]:checked").val() != undefined) {
-                    var result = $(this).find("input[type=checkbox]:checked").val();
-                    alert(result);
-                    //$.post("TestListView", { number: number }, function (data) { console.log(data) })
-                    $.ajax({
-                        type: "POST",
-                        url: "@Url.Action("TestListView", "Room")"+ result
-                    }).done(function (result) {
-                        $("TestListView").html(result);
-                    });
-                }
-            });
-        });*@
-
-
-        //-----------------------------------------------------------------------------
-
- //選設備
-        @*$("#eq").click(function () {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "/" + $(this).attr("value")+"/0";
-            $.ajax({
-                type: "GET",
-                url: shopUrl
-
-            }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-                bindshop();
-            }).fail(function (e) {
-                alert(e.responseText);
-            });
-
-              });*@
-
-        function calc(eqID) {
-            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
+        @*function calc(eqID) {
+              var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
             $.ajax({
                 type: "GET",
                 url: shopUrl,
             }).done(function (result) {
-                $("TestListView").html(result);
-                alert(resutlt);
-                bindshop();
+
+
+            })
+
+        }*@
+
+
+
+
+        function calc(eqID) {
+           var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
+            $.ajax({
+                type: "GET",
+                url: shopUrl,
+            }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
+
+                let qq = document.querySelector("#hhh");
+                qq.innerHTML="";
+                let div = document.createElement("div");
+                div.className = "mobile-bg-secondary";
+                result.forEach(function (data) {
+                    let roomdatas =
+                        ` <div class="card border-0 mb-sm-4 mb-2">
+                                    <div class="row no-gutters">
+                                        <div class="col-4" style="padding-top:25px;padding-left:11px;padding-bottom:25px">
+                                            <img src='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}'  style=" padding:5px; height:200px" />
+                                        </div>
+                                        <div class="col-8"> 
+                                            <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
+                                                <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
+                                                    <small class="text-primary d-flex">
+
+                                                        <span class="text-black-50 d-lg-block d-none"></span>
+                                                    </small>
+                                                    <ul class="list-unstyled d-flex align-items-center m-0">
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <ul class="list-unstyled m-sm-0 m-1" style="padding-left:10px;">
+                                                    <li>
+                                                        <h3 class="card-title">${data.roomName}</h3>
+                                                    </li>
+                                                    <li>
+                                                        <p class="card-text small text-black-50">
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
+                                                    <li>
+                                                        <span class="badge badge-pill badge-info text-black mr-3">
+                                                            ${data.roomIntrodution}
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                        <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
+                                                    </li>
+                                                </ul>
+                                                <div class="money-block text-right d-flex flex-column">
+                                                    <small class="text-black-50 d-lg-block d-none" style="font-size:20px">每晚價錢</small>
+                                                    <p class="h3 m-0" id="RoomPrice">NT$${data.roomPrice}</p>
+                                                </div>
+                                                <!-- badge樣式沒有作用另外寫css的 -->
+                                            </div>
+                                            <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
+                                                <span>
+                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=..">
+                                                        <img src="/Image/heart.png" style="width:45px ;height:45px" />
+                                                    </a>
+                                                </span>
+                                            </button>
+                                            <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
+                                                <span>
+                                                    <a href='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}' style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
+                                                        立即預訂
+
+                                                    </a>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider d-lg-block d-none"></div>
+                                </div>`
+                    div.innerHTML += roomdatas;
+                    @*var qqq = `@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}`;
+                    console.log(qqq)*@
+                })
+                qq.append(div);
             }).fail(function (e) {
                 alert(e.responseText);
             });
 
         }
+
+
+
+
+
+        @*function calc(eqID) {
+           var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
+            $.ajax({
+                type: "GET",
+                url: shopUrl,
+
+            }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
+                var result = [];
+                for (var i = 0; i <= result.length - 1; i++) {
+
+
+                }
+
+                const hh = $("#hhh").html()
+                console.log(hh);
+
+                $("#hhh").html(result);
+                console.log(result);
+
+
+            }).fail(function (e) {
+                alert(e.responseText);
+            });
+
+        }*@
+
+        @*function calc(eqID) {
+            $("[name=EquipmentId]:checkbox:checked").each(function () {
+                selected.push($(this).val());
+            });
+            var selected = [];
+                for (var i = 0; i <= selected.length - 1; i++) {
+                    //alert(selected[i]);
+                    $.get("@Url.Action("TestListView", "Room")", { EquipmentId: selected[i] }).done(function (result) {
+                    });
+            }
+           var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
+
+            $.ajax({
+                type: "GET",
+                url: shopUrl,
+
+            }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
+
+
+                const hh = $("#hhh").html()
+                console.log(hh);
+
+                $("#hhh").html(result);
+                console.log(result);
+
+
+            }).fail(function (e) {
+                alert(e.responseText);
+            });
+
+        }*@
+
+        @*function calc(eqID)
+       {
+            $.ajax({
+                url: '@Url.Action("forEquipment", "Room")' + "?Equipment=" + eqID,
+                type: 'GET',
+        //    data:{},
+        }).then(function () {
+
+            $('.col-lg-9 col-12 room-card').load('@Url.Action("forEquipment", "Room")')//右邊的房間列表，讀取選取設備後後新ㄉ房間
+        })
+
+         $.get('@Url.Action("TestListView", "Room")',
+           function (data) {
+                console.log(data)
+            }
+
+         )
+    }*@
+
+
 
     </script>
 
