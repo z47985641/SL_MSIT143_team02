@@ -30,9 +30,14 @@
                 <span asp-validation-for="txtPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="登入" class="btn btn-primary"/>
+                <input type="submit" value="登入" class="btn btn-primary" />
             </div>
         </form>
+        <button class="btn btn-primary" style="margin:5px" onclick="Demo1()">Demo:一般會員</button>
+        <br />
+        <button class="btn btn-primary" style="margin: 5px" onclick="Demo2()">Demo:業主</button>
+        <br />
+        <button class="btn btn-primary" style="margin: 5px " onclick="Demo3()">Demo:管理員</button>
     </div>
     <div class="col-md-4"></div>
 </div>
@@ -40,4 +45,20 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+    function Demo1() {
+        $('#txtAccount').val('asdf1234');
+        $('#txtPassword').val('asdf1234');
+    }
+    function Demo2() {
+        $('#txtAccount').val('Dermot');
+        $('#txtPassword').val('Dermot');
+    }
+    function Demo3() {
+        $('#txtAccount').val('Admin');
+        $('#txtPassword').val('Admin');
+
+    }
+
+</script>
 }
