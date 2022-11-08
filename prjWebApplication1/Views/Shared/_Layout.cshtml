@@ -89,9 +89,15 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    @{
+                                        if ((@Accessor.HttpContext.Session.GetString("Power")) == "業主")
+                                        {
+                                            <li>
+                                                <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerRoomNew">刊登旅宿</a>
+                                            </li>
+                                        }
 
-
-                                    @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
+                                        if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
                                         {
                                             <li>
                                                 <a asp-area="" asp-controller="MemberCreate" asp-action="Login">登入</a>
@@ -104,9 +110,7 @@
                                         {
                                             if ((@Accessor.HttpContext.Session.GetString("Power")) != "管理員")
                                             {
-                                                <li>
-                                                    <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerRoomNew">刊登旅宿</a>
-                                                </li>
+
                                                 <li>
                                                     <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerMainPage">會員專區</a>
                                                     <ul class="dropdown">
@@ -122,9 +126,15 @@
                                                         <li>
                                                             <a class="nav-link text-dark" asp-area="" asp-controller="Member" asp-action="LikeList">追蹤清單</a>
                                                         </li>
-                                                        <li>
-                                                            <a class="nav-link text-dark" asp-area="" asp-controller="MemberOnly" asp-action="MemnerRoomList">房源資料</a>
-                                                        </li>
+                                                        @{
+                                                            if ((@Accessor.HttpContext.Session.GetString("Power")) == "業主")
+                                                            {
+                                                                <li>
+                                                                    <a class="nav-link text-dark" asp-area="" asp-controller="MemberOnly" asp-action="MemnerRoomList">房源資料</a>
+                                                                </li>
+                                                            }
+                                                        }
+
                                                     </ul>
                                                 </li>
                                             }
@@ -179,7 +189,7 @@
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
+
 
     @RenderSection("scripts", required: false)
 
@@ -246,21 +256,21 @@
 </body>
 </html>
 
-@section Scripts{ 
-<script>
-    var box = document.getElementById('box');
-    var down = false;
+@section Scripts{
+    <script>
+        var box = document.getElementById('box');
+        var down = false;
 
-    function toggleNotifi() {
-        if (down) {
-            box.style.height = '0px';
-            box.style.opacity = 0;
-            down = false;
-        } else {
-            box.style.height = '510px';
-            box.style.opacity = 1;
-            down = true;
+        function toggleNotifi() {
+            if (down) {
+                box.style.height = '0px';
+                box.style.opacity = 0;
+                down = false;
+            } else {
+                box.style.height = '510px';
+                box.style.opacity = 1;
+                down = true;
+            }
         }
-    }
-</script>
+    </script>
 }
