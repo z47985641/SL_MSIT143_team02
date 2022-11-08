@@ -20,7 +20,7 @@ namespace PJ_MSIT143_team02.Controllers
         public IEnumerable<Activity> queryAll()
         {
             var data = from d in (new MingSuContext()).Activities
-                       orderby d.ActivityId descending
+                       orderby d.ActivityDate descending
                        select d;
             return data;
         }
