@@ -41,16 +41,33 @@
             </div>
             <div class="form-group row">
                 <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
-                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
                 <ul class="list-group">
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4" checked>
-                        <label class="form-check-label" for="4">未上架</label>
-                    </li>
-                    <li class="list-group-item">
-                        <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2">
-                        <label class="form-check-label" for="2">已上架</label>
-                    </li>
+                    @{
+                        if (Model.RoomstatusId == 4)
+                        {
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4" checked>
+                                <label class="form-check-label" for="4">未上架</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2">
+                                <label class="form-check-label" for="2">已上架</label>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4">
+                                <label class="form-check-label" for="4">未上架</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2" checked>
+                                <label class="form-check-label" for="2">已上架</label>
+                            </li>
+                        }
+
+                    }
+
                 </ul>
             </div>
 
@@ -190,14 +207,6 @@
                                 }
                                 count++;
                             }
-                            @*if (key == 0)
-                        {
-                            <div style="float:left " class="col-md-6">
-                                <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
-                                <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
-                            </div>
-                            break;
-                        }*@
                             id3++;
                         }
 
@@ -211,8 +220,9 @@
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 房源圖片 </p>
                 <div class="col-md-1"></div>
+                <input type="file" name="img" id="img" multiple accept="image/*" />
                 <div class="col-md-10 " id="div_img">
-                    <input type="file" name="img" id="img" multiple accept="image/*" />
+
                     @{
                         foreach (var item in Model.imgId)
                         {
@@ -226,8 +236,9 @@
 
                     }
                 </div>
-                <div class="col-md-1"></div>
+                
             </div>
+            <div class="col-md-10" id="div_img03"></div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -243,16 +254,16 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 <script>
-    $('#img_div1>a').on('click', function () {
+    $('#img_div1>#img_delete').on('click', function () {
         $(this).parents('#img_div').attr('hidden', 'hidden')
     })
-    var divimg = document.getElementById("div_img")
+    var divimg = document.getElementById("div_img03")
 
     $("#img").on("change", function (e) {
         var count = 0;
         for (count; count < 10; count++) {
             if (this.files[count] != null) {
-                divimg.innerHTML += `<img style=" padding:5px; height:200px" id="Photo${count}"  />`
+                divimg.innerHTML += ` <div id="img_div"><img style=" padding:5px; height:200px" id="Photo${count}"  /><div id="img_div1"><a  class="btn btn-danger" type="button" onclick="del(${count})" >刪除</a></div></div>`
                 var file = this.files[count];
                 var obj = URL.createObjectURL(file);
                 $(`#Photo${count}`).attr('src', obj);
@@ -260,7 +271,10 @@
         };
     });
 
-
+    function del(id) {
+        alert(`Photo${id}`)
+        $(`#Photo${id}`).parents('#img_div').remove();
+    }
 </script>
 
 }

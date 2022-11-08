@@ -4,11 +4,8 @@
     ViewData["Title"] = "MemnerRoomList";
 }
 
-<h1>房源清單</h1>
+<h1 style="text-align:center">房源清單</h1>
 
-<p>
-    <a asp-action="MemnerRoomNew">建立新房源</a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -41,33 +38,46 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomstatusId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RoomPrice)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Qty)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
+        <tr>
+            <td>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomName)
+            </td>
 
-                <td>
-                    @Html.ActionLink("編輯", "MemnerRoomEdit", new {  roomId=item.RoomId }) |
-                    @Html.ActionLink("刪除", "MemnerRoomDelete", new { roomId = item.RoomId })
-                </td>
-            </tr>
+            @{
+                if (item.RoomstatusId == 4)
+                {
+                    <td>
+                        未上架
+                    </td>
+
+
+                }
+                else
+                {  <td>
+    已上架
+</td>
+                }
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+
+            <td>
+                @Html.ActionLink("編輯", "MemnerRoomEdit", new { roomId = item.RoomId }) |
+                @Html.ActionLink("刪除", "MemnerRoomDelete", new { roomId = item.RoomId })
+            </td>
+        </tr>
         }
     </tbody>
 </table>
