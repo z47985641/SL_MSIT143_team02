@@ -217,19 +217,21 @@ namespace PJ_MSIT143_team02.Controllers
 
 
         [HttpGet]
-        public ActionResult forEquipment(int EquipmentID)
+        public ActionResult forEquipment(string Equipment)
         {
-            //int EquipmentID = 0;
-            //EquipmentID = int.Parse(Equipment);
+            int EquipmentID = 0;
+            EquipmentID = int.Parse(Equipment);
 
             var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room).ToList();
             //return PartialView("forEquipment", q);
-            
+
             //CKeywordViewModel ck = new CKeywordViewModel();
             //ck = JsonSerializer.Serialize<CKeywordViewModel>(q);
             string jsonString = JsonSerializer.Serialize(q);
 
             return Json(q);
+
+
 
             //eq = (from r in db.Equipment
             //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
