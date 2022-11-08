@@ -89,9 +89,7 @@
                                             </li>
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerRoomNew">刊登旅宿</a>
-                                    </li>
+
 
                                     @{ if ((@Accessor.HttpContext.Session.GetString("Power")) == null || (@Accessor.HttpContext.Session.GetString("Power")) == "")
                                         {
@@ -106,6 +104,9 @@
                                         {
                                             if ((@Accessor.HttpContext.Session.GetString("Power")) != "管理員")
                                             {
+                                                <li>
+                                                    <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerRoomNew">刊登旅宿</a>
+                                                </li>
                                                 <li>
                                                     <a asp-area="" asp-controller="MemberOnly" asp-action="MemnerMainPage">會員專區</a>
                                                     <ul class="dropdown">
