@@ -80,7 +80,7 @@ namespace PJ_MSIT143_team02.Controllers
             var Room = db.Rooms;
             ck.Equipment = Equipment;  //EquipmentID
             ck.EquipmentReference = EquipmentReference;  //EquipmentID RoomID
-            ck.Room = Room; //RoomID
+            ck.Room = Room.Where(e => e.RoomstatusId == 2); //RoomID
 
             //IEnumerable<Equipment> eq = null;
             //if (string.IsNullOrEmpty(ck.txtKeyword))
