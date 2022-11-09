@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return _room; }
             set { _room = value; }
         }
+        public List<Room> rooms { get; set; }
 
         public CRoomNew()
         {
@@ -33,6 +35,8 @@ namespace PJ_MSIT143_team02.ViewModels
             get { return _room.RoomName; }
             set { _room.RoomName = value; }
         }
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
+
         public decimal RoomPrice
         {
             get { return _room.RoomPrice; }

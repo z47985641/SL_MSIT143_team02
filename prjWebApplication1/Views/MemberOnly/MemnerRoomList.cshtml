@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
+﻿@model PJ_MSIT143_team02.ViewModels.CRoomNew
 
 @{
     ViewData["Title"] = "MemnerRoomList";
@@ -36,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.rooms)
         {
         <tr>
             <td>

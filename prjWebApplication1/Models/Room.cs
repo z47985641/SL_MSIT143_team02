@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 
@@ -17,6 +18,7 @@ namespace PJ_MSIT143_team02.Models
 
         public int RoomId { get; set; }
         public string RoomName { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         public decimal RoomPrice { get; set; }
         public string RoomIntrodution { get; set; }
         public int MemberId { get; set; }

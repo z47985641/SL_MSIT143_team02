@@ -11,18 +11,25 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
             <div style="height: 200px; margin: 10px" class="column">
-                <div class="col-md-3"  style="height: 139px; float: left"></div>
+                <div class="col-md-3" style="height: 139px; float: left"></div>
                 <div class="col-md-6" style=" float: left">
-                    <img style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto","Member",new{ItemId = item.MemberId})" />
+                    @if (item.MemberImage == null)
+                    {
+                        <img id="Photo" style=" padding:5px;height:200px" src="~/img/Admin/unknown.png" />
+                    }
+                    else
+                    {
+                        <img id="Photo" style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto", "Member", new { ItemId = item.MemberId })" />
+                    }
                     <div style=" height:30px"><input type="hidden" name="photoEdit" id="photoEdit1" /></div>
                 </div>
-                <div class="col-md-3"style="height: 139px; float: left"></div>
-               
+                <div class="col-md-3" style="height: 139px; float: left"></div>
+
             </div>
             <div style=" height: 300px ">
                 <div class="text-danger"></div>
-                <div  class="col-md-6"style="float: left">
-                    <div class="form-group" >
+                <div class="col-md-6" style="float: left">
+                    <div class="form-group">
                         <input type="hidden" name="MemberId" value="@item.MemberId" />
                         <label class="control-label">姓名</label>
                         <p style="padding: 6px; margin: 0px 0px 0px 10px">@Html.DisplayFor(modelItem => item.MemberName)</p>
@@ -62,4 +69,18 @@
     }
 </div>
 <hr />
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+
+        $("#photoEdit1").on("change", function (e) {
+            const file = this.files[0];
+            var obj = URL.createObjectURL(file);
+            $('#Photo').attr('src', obj);
+
+        });
+
+    </script>
+}
 
