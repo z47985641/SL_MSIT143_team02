@@ -79,7 +79,6 @@
                     <thead>
                         <tr>
                             <th>商品名稱</th>
-                            @*<th>活動名稱</th>*@
                             <th>小計</th>
                         </tr>
                     </thead>
@@ -87,9 +86,6 @@
                         <tr>
                             <td>
                                 @Model.房源及會員.FirstOrDefault().RoomName </td>
-                            @*<td>
-                                @Model.房源及會員.FirstOrDefault().ActivityName
-                            </td>*@
                             <td>@Model.房源及會員.FirstOrDefault().小計</td>
                         </tr>
                     </tbody>
