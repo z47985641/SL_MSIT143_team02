@@ -58,14 +58,22 @@
                         <span asp-validation-for="CityName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Authority" class="control-label"></label>
-                        <input asp-for="Authority" class="form-control" />
+                        <label asp-for="Authority" class="control-label">權限</label>
+                        <br />
+                        @*<input asp-for="Authority" class="form-control" />*@
+                        <select class="form-select" aria-label="Default select example" name="Authority">
+                            <option selected >@Model.Authority</option>
+                            <option value="一般會員">一般會員</option>
+                            <option value="業主">業主</option>
+                            <option value="管理員">管理員</option>
+                        </select>
                         <span asp-validation-for="Authority" class="text-danger"></span>
+                        <br />
                     </div>
                 </div>
 
             </div>
-            <div class="row">
+            <div class="row" style="padding:10px">
                 <div class="col-md-5"></div>
                 <div class="col-md-2"><input type="submit" value="Save" class="btn btn-primary" /></div>
                 <div class="col-md-5"></div>

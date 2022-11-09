@@ -15,7 +15,6 @@ namespace PJ_MSIT143_team02.ViewModels
         //public int EquipmentId { get; set; }
         //public int RoomId { get; set; }
 
-
         public IEnumerable<Equipment> Equipment { get; set; }   //EquipmentID
         public IEnumerable<EquipmentReference> EquipmentReference { get; set; }  //EquipmentID RoomID
         public IEnumerable<Room> Room { get; set; }  //RoomID

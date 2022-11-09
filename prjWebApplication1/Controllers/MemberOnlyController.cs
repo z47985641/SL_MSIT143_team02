@@ -93,9 +93,8 @@ namespace PJ_MSIT143_team02.Controllers
                 return RedirectToAction("Login", "MemberCreate");
 
             MingSuContext db = new MingSuContext();
-            var roomItem = from r in db.Rooms
-                           where r.MemberId == HttpContext.Session.GetInt32("MemberID")&& r.RoomstatusId != 5
-                           select r;
+            CRoomNew roomItem = new CRoomNew();
+            roomItem.rooms = db.Rooms.Where(r => r.MemberId == HttpContext.Session.GetInt32("MemberID") && r.RoomstatusId != 5).Select(r => r).ToList(); ;
             return View(roomItem);
         }
         public IActionResult MemnerRoomEdit(int? roomId)

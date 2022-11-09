@@ -6,9 +6,13 @@
 
 <hr />
 <h1 style="text-align:center">房源編輯</h1>
-<div class="row">
+<div class="row" style="min-block-size:1000px">
     <div class="col-md-4"></div>
     <div class="col-md-4">
+        <br />
+        <h2 style="text-align:center">房源基本資料</h2>
+        <hr />
+
         <form asp-action="MemnerRoomEdit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group row">
@@ -36,12 +40,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="RoomIntrodution" class="control-label">介紹</label>
-                <textarea asp-for="RoomIntrodution" class="form-control"></textarea>
+                <textarea asp-for="RoomIntrodution" class="form-control" style="height:300px"></textarea>
                 <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
-            <div class="form-group row">
-                <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
-                <ul class="list-group">
+            <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
+            <div class="row form-group ">
+                <ul class="list-group list-group-horizontal" style=" padding:0px 10px">
                     @{
                         if (Model.RoomstatusId == 4)
                         {
@@ -70,19 +74,21 @@
 
                 </ul>
             </div>
+            <br />
+            <h2 style="text-align:center">房源設施</h2>
+            <hr />
 
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 基礎設施 </p>
                 <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    @* 未選取設備的房源會空白 *@
+                <div class="col-md-10 row">
                     @{
                         int id = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
                             if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id] == 1)
                             {
-                                <div style="float:left " class="col-md-6">
+                                <div class="col-md-6">
                                     <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
                                     <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
                                 </div>
@@ -96,7 +102,7 @@
                                 {
                                     if (j == @Model.EquipmentIdlist[id])
                                     {
-                                        <div style="float:left " class="col-md-6">
+                                        <div class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]" checked>
                                             <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
                                         </div>
@@ -104,7 +110,7 @@
                                     }
                                     if (Model.EquipmentId.Count == count)
                                     {
-                                        <div style="float:left " class="col-md-6">
+                                        <div class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
                                             <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
                                         </div>
@@ -123,14 +129,14 @@
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 獨特設施 </p>
                 <div class="col-md-1"></div>
-                <div class="col-md-10">
+                <div class="col-md-10 row">
                     @{
                         int id2 = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
                             if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id2] == 2)
                             {
-                                <div style="float:left " class="col-md-6">
+                                <div class="col-md-6">
                                     <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]">
                                     <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
                                 </div>
@@ -143,7 +149,7 @@
                                 {
                                     if (j == @Model.EquipmentIdlist[id2])
                                     {
-                                        <div style="float:left " class="col-md-6">
+                                        <div class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]" checked>
                                             <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
                                         </div>
@@ -151,7 +157,7 @@
                                     }
                                     if (Model.EquipmentId.Count == count)
                                     {
-                                        <div style="float:left " class="col-md-6">
+                                        <div class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]">
                                             <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
                                         </div>
@@ -170,14 +176,14 @@
             <div class="row" style="padding:10px">
                 <p style="text-align:center"> 安全設施 </p>
                 <div class="col-md-1"></div>
-                <div class="col-md-10">
+                <div class="col-md-10 row">
                     @{
                         int id3 = 0;
                         foreach (var i in Model.EquipmentNamelist)
                         {
                             if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id3] == 3)
                             {
-                                <div style="float:left " class="col-md-6">
+                                <div class="col-md-6">
                                     <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
                                     <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
                                 </div>
@@ -190,7 +196,7 @@
                                 {
                                     if (j == @Model.EquipmentIdlist[id3])
                                     {
-                                        <div style="float:left " class="col-md-6">
+                                        <div class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]" checked>
                                             <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
                                         </div>
@@ -198,7 +204,7 @@
                                     }
                                     if (Model.EquipmentId.Count == count)
                                     {
-                                        <div style="float:left " class="col-md-6">
+                                        <div class="col-md-6">
                                             <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
                                             <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
                                         </div>
@@ -216,12 +222,14 @@
                 <div class="col-md-1"></div>
 
             </div>
+            <br />
+            <h2 style="text-align:center">房源圖片</h2>
+            <hr />
 
-            <div class="row" style="padding:10px">
-                <p style="text-align:center"> 房源圖片 </p>
+            <div style="padding:10px">
                 <div class="col-md-1"></div>
                 <input type="file" name="img" id="img" multiple accept="image/*" />
-                <div class="col-md-10 " id="div_img">
+                <div class="col-md-10 row" id="div_img">
 
                     @{
                         foreach (var item in Model.imgId)
@@ -236,19 +244,16 @@
 
                     }
                 </div>
-                
+
             </div>
             <div class="col-md-10" id="div_img03"></div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="form-group" style="padding:15px 0px">
+                <input type="submit" value="編輯完成" class="btn btn-primary" />
+                @Html.ActionLink("取消", "MemnerRoomList", new { }, new {Class = "btn btn-danger"})
             </div>
             <div class="col-md-4"></div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

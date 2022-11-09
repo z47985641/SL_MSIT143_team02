@@ -61,15 +61,12 @@
 
     </div>
 
-    @*@{
-            decimal TotalPrice = Model.房源及會員.FirstOrDefault().price * Model.房源及會員.FirstOrDefault().count;
-        }*@
     @{
         decimal sum = 0;
         sum += Model.房源及會員.FirstOrDefault().小計;
+    }
 
 
-}
     <div class="col-4">
         <div class="card" style="background-color: #f8f9fa">
             @*<input type="hidden" asp-for="OrderItem" />*@
@@ -79,29 +76,37 @@
                     <thead>
                         <tr>
                             <th>商品名稱</th>
-                            @*<th>活動名稱</th>*@
                             <th>小計</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>
-                                @Model.房源及會員.FirstOrDefault().RoomName </td>
-                            @*<td>
-                                @Model.房源及會員.FirstOrDefault().ActivityName
-                            </td>*@
+                            @if (Model.房源及會員.FirstOrDefault().ActivityId == 0)
+                            {
+                                <td class="RoomName">
+                                    @Model.房源及會員.FirstOrDefault().RoomName
+                                </td>
+                            }
+                            else if (Model.房源及會員.FirstOrDefault().RoomId == 0)
+                            {
+                                <td class="ActivityName">
+                                    活動:   @Model.房源及會員.FirstOrDefault().ActivityName
+                                </td>
+                            }
+
                             <td>@Model.房源及會員.FirstOrDefault().小計</td>
+
                         </tr>
                     </tbody>
                 </table>
                 <hr />
                 <div class="text-right">
                     @*<input type="hidden" asp-for="TotalPrice" />*@
-                    <p class="card-text font-weight-bolder" style="padding-right:12px">總計:　$ @sum.ToString("###,###,##0")</p>
+                    <p class="card-text font-weight-bolder" style="padding-right:12px">總計: $@sum.ToString("###,###,##0") </p>
                 </div>
                 <p></p>
                 <div class="text-center card-link">
-                    <button type="submit" class="btn btn-success w-75" >建立訂單</button>
+                    <button type="submit" class="btn btn-success w-75">建立訂單</button>
                 </div>
             </div>
         </div>

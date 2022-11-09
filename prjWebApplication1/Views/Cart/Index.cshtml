@@ -29,7 +29,6 @@
                 <thead class="table-borderless">
                     <tr>
                         <th>商品名稱</th>
-                        @*<th>活動名稱</th>*@
                         <th>單價</th>
                         <th>數量</th>
                         <th>小計</th>
@@ -43,7 +42,6 @@
 
                     <tr>
                         <a class="RoomId d-none">@item.RoomId</a>
-                        @*<td class="text-center"><img src="@Html.DisplayFor(modelItem => item.imageSrc)" height="30" /></td>*@
                         @if (item.ActivityId == 0)
                         {
                             <td class="RoomName">
@@ -52,14 +50,10 @@
 }
                         else if (item.RoomId == 0)
                         {
-                            <td class="RoomName">
+                            <td class="ActivityName">
                                 活動:   @Html.DisplayFor(modelItem => item.ActivityName)
                             </td>
 }
-
-                        @*<td class="ActivityName">
-            @Html.DisplayFor(modelItem => item.ActivityName)
-        </td>*@
                         <td class="RoomPrice">
                             @Html.DisplayFor(modelItem => item.price)
                         </td>
@@ -106,22 +100,22 @@
 <script>
     $(".GoCheckout").click(async function(){
         const RoomId = Number($(".RoomId").html());
+
         const RoomName = ($(".RoomName").html());
+        const ActivityName = Number($(".ActivityName").html());
+
+
         const RoomPrice = Number($(".RoomPrice").html());
-        //const ActivityName = Number($(".ActivityName").html());
-        const price = Number($("#price").html());
         const Qty = Number($(".Qty").html());
         //const count = Number($(".count").html());
 
 
         const json = {
             "RoomId": RoomId,
-            //"ActivityName": ActivityName,
             "RoomName": RoomName,
+            "ActivityName": ActivityName,
             "RoomPrice": RoomPrice,
-            "price": price,
             "Qty": Qty
-            //"count": count,
         }
         
         const jsonString = JSON.stringify(json);
