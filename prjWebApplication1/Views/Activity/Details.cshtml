@@ -2,7 +2,7 @@
 
 @{ 
     ViewData["Title"] = "Details";
-    int count = 10;
+    int count = 13;
     int left = Model.ActivityCapacity - count;
  }
 
@@ -43,13 +43,19 @@
                             活動地點: @Html.DisplayFor(model => model.ActivityLocation)
                         </p>
                         <p class="col-sm-10 card-text">
-                            @{ if (Model.ActivityStatus == "開放報名")
+                            @{ if (Model.ActivityCapacity == 120)
                                 {
-                            <span>剩餘人數/人數上限: @left / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
+                                    <span>剩餘人數/人數上限: @Html.DisplayFor(model => model.ActivityCapacity) / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
                                 }
-                                else if (Model.ActivityStatus == "額滿") { <span>報名人數已達名額上限</span>}
-                                else if (Model.ActivityStatus == "未開放報名") { <span>人數上限: @Html.DisplayFor(model => model.ActivityCapacity) 人</span>}
-                              }
+                                else if (Model.ActivityStatus == "開放報名")
+                                {
+                                    <span>剩餘人數/人數上限: @left / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
+                                }
+                                else if (Model.ActivityStatus == "額滿")
+                                { <span>報名人數已達名額上限</span>}
+                                else if (Model.ActivityStatus == "未開放報名")
+                                { <span>人數上限: @Html.DisplayFor(model => model.ActivityCapacity) 人</span>}
+                            }
                         </p>
                         <p class="col-sm-10 card-text">
                             活動價格: 新台幣 @Html.DisplayFor(model => model.ActivityPrice) 元
