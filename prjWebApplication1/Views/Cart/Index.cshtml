@@ -41,19 +41,29 @@
                         sum += item.小計;
 
                     <tr>
-                        <a class="RoomId d-none">@item.RoomId</a>
+                        @if (item.ActivityId == 0)
+                        {
+                            <a class="RoomId d-none">@item.RoomId</a>
+                        }
+                        else if (item.RoomId == 0)
+                        {
+                        <a class="RoomId d-none">@item.ActivityId</a>
+                        }
+
+
+
                         @if (item.ActivityId == 0)
                         {
                             <td class="RoomName">
                                 @Html.DisplayFor(modelItem => item.RoomName)
                             </td>
-}
+                        }
                         else if (item.RoomId == 0)
                         {
                             <td class="RoomName">
                                 活動:   @Html.DisplayFor(modelItem => item.ActivityName)
                             </td>
-}
+                        }
                         <td class="RoomPrice">
                             @Html.DisplayFor(modelItem => item.price)
                         </td>
