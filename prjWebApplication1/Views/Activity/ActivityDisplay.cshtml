@@ -26,12 +26,19 @@
             <div class="row">
                 @foreach (var item in Model)
                 {
-                    int count = 10;
+                    int count = 13;
                     int left = 0;
                     if (item.ActivityStatus == "開放報名") { left = item.ActivityCapacity - count; }
                     else if (item.ActivityStatus == "額滿" || item.ActivityStatus == "已結束") { left = 0; }
                     else if (item.ActivityStatus == "未開放報名") { left = item.ActivityCapacity; }
                     else { left = 0; }
+
+                    double cal = 0;
+                    double ac = item.ActivityCapacity;
+                    if(left != 0)
+                    {
+                        cal = left / ac;
+                    }
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="room-item card">
                         @*<img src=""
@@ -42,17 +49,21 @@
                                 活動日期: @Html.DisplayFor(modelItem => item.ActivityDate)
                             </p>
                             <p class="card-text">
-                                
-                                @if (left < 20 && left >0)
+
+                                @if (left == 0)
                                 {
-                                <p>剩餘名額: @left 人</p>
-                                <p class="text-red">即將額滿，報名從速 !</p>
-                                }
-                                else if (left >= 20) { <p>剩餘名額: @left 人</p><p><br /></p>}
-                                else if (left == 0) { <p>活動額滿或已結束</p><p><br /></p>}
-                                else
-                                { <p><br/></p><p><br /></p>}
-                                </p>
+                                <p>活動額滿或已結束</p><p><br /></p>
+                            }
+                            else if (ac == 120)
+                            { <p>剩餘名額: @ac 人</p><p><br /></p>}
+                        else if (cal >= 0.34)
+                        { <p>剩餘名額: @left 人</p><p><br /></p>}
+                    else if (cal < 0.34)
+                    { <p>剩餘名額: @left 人</p>
+                        <p class="text-red">即將額滿，報名從速 !</p>}
+                    else
+                    { <p><br /></p><p><br /></p>}
+                                @*</p>*@
                                 @*<p class="card-text">
                 活動狀態: @Html.DisplayFor(modelItem => item.ActivityStatus)
             </p>
