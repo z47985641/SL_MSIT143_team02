@@ -209,17 +209,17 @@ namespace PJ_MSIT143_team02.Controllers
                          where c.RoomId == p.RoomId
                          select new 房源及會員
                          {
-                             ActivityId = p.ActivityId,
-                             ActivityName = p.ActivityName,
+                             //ActivityId = p.ActivityId,
+                             //ActivityName = p.ActivityName,
                              MemberId = v.MemberId,
                              MemberAccount = v.MemberAccount,
                              MemberName = v.MemberName,
                              MemberEmail = v.MemberEmail,
                              MemberPhone = v.MemberPhone,
-                             RoomId = p.RoomId,
-                             RoomName = p.RoomName,
+                             RoomId = (p.RoomId == 0 ? p.RoomId : p.ActivityId),
+                             RoomName = (p.RoomName==null? p.RoomName: p.ActivityName),
                              price =(p.ActivityPrice==0?p.RoomPrice:p.ActivityPrice),
-                             count =Convert.ToInt32(p.count==0?p.Qty:p.count),
+                             count =Convert.ToInt32(p.count==null?p.Qty:p.count),
                          }).ToList();
             return View(crv);
 
