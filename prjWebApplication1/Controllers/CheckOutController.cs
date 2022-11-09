@@ -204,7 +204,7 @@ namespace PJ_MSIT143_team02.Controllers
             var v = JsonSerializer.Deserialize<Member>(Name);
 
             CRoomMemberViewModel crv = new CRoomMemberViewModel();
-
+            //註記用//
             crv.房源及會員 = (from c in db.Rooms
                          where c.RoomId == p.RoomId
                          select new 房源及會員
@@ -220,6 +220,10 @@ namespace PJ_MSIT143_team02.Controllers
                              RoomName = (p.RoomName==null? p.RoomName: p.ActivityName),
                              price =(p.ActivityPrice==0?p.RoomPrice:p.ActivityPrice),
                              count =Convert.ToInt32(p.count==null?p.Qty:p.count),
+                             //++++++++++++++佑謙更新+++++++++++++++++++
+                             //TotalPrice = p.TotalPrice,
+                             //count = Convert.ToInt32(p.count == 0 ? p.Qty : p.count),
+                             //+++++++++++++++暫不合併++++++++++++++++++
                          }).ToList();
             return View(crv);
 
@@ -256,6 +260,7 @@ namespace PJ_MSIT143_team02.Controllers
                              RoomId = p.RoomId,
                              RoomName = p.RoomName,
                              price = p.RoomPrice,
+                             TotalPrice = p.TotalPrice,
                              count = Convert.ToInt32(p.Qty),
                          }).ToList();
 

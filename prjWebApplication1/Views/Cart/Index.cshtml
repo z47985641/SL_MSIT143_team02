@@ -112,6 +112,32 @@
             "RoomPrice": RoomPrice,
             "Qty": Qty
         }
+    //+++++++++++++++++++++++++++++++++++++++佑謙更新++++++++++++++++++++++++++++
+     //$(".GoCheckout").click(async function(){
+     //   const RoomId = Number($(".RoomId").html());
+     //
+     //   const RoomName = $(".RoomName").html();
+     //   const ActivityName = $(".ActivityName").html();
+     //
+     //
+     //   const RoomPrice = Number($(".RoomPrice").html());
+     //   const Qty = Number($(".Qty").html());
+     //   if ($("#price").val() == "" || $("#price").val() == null) { 
+     //       $("#price").html(@sum);
+     //   }
+     //   const TotalPrice = Number($("#price").html());
+     //   //const count = Number($(".count").html());
+     //
+     //   const json = {
+     //       "RoomId": RoomId,
+     //       "RoomName": RoomName,
+     //       "ActivityName": ActivityName,
+     //       "RoomPrice": RoomPrice,
+     //       "count": Qty,
+     //       "TotalPrice": TotalPrice,
+     //   }
+        //+++++++++++++++++++++++++++++++++++++++暫不合併++++++++++++++++++++++++++++
+
         
         const jsonString = JSON.stringify(json);
         const response = await fetch("@Url.Content("~/CheckOut/GetPayData")" + `?jsonString=${jsonString}`);
@@ -139,6 +165,7 @@
                 toastr["error"]("無此優惠碼！");
             }
             $("#price").html(result);
+            $("#price").val(result);
         })
     });
 </script>

@@ -234,7 +234,7 @@
                                                 <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
                                                     <li>
                                                         <span class="badge badge-pill badge-info text-black mr-3">
-                                                            @r.RoomIntrodution.Substring(0, 15)...
+                                                            @r.RoomIntrodution.Substring(0,16)<span>...</span>
                                                         </span>
                                                     </li>
                                                     <li>
@@ -364,6 +364,8 @@
                 let div = document.createElement("div");
                 div.className = "mobile-bg-secondary";
                 result.forEach(function (data) {
+                    let roomIntrodution = data.roomIntrodution;
+                    let roomIntSub = roomIntrodution.substring(0, 16);
                     let roomdatas =
                         ` <div class="card border-0 mb-sm-4 mb-2">
                                     <div class="row no-gutters">
@@ -396,7 +398,7 @@
                                                 <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
                                                     <li>
                                                         <span class="badge badge-pill badge-info text-black mr-3">
-                                                            ${data.roomIntrodution}
+                                                            ${roomIntSub}...
                                                         </span>
                                                     </li>
                                                     <li>
