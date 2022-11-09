@@ -26,8 +26,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="txtPassword" class="control-label">密碼</label>
-                <input type="password" asp-for="txtPassword" class="form-control" />
+                <input asp-for="txtPassword" class="form-control" />
                 <span asp-validation-for="txtPassword" class="text-danger"></span>
+            </div>
+            <div class="mb-3 form-check">
+                <input  class="form-check-input me-1" type="checkbox" value="" id="passwordcheck" checked="checked">
+                <label  class="form-check-label" for="exampleCheck1">顯示密碼</label>
             </div>
             <div class="form-group">
                 <input type="submit" value="登入" class="btn btn-primary" />
@@ -59,6 +63,16 @@
         $('#txtPassword').val('Admin');
 
     }
-
+    $(document).ready(function () {
+        passwordchange()
+        $("#passwordcheck").attr('onclick', 'passwordchange()')
+    })
+    function passwordchange() {
+        if ($('#txtPassword').attr("type") == ("text")) {
+            $('#txtPassword').attr("type", "password");
+        } else {
+            $('#txtPassword').attr("type", "text");
+        }
+    }
 </script>
 }
