@@ -85,7 +85,7 @@ namespace PJ_MSIT143_team02.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("TestListView", "Room");
+            return RedirectToAction("MemnerRoomList");
         }
         public IActionResult MemnerRoomList()
         {
