@@ -206,23 +206,22 @@ namespace PJ_MSIT143_team02.Controllers
             CRoomMemberViewModel crv = new CRoomMemberViewModel();
 
             crv.房源及會員 = (from c in db.Rooms
-                        where c.RoomId == p.RoomId
+                         where c.RoomId == p.RoomId
                          select new 房源及會員
-                        {
+                         {
                              ActivityId = p.ActivityId,
                              ActivityName = p.ActivityName,
-                             ActivityPrice=p.ActivityPrice,
-                             MemberId =v.MemberId,
-                             MemberAccount=v.MemberAccount,
-                            MemberName = v.MemberName,
-                            MemberEmail = v.MemberEmail,
-                            MemberPhone = v.MemberPhone,
-                            RoomId = p.RoomId,
-                            RoomName = p.RoomName,
-                             RoomPrice= p.RoomPrice,
-                             price = p.price,
-                            count = Convert.ToInt32(p.Qty),
-                        }).ToList();
+                             ActivityPrice = p.ActivityPrice,
+                             MemberId = v.MemberId,
+                             MemberAccount = v.MemberAccount,
+                             MemberName = v.MemberName,
+                             MemberEmail = v.MemberEmail,
+                             MemberPhone = v.MemberPhone,
+                             RoomId = p.RoomId,
+                             RoomName = p.RoomName,
+                             price = p.RoomPrice,
+                             count = Convert.ToInt32(p.Qty),
+                         }).ToList();
             return View(crv);
 
 
@@ -259,8 +258,7 @@ namespace PJ_MSIT143_team02.Controllers
                              MemberPhone = v.MemberPhone,
                              RoomId = p.RoomId,
                              RoomName = p.RoomName,
-                             RoomPrice = p.RoomPrice,
-                             price = p.price,
+                             price = p.RoomPrice,
                              count = Convert.ToInt32(p.Qty),
                          }).ToList();
 
@@ -274,38 +272,6 @@ namespace PJ_MSIT143_team02.Controllers
             db.SaveChanges();
             return View(crv);
         }
-        //[HttpPost]
-        //public IActionResult PayEnd()   //付款
-        //{
-        //    var checkout = HttpContext.Session.GetString(CDictionary.SK_CHECK_OUT);
-        //    var p = JsonSerializer.Deserialize<CAddToCart>(checkout);
-
-
-        //    MingSuContext db = new MingSuContext();
-
-        //    var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
-        //    var v = JsonSerializer.Deserialize<Member>(Name);
-        //    Order od = new Order()
-        //    {
-                
-        //        MemberId = v.MemberId,
-        //        RoomId = p.RoomId,
-        //        OrderstatusId = 4,   //1已成立  4加入購物車
-        //    };
-        //    db.Orders.Add(od);
-        //    db.SaveChanges();
-
-        //    OrderDetail odd = new OrderDetail()
-        //    {
-        //        OrderId = db.Orders.OrderBy(e => e.OrderId).LastOrDefault().OrderId,
-        //        RoomId = p.RoomId,
-        //        OrderPrice = p.RoomPrice,
-        //    };
-        //    db.OrderDetails.Add(odd);
-        //    db.SaveChanges();
-        //    System.Threading.Thread.Sleep(3000);
-        //    return RedirectToAction("Index", "Home");
-        //}
 
     }
 }
