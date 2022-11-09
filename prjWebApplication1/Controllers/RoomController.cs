@@ -225,43 +225,9 @@ namespace PJ_MSIT143_team02.Controllers
             EquipmentID = int.Parse(Equipment);
 
             var q = db.EquipmentReferences.Where(i => i.EquipmentId == EquipmentID).Select(i => i.Room).ToList();
-            //return PartialView("forEquipment", q);
-
-            //CKeywordViewModel ck = new CKeywordViewModel();
-            //ck = JsonSerializer.Serialize<CKeywordViewModel>(q);
             string jsonString = JsonSerializer.Serialize(q);
 
             return Json(q);
-
-
-
-            //eq = (from r in db.Equipment
-            //      join i in db.EquipmentReferences on r.EquipmentId equals i.EquipmentId
-            //      join k in db.Rooms on i.RoomId equals k.RoomId
-            //      select r).ToList();
-            //int RoomId=0;
-            //IQueryable<Equipment> eq = null;
-            //if (RoomId == 0)
-            //{
-            //    eq = from s in db.EquipmentReferences
-            //         join k in db.Rooms on s.RoomId equals k.RoomId
-            //         where s.RoomId == RoomId
-            //         select s;
-            //    ViewBag.name = (eq.ToList().Count() != 0)
-            //        ? "設備>>>>>" + eq.FirstOrDefault().EquipmentName;
-            //}
-            //else if (EquipmentID == 0)
-            //{
-            //    eq = from s in db.Equipment
-            //         join i in db.EquipmentReferences on s.EquipmentId equals i.EquipmentId
-            //         where s.EquipmentId == EquipmentID
-            //         select s;
-
-            //    ViewBag.name = (eq.ToList().Count() != 0)
-            //        ? "設備>>>>>" + eq.FirstOrDefault().EquipmentName;
-            //}
-            //CKeywordViewModel ck = new CKeywordViewModel();
-            //ck.EquipmentReference = q;
 
         }
 
