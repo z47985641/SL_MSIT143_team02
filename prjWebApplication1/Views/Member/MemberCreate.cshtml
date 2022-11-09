@@ -5,70 +5,92 @@
     ViewData["Title"] = "會員管理01";
 }
 
-<h1>新增會員</h1>
-
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="MemberCreate">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <input asp-for="MemberId" type="hidden" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberAccount" class="control-label"></label>
-                <input asp-for="MemberAccount" class="form-control" />
-                <span asp-validation-for="MemberAccount" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberPassword" class="control-label"></label>
-                <input asp-for="MemberPassword" class="form-control" />
-                <span asp-validation-for="MemberPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberName" class="control-label"></label>
-                <input asp-for="MemberName" class="form-control" />
-                <span asp-validation-for="MemberName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
-                <span asp-validation-for="BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberPhone" class="control-label"></label>
-                <input asp-for="MemberPhone" class="form-control" />
-                <span asp-validation-for="MemberPhone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberEmail" class="control-label"></label>
-                <input asp-for="MemberEmail" class="form-control" />
-                <span asp-validation-for="MemberEmail" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CityName" class="control-label"></label>
-                <input asp-for="CityName" class="form-control" />
-                <span asp-validation-for="CityName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Authority" class="control-label"></label>
-                <input asp-for="Authority" class="form-control" />
-                <span asp-validation-for="Authority" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+<h1 style="text-align:center">會員資料新增</h1>
+<form asp-action="MemberCreate" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div style="height:240px;margin:10px" class="column">
+                <div class="col-md-3" style="height: 139px; float: left">
+                </div>
+                <div class="col-md-6" style=" float: left">
+                        <img id="Photo" style=" padding:5px;height:200px" src="~/img/Admin/unknown.png" />
+                    <div style=" height:30px"><input type="file" name="photoEdit" id="photoEdit1" /></div>
+                </div>
+                <div class="col-md-3" style="height: 139px; float: left"></div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+            </div>
+            <div style=" height: 300px ">
+                <div class="col-md-6" style="float: left">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="MemberName" class="control-label">姓名</label>
+                        <input asp-for="MemberName" class="form-control" />
+                        <span asp-validation-for="MemberName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MemberAccount" class="control-label">帳號</label>
+                        <input asp-for="MemberAccount" class="form-control" />
+                        <span asp-validation-for="MemberAccount" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="BirthDate" class="control-label">生日</label>
+                        <input type="date" asp-for="BirthDate" class="form-control" />
+                        <span asp-validation-for="BirthDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6" style=" float: left ">
+                    <div class="form-group">
+                        <label asp-for="MemberPhone" class="control-label">電話</label>
+                        <input asp-for="MemberPhone" class="form-control" />
+                        <span asp-validation-for="MemberPhone" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MemberEmail" class="control-label">電子郵件</label>
+                        <input asp-for="MemberEmail" class="form-control" />
+                        <span asp-validation-for="MemberEmail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="CityName" class="control-label">居住地址</label>
+                        <input asp-for="CityName" class="form-control" />
+                        <span asp-validation-for="CityName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Authority" class="control-label">權限</label>
+                        <br />
+                        <select class="form-select" aria-label="Default select example" asp-for="Authority">
+                            <option id="一般會員" value="一般會員">一般會員</option>
+                            <option id="業主" value="業主">業主</option>
+                            <option id="管理員" value="管理員">管理員</option>
+                        </select>
+                        <span asp-validation-for="Authority" class="text-danger"></span>
+                        <br />
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="padding:10px">
+                <div class="col-md-5"></div>
+                <div class="col-md-2"><input type="submit" value="Save" class="btn btn-primary" /></div>
+                <div class="col-md-5"></div>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</form>
+<hr />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-<script>
-    $('#Member').addClass('active');
-</script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script>
+
+        $("#photoEdit1").on("change", function (e) {
+            const file = this.files[0];
+            var obj = URL.createObjectURL(file);
+            $('#Photo').attr('src', obj);
+
+        });
+
+    </script>
 }

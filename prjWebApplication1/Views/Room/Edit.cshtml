@@ -1,45 +1,39 @@
-﻿@model PJ_MSIT143_team02.Models.Room
+﻿@model PJ_MSIT143_team02.ViewModels.CRoomNew
+
 
 @{
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "Edit";
 }
 
-<h2>編輯房源</h2>
 <hr />
-<div class="row">
+<h1 style="text-align:center">房源編輯</h1>
+<div class="row" style="min-block-size:1000px">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <br />
+        <h2 style="text-align:center">房源基本資料</h2>
+        <hr />
+
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                @*<label asp-for="RoomId" class="control-label"></label>*@
-                <input type="hidden" asp-for="RoomId" class="form-control" />
-                @*<span asp-validation-for="RoomId" class="text-danger"></span>*@
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomName" class="control-label">房間名稱</label>
-                <input asp-for="RoomName" class="form-control" />
-                <span asp-validation-for="RoomName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomPrice" class="control-label">房間價格</label>
-                <input asp-for="RoomPrice" class="form-control" />
-                <span asp-validation-for="RoomPrice" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomIntrodution" class="control-label">房間介紹</label>
-                <input asp-for="RoomIntrodution" class="form-control" />
-                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MemberId" class="control-label">會員ID</label>
-                <input asp-for="MemberId" class="form-control" />
-                <span asp-validation-for="MemberId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
-                <input asp-for="RoomstatusId" class="form-control" />
-                <span asp-validation-for="RoomstatusId" class="text-danger"></span>
+            <div class="form-group row">
+                <div class=" col-md-4">
+                    <input type="hidden" name="RoomId" value="@Model.RoomId" />
+                    <label asp-for="RoomName" class="control-label">房間名稱</label>
+                    <input asp-for="RoomName" class="form-control" />
+                    <span asp-validation-for="RoomName" class="text-danger"></span>
+                </div>
+                <div class=" col-md-4">
+                    <label asp-for="Qty" class="control-label">數量</label>
+                    <input asp-for="Qty" class="form-control" />
+                    <span asp-validation-for="Qty" class="text-danger"></span>
+                </div>
+                <div class=" col-md-4">
+                    <label asp-for="RoomPrice" class="control-label">價格</label>
+                    <input asp-for="RoomPrice" class="form-control" />
+                    <span asp-validation-for="RoomPrice" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <label asp-for="Address" class="control-label">地址</label>
@@ -47,45 +41,247 @@
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreateDate" class="control-label">日期</label>
-                <input asp-for="CreateDate" class="form-control" value="@DateTime.Now" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
+                <label asp-for="RoomIntrodution" class="control-label">介紹</label>
+                <textarea asp-for="RoomIntrodution" class="form-control" style="height:300px"></textarea>
+                <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Qty" class="control-label">數量</label>
-                <input asp-for="Qty" class="form-control" />
-                <span asp-validation-for="Qty" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label class="control-label">產品照片</label>
-                <input type="file" name="FImagePath" />
-            </div>
+            <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
+            <div class="row form-group ">
+                <ul class="list-group list-group-horizontal" style=" padding:0px 10px">
+                    @{
+                        if (Model.RoomstatusId == 4)
+                        {
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4" checked>
+                                <label class="form-check-label" for="4">未上架</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2">
+                                <label class="form-check-label" for="2">已上架</label>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4">
+                                <label class="form-check-label" for="4">未上架</label>
+                            </li>
+                            <li class="list-group-item">
+                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2" checked>
+                                <label class="form-check-label" for="2">已上架</label>
+                            </li>
+                        }
 
-            <!--<div class="container" style="margin-top:20px">
-    <div class="row">
-        <div class="col-12 col-md-4">
-            <div class="img-thumbnail">
-                <img src="..." />
-                <label asp-for="ImageReferences" class="control-label">照片</label>-->
-            @*<input asp-for="ImageReferences" class="form-control" />*@
-            <!--<input type="submit" value="選擇檔案" />
-                    <span asp-validation-for="ImageReferences" class="text-danger"></span>
+                    }
+
+                </ul>
+            </div>
+            <br />
+            <h2 style="text-align:center">房源設施</h2>
+            <hr />
+
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 基礎設施 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10 row">
+                    @{
+                        int id = 0;
+                        foreach (var i in Model.EquipmentNamelist)
+                        {
+                            if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id] == 1)
+                            {
+                                <div class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
+                                    <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
+                                </div>
+                            }
+
+                            var count = 1;
+                            foreach (var j in Model.EquipmentId)
+                            {
+
+                                if (@Model.EquipmentCatergoryIdlist[id] == 1)
+                                {
+                                    if (j == @Model.EquipmentIdlist[id])
+                                    {
+                                        <div class="col-md-6">
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]" checked>
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
+                                        </div>
+                                        break;
+                                    }
+                                    if (Model.EquipmentId.Count == count)
+                                    {
+                                        <div class="col-md-6">
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id]" id="@Model.EquipmentIdlist[id]">
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id]">@i</label>
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                count++;
+                            }
+                            id++;
+                        }
+                    }
                 </div>
+                <div class="col-md-1"></div>
+
             </div>
-        </div>
-    </div>-->
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" onclick="return confirm('確定要送出嗎?')" />
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 獨特設施 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10 row">
+                    @{
+                        int id2 = 0;
+                        foreach (var i in Model.EquipmentNamelist)
+                        {
+                            if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id2] == 2)
+                            {
+                                <div class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]">
+                                    <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
+                                </div>
+                            }
+                            var count = 1;
+                            foreach (var j in Model.EquipmentId)
+                            {
+
+                                if (@Model.EquipmentCatergoryIdlist[id2] == 2)
+                                {
+                                    if (j == @Model.EquipmentIdlist[id2])
+                                    {
+                                        <div class="col-md-6">
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]" checked>
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
+                                        </div>
+                                        break;
+                                    }
+                                    if (Model.EquipmentId.Count == count)
+                                    {
+                                        <div class="col-md-6">
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id2]" id="@Model.EquipmentIdlist[id2]">
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id2]">@i</label>
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                count++;
+                            }
+                            id2++;
+                        }
+                    }
+                </div>
+                <div class="col-md-1"></div>
+
             </div>
+            <div class="row" style="padding:10px">
+                <p style="text-align:center"> 安全設施 </p>
+                <div class="col-md-1"></div>
+                <div class="col-md-10 row">
+                    @{
+                        int id3 = 0;
+                        foreach (var i in Model.EquipmentNamelist)
+                        {
+                            if (Model.EquipmentId.Count == 0 && @Model.EquipmentCatergoryIdlist[id3] == 3)
+                            {
+                                <div class="col-md-6">
+                                    <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
+                                    <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
+                                </div>
+                            }
+                            var count = 1;
+                            foreach (var j in Model.EquipmentId)
+                            {
+
+                                if (@Model.EquipmentCatergoryIdlist[id3] == 3)
+                                {
+                                    if (j == @Model.EquipmentIdlist[id3])
+                                    {
+                                        <div class="col-md-6">
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]" checked>
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
+                                        </div>
+                                        break;
+                                    }
+                                    if (Model.EquipmentId.Count == count)
+                                    {
+                                        <div class="col-md-6">
+                                            <input class="form-check-input me-1" type="checkbox" name="EquipmentId" value="@Model.EquipmentIdlist[id3]" id="@Model.EquipmentIdlist[id3]">
+                                            <label class="form-check-label stretched-link" for="@Model.EquipmentIdlist[id3]">@i</label>
+                                        </div>
+                                        break;
+                                    }
+                                }
+                                count++;
+                            }
+                            id3++;
+                        }
+
+
+                    }
+                </div>
+                <div class="col-md-1"></div>
+
+            </div>
+            <br />
+            <h2 style="text-align:center">房源圖片</h2>
+            <hr />
+
+            <div style="padding:10px">
+                <div class="col-md-1"></div>
+                <input type="file" name="img" id="img" multiple accept="image/*" />
+                <div class="col-md-10 row" id="div_img">
+
+                    @{
+                        foreach (var item in Model.imgId)
+                        {
+                            <div id="img_div">
+                                <img src="@Url.Action("ShowPhoto","MemberOnly", new {imgId= item })" style=" padding:5px; height:200px" />
+                                <div id="img_div1">
+                                    @Html.ActionLink("刪除", "MemnerRoomPhotoDelete", new { ImageId = item }, new { onclick = "return confirm('確定要刪除嗎?')", Class = "btn btn-danger", @id = "img_delete" })
+                                </div>
+                            </div>
+                        }
+
+                    }
+                </div>
+
+            </div>
+            <div class="col-md-10" id="div_img03"></div>
+            <div class="form-group" style="padding:15px 0px">
+                <input type="submit" value="編輯完成" class="btn btn-primary" />
+                @Html.ActionLink("取消", "MemnerRoomList", new { }, new { Class = "btn btn-danger" })
+            </div>
+            <div class="col-md-4"></div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">回主頁</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>$('#Room').addClass('active');</script>
+    <script>
+        $('#img_div1>#img_delete').on('click', function () {
+            $(this).parents('#img_div').attr('hidden', 'hidden')
+        })
+        var divimg = document.getElementById("div_img03")
+
+        $("#img").on("change", function (e) {
+            var count = 0;
+            for (count; count < 10; count++) {
+                if (this.files[count] != null) {
+                    divimg.innerHTML += ` <div id="img_div"><img style=" padding:5px; height:200px" id="Photo${count}"  /><div id="img_div1"><a  class="btn btn-danger" type="button" onclick="del(${count})" >刪除</a></div></div>`
+                    var file = this.files[count];
+                    var obj = URL.createObjectURL(file);
+                    $(`#Photo${count}`).attr('src', obj);
+                };
+            };
+        });
+
+        function del(id) {
+            alert(`Photo${id}`)
+            $(`#Photo${id}`).parents('#img_div').remove();
+        }
+    </script>
+
 }
