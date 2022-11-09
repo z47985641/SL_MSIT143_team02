@@ -101,21 +101,25 @@
     $(".GoCheckout").click(async function(){
         const RoomId = Number($(".RoomId").html());
 
-        const RoomName = ($(".RoomName").html());
-        const ActivityName = Number($(".ActivityName").html());
+        const RoomName = $(".RoomName").html();
+        const ActivityName = $(".ActivityName").html();
 
 
         const RoomPrice = Number($(".RoomPrice").html());
         const Qty = Number($(".Qty").html());
+        if ($("#price").val() == "" || $("#price").val() == null) { 
+            $("#price").html(@sum);
+        }
+        const TotalPrice = Number($("#price").html());
         //const count = Number($(".count").html());
-
 
         const json = {
             "RoomId": RoomId,
             "RoomName": RoomName,
             "ActivityName": ActivityName,
             "RoomPrice": RoomPrice,
-            "Qty": Qty
+            "count": Qty,
+            "TotalPrice": TotalPrice,
         }
         
         const jsonString = JSON.stringify(json);
@@ -144,6 +148,7 @@
                 toastr["error"]("無此優惠碼！");
             }
             $("#price").html(result);
+            $("#price").val(result);
         })
     });
 </script>

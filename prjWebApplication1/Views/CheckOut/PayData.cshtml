@@ -103,6 +103,14 @@
                 <div class="text-right">
                     @*<input type="hidden" asp-for="TotalPrice" />*@
                     <p class="card-text font-weight-bolder" style="padding-right:12px">總計: $@sum.ToString("###,###,##0") </p>
+                    @if (sum == @Model.房源及會員.FirstOrDefault().TotalPrice)
+                    {
+                        <p class="card-text font-weight-bolder" style="padding-right:12px">未使用優惠碼</p>
+                    } 
+                    else
+                    {
+                        <p class="card-text font-weight-bolder" style="padding-right:12px">折扣後金額: $@Model.房源及會員.FirstOrDefault().TotalPrice.ToString("###,###,##0")</p>
+                    }                   
                 </div>
                 <p></p>
                 <div class="text-center card-link">
