@@ -131,9 +131,8 @@ namespace PJ_MSIT143_team02.Controllers
         {
             MingSuContext db = new MingSuContext();
             Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == HttpContext.Session.GetInt32("MemberID"));
-            CMemberPassword password = new CMemberPassword();
-            password.MemberPassword = datas.MemberPassword;
-            return View(password);
+            ViewBag.oldpassword = datas.MemberPassword;
+            return View();
         }
         [HttpPost]
         public IActionResult MemberPasswordEdit(CMemberPassword datasedit)
