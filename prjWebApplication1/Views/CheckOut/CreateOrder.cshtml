@@ -104,44 +104,6 @@
         }).render('#payment-button');
 </script>
 
-@*<script>
-    paypal.Buttons({
-        //style: {
-        //    shape: 'rect',
-        //    size: 'small',
-        //},
-                createOrder: function (data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: @sum.ToString("###,###,##0"),
-                        currency_code: 'TWD',
-                        breakdown: {
-                            item_total: { value: @sum.ToString("###,###,##0"), currency_code: 'TWD' }     //訂單ㄉ金額
-                        }
-                    },
-                    invoice_id: 'muesli_invoice_id',
-                    items: [
-                        {
-                            name: '@Model.房源及會員.FirstOrDefault().MemberName',
-                            unit_amount: { value:@Model.房源及會員.FirstOrDefault().小計, currency_code: 'TWD' },   //商品項目
-                        quantity:@Model.房源及會員.FirstOrDefault().count}
-                ]
-            }]
-            });
-        },
-        onApprove: function (data, actions) {
-            return actions.order.capture().then(function (details) {
-                console.log(details),
-                    window.location.replace("/checkout/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSuccess=true");
-            })
-        },
-        onCancel: function (data) {
-            window.location.replace("/checkout/CreateOrder/?Id=@Model.房源及會員.FirstOrDefault().OrderId&isSussess=false");
-        }
-    }).render('#payment-button')
-</script>*@
-
 
 
 <style>

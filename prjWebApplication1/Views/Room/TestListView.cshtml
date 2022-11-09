@@ -55,15 +55,15 @@
                                 foreach (var r in Model.Equipment)
                                 {
                                     count++;
-                                <div class="form-check mb-2" id="dxbox">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId"  onclick="calc(@r.EquipmentId)">
-                                    <!--<input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" @*onclick="@Url.Action("forEquipment","Room",new {id=r.EquipmentId});"*@<!-->
-                                    <label class="form-check-label" for="@r.EquipmentId">
-                                        @r.EquipmentName
-                                    </label>
-                                </div>
+                                    <div class="form-check mb-2" id="dxbox">
+                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" onclick="calc(@r.EquipmentId)">
+                                        <!--<input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" @*onclick="@Url.Action("forEquipment","Room",new {id=r.EquipmentId});"*@<!-->
+                                        <label class="form-check-label" for="@r.EquipmentId">
+                                            @r.EquipmentName
+                                        </label>
+                                    </div>
                                 };
-                            
+
                             }
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
@@ -183,15 +183,10 @@
                                 </label>
                             </div>
                         </form>
-                        <form class="mb-3" style="padding-bottom:25px">
-                            <div style="float:right">
-                                <input type="button" id="ok" value="確定">
-                            </div>
-                        </form>
                     </div>
                 </div>
 
-                <div class="col-lg-9 col-12 room-card" @*id="display-items-div"*@  id="hhh"  style="border-radius:12px">
+                <div class="col-lg-9 col-12 room-card" @*id="display-items-div"*@ id="hhh" style="border-radius:12px">
                     @{
                         int q = 0;
                         foreach (var r in Model.Room)
@@ -239,7 +234,7 @@
                                                 <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
                                                     <li>
                                                         <span class="badge badge-pill badge-info text-black mr-3">
-                                                            @r.RoomIntrodution.Substring(0, 15)<span>...</span>
+                                                            @r.RoomIntrodution.Substring(0, 15)...
                                                         </span>
                                                     </li>
                                                     <li>
@@ -254,7 +249,7 @@
                                             </div>
                                             <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
                                                 <span>
-                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=..">
+                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
                                                         <img src="~/Image/heart.png" style="width:45px ;height:45px" />
                                                     </a>
                                                 </span>
@@ -279,6 +274,9 @@
 
         </div>
     </div>
+</div>
+<div>
+    <input type="button" id="ok" value="確定">
 </div>
 
 
@@ -372,7 +370,7 @@
                                         <div class="col-4" style="padding-top:25px;padding-left:11px;padding-bottom:25px">
                                             <img src='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}'  style=" padding:5px; height:200px" />
                                         </div>
-                                        <div class="col-8"> 
+                                        <div class="col-8">
                                             <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
                                                 <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
                                                     <small class="text-primary d-flex">
@@ -413,16 +411,15 @@
                                             </div>
                                             <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
                                                 <span>
-                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=..">
+                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=${data.roomId}">
                                                         <img src="/Image/heart.png" style="width:45px ;height:45px" />
                                                     </a>
                                                 </span>
                                             </button>
                                             <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
                                                 <span>
-                                                    <a href='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}' style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
+                                                    <a href='@Url.Content("~/Room/Details/?id=")${data.roomId}' style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
                                                         立即預訂
-
                                                     </a>
                                                 </span>
                                             </button>
@@ -528,4 +525,3 @@
     </script>
 
 }
-
