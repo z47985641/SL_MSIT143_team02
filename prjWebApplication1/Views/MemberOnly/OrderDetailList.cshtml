@@ -1,101 +1,83 @@
-﻿@model PJ_MSIT143_team02.ViewModels.COrderdetailViewModel
-
+﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.COrderdetailViewModel> 
 @{
     ViewData["Title"] = "OrderDetailList";
 }
 
-<h1>OrderDetailList</h1>
+<h1 style="text-align:center">訂單管理</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.OrderId)
+                訂單編號
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderstatusId)
+                訂單狀態
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RoomId)
+                房間名稱
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ActivityId)
+                訂單金額
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderDetailId)
+                訂房開始日
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderPrice)
+                訂房結束日
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RoomDiscountId)
+                付款方式
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.OrderStartDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.OrderEndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Payment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Qty)
+                房間數
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.order)
+        @foreach (var item in Model)
         {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.OrderId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderstatusId)
+                @Html.DisplayFor(modelItem => item.OrderstatusContent)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomId)
+                @Html.DisplayFor(modelItem => item.RoomName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ActivityId)
+                @Html.DisplayFor(modelItem => item.OrderPrice)
             </td>
-            @foreach (var detail in Model.orderdetail)
-            {
-                if (item.OrderId == detail.OrderId)
-                {
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderStartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderEndDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Payment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qty)
+                間
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                @{
+                    if (item.OrderDetailId == 3) { 
+                         @Html.ActionLink("退訂", "Delete", new { /* id=item.PrimaryKey */ }) 
+                    }
 
-                    <td>
-                        @Html.DisplayFor(modelItem => detail.OrderPrice)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => detail.RoomDiscountId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => detail.OrderStartDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => detail.OrderEndDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => detail.Payment)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => detail.Qty)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                    </td>
+                    }
+            </td>
 
-                }
 
-            }
-        </tr> }
-            </tbody>
+
+
+        </tr>
+}
+    </tbody>
 </table>
