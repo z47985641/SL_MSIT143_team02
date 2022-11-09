@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModels;
 using System;
@@ -10,18 +11,34 @@ namespace PJ_MSIT143_team02.Controllers
 {
     public class OrderController : Controller
     {
-        public IActionResult List(CKeywordViewModel model)
+        public IActionResult List()
         {
-            MingSuContext hotel = new MingSuContext();
-            IEnumerable<Order> datas = null;
-            if (string.IsNullOrEmpty(model.txtKeyword))
-                datas = from p in hotel.Orders
-                        select p;
-            else
-                datas = hotel.Orders.Where(p => (p.OrderId).ToString().Contains(model.txtKeyword) ||
-                p.OrderRemark.Contains(model.txtKeyword) ||
-                p.MemberId.ToString().Contains(model.txtKeyword));
-            return View(datas);
+            MingSuContext db = new MingSuContext();
+            COrderdetailViewModel vb = new COrderdetailViewModel();
+            IEnumerable<COrderdetailViewModel> order = (from o in db.Orders
+                                                        join m in db.OrderDetails on o.OrderId equals m.OrderId
+                                                        join s in db.OrderStatuses on o.OrderstatusId equals s.OrderstatusId
+                                                        join r in db.Rooms on o.RoomId equals r.RoomId
+                                                        select new COrderdetailViewModel()
+                                                        {
+                                                            OrderId = o.OrderId,
+                                                            OrderRemark = o.OrderRemark,
+                                                            MemberId = o.MemberId,
+                                                            OrderstatusId = o.OrderstatusId,
+                                                            RoomId = o.RoomId,
+                                                            ActivityId = o.ActivityId,
+                                                            OrderPrice = m.OrderPrice,
+                                                            OrderStartDate = m.OrderStartDate,
+                                                            OrderEndDate = m.OrderEndDate,
+                                                            Payment = m.Payment,
+                                                            Qty = m.Qty,
+                                                            OrderstatusContent = s.OrderstatusContent,
+                                                            RoomName = r.RoomName,
+
+
+                                                        }).ToList();
+
+            return View(order);
         }
 
         public IActionResult Delete(int? id)

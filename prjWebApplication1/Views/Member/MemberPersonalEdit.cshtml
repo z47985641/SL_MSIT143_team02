@@ -78,11 +78,9 @@
 <hr />
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script>
 
-        $('#Member').addClass('active');
         $("#photoEdit1").on("change", function (e) {
             const file = this.files[0];
             var obj = URL.createObjectURL(file);

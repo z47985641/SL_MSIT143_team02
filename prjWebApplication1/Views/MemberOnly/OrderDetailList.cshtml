@@ -1,83 +1,89 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.COrderdetailViewModel> 
+﻿@model IEnumerable<PJ_MSIT143_team02.ViewModels.COrderdetailViewModel>
 @{
     ViewData["Title"] = "OrderDetailList";
 }
 
 <h1 style="text-align:center">訂單管理</h1>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        訂單編號
+                    </th>
+                    <th>
+                        訂單狀態
+                    </th>
+                    <th>
+                        房間名稱
+                    </th>
+                    <th>
+                        訂單金額
+                    </th>
+                    <th>
+                        訂房開始日
+                    </th>
+                    <th>
+                        訂房結束日
+                    </th>
+                    <th>
+                        付款方式
+                    </th>
+                    <th>
+                        房間數
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                訂單編號
-            </th>
-            <th>
-                訂單狀態
-            </th>
-            <th>
-                房間名稱
-            </th>
-            <th>
-                訂單金額
-            </th>
-            <th>
-                訂房開始日
-            </th>
-            <th>
-                訂房結束日
-            </th>
-            <th>
-                付款方式
-            </th>
-            <th>
-                房間數
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderstatusContent)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderStartDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OrderEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Payment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Qty)
-                間
-            </td>
-            <td>
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
-                @{
-                    if (item.OrderDetailId == 3) { 
-                         @Html.ActionLink("退訂", "Delete", new { /* id=item.PrimaryKey */ }) 
-                    }
-
-                    }
-            </td>
+                    <tr>
+                        <td>
+                            <a href="/MemberOnly/Details">
+                                @Html.DisplayFor(modelItem => item.OrderId)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderstatusContent)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RoomName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderStartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OrderEndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Payment)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Qty)
+                            間
+                        </td>
+                        <td>
+                            @{
+                                if (item.OrderDetailId == 3)
+                                    @Html.ActionLink("X", "Delete", new { /* id=item.PrimaryKey */ }, new { Class = "btn btn-outline-danger" })
+                            }
+                        </td>
 
 
 
 
-        </tr>
-}
-    </tbody>
-</table>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+
