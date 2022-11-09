@@ -77,7 +77,6 @@
 
         $('#Member').addClass('active');
         $("#photoEdit1").on("change", function (e) {
-            alert("01")
             const file = this.files[0];
             var obj = URL.createObjectURL(file);
             $('#Photo').attr('src', obj);
