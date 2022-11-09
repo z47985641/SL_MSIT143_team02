@@ -211,7 +211,6 @@ namespace PJ_MSIT143_team02.Controllers
                          {
                              ActivityId = p.ActivityId,
                              ActivityName = p.ActivityName,
-                             ActivityPrice = p.ActivityPrice,
                              MemberId = v.MemberId,
                              MemberAccount = v.MemberAccount,
                              MemberName = v.MemberName,
@@ -219,14 +218,13 @@ namespace PJ_MSIT143_team02.Controllers
                              MemberPhone = v.MemberPhone,
                              RoomId = p.RoomId,
                              RoomName = p.RoomName,
-                             price = p.RoomPrice,
-                             count = Convert.ToInt32(p.Qty),
+                             price =(p.ActivityPrice==0?p.RoomPrice:p.ActivityPrice),
+                             count =Convert.ToInt32(p.count==0?p.Qty:p.count),
                          }).ToList();
             return View(crv);
 
 
         }
-
         public IActionResult GetPayData(string jsonString)
         {
             
@@ -246,7 +244,6 @@ namespace PJ_MSIT143_team02.Controllers
             var v = JsonSerializer.Deserialize<Member>(Name);
 
             CRoomMemberViewModel crv = new CRoomMemberViewModel();
-
             crv.房源及會員 = (from c in db.Rooms
                          where c.RoomId == p.RoomId
                          select new 房源及會員
