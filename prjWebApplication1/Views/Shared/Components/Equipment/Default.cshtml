@@ -8,8 +8,8 @@
     @foreach (var item in Model)
     {
         <li class="col-lg-4 justify-content-between align-items-center" style="display:inline-block;padding-bottom:10px;">
-            <img src="~/Image/eqp@(item.EquipmentId).png" height="48" /><span> @item.EquipmentName </span>
-            <img src="~/Image/check_sign_icon.png" height="24" />
+            <img src="~/Image/check_sign_icon.png" height="24" />&nbsp;
+            <img src="~/Image/eqp@(item.EquipmentId).png" height="48" />&nbsp;<span>@item.EquipmentName</span>
         </li>
     }
 </ul>

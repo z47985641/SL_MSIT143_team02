@@ -189,13 +189,15 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult RoomImage(int? id)
         {
             MingSuContext db = new MingSuContext();
-            var photoData = db.Images.FirstOrDefault(t => t.ImageId == id);
-            if (photoData.Image1 != null)
+            var photoData = db.Images.Where(t => t.ImageId == id).ToList();
+            if (photoData.FirstOrDefault().Image1 != null)
             {
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    byte[] b_photo = photoData.Image1;
-                    ms.Write(b_photo);
+                    for (int i = 0; i < photoData.Count(); i++) { 
+                        byte[] b_photo = photoData[i].Image1;
+                        ms.Write(b_photo);
+                    }
                     return File(ms.ToArray(), "image/jpeg");
                 }
             }
