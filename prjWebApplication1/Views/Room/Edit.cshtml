@@ -18,21 +18,30 @@
         <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group row">
-                <div class=" col-md-4">
+                <div class=" col-md-5">
                     <input type="hidden" name="RoomId" value="@Model.RoomId" />
                     <label asp-for="RoomName" class="control-label">房間名稱</label>
                     <input asp-for="RoomName" class="form-control" />
                     <span asp-validation-for="RoomName" class="text-danger"></span>
                 </div>
-                <div class=" col-md-4">
+                <div class=" col-md-2">
+                    <label asp-for="RoomPrice" class="control-label">價格</label>
+                    <input asp-for="RoomPrice" class="form-control" />
+                    <span asp-validation-for="RoomPrice" class="text-danger"></span>
+                </div>
+                <div class=" col-md-2">
                     <label asp-for="Qty" class="control-label">數量</label>
                     <input asp-for="Qty" class="form-control" />
                     <span asp-validation-for="Qty" class="text-danger"></span>
                 </div>
-                <div class=" col-md-4">
-                    <label asp-for="RoomPrice" class="control-label">價格</label>
-                    <input asp-for="RoomPrice" class="form-control" />
-                    <span asp-validation-for="RoomPrice" class="text-danger"></span>
+
+                <div class=" col-md-3">
+                    <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
+                    <select aria-label="Default select example" asp-for="RoomstatusId">
+                        <option id="未上架" value="4">未上架</option>
+                        <option id="已上架" value="2">已上架</option>
+                        <option id="永久下架" value="5">永久下架</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -45,37 +54,7 @@
                 <textarea asp-for="RoomIntrodution" class="form-control" style="height:300px"></textarea>
                 <span asp-validation-for="RoomIntrodution" class="text-danger"></span>
             </div>
-            <label asp-for="RoomstatusId" class="control-label">房間狀態</label>
-            <div class="row form-group ">
-                <ul class="list-group list-group-horizontal" style=" padding:0px 10px">
-                    @{
-                        if (Model.RoomstatusId == 4)
-                        {
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4" checked>
-                                <label class="form-check-label" for="4">未上架</label>
-                            </li>
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2">
-                                <label class="form-check-label" for="2">已上架</label>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="4" id="4">
-                                <label class="form-check-label" for="4">未上架</label>
-                            </li>
-                            <li class="list-group-item">
-                                <input class="form-check-input me-1" type="radio" name="RoomstatusId" value="2" id="2" checked>
-                                <label class="form-check-label" for="2">已上架</label>
-                            </li>
-                        }
 
-                    }
-
-                </ul>
-            </div>
             <br />
             <h2 style="text-align:center">房源設施</h2>
             <hr />

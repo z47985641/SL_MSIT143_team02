@@ -41,47 +41,53 @@
             <tbody>
                 @foreach (var item in Model.rooms)
                 {
-                    <tr>
-                        <td>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RoomName)
-                        </td>
+                <tr>
+                    <td>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomName)
+                    </td>
 
-                        @{
-                            if (item.RoomstatusId == 4)
-                            {
-                                <td>
-                                    未上架
-                                </td>
+                    @{
+                        if (item.RoomstatusId == 4)
+                        {
+                            <td>
+                                未上架
+                            </td>
 
 
-                            }
-                            else
-                            {
-                                <td>
-                                    已上架
-                                </td>
-                            }
                         }
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RoomPrice)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Qty)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CreateDate)
-                        </td>
+                        else if(item.RoomstatusId == 2)
+                        {
+                            <td>
+                                已上架
+                            </td>
+                        }
+                        else if(item.RoomstatusId == 5)
+                        {
+                            <td>
+                                永久下架
+                            </td>
+                        }
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RoomPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Qty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreateDate)
+                    </td>
 
-                        <td>
-                            @Html.ActionLink("編輯", "Edit", new { roomId = item.RoomId }) |
-                            @Html.ActionLink("刪除", "Delete", new { roomId = item.RoomId })
-                        </td>
-                    </tr>
+                    <td>
+                        @Html.ActionLink("編輯", "Edit", new { roomId = item.RoomId }) |
+                        @Html.ActionLink("刪除", "Delete", new { roomId = item.RoomId })
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

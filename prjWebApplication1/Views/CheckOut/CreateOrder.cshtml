@@ -47,7 +47,18 @@
                     @*@foreach (var item in ViewBag.orderItems)
                         {*@
                     <tr>
-                        <td>@Model.房源及會員.FirstOrDefault().RoomName</td>
+                        @if (@Model.房源及會員.FirstOrDefault().ActivityId == 0)
+                        {
+                            <td class="RoomName">
+                                @Model.房源及會員.FirstOrDefault().RoomName
+                            </td>
+                        }
+                        else if (@Model.房源及會員.FirstOrDefault().RoomId == 0)
+                        {
+                            <td class="RoomName">
+                                活動:   @Model.房源及會員.FirstOrDefault().ActivityName
+                            </td>
+                        }
                         <td>@Model.房源及會員.FirstOrDefault().count</td>
                         <td>@Model.房源及會員.FirstOrDefault().小計</td>
                     </tr>

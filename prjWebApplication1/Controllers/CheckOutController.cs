@@ -257,7 +257,7 @@ namespace PJ_MSIT143_team02.Controllers
                              MemberEmail = v.MemberEmail,
                              MemberPhone = v.MemberPhone,
                              RoomId = (p.RoomId == 0 ? p.RoomId : p.ActivityId),
-                             RoomName = (p.RoomName == null ? p.RoomName : p.ActivityName),
+                             RoomName = (p.ActivityName == null ? p.RoomName : p.ActivityName),
                              price = (p.ActivityPrice == 0 ? p.RoomPrice : p.ActivityPrice),
                              count = Convert.ToInt32(p.count == null ? p.Qty : p.count),
                              DisPrice = p.DisPrice,
