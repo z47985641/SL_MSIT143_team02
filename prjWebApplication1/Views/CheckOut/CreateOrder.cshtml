@@ -109,7 +109,7 @@
                 return actions.order.create({
                     purchase_units: [{
                         amount: {
-                            value:'@Model.房源及會員.FirstOrDefault().小計'   //訂單ㄉ金額
+                            value:'@Model.房源及會員.FirstOrDefault().DisPrice.ToString("###,###,##0")'   //訂單ㄉ金額
                         }
                     }]
                 });
