@@ -220,10 +220,7 @@ namespace PJ_MSIT143_team02.Controllers
                              RoomName = (p.ActivityName == null? p.RoomName: p.ActivityName),
                              price =(p.ActivityPrice==0?p.RoomPrice:p.ActivityPrice),
                              count =Convert.ToInt32(p.count==null?p.Qty:p.count),
-                             //++++++++++++++佑謙更新+++++++++++++++++++
-                             //TotalPrice = p.TotalPrice,
-                             //count = Convert.ToInt32(p.count == 0 ? p.Qty : p.count),
-                             //+++++++++++++++暫不合併++++++++++++++++++
+                             DisPrice = p.DisPrice,
                          }).ToList();
             return View(crv);
 
@@ -263,6 +260,7 @@ namespace PJ_MSIT143_team02.Controllers
                              RoomName = (p.ActivityName == null ? p.RoomName : p.ActivityName),
                              price = (p.ActivityPrice == 0 ? p.RoomPrice : p.ActivityPrice),
                              count = Convert.ToInt32(p.count == null ? p.Qty : p.count),
+                             DisPrice = p.DisPrice,
                          }).ToList();
 
             Order od = new Order()
