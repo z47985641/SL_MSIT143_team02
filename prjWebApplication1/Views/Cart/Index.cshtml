@@ -110,17 +110,22 @@
 <script>
     $(".GoCheckout").click(async function(){
         const RoomId = Number($(".RoomId").html());
-        const RoomName = ($(".RoomName").html());
+        const RoomName = $(".RoomName").html();
         //const ActivityName = Number($(".ActivityName").html());
         const RoomPrice = Number($(".RoomPrice").html());
         const Qty = Number($(".Qty").html());
+        if ($("#price").val() == "" || $("#price").val() == null) { 
+            $("#price").html(@sum);
+        }
+        const TotalPrice = Number($("#price").html());
 
         const json = {
             "RoomId": RoomId,
             "RoomName": RoomName,
             //"ActivityName": ActivityName,
             "RoomPrice": RoomPrice,
-            "Qty": Qty
+            "Qty": Qty,
+            "TotalPrice": TotalPrice,
         }
     //+++++++++++++++++++++++++++++++++++++++佑謙更新++++++++++++++++++++++++++++
      //$(".GoCheckout").click(async function(){
