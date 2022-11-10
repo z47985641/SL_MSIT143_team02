@@ -51,7 +51,6 @@
                         }
 
 
-
                         @if (item.ActivityId == 0)
                         {
                             <td class="RoomName">
@@ -61,9 +60,10 @@
                         else if (item.RoomId == 0)
                         {
                             <td class="RoomName">
-                                活動:   @Html.DisplayFor(modelItem => item.ActivityName)
+                                活動:  @Html.DisplayFor(modelItem => item.ActivityName)
                             </td>
                         }
+
                         <td class="RoomPrice">
                             @Html.DisplayFor(modelItem => item.price)
                         </td>
