@@ -186,7 +186,22 @@ namespace PJ_MSIT143_team02.Controllers
 
         }
 
+        public IActionResult RoomImage(int? id)
+        {
+            MingSuContext db = new MingSuContext();
+            var photoData = db.Images.FirstOrDefault(t => t.ImageId == id);
+            if (photoData.Image1 != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    byte[] b_photo = photoData.Image1;
+                    ms.Write(b_photo);
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+            return new EmptyResult();
 
+        }
 
 
         public IActionResult AddRoom(CKeywordViewModel model)

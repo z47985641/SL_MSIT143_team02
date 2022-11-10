@@ -65,6 +65,9 @@
                     <div id="content">
                         <div>
                             <h4 id="roomname">@Html.DisplayFor(model => item.RoomName)</h4>
+                            <p style="float:right">
+                                剩餘房間數: @Html.DisplayFor(model => item.Qty)
+                            </p>
                             <p id="roomlocation">
                                 <a id="location" target="_blank">@Html.DisplayFor(model => item.Address)</a>
                             </p>
@@ -75,31 +78,9 @@
                             <hr />
                             <h4 id="roomfacility">重點設施</h4>
                             <br />
-                            <div id="detail">
-                                <figure>
-                                    <img src="~/Image/bus_icon.png" />
-                                    <figcaption>距離大眾運輸100公尺</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/Door.png" />
-                                    <figcaption>24小時皆可入住</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/flight.png" />
-                                    <figcaption>機場接送</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/restaurant.png" />
-                                    <figcaption>早餐很棒</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/landscape.png" />
-                                    <figcaption>景觀很棒</figcaption>
-                                </figure>
-                            </div>
                         </div>
                         <div>
-                            @await Component.InvokeAsync("Equipment", new { RoomID = item.RoomId })
+                            @await Component.InvokeAsync("Equipment", new { id = item.RoomId })
                         </div>
                     </div>
                 </div>
