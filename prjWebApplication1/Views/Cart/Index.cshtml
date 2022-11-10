@@ -117,7 +117,7 @@
         if ($("#price").val() == "" || $("#price").val() == null) { 
             $("#price").html(@sum);
         }
-        const TotalPrice = Number($("#price").html());
+        const DisPrice = Number($("#price").html());
 
         const json = {
             "RoomId": RoomId,
@@ -125,33 +125,8 @@
             //"ActivityName": ActivityName,
             "RoomPrice": RoomPrice,
             "Qty": Qty,
-            "TotalPrice": TotalPrice,
+            "DisPrice": DisPrice,
         }
-    //+++++++++++++++++++++++++++++++++++++++佑謙更新++++++++++++++++++++++++++++
-     //$(".GoCheckout").click(async function(){
-     //   const RoomId = Number($(".RoomId").html());
-     //
-     //   const RoomName = $(".RoomName").html();
-     //   const ActivityName = $(".ActivityName").html();
-     //
-     //
-     //   const RoomPrice = Number($(".RoomPrice").html());
-     //   const Qty = Number($(".Qty").html());
-     //   if ($("#price").val() == "" || $("#price").val() == null) { 
-     //       $("#price").html(@sum);
-     //   }
-     //   const TotalPrice = Number($("#price").html());
-     //   //const count = Number($(".count").html());
-     //
-     //   const json = {
-     //       "RoomId": RoomId,
-     //       "RoomName": RoomName,
-     //       "ActivityName": ActivityName,
-     //       "RoomPrice": RoomPrice,
-     //       "count": Qty,
-     //       "TotalPrice": TotalPrice,
-     //   }
-        //+++++++++++++++++++++++++++++++++++++++暫不合併++++++++++++++++++++++++++++
 
         
         const jsonString = JSON.stringify(json);
@@ -165,8 +140,7 @@
 
     $("#couponBtn").click(async function () {
         var s = {
-            "price": @sum,
-            "count": Number($(".Qty").html()),
+            "DisPrice": @sum,
             "Coupon": $("#coupon").val(),
         };
         let data = JSON.stringify(s);

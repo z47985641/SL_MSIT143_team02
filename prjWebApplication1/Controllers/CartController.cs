@@ -92,12 +92,11 @@ namespace PJ_MSIT143_team02.Controllers
             
                 房源及會員 item = new 房源及會員()
                 {
-                    price = couponItem.price * discount.DiscountValue,
-                    count = couponItem.count,
+                    DisPrice = couponItem.DisPrice * discount.DiscountValue,
                     Discount = discount,
                 };
 
-                return Content(item.price.ToString());
+                return Content(item.DisPrice.ToString());
             }
             catch (InvalidOperationException e)
             {

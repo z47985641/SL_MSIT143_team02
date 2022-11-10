@@ -19,6 +19,7 @@ namespace PJ_MSIT143_team02.ViewModels
         public int count { get; set; }
         [DisplayName("採購價")]
         public decimal price { get; set; }
+        public decimal DisPrice { get; set; }
         public decimal TotalPrice { get; set; }
 
         public decimal 小計 { get { return this.count * this.price; } }

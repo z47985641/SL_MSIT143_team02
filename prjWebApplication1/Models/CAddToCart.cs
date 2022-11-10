@@ -18,7 +18,7 @@ namespace PJ_MSIT143_team02.Models
         public string ActivityName { get; set; }
         public decimal ActivityPrice { get; set; }
         public decimal price { get; set; }
-
+        public decimal DisPrice { get; set; }
 
 
 
