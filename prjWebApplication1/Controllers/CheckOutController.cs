@@ -204,22 +204,26 @@ namespace PJ_MSIT143_team02.Controllers
             var v = JsonSerializer.Deserialize<Member>(Name);
 
             CRoomMemberViewModel crv = new CRoomMemberViewModel();
-
+            //註記用//
             crv.房源及會員 = (from c in db.Rooms
                          where c.RoomId == p.RoomId
                          select new 房源及會員
                          {
-                             ActivityId = p.ActivityId,
-                             ActivityName = p.ActivityName,
+                             //ActivityId = p.ActivityId,
+                             //ActivityName = p.ActivityName,
                              MemberId = v.MemberId,
                              MemberAccount = v.MemberAccount,
                              MemberName = v.MemberName,
                              MemberEmail = v.MemberEmail,
                              MemberPhone = v.MemberPhone,
-                             RoomId = p.RoomId,
-                             RoomName = p.RoomName,
+                             RoomId = (p.RoomId == 0 ? p.RoomId : p.ActivityId),
+                             RoomName = (p.ActivityName == null? p.RoomName: p.ActivityName),
                              price =(p.ActivityPrice==0?p.RoomPrice:p.ActivityPrice),
-                             count =Convert.ToInt32(p.count==0?p.Qty:p.count),
+                             count =Convert.ToInt32(p.count==null?p.Qty:p.count),
+                             //++++++++++++++佑謙更新+++++++++++++++++++
+                             //TotalPrice = p.TotalPrice,
+                             //count = Convert.ToInt32(p.count == 0 ? p.Qty : p.count),
+                             //+++++++++++++++暫不合併++++++++++++++++++
                          }).ToList();
             return View(crv);
 
@@ -248,15 +252,17 @@ namespace PJ_MSIT143_team02.Controllers
                          where c.RoomId == p.RoomId
                          select new 房源及會員
                          {
+                             //ActivityId = p.ActivityId,
+                             //ActivityName = p.ActivityName,
                              MemberId = v.MemberId,
                              MemberAccount = v.MemberAccount,
                              MemberName = v.MemberName,
                              MemberEmail = v.MemberEmail,
                              MemberPhone = v.MemberPhone,
-                             RoomId = p.RoomId,
-                             RoomName = p.RoomName,
-                             price = p.RoomPrice,
-                             count = Convert.ToInt32(p.Qty),
+                             RoomId = (p.RoomId == 0 ? p.RoomId : p.ActivityId),
+                             RoomName = (p.ActivityName == null ? p.RoomName : p.ActivityName),
+                             price = (p.ActivityPrice == 0 ? p.RoomPrice : p.ActivityPrice),
+                             count = Convert.ToInt32(p.count == null ? p.Qty : p.count),
                          }).ToList();
 
             Order od = new Order()

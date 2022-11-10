@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PJ_MSIT143_team02.Models;
 using PJ_MSIT143_team02.ViewModel;
@@ -26,50 +27,11 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult List(CKeywordViewModel model)
         {
-
             MingSuContext db = new MingSuContext();
-            IEnumerable<Room> datas = null;
-            if (string.IsNullOrEmpty(model.txtKeyword))
-                datas = from p in db.Rooms
-                        select p;
-            else
-                datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
-                || p.RoomPrice.ToString().Contains(model.txtKeyword)
-                || p.RoomIntrodution.Contains(model.txtKeyword)
-                || p.MemberId.ToString().Contains(model.txtKeyword)
-                || p.RoomstatusId.ToString().Contains(model.txtKeyword)
-                || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword)
-                || p.Qty.ToString().Contains(model.txtKeyword));
-            return View(datas);
+            CRoomNew roomItem = new CRoomNew();
+            roomItem.rooms = db.Rooms.Select(r => r).ToList(); ;
+            return View(roomItem);
         }
-
-        public IActionResult ListView(CKeywordViewModel model)
-        {
-            MingSuContext db = new MingSuContext();
-            List<CAllViewModel> cAlls = new List<CAllViewModel>();
-            var q = from r in db.Rooms
-                    select r;
-            IEnumerable<Room> datas = null;
-            if (string.IsNullOrEmpty(model.txtKeyword))
-
-                datas = from r in db.Rooms
-                        join i in db.ImageReferences on r.RoomId equals i.RoomId
-                        join k in db.Images on i.ImageId equals k.ImageId
-                        join m in db.Members on r.MemberId equals m.MemberId
-                        join l in db.RoomStatuses on r.RoomstatusId equals l.RoomstatusId
-                        select r;
-            else
-                datas = db.Rooms.Where(p => p.RoomName.Contains(model.txtKeyword)
-                || p.RoomPrice.ToString().Contains(model.txtKeyword)
-                || p.RoomIntrodution.Contains(model.txtKeyword)
-                || p.MemberId.ToString().Contains(model.txtKeyword)
-                || p.RoomstatusId.ToString().Contains(model.txtKeyword)
-                || p.Address.Contains(model.txtKeyword)
-                || p.CreateDate.ToString().Contains(model.txtKeyword));
-            return View(cAlls);
-        }
-
         public IActionResult TestListView(/*CKeywordViewModel model*/int number)
         {
             DateTime thisDate = new DateTime(0001, 1, 1);
@@ -89,11 +51,6 @@ namespace PJ_MSIT143_team02.Controllers
                        join i in db.Equipment on r.EquipmentId equals i.EquipmentId
                        join k in db.Rooms on r.RoomId equals k.RoomId
                        select r).ToList();
-
-
-
-
-
 
             IEnumerable<Room> datas = null;
             if (string.IsNullOrEmpty(ck.txtKeyword))
@@ -216,8 +173,6 @@ namespace PJ_MSIT143_team02.Controllers
             return View("TestListView", ck);
 
         }
-
-
         [HttpGet]
         public ActionResult forEquipment(string Equipment)
         {
@@ -253,62 +208,97 @@ namespace PJ_MSIT143_team02.Controllers
             db.SaveChanges();
             return RedirectToAction("List");
         }
-        public IActionResult Delete(int? id)
+        public IActionResult Delete(int? roomId)
         {
-            if (id != null)
-            {
-                MingSuContext db = new MingSuContext();
-                Room r = db.Rooms.FirstOrDefault(t => t.RoomId == id);
-                if (r != null)
-                {
-                    db.Rooms.Remove(r);
-                    db.SaveChanges();
-                }
+            MingSuContext db = new MingSuContext();
+            var v = db.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+            v.RoomstatusId = 5;
+            db.SaveChanges();
 
-            }
             return RedirectToAction("List");
         }
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(int? roomId)
         {
-            if (id != null)
-            {
-                MingSuContext db = new MingSuContext();
-                Room r = db.Rooms.FirstOrDefault(t => t.RoomId == id);
-                if (r != null)
-                    return View(r);
-            }
-            return RedirectToAction("List");
+            MingSuContext db = new MingSuContext();
+            CRoomNew roomNew = new CRoomNew();
+
+            //加入房間資料
+            var roomData = db.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+            roomNew.room = roomData;
+
+            //加入設備選項
+            var eId = db.Equipment.Select(e => e.EquipmentId);
+            var eName = db.Equipment.Select(e => e.EquipmentName);
+            var eCate = db.Equipment.Select(e => e.EquipmentCatergoryId);
+            roomNew.EquipmentIdlist = eId.ToList();
+            roomNew.EquipmentNamelist = eName.ToList();
+            roomNew.EquipmentCatergoryIdlist = eCate.ToList();
+
+            //帶入設備狀態
+            List<int> idlist = new List<int>();
+            var EE = db.EquipmentReferences.Where(e => e.RoomId == roomId).Select(e => e.EquipmentId);
+            roomNew.EquipmentId = EE.ToList();
+            db.SaveChanges();
+
+
+            //加入圖片
+            var imgedit = db.ImageReferences.Where(i => i.RoomId == roomId).Select(i => i.ImageId);
+            roomNew.imgId = imgedit.ToList();
+
+            return View(roomNew);
         }
         [HttpPost]
-        public ActionResult Edit(CRoomViewModel InRoom)
+        public IActionResult Edit(CRoomNew roomedit)
         {
 
+            int count = 0;
             MingSuContext db = new MingSuContext();
-            Room r = db.Rooms.FirstOrDefault(t => t.RoomId == InRoom.RoomId);
-            if (r != null)
+
+            //加入房源資訊
+            var roomData = db.Rooms.FirstOrDefault(r => r.RoomId == roomedit.RoomId);
+
+            roomData.RoomName = roomedit.RoomName;
+            roomData.RoomPrice = roomedit.RoomPrice;
+            roomData.RoomIntrodution = roomedit.RoomIntrodution;
+            roomData.RoomstatusId = roomedit.RoomstatusId;
+            roomData.Address = roomedit.Address;
+            roomData.Qty = roomedit.Qty;
+
+            //迴圈加入設備References
+            foreach (var Eitem in roomedit.EquipmentId)
             {
-                if (InRoom.photo != null)
-                {
-                    string pName = Guid.NewGuid().ToString() + ".jpg";
-                    r.FimagePath = pName;
-                    string path = _enviro.WebRootPath + "/image/" + pName;
-                    InRoom.photo.CopyTo(new FileStream(path, FileMode.Create));
-                }
-
-
-                r.RoomId = InRoom.RoomId;
-                r.RoomName = InRoom.RoomName;
-                r.RoomPrice = InRoom.RoomPrice;
-                r.RoomIntrodution = InRoom.RoomIntrodution;
-                r.MemberId = InRoom.MemberId;
-                r.RoomstatusId = InRoom.RoomstatusId;
-                r.Address = InRoom.Address;
-                r.CreateDate = InRoom.CreateDate;
-                r.Qty = InRoom.Qty;
-                r.FimagePath = InRoom.FimagePath;
-                db.SaveChanges();
+                EquipmentReference item = new EquipmentReference();
+                item.EquipmentId = Eitem;
+                item.RoomId = roomedit.RoomId;
+                db.EquipmentReferences.Add(item);
             }
-            return RedirectToAction("List", "path");
+            if (roomedit.img != null)
+            {
+                foreach (var imgindex in roomedit.img)
+                {
+                    count++;
+                    Image img = new Image();
+                    using (var ms1 = new MemoryStream())
+                    {
+                        imgindex.CopyTo(ms1);
+                        img.Image1 = ms1.ToArray();
+                    }
+                    db.Images.Add(img);
+                    db.SaveChanges();
+                }
+                //迴圈加入ImageReferences
+                for (int i = 1; i <= roomedit.img.Count; i++)
+                {
+                    ImageReference imgRef = new ImageReference();
+                    imgRef.RoomId = roomedit.RoomId;
+                    imgRef.ImageId = db.Images.OrderByDescending(i => i.ImageId).FirstOrDefault().ImageId - count + i;
+                    db.ImageReferences.Add(imgRef);
+
+                }
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("List");
         }
         public IActionResult Details(int? Id)
         {

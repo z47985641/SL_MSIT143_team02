@@ -1,77 +1,80 @@
-﻿@model IEnumerable<PJ_MSIT143_team02.Models.Room>
+﻿@model PJ_MSIT143_team02.ViewModels.CRoomNew
 @*@model List<PJ_MSIT143_team02.ViewModel.CRoomViewModel>*@
 @{
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "List";
 }
-<div class="container">
-    <br />
-    <p style="font-size:30px">房源管理</p>
-    <div class="forp">
-        @using (Html.BeginForm())
-        {
-            @:關鍵字 @Html.TextBox("txtKeyword", "", new { @class = "form-control" }) <input type="submit" value="查詢" class="btn btn-secondary" />
-        }
-    </div>
-    <p>
-        <a asp-action="Create" class="btn btn-dark">新增房間</a>
-    </p>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    房間序號
-                </th>
-                <th>
-                    房間名稱
-                </th>
-                <th>
-                    房間價格
-                </th>
-                <th>
-                    房間介紹
-                </th>
-                <th>
-                    會員ID
-                </th>
-                <th>
-                    房間狀態
-                </th>
-                <th>
-                    房間地址
-                </th>
-                <th>
-                    日期
-                </th>
-                <th>
-                    庫存
-                </th>
-                <th>
-                    照片
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<h1 style="text-align:center">房源清單</h1>
+
+<div class="row">
+    <div class="col-md-2 "></div>
+    <div class="col-md-8 ">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    <th>
+                        房名
+                    </th>
+                    <th>
+                        狀態
+                    </th>
+                    <th>
+                        價格
+                    </th>
+                    <th>
+                        房間數
+                    </th>
+                    <th>
+                        位置
+                    </th>
+                    <th>
+                        建立時間
+                    </th>
+                    <th>
+                        功能
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.rooms)
+                {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RoomId)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.RoomName)
                     </td>
+
+                    @{
+                        if (item.RoomstatusId == 4)
+                        {
+                            <td>
+                                未上架
+                            </td>
+
+
+                        }
+                        else if(item.RoomstatusId == 2)
+                        {
+                            <td>
+                                已上架
+                            </td>
+                        }
+                        else if(item.RoomstatusId == 5)
+                        {
+                            <td>
+                                永久下架
+                            </td>
+                        }
+                    }
                     <td>
                         @Html.DisplayFor(modelItem => item.RoomPrice)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.RoomIntrodution)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MemberId)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RoomstatusId)
+                        @Html.DisplayFor(modelItem => item.Qty)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Address)
@@ -79,24 +82,15 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.CreateDate)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Qty)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FimagePath)
-                    </td>
-                    <td>
-                        @Html.ActionLink("編輯", "Edit", new { id = item.RoomId }, new { @class = "btn btn-success" }) |
 
-                        @Html.ActionLink("刪除", "Delete", new { id = item.RoomId },new { onclick = "return confirm('確定要刪除嗎?')", @class = "btn btn-danger" })
+                    <td>
+                        @Html.ActionLink("編輯", "Edit", new { roomId = item.RoomId }) |
+                        @Html.ActionLink("刪除", "Delete", new { roomId = item.RoomId })
                     </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    
-
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2 "></div>
 </div>
-@section Scripts {
-    <script>$('#Room').addClass('active');</script>
-}

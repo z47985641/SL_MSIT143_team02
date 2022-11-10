@@ -16,6 +16,7 @@
     <None Remove="00_DataBase\DataBase_FinHotel_20221028.bak" />
     <None Remove="00_DataBase\DataBase_FinHotel_20221028NEW.bak" />
     <None Remove="00_DataBase\DataBase_FinHotel_2022102NEW.bak" />
+    <None Remove="00_DataBase\old\.~lock.MSIT143 FindHotel訂房網.pptx#" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,7 +14,14 @@
                 <div class="col-md-3" style="height: 139px; float: left">
                 </div>
                 <div class="col-md-6" style=" float: left">
-                    <img style=" padding:5px; height:200px" id="Photo" src="@Url.Action("MemberPhoto","Member",new { ItemId = Model.MemberId })" />
+                    @if (Model.MemberImage == null)
+                    {
+                        <img id="Photo" style=" padding:5px;height:200px" src="~/img/Admin/unknown.png" />
+                    }
+                    else
+                    {
+                        <img id="Photo" style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto", "Member", new { ItemId = Model.MemberId })" />
+                    }
                     <div style=" height:30px"><input type="file" name="photoEdit" id="photoEdit1" /></div>
                 </div>
                 <div class="col-md-3" style="height: 139px; float: left"></div>
@@ -61,11 +68,10 @@
                         <label asp-for="Authority" class="control-label">權限</label>
                         <br />
                         @*<input asp-for="Authority" class="form-control" />*@
-                        <select class="form-select" aria-label="Default select example" name="Authority">
-                            <option selected >@Model.Authority</option>
-                            <option value="一般會員">一般會員</option>
-                            <option value="業主">業主</option>
-                            <option value="管理員">管理員</option>
+                        <select class="form-select" aria-label="Default select example"  asp-for="Authority">
+                            <option id="一般會員" value="一般會員">一般會員</option>
+                            <option id="業主" value="業主">業主</option>
+                            <option id="管理員" value="管理員">管理員</option>
                         </select>
                         <span asp-validation-for="Authority" class="text-danger"></span>
                         <br />
@@ -88,7 +94,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script>
 
         $('#Member').addClass('active');
@@ -100,7 +105,6 @@
             };
             reader.readAsDataURL(file);
         });
-
     </script>
 
 

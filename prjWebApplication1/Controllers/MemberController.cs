@@ -129,6 +129,9 @@ namespace PJ_MSIT143_team02.Controllers
 
         public IActionResult MemberPasswordEdit()
         {
+            MingSuContext db = new MingSuContext();
+            Member datas = db.Members.FirstOrDefault(Member => Member.MemberId == HttpContext.Session.GetInt32("MemberID"));
+            ViewBag.oldpassword = datas.MemberPassword;
             return View();
         }
         [HttpPost]

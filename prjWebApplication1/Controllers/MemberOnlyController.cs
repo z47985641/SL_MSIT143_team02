@@ -85,7 +85,7 @@ namespace PJ_MSIT143_team02.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("TestListView", "Room");
+            return RedirectToAction("MemnerRoomList");
         }
         public IActionResult MemnerRoomList()
         {
@@ -213,21 +213,31 @@ namespace PJ_MSIT143_team02.Controllers
         public IActionResult OrderDetailList()
         {
             MingSuContext db = new MingSuContext();
-            IEnumerable<OrderDetail> orderDetail = null;
-            IEnumerable<Order> order = (from o in db.Orders
-                                       where o.MemberId == HttpContext.Session.GetInt32("MemberID")
-                                       select o).ToList();
-            foreach (var item in order)
-            {
-                orderDetail = from o in db.OrderDetails
-                              where o.OrderId == item.OrderId
-                              select o;
-            }
             COrderdetailViewModel vb = new COrderdetailViewModel();
-            vb.order = order;
-            vb.orderdetail = orderDetail;
+            IEnumerable<COrderdetailViewModel> order = (from o in db.Orders
+                                       where o.MemberId == HttpContext.Session.GetInt32("MemberID")
+                                       join m in db.OrderDetails on o.OrderId equals m.OrderId
+                                       join s in db.OrderStatuses on o.OrderstatusId equals s.OrderstatusId
+                                       join r in db.Rooms on o.RoomId equals r.RoomId
+                                                        select new COrderdetailViewModel()
+                                       { OrderId= o.OrderId,
+                                        OrderRemark=o.OrderRemark,
+                                        MemberId = o.MemberId,
+                                        OrderstatusId = o.OrderstatusId,
+                                        RoomId = o.RoomId,
+                                        ActivityId = o.ActivityId,
+                                        OrderPrice =m.OrderPrice,
+                                        OrderStartDate =m.OrderStartDate,
+                                        OrderEndDate = m.OrderEndDate,
+                                        Payment = m.Payment,
+                                        Qty =m.Qty,
+                                           OrderstatusContent = s.OrderstatusContent,
+                                           RoomName = r.RoomName,
 
-            return View(vb);
+                                        
+                                       }).ToList();
+            
+            return View(order);
         }
        
 

@@ -1,6 +1,7 @@
 ﻿using PJ_MSIT143_team02.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace PJ_MSIT143_team02.ViewModels
     {
         public IEnumerable<Order> order { get; set; }
         public IEnumerable<OrderDetail> orderdetail { get; set; }
+        public List<object> list { get; set; }
+
         public int OrderId { get; set; }
         public string OrderRemark { get; set; }
         public int MemberId { get; set; }
@@ -18,11 +21,17 @@ namespace PJ_MSIT143_team02.ViewModels
         public int? ActivityId { get; set; }
 
         public int OrderDetailId { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n0}", ApplyFormatInEditMode = true)]
         public decimal OrderPrice { get; set; }
         public int? RoomDiscountId { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime OrderStartDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public DateTime OrderEndDate { get; set; }
         public string Payment { get; set; }
+        public string OrderstatusContent { get; set; }
 
 
         public string ActivityName { get; set; }
