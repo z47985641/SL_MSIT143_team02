@@ -14,6 +14,7 @@ namespace PJ_MSIT143_team02.Models
         public int count { get; set; }
         [DisplayName("採購價")]
         public decimal price { get; set; }
+        public decimal DisPrice { get; set; }
         public decimal 小計 { get { return this.count * this.price; } }
         public Room Room { get; set; }
         public decimal DiscountValue { get; set; }
