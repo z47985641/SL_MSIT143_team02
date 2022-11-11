@@ -44,7 +44,7 @@
             <div class="dropdown-divider d-lg-block d-none"></div>
             <div class="row">
                 <div class="col-sm-3 d-sm-block d-none" style="border-radius:12px">
-                    <div class="bg-white px-4 py-2 rounded">
+                    <div class="bg-white px-4 py-2 rounded" id="aaa">
                         <div class="dropdown-divider mb-3 border-white"></div>
                         <h3 class="mb-3">客房設施</h3>
                         
@@ -73,17 +73,11 @@
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
 
-                        <h3 class="mb-3">每晚預算</h3>
-                        <form class="mb-3" id="price-range-form">
-                            預算區間:<span id="spanOutput"></span>
+                        <h3 class="mb-3" for="RoomPrice">每晚預算</h3>
+                        <form class="mb-3" id="price-range-form" >
+                            預算區間:
                             <br /><br />
                             <div id="slider"></div>
-                            <br />
-                            <label for="txtMinAge">下限:</label>
-                            <input type="text" id="txtMinAge" />
-                            <br /><br />
-                            <label for="txtMaxAge">上限:</label>
-                            <input type="text" id="txtMaxAge" />
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -289,28 +283,105 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
     <script>
-        $("#minus").click(function () {
-            var i = Number($("#num").val());
-            if (i > 1)
-                i -= 1;
-            $("#num").val(i);
+        $(function () {
+            $("slider").slider({
+                range: true,
+                min: 0,
+                max: 1200000,
+                values: [500, 100000],
+                slide: function (event, ui) {
+                    $("#RoomPrice").val("$" + ui.values[0] + "-$" + ui.values[1]);
+                    var min = ui.values[0];
+                    var max = ui.values[1];
+
+
+                    ajax({
+                        type: 'GET',
+                        url: '/Room/Search/' + min + '/' + max,
+                        done: function (result) {
+                            let qq = document.querySelector("#aaa");
+                            qq.innerHTML = "";
+                            let div = document.createElement("div");
+                            div.className = "mobile-bg-secondary";
+                            result.forEach(function (data) {
+                                let roomIntrodution = data.roomIntrodution;
+                                let roomIntSub = roomIntrodution.substring(0, 16);
+                                let roomdatas =
+                                    ` <div class="card border-0 mb-sm-4 mb-2">
+                                    <div class="row no-gutters">
+                                        <div class="col-4" style="padding-top:25px;padding-left:11px;padding-bottom:25px">
+                                            <img src='@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}'  style=" padding:5px; height:200px" />
+                                        </div>
+                                        <div class="col-8">
+                                            <div class="card-body position-relative d-flex flex-column justify-content-center py-2 pr-sm-3 p-0">
+                                                <div class="card-score d-flex justify-content-between flex-lg-row flex-column">
+                                                    <small class="text-primary d-flex">
+
+                                                        <span class="text-black-50 d-lg-block d-none"></span>
+                                                    </small>
+                                                    <ul class="list-unstyled d-flex align-items-center m-0">
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                        <li class="mr-1"><i class="fas fa-star"></i></li>
+                                                    </ul>
+                                                </div>
+                                                <ul class="list-unstyled m-sm-0 m-1" style="padding-left:10px;">
+                                                    <li>
+                                                        <h3 class="card-title">${data.roomName}</h3>
+                                                    </li>
+                                                    <li>
+                                                        <p class="card-text small text-black-50">
+                                                        </p>
+                                                    </li>
+                                                </ul>
+                                                <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
+                                                    <li>
+                                                        <span class="badge badge-pill badge-info text-black mr-3">
+                                                            ${roomIntSub}...
+                                                        </span>
+                                                    </li>
+                                                    <li>
+                                                    //    <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
+                                                    </li>
+                                                </ul>
+                                                <div class="money-block text-right d-flex flex-column">
+                                                    <small class="text-black-50 d-lg-block d-none" style="font-size:20px">每晚價錢</small>
+                                                    <p class="h3 m-0" id="RoomPrice">NT$${data.roomPrice}</p>
+                                                </div>
+                                                <!-- badge樣式沒有作用另外寫css的 -->
+                                            </div>
+                                            <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
+                                                <span>
+                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=${data.roomId}">
+                                                        <img src="/Image/heart.png" style="width:45px ;height:45px" />
+                                                    </a>
+                                                </span>
+                                            </button>
+                                            <button class="bbtn" style="text-decoration: none;background-color:#514525;float:right;margin-right:15px">
+                                                <span>
+                                                    <a href='@Url.Content("~/Room/Details/?id=")${data.roomId}' style="font-size:24px;text-decoration:none;color: #ffffff;font-family:'Playfair Display', serif;">
+                                                        立即預訂
+                                                    </a>
+                                                </span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dropdown-divider d-lg-block d-none"></div>
+                                </div>`
+                                div.innerHTML += roomdatas;
+                            })
+                            qq.append(div);
+
+                        }
+                    
+                });
+                }
+            });
+
         });
-        $("#plus").click(function () {
-            var i = Number($("#num").val());
-            i += 1;
-            $("#num").val(i);
-        });
-        $("#roomminus").click(function () {
-            var i = Number($("#roomnum").val());
-            if (i > 1)
-                i -= 1;
-            $("#roomnum").val(i);
-        });
-        $("#roomplus").click(function () {
-            var i = Number($("#roomnum").val());
-            i += 1;
-            $("#roomnum").val(i);
-        });
+
     </script>
 
     <script>
