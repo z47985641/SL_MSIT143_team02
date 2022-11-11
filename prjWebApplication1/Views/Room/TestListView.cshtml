@@ -47,19 +47,24 @@
                     <div class="bg-white px-4 py-2 rounded">
                         <div class="dropdown-divider mb-3 border-white"></div>
                         <h3 class="mb-3">客房設施</h3>
-
+                        
                         <form class="mb-3">
                             @{
-
-                                int count = 0;
-                                foreach (var r in Model.Equipment)
+                                var eqArry = @Model.Equipment.ToArray();
+                                for (var i = 0; i <= 5; i++)
                                 {
-                                    count++;
-                                    <div class="form-check mb-2" id="dxbox">
+
+                                    @*<div class="form-check mb-2" id="dxbox">
                                         <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" onclick="calc(@r.EquipmentId)">
-                                        <!--<input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" @*onclick="@Url.Action("forEquipment","Room",new {id=r.EquipmentId});"*@<!-->
                                         <label class="form-check-label" for="@r.EquipmentId">
                                             @r.EquipmentName
+                                        </label>
+                                    </div>*@
+
+                                    <div class="form-check mb-2" id="dxbox">
+                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@eqArry[i].EquipmentId" onclick="calc(@eqArry[i].EquipmentId)">
+                                        <label class="form-check-label" for="@eqArry[i].EquipmentId">
+                                            @eqArry[i].EquipmentName
                                         </label>
                                     </div>
                                 };
@@ -336,22 +341,6 @@
     </script>
 
     <script>
-
-        @*function calc(eqID) {
-              var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
-            $.ajax({
-                type: "GET",
-                url: shopUrl,
-            }).done(function (result) {
-
-
-            })
-
-        }*@
-
-
-
-
         function calc(eqID) {
            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
             $.ajax({
@@ -402,7 +391,7 @@
                                                         </span>
                                                     </li>
                                                     <li>
-                                                        <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
+                                                    //    <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
                                                     </li>
                                                 </ul>
                                                 <div class="money-block text-right d-flex flex-column">
@@ -431,8 +420,6 @@
                                 <div class="dropdown-divider d-lg-block d-none"></div>
                                 </div>`
                     div.innerHTML += roomdatas;
-                    @*var qqq = `@Url.Content("~/Room/ShowPhoto/?roomId=")${data.roomId}`;
-                    console.log(qqq)*@
                 })
                 qq.append(div);
             }).fail(function (e) {
@@ -440,90 +427,6 @@
             });
 
         }
-
-
-
-
-
-        @*function calc(eqID) {
-           var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
-            $.ajax({
-                type: "GET",
-                url: shopUrl,
-
-            }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
-                var result = [];
-                for (var i = 0; i <= result.length - 1; i++) {
-
-
-                }
-
-                const hh = $("#hhh").html()
-                console.log(hh);
-
-                $("#hhh").html(result);
-                console.log(result);
-
-
-            }).fail(function (e) {
-                alert(e.responseText);
-            });
-
-        }*@
-
-        @*function calc(eqID) {
-            $("[name=EquipmentId]:checkbox:checked").each(function () {
-                selected.push($(this).val());
-            });
-            var selected = [];
-                for (var i = 0; i <= selected.length - 1; i++) {
-                    //alert(selected[i]);
-                    $.get("@Url.Action("TestListView", "Room")", { EquipmentId: selected[i] }).done(function (result) {
-                    });
-            }
-           var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
-
-            $.ajax({
-                type: "GET",
-                url: shopUrl,
-
-            }).done(function (result) {  //done完成後右邊的房間列表，讀取選取設備後新ㄉ房間
-
-
-                const hh = $("#hhh").html()
-                console.log(hh);
-
-                $("#hhh").html(result);
-                console.log(result);
-
-
-            }).fail(function (e) {
-                alert(e.responseText);
-            });
-
-        }*@
-
-        @*function calc(eqID)
-       {
-            $.ajax({
-                url: '@Url.Action("forEquipment", "Room")' + "?Equipment=" + eqID,
-                type: 'GET',
-        //    data:{},
-        }).then(function () {
-
-            $('.col-lg-9 col-12 room-card').load('@Url.Action("forEquipment", "Room")')//右邊的房間列表，讀取選取設備後後新ㄉ房間
-        })
-
-         $.get('@Url.Action("TestListView", "Room")',
-           function (data) {
-                console.log(data)
-            }
-
-         )
-    }*@
-
-
-
     </script>
 
 }
