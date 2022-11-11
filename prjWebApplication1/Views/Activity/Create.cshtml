@@ -4,20 +4,19 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "Create";
 }
-
-<h1>活動管理頁面</h1>
-
-<h4>新增活動</h4>
+<h1 style="text-align:center">新增活動</h1>
 <hr />
-<div class="row">
+
+<div class="row" style="min-block-size:1000px">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
-                <label asp-for="ActivityId" class="control-label"></label>
-                <input asp-for="ActivityId" class="form-control" />
-                <span asp-validation-for="ActivityId" class="text-danger"></span>
-            </div>*@
+                    <label asp-for="ActivityId" class="control-label"></label>
+                    <input asp-for="ActivityId" class="form-control" />
+                    <span asp-validation-for="ActivityId" class="text-danger"></span>
+                </div>*@
             <div class="form-group">
                 <label asp-for="ActivityName" class="control-label">活動名稱</label>
                 <input asp-for="ActivityName" class="form-control" />
@@ -110,15 +109,16 @@
 </div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>$('#Activity').addClass('active');
+    <script>
+        $('#Activity').addClass('active');
         function DemoA() {
-        $('#ActivityName').val('聖誕晚會');
-        $('#ActivityDate').val('2022-12-24 00:00:00.000');
-        $('#ActivityInfo').val('聖誕節一向都是代表愛與親友團聚的節日，今年的聖誕活動將有交換禮物環節，邀請各位來賓準備一份價值300元以內的小心意，並且現場還有抽獎、團康遊戲及舞會等豐富節目，歡迎踴躍報名參加');
-        $('#ActivityCapacity').val('120');
-        $('#ActivityStatus').val('開放報名');
-        $('#ActivityLocation').val('台北市');
-        $('#ActivityPrice').val('500');
+            $('#ActivityName').val('聖誕晚會');
+            $('#ActivityDate').val('2022-12-24 00:00:00.000');
+            $('#ActivityInfo').val('聖誕節一向都是代表愛與親友團聚的節日，今年的聖誕活動將有交換禮物環節，邀請各位來賓準備一份價值300元以內的小心意，並且現場還有抽獎、團康遊戲及舞會等豐富節目，歡迎踴躍報名參加');
+            $('#ActivityCapacity').val('120');
+            $('#ActivityStatus').val('開放報名');
+            $('#ActivityLocation').val('台北市');
+            $('#ActivityPrice').val('500');
         }
     </script>
 }
