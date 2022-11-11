@@ -108,7 +108,7 @@
                         <br />
                         <h5>留言</h5>
                         <textarea rows="3" cols="81"></textarea>
-                        <br /><br />
+                        <br />
                         <a class="bbtn" id="addcomment" href="@Url.Action()">
                             <span>送出</span>
                         </a>
@@ -173,6 +173,7 @@
             toastr["success"]("商品已加入購物車！");
         }
 
+        let isClick = false;
         $(".imgbox img").mouseenter(mouseover);
         $(".imgbox img").mouseleave(mouseout);
         $(".imgbox img").click(click);
@@ -181,19 +182,25 @@
         function mouseover() {
             if (isClick) return;
             let selected = $(this).index()+1;
+            $("#CommentPoint").val(selected);
             $(`.imgbox img:lt(${selected})`).attr("src", "../../img/starhover.gif");
         }
         function mouseout() {
             if (isClick) return;
+            let selected = "";
+            $("#CommentPoint").val(selected);
             $(".imgbox img").attr("src", "../../img/star.gif");
         }
         function click() {
             isClick = true;
             let selected = $(this).index()+1;
+            $("#CommentPoint").val(selected);
             $(this.nextSibling).prevAll().attr("src", "../../img/starhover.gif").end().nextAll().attr("src", "../../img/star.gif");
         }
         function dblclick() {
             isClick = false;
+            let selected = "";
+            $("#CommentPoint").val(selected);
             $(".imgbox img").attr("src", "../../img/star.gif");
         }
     </script>
