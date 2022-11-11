@@ -184,8 +184,8 @@ namespace PJ_MSIT143_team02.Controllers
 
             return Json(q);
         }
-        
-        [Route("Room/TestListView/{min}/{max}")]
+        [HttpGet]
+        [Route("Room/Search/{min}/{max}")]
         public IActionResult Search (decimal min, decimal max)
         {
             var prices = db.Rooms.Where(p => p.RoomPrice >= min && p.RoomPrice <= max);
