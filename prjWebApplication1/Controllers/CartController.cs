@@ -100,7 +100,7 @@ namespace PJ_MSIT143_team02.Controllers
             }
             catch (InvalidOperationException e)
             {
-                return Content(couponItem.price.ToString());
+                return Content(couponItem.DisPrice.ToString());
             }
         }
 
