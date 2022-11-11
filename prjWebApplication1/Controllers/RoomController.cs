@@ -262,8 +262,6 @@ namespace PJ_MSIT143_team02.Controllers
             List<int> idlist = new List<int>();
             var EE = db.EquipmentReferences.Where(e => e.RoomId == roomId).Select(e => e.EquipmentId);
             roomNew.EquipmentId = EE.ToList();
-            db.SaveChanges();
-
 
             //加入圖片
             var imgedit = db.ImageReferences.Where(i => i.RoomId == roomId).Select(i => i.ImageId);
@@ -289,6 +287,15 @@ namespace PJ_MSIT143_team02.Controllers
             roomData.Qty = roomedit.Qty;
 
             //迴圈加入設備References
+            var EE = db.EquipmentReferences.Where(e => e.RoomId == roomedit.RoomId).Select(e => e).ToList();
+            foreach(var item in EE)
+            {
+                db.EquipmentReferences.Remove(item);
+                db.SaveChanges();
+            }
+
+
+
             foreach (var Eitem in roomedit.EquipmentId)
             {
                 EquipmentReference item = new EquipmentReference();
