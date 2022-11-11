@@ -183,7 +183,13 @@ namespace PJ_MSIT143_team02.Controllers
             string jsonString = JsonSerializer.Serialize(q);
 
             return Json(q);
-
+        }
+        [HttpGet]
+        [Route("Room/Search/{min}/{max}")]
+        public IActionResult Search (decimal min, decimal max)
+        {
+            var prices = db.Rooms.Where(p => p.RoomPrice >= min && p.RoomPrice <= max);
+            return new JsonResult(prices);
         }
 
         public IActionResult RoomImage(int? id)
