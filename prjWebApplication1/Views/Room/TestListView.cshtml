@@ -47,7 +47,7 @@
                     <div class="bg-white px-4 py-2 rounded">
                         <div class="dropdown-divider mb-3 border-white"></div>
                         <h3 class="mb-3">客房設施</h3>
-                        
+
                         <form class="mb-3">
                             @{
                                 var eqArry = @Model.Equipment.ToArray();
@@ -55,11 +55,11 @@
                                 {
 
                                     @*<div class="form-check mb-2" id="dxbox">
-                                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" onclick="calc(@r.EquipmentId)">
-                                        <label class="form-check-label" for="@r.EquipmentId">
-                                            @r.EquipmentName
-                                        </label>
-                                    </div>*@
+                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" onclick="calc(@r.EquipmentId)">
+                        <label class="form-check-label" for="@r.EquipmentId">
+                            @r.EquipmentName
+                        </label>
+                    </div>*@
 
                                     <div class="form-check mb-2" id="dxbox">
                                         <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@eqArry[i].EquipmentId" onclick="calc(@eqArry[i].EquipmentId)">
@@ -72,117 +72,118 @@
                             }
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
-                        <p id="aaa">
-                            <h3 class="mb-3" for="RoomPrice">每晚預算</h3>
-                            @*<form class="mb-3" id="price-range-form">*@
+                        <div>
+                            <h3 class="mb-3" for="Price">每晚預算</h3>
+                            <form class="mb-3" id="aaa">
                                 <input type="text" id="Price" readonly style="border:0;font-weight:bold;">
-                                <div id="slider"></div>
-                            @*</form>*@
-                        </p>
-                            <div class="dropdown-divider mb-3 border-white"></div>
 
-                            <h3 class="mb-3">星級</h3>
-                            <form class="mb-3">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" name="rating" value="option1" type="radio" id="five-star">
-                                    <label class="form-check-label" for="five-star">
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <span class="text-black-50">5.0</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" name="rating" value="option2" type="radio" id="four-star">
-                                    <label class="form-check-label" for="four-star">
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <span class="text-black-50">4.0</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" name="rating" value="option3" type="radio" id="three-star">
-                                    <label class="form-check-label" for="three-star">
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <span class="text-black-50">3.0</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" name="rating" value="option4" type="radio" id="two-star">
-                                    <label class="form-check-label" for="two-star">
-                                        <i class="fas fa-star mr-1"></i>
-                                        <i class="fas fa-star mr-1"></i>
-                                        <span class="text-black-50">2.0</span>
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" name="rating" value="option5" type="radio" id="one-star">
-                                    <label class="form-check-label" for="one-star">
-                                        <i class="fas fa-star mr-1"></i>
-                                        <span class="text-black-50">1.0</span>
-                                    </label>
-                                </div>
                             </form>
-                            <div class="dropdown-divider mb-3 border-white"></div>
-
-                            <h3 class="mb-3">住宿類型</h3>
-                            <form class="mb-3">
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hotel">
-                                    <label class="form-check-label" for="hotel">
-                                        飯店
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="apartment">
-                                    <label class="form-check-label" for="apartment">
-                                        渡假村
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="unique">
-                                    <label class="form-check-label" for="unique">
-                                        汽車旅館/摩鐵
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
-                                    <label class="form-check-label" for="hostel">
-                                        民宿
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
-                                    <label class="form-check-label" for="hostel">
-                                        青年旅館
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
-                                    <label class="form-check-label" for="hostel">
-                                        飯店式公寓
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
-                                    <label class="form-check-label" for="hostel">
-                                        度假別墅
-                                    </label>
-                                </div>
-                                <div class="form-check mb-2">
-                                    <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
-                                    <label class="form-check-label" for="hostel">
-                                        私人別墅
-                                    </label>
-                                </div>
-                            </form>
+                            <div id="slider"></div>
                         </div>
+                        <div class="dropdown-divider mb-3 border-white"></div>
+
+                        <h3 class="mb-3">星級</h3>
+                        <form class="mb-3">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option1" type="radio" id="five-star">
+                                <label class="form-check-label" for="five-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">5.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option2" type="radio" id="four-star">
+                                <label class="form-check-label" for="four-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">4.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option3" type="radio" id="three-star">
+                                <label class="form-check-label" for="three-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">3.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option4" type="radio" id="two-star">
+                                <label class="form-check-label" for="two-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">2.0</span>
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" name="rating" value="option5" type="radio" id="one-star">
+                                <label class="form-check-label" for="one-star">
+                                    <i class="fas fa-star mr-1"></i>
+                                    <span class="text-black-50">1.0</span>
+                                </label>
+                            </div>
+                        </form>
+                        <div class="dropdown-divider mb-3 border-white"></div>
+
+                        <h3 class="mb-3">住宿類型</h3>
+                        <form class="mb-3">
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hotel">
+                                <label class="form-check-label" for="hotel">
+                                    飯店
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="apartment">
+                                <label class="form-check-label" for="apartment">
+                                    渡假村
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="unique">
+                                <label class="form-check-label" for="unique">
+                                    汽車旅館/摩鐵
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    民宿
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    青年旅館
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    飯店式公寓
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    度假別墅
+                                </label>
+                            </div>
+                            <div class="form-check mb-2">
+                                <input class="form-check-input rounded-0 border-dark" type="checkbox" id="hostel">
+                                <label class="form-check-label" for="hostel">
+                                    私人別墅
+                                </label>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <div class="col-lg-9 col-12 room-card" @*id="display-items-div"*@ id="hhh" style="border-radius:12px">
@@ -297,10 +298,10 @@
                     $.ajax({
                         type: 'GET',
                         url: '/Room/Search/' + min + '/' + max,
-                        done: function (result) {
+                        success: function (result) {
                             console.log(result);
 
-                            let qq = document.querySelector("#aaa");
+                            let qq = document.querySelector("#hhh");
                             qq.innerHTML = "";
 
                             let div = document.createElement("div");
