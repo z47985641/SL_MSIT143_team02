@@ -43,7 +43,7 @@ namespace PJ_MSIT143_team02.Controllers
             var Room = db.Rooms;
             ck.Equipment = Equipment;  //EquipmentID
             ck.EquipmentReference = EquipmentReference;  //EquipmentID RoomID
-            ck.Room = Room; //RoomID
+            ck.Room = Room.Where(r=>r.RoomstatusId==2); //RoomID
 
             IEnumerable<EquipmentReference> eqr = null;
             if (string.IsNullOrEmpty(ck.txtKeyword))
@@ -352,6 +352,18 @@ namespace PJ_MSIT143_team02.Controllers
             }
 
             return File(content, "image/jpeg");
+        }
+        public IActionResult MemnerRoomPhotoDelete(int? ImageId)
+        {
+            MingSuContext db = new MingSuContext();
+            ImageReference imgRe = db.ImageReferences.FirstOrDefault(img => img.ImageId == ImageId);
+            Image img = db.Images.FirstOrDefault(img => img.ImageId == ImageId);
+            db.ImageReferences.Remove(imgRe);
+            db.SaveChanges();
+            //db.Images.Remove(img);
+            //db.SaveChanges();
+
+            return NoContent();
         }
         //public static byte[] GetBytesFromImage(string filename)
         //{
