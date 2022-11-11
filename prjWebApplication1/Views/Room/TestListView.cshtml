@@ -73,12 +73,12 @@
                         </form>
                         <div class="dropdown-divider mb-3 border-white"></div>
                         <div>
-                            <h3 class="mb-3" for="Price">每晚預算</h3>
-                            <form class="mb-3" id="aaa">
-                                <input type="text" id="Price" readonly style="border:0;font-weight:bold;">
-
-                            </form>
-                            <div id="slider"></div>
+                            <p>
+                                <h3 class="mb-3" for="price">每晚預算</h3>
+                                <input type="text" id="price" readonly style="border:0;font-weight:bold;"/>
+                             </p>
+                                <div id="slider"></div>
+                            
                         </div>
                         <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -291,7 +291,7 @@
                 max: 1200000,
                 values: [500, 100000],
                 slide: function (event, ui) {
-                    $("#Price").val("$" + ui.values[0] + "-$" + ui.values[1]);
+                    $("#price").val("$" + ui.values[0] + "-$" + ui.values[1]);
                     var min = ui.values[0];
                     var max = ui.values[1];
 

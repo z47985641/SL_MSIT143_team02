@@ -93,17 +93,17 @@ namespace PJ_MSIT143_team02.Controllers
                 if (0.Equals(ck.txtQty)
                     && thisDate.Equals(ck.mydatein)
                     && thisDate.Equals(ck.mydateout))
-                    datas = from r in db.Rooms
+                    datas =( from r in db.Rooms
                             where r.RoomName.Contains(ck.txtKeyword)
                             || r.RoomPrice.ToString().Contains(ck.txtKeyword)
                             || r.RoomIntrodution.Contains(ck.txtKeyword)
                             || r.MemberId.ToString().Contains(ck.txtKeyword)
                             || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
                             || r.Address.Contains(ck.txtKeyword)
-                            select r;
+                            select r).ToList();
                 else if (thisDate.Equals(ck.mydatein)
                     && thisDate.Equals(ck.mydateout))
-                    datas = from r in db.Rooms
+                    datas = (from r in db.Rooms
                             where r.RoomName.Contains(ck.txtKeyword)
                             || r.RoomPrice.ToString().Contains(ck.txtKeyword)
                             || r.RoomIntrodution.Contains(ck.txtKeyword)
@@ -111,9 +111,9 @@ namespace PJ_MSIT143_team02.Controllers
                             || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
                             || r.Address.Contains(ck.txtKeyword)
                             || r.Qty.Equals(ck.txtQty)
-                            select r;
+                            select r).ToList();
                 else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydateout))
-                    datas = from r in db.Rooms
+                    datas =( from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
@@ -124,9 +124,9 @@ namespace PJ_MSIT143_team02.Controllers
                             || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
                             || r.Address.Contains(ck.txtKeyword)
                             || s.OrderEndDate != ck.mydatein
-                            select r;
+                            select r).ToList();
                 else if (0.Equals(ck.txtQty) && thisDate.Equals(ck.mydatein))
-                    datas = from r in db.Rooms
+                    datas =( from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
@@ -137,9 +137,9 @@ namespace PJ_MSIT143_team02.Controllers
                             || r.RoomstatusId.ToString().Contains(ck.txtKeyword)
                             || r.Address.Contains(ck.txtKeyword)
                             || s.OrderEndDate != ck.mydateout
-                            select r;
+                            select r).ToList();
                 else if (0.Equals(ck.txtQty))
-                    datas = from r in db.Rooms
+                    datas =( from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
@@ -151,9 +151,9 @@ namespace PJ_MSIT143_team02.Controllers
                             || r.Address.Contains(ck.txtKeyword)
                             || (s.OrderStartDate != ck.mydatein
                             && s.OrderEndDate != ck.mydateout)
-                            select r;
+                            select r).ToList();
                 else
-                    datas = from r in db.Rooms
+                    datas =( from r in db.Rooms
                             join o in db.OrderDetails on r.RoomId equals o.RoomId
                             into subGrp
                             from s in subGrp.DefaultIfEmpty()
@@ -166,7 +166,7 @@ namespace PJ_MSIT143_team02.Controllers
                             || r.Qty.Equals(ck.txtQty)
                             || s.OrderStartDate != ck.mydatein
                             || s.OrderEndDate != ck.mydateout
-                            select r;
+                            select r).ToList();
             }
 
             //return View("TestListView", datas.Where(e => e.RoomstatusId != 5));
