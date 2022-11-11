@@ -79,8 +79,8 @@
 }
 
 .imgbox img{
-    width:30px;
-    height:30px;
+    width:25px;
+    height:25px;
 }
 
 #comment h4, h5 {
@@ -109,20 +109,17 @@
 }
 
 #carouselExampleIndicators {
-    padding-top: 76px;
+    padding-top: 75.5px;
 }
 
 .carousel-control-prev {
     background-color: transparent;
     border: hidden;
-}
-
-.carousel-control-prev-icon {
-    background-color: transparent;
-    border: hidden;
+    padding-top: 75.5px;
 }
 
 .carousel-control-next {
     background-color: transparent;
     border: hidden;
+    padding-top: 75.5px;
 }
