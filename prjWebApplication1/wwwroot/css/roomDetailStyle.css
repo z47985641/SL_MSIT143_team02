@@ -4,7 +4,6 @@
 
 #imgbox {
     height: 500px;
-    border-radius: 10px;
 }
 
 #nav {
@@ -108,8 +107,13 @@
     text-align:center;
 }
 
-#carouselExampleIndicators {
+#carouselExampleIndicators {    
     padding-top: 75.5px;
+}
+
+.carousel-inner {
+    background-color: rgba(255,250,240,0.25);
+    border-radius: 10px;
 }
 
 .carousel-control-prev {
