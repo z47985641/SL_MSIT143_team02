@@ -183,10 +183,33 @@ namespace PJ_MSIT143_team02.Controllers
             string jsonString = JsonSerializer.Serialize(q);
 
             return Json(q);
-
+        }
+        [HttpGet]
+        [Route("Room/Search/{min}/{max}")]
+        public IActionResult Search (decimal min, decimal max)
+        {
+            var prices = db.Rooms.Where(p => p.RoomPrice >= min && p.RoomPrice <= max);
+            return new JsonResult(prices);
         }
 
+        public IActionResult RoomImage(int? id)
+        {
+            MingSuContext db = new MingSuContext();
+            var photoData = db.Images.Where(t => t.ImageId == id).ToList();
+            if (photoData.FirstOrDefault().Image1 != null)
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    for (int i = 0; i < photoData.Count(); i++) { 
+                        byte[] b_photo = photoData[i].Image1;
+                        ms.Write(b_photo);
+                    }
+                    return File(ms.ToArray(), "image/jpeg");
+                }
+            }
+            return new EmptyResult();
 
+        }
 
 
         public IActionResult AddRoom(CKeywordViewModel model)

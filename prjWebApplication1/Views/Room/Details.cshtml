@@ -10,13 +10,8 @@
 <section class="rooms-section spad">
     <div class="container">
         @foreach (var item in Model){
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-            </div>
-            @await Component.InvokeAsync("Image", new { RoomID = item.RoomId })
+        <div id="carouselExampleIndicators" class="carousel slide col-lg-12" data-bs-ride="true">
+            @await Component.InvokeAsync("Image", new { id = item.RoomId })
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             </button>
@@ -25,8 +20,8 @@
             </button>
         </div>
         <div class="col-lg-12">
-            <hr />
             <div id="nav" class="col-lg-12">
+                <hr />
                 <ul>
                     <li><a href="#roomname">房間名稱</a></li>
                     <li><a href="#roomintro">房間介紹</a></li>
@@ -37,7 +32,7 @@
                         NT @Html.DisplayFor(model => item.RoomPrice)起
                     </li>
                     <li>
-                        房間數:
+                        預訂間數:
                         <button type="button" class="btn btn-secondary" id="roomminus">-</button>
                         <input type="text" id="roomnum" style="text-align:center;width:30px" value="1">
                         <button type="button" class="btn btn-secondary" id="roomplus">+</button>
@@ -58,12 +53,15 @@
                                asp-controller="Cart" asp-action="Index" asp-route-Id="@Model.RoomId">加入購物車</a>
                         </li>*@
                 </ul>
+                <hr />
             </div>
-            <hr />
             <div class="row">
                 <div class="col-lg-8">
                     <div id="content">
                         <div>
+                            <p style="float:right;font-size:19px">
+                                剩餘間數: @Html.DisplayFor(model => item.Qty)
+                            </p>
                             <h4 id="roomname">@Html.DisplayFor(model => item.RoomName)</h4>
                             <p id="roomlocation">
                                 <a id="location" target="_blank">@Html.DisplayFor(model => item.Address)</a>
@@ -75,31 +73,9 @@
                             <hr />
                             <h4 id="roomfacility">重點設施</h4>
                             <br />
-                            <div id="detail">
-                                <figure>
-                                    <img src="~/Image/bus_icon.png" />
-                                    <figcaption>距離大眾運輸100公尺</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/Door.png" />
-                                    <figcaption>24小時皆可入住</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/flight.png" />
-                                    <figcaption>機場接送</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/restaurant.png" />
-                                    <figcaption>早餐很棒</figcaption>
-                                </figure>
-                                <figure>
-                                    <img src="~/Image/landscape.png" />
-                                    <figcaption>景觀很棒</figcaption>
-                                </figure>
-                            </div>
                         </div>
                         <div>
-                            @await Component.InvokeAsync("Equipment", new { RoomID = item.RoomId })
+                            @await Component.InvokeAsync("Equipment", new { id = item.RoomId })
                         </div>
                     </div>
                 </div>
