@@ -1,5 +1,15 @@
-﻿#imgbox {
+﻿section {
+    background-image: url(../../img/background/搜好房背景圖.png);
+}
+
+#imgbox {
     height: 500px;
+    border-radius: 10px;
+}
+
+#nav {
+    background-color: rgba(255,250,240,0.95);
+    border-radius: 10px;
 }
 
 #nav a {
@@ -23,7 +33,7 @@
 }
 
 #sidebar {
-    background-color:blanchedalmond;
+    background-color:rgba(255,250,240,0.95);
     border-radius:10px;
     padding: 20px;
 }
@@ -45,7 +55,7 @@
 }
 
 #content {
-    background-color: blanchedalmond;
+    background-color: rgba(255,250,240,0.95);
     border-radius: 10px;
     padding: 20px;
 }
@@ -59,7 +69,7 @@
 }
 
 #comment {
-    background-color: blanchedalmond;
+    background-color: rgba(255,250,240,0.95);
     border-radius: 10px;
     padding: 20px;
 }
@@ -96,6 +106,10 @@
     display: inline-block;
     margin-left: 35px;
     text-align:center;
+}
+
+#carouselExampleIndicators {
+    padding-top: 76px;
 }
 
 .carousel-control-prev {
