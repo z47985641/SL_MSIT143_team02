@@ -53,14 +53,6 @@
                                 var eqArry = @Model.Equipment.ToArray();
                                 for (var i = 0; i <= 5; i++)
                                 {
-
-                                    @*<div class="form-check mb-2" id="dxbox">
-                        <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@r.EquipmentId" onclick="calc(@r.EquipmentId)">
-                        <label class="form-check-label" for="@r.EquipmentId">
-                            @r.EquipmentName
-                        </label>
-                    </div>*@
-
                                     <div class="form-check mb-2" id="dxbox">
                                         <input class="form-check-input rounded-0 border-dark" type="checkbox" id="@eqArry[i].EquipmentId" onclick="calc(@eqArry[i].EquipmentId)">
                                         <label class="form-check-label" for="@eqArry[i].EquipmentId">
@@ -68,17 +60,17 @@
                                         </label>
                                     </div>
                                 };
-
                             }
                         </form>
+
+
                         <div class="dropdown-divider mb-3 border-white"></div>
                         <div>
                             <p>
-                                <h3 class="mb-3" for="price">每晚預算</h3>
-                                <input type="text" id="price" readonly style="border:0;font-weight:bold;"/>
+                                <h3 class="mb-3" for="amount">每晚預算</h3>
+                                <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
                              </p>
-                                <div id="slider"></div>
-                            
+                                <div id="slider-range"></div>
                         </div>
                         <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -285,13 +277,13 @@
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
     <script>
         $(function () {
-            $("#slider").slider({
+            $("#slider-range").slider({
                 range: true,
                 min: 0,
-                max: 1200000,
-                values: [500, 100000],
+                max: 9999,
+                values: [500, 8888],
                 slide: function (event, ui) {
-                    $("#price").val("$" + ui.values[0] + "-$" + ui.values[1]);
+                    $("#amount").val("$" + ui.values[0] + "- $" + ui.values[1]);
                     var min = ui.values[0];
                     var max = ui.values[1];
 
@@ -299,14 +291,11 @@
                         type: 'GET',
                         url: '/Room/Search/' + min + '/' + max,
                         success: function (result) {
-                            console.log(result);
-
                             let qq = document.querySelector("#hhh");
                             qq.innerHTML = "";
-
                             let div = document.createElement("div");
                             div.className = "mobile-bg-secondary";
-
+                            console.log(result);
                             result.forEach(function (data) {
                                 let roomIntrodution = data.roomIntrodution;
                                 let roomIntSub = roomIntrodution.substring(0, 16);
@@ -344,9 +333,6 @@
                                                         <span class="badge badge-pill badge-info text-black mr-3">
                                                             ${roomIntSub}...
                                                         </span>
-                                                    </li>
-                                                    <li>
-                                                    //    <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
                                                     </li>
                                                 </ul>
                                                 <div class="money-block text-right d-flex flex-column">
@@ -460,9 +446,7 @@
                                                             ${roomIntSub}...
                                                         </span>
                                                     </li>
-                                                    <li>
-                                                    //    <span class="badge badge-pill badge-info text-black mr-3">${data.Address}</span>
-                                                    </li>
+
                                                 </ul>
                                                 <div class="money-block text-right d-flex flex-column">
                                                     <small class="text-black-50 d-lg-block d-none" style="font-size:20px">每晚價錢</small>
