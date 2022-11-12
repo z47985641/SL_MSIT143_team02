@@ -173,6 +173,21 @@ namespace PJ_MSIT143_team02.Controllers
             return View("TestListView", ck);
 
         }
+        [HttpPost]
+        public IActionResult TestListView(string input)
+        {
+            CKeywordViewModel items = JsonSerializer.Deserialize<CKeywordViewModel>(input);
+            MingSuContext db = new MingSuContext();
+            var datas = (from r in db.Rooms
+                         join o in db.OrderDetails on r.RoomId equals o.RoomId
+                         into subGrp
+                         from s in subGrp.DefaultIfEmpty()
+                         where r.Qty.Equals(items.txtQty)
+                         || s.OrderStartDate != items.mydatein
+                         || s.OrderEndDate != items.mydateout
+                         select r).ToList();
+            return View(datas);
+        }
         [HttpGet]
         public ActionResult forEquipment(string Equipment)
         {
