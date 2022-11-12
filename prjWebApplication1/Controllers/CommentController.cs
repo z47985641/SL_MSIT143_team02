@@ -3,6 +3,8 @@ using PJ_MSIT143_team02.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
 using PJ_MSIT143_team02.Models;
+using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace PJ_MSIT143_team02.Controllers
 {
@@ -71,7 +73,20 @@ namespace PJ_MSIT143_team02.Controllers
             }
             return RedirectToAction("List");
         }
-
+        public IActionResult Create(string input)
+        {
+            Comment c = JsonSerializer.Deserialize<Comment>(input);
+            if (string.IsNullOrEmpty(c.CommentDetail) || string.IsNullOrEmpty(c.CommentPoint.ToString()))
+                return NoContent();
+            MingSuContext db = new MingSuContext();
+            var Name = HttpContext.Session.GetString(CDictionary.SK_LOGINED_USER);
+            var v = JsonSerializer.Deserialize<Member>(Name);
+            c.CommentStatus = "no";
+            c.MemberAccount = v.MemberAccount;
+            db.Comments.Add(c);
+            db.SaveChanges();
+            return Content("1");
+        }
         public IEnumerable<Comment> queryAll()
         {
             var data = from d in (new MingSuContext()).Comments

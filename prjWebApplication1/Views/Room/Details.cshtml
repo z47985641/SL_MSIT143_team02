@@ -95,23 +95,7 @@
             <div class="col-lg-7 ">
                 <div class="row">
                     <div id="comment">
-                        <h4>評論</h4>
-                        <br />
-                        <h5>評分</h5>
-                        <div class="imgbox">
-                            <img id="id1" src="~/img/star.gif" />
-                            <img id="id2" src="~/img/star.gif" />
-                            <img id="id3" src="~/img/star.gif" />
-                            <img id="id4" src="~/img/star.gif" />
-                            <img id="id5" src="~/img/star.gif" />
-                        </div>
-                        <br />
-                        <h5>留言</h5>
-                        <textarea rows="3" cols="81"></textarea>
-                        <br />
-                        <a class="bbtn" id="addcomment" href="@Url.Action()">
-                            <span>送出</span>
-                        </a>
+                        @await Component.InvokeAsync("CommentCreate", new { id = item.RoomId})
                         <br /><br />
                         <hr />
                         @await Component.InvokeAsync("Comment", new { id = item.RoomId})
@@ -145,6 +129,29 @@
                 i += 1;
             $("#roomnum").val(i);
         });
+        $("#addcomment").click(async function () {
+            let roomId = Number($("#RoomId").val());
+            let commentPoint = Number($("#CommentPoint").val());
+            let commentDetail = $("#CommentDetail").val();
+            var s = {
+                "RoomId": roomId,
+                "CommentPoint": commentPoint,
+                "CommentDetail": commentDetail,
+            };
+            let data = JSON.stringify(s);
+            $.ajax({
+                type: "POST",
+                url: "@Url.Content("~/Comment/Create")" + `?input=${data}`,
+            }).done(function(result) {
+                if (result == 1) {
+                    var refreshComponent = function () {
+                        $.get("/Views/Shared/Components/CommentComponent", { id: roomId});
+                    }; 
+                    window.setInterval(refreshComponent, 1);
+                }
+                ShowComMessage();
+            });           
+        });
         $("#add").click(function(){
             if ($("#roomnum").val() > @Html.DisplayFor(model => model[0].Qty)) {
                 alert("加入購物車數量大於庫存數");
@@ -171,6 +178,9 @@
         });
         function ShowMessage() {
             toastr["success"]("商品已加入購物車！");
+        }
+        function ShowComMessage() {
+            toastr["success"]("評論已新增！");
         }
 
         let isClick = false;

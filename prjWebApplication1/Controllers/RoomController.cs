@@ -183,8 +183,8 @@ namespace PJ_MSIT143_team02.Controllers
                          into subGrp
                          from s in subGrp.DefaultIfEmpty()
                          where r.Qty.Equals(items.txtQty)
-                         || s.OrderStartDate != items.mydatein
-                         || s.OrderEndDate != items.mydateout
+                         || s.OrderStartDate != Convert.ToDateTime(items.datein)
+                         || s.OrderEndDate != Convert.ToDateTime(items.dateout)
                          select r).ToList();
             return View(datas);
         }

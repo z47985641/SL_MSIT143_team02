@@ -1,0 +1,33 @@
+﻿@model PJ_MSIT143_team02.Models.Comment
+
+@{
+    //ViewData["Title"] = "CommentCreate";
+}
+
+<h4>評論</h4>
+<br />
+<h5>評分</h5>
+<div class="imgbox">
+    <img id="id1" src="~/img/star.gif" />
+    <img id="id2" src="~/img/star.gif" />
+    <img id="id3" src="~/img/star.gif" />
+    <img id="id4" src="~/img/star.gif" />
+    <img id="id5" src="~/img/star.gif" />
+</div>
+<br />
+<h5>留言</h5>
+<form>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input asp-for="RoomId" id="RoomId" class="form-control" hidden/>
+    <input id="CommentPoint" class="form-control" hidden/>
+    <div class="form-group">
+        <textarea id="CommentDetail" rows="3" cols="81"></textarea>
+    </div>
+    <div class="form-group">
+        <button class="bbtn" id="addcomment" style="text-decoration: none;">
+            <span>送出</span>
+        </button>
+    </div>
+    <br />
+</form>
+

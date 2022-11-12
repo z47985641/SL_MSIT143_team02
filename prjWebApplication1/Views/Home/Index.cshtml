@@ -557,12 +557,12 @@
 
         $("#search").click(function () {
             let qty = Number($("#roomnum").val());
-            let datein = Date($("#date-in").val());
-            let dateout = Date($("#date-out").val());
+            let datein = $("#date-in").val();
+            let dateout = $("#date-out").val();
             var s = {
                 "txtQty": qty,
-                "mydatein": datein,
-                "mydateout": dateout,
+                "datein": datein,
+                "dateout": dateout,
             };
             let data = JSON.stringify(s);
             $.ajax({

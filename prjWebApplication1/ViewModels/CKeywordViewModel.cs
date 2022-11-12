@@ -11,6 +11,8 @@ namespace PJ_MSIT143_team02.ViewModels
         public string txtKeyword { get; set; }
         public DateTime mydatein { get; set; }
         public DateTime mydateout { get; set; }
+        public string datein { get; set; }
+        public string dateout { get; set; }
         public int txtQty { get; set; }
         //public int EquipmentId { get; set; }
         //public int RoomId { get; set; }
