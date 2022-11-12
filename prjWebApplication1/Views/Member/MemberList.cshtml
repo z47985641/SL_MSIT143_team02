@@ -5,12 +5,11 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "會員清單";
 }
-
+<h1 style="text-align:center">
+    會員清單
+</h1>
+<hr />
 <div class="container">
-    <br />
-    <p style="font-size:30px">
-        會員清單
-    </p>
     <p>
         <a asp-action="MemberCreate" class="btn btn-dark">建立會員</a>
     </p>
@@ -82,20 +81,20 @@
         foreach (var item in Model)
         {
             <div style="border: solid;display: flex;float: left; padding: 5px;margin: 5px;width: 550px;">
-                    <div style="width: 250px;height: 250px;position: relative;">
-                        <div style="position:absolute;top:0px;left:0px;background-color:ghostwhite;opacity:0.9;width: 100px;">會員編號:@Html.DisplayFor(modelItem => item.MemberId)</div>
-                        <div style="position:absolute;bottom:0px;display:inline-flex ;background-color:ghostwhite;opacity:0.9;width: 250px;text-align:justify">
-                            @Html.DisplayFor(modelItem => item.Authority) : @Html.DisplayFor(modelItem => item.MemberName)
-                        </div>
-                        @if (item.MemberImage == null)
-                        {
-                            <img id="Photo" style=" padding:5px;height:200px" src="~/img/Admin/unknown.png" />
-                        }
-                        else
-                        {
-                            <img id="Photo" style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto", "Member", new { ItemId = item.MemberId })" />
-                        }
+                <div style="width: 250px;height: 250px;position: relative;">
+                    <div style="position:absolute;top:0px;left:0px;background-color:ghostwhite;opacity:0.9;width: 100px;">會員編號:@Html.DisplayFor(modelItem => item.MemberId)</div>
+                    <div style="position:absolute;bottom:0px;display:inline-flex ;background-color:ghostwhite;opacity:0.9;width: 250px;text-align:justify">
+                        @Html.DisplayFor(modelItem => item.Authority) : @Html.DisplayFor(modelItem => item.MemberName)
                     </div>
+                    @if (item.MemberImage == null)
+                    {
+                        <img id="Photo" style=" padding:5px;height:200px" src="~/img/Admin/unknown.png" />
+                    }
+                    else
+                    {
+                        <img id="Photo" style=" padding:5px;height:200px" src="@Url.Action("MemberPhoto", "Member", new { ItemId = item.MemberId })" />
+                    }
+                </div>
                 <div style="width: 250px;height: 250px; ">
                     <div style="height: 180px; ">
                         <p style="margin:10px">帳號 : @Html.DisplayFor(modelItem => item.MemberAccount)</p>
