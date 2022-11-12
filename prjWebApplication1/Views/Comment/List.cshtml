@@ -4,9 +4,12 @@
     Layout = "~/Views/Shared/_Layout_Admin.cshtml";
     ViewData["Title"] = "List";
 }
+<h1 style="text-align:center">
+    評論管理
+</h1>
+<hr />
 <div class="container">
-    <br />
-    <p style="font-size:30px" class="forp">評論管理系統</p>
+
     <div class="forp">
         @using (Html.BeginForm())
         {
@@ -27,7 +30,7 @@
                     評分
                 </th>
                 <th>
-                    是否隱藏
+                    是否顯示
                 </th>
                 <th colspan="4">
                     評論內容
