@@ -139,18 +139,18 @@
                 "CommentDetail": commentDetail,
             };
             let data = JSON.stringify(s);
+            $("#cdata").html($("#cdata").html() + "<div class='breadcrumb-text' style='text-align:left'>" +
+                    "<h5 style='font-size:17px'>評論者:</h5>" +
+                    "<p></p>" +
+                    "<h5 style='font-size:17px'>評分:</h5>" +
+                    `<p>${commentPoint} / 5</p>` +
+                    `<p>${commentDetail}</p>` +
+                    "</div>" +
+                    "<hr />");
             $.ajax({
                 type: "POST",
                 url: "@Url.Content("~/Comment/Create")" + `?input=${data}`,
-            }).done(function(result) {
-                if (result == 1) {
-                    var refreshComponent = function () {
-                        $.get("/Views/Shared/Components/CommentComponent", { id: roomId});
-                    }; 
-                    window.setInterval(refreshComponent, 1);
-                }
-                ShowComMessage();
-            });           
+            })
         });
         $("#add").click(function(){
             if ($("#roomnum").val() > @Html.DisplayFor(model => model[0].Qty)) {
@@ -178,9 +178,6 @@
         });
         function ShowMessage() {
             toastr["success"]("商品已加入購物車！");
-        }
-        function ShowComMessage() {
-            toastr["success"]("評論已新增！");
         }
 
         let isClick = false;

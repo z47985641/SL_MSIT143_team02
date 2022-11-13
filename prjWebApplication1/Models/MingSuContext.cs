@@ -214,7 +214,6 @@ namespace PJ_MSIT143_team02.Models
                 entity.ToTable("Comment");
 
                 entity.Property(e => e.CommentId)
-                    .ValueGeneratedNever()
                     .HasColumnName("CommentID");
 
                 entity.Property(e => e.CommentStatus).HasMaxLength(50);

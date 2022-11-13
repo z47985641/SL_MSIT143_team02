@@ -85,7 +85,7 @@ namespace PJ_MSIT143_team02.Controllers
             c.MemberAccount = v.MemberAccount;
             db.Comments.Add(c);
             db.SaveChanges();
-            return Content("1");
+            return RedirectToAction("Details","Room",c.RoomId);
         }
         public IEnumerable<Comment> queryAll()
         {
