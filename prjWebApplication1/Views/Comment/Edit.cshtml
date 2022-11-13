@@ -5,11 +5,11 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>評論管理系統</h1>
-
-<h4>評論維護</h4>
+<h1 style="text-align:center">評論維護</h1>
 <hr />
-<div class="row">
+
+<div class="row" style="min-block-size:1000px">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -46,7 +46,7 @@
             <div class="form-group">
                 <input type="button" id="save" value="儲存" class="btn btn-primary" hidden />
                 <input type="button" id="block" value="隱藏" class="btn btn-primary" />
-                <input type="button" id="unblock" value="取消隱藏" class="btn btn-primary" disabled/>
+                <input type="button" id="unblock" value="取消隱藏" class="btn btn-primary" disabled />
             </div>
         </form>
     </div>
@@ -61,7 +61,7 @@
     <script>$('#Comment').addClass('active');</script>
     <script>
         $(function () {
-            if ($("#status").val() == "yes") {
+            if ($("#status").val() == "no") {
                 $("#unblock").removeAttr("disabled");
                 $("#block").attr("disabled", true);
             }
@@ -73,21 +73,21 @@
                 window.alert("評分需在1 - 5之間");
                 return;
             } else {
-                $("#save").get(0).type = "submit";               
+                $("#save").get(0).type = "submit";
             }
         })
         $("#block").click(function () {
-            $("#status").val("yes");
+            $("#status").val("no");
             var result = confirm("確定要隱藏該評論嗎?");
-            if (result) {                
+            if (result) {
                 $("#save").click();
             }
         })
         $("#unblock").click(function () {
-            $("#status").val("no");
+            $("#status").val("yes");
             var result = confirm("確定要取消隱藏該評論嗎?");
             if (result) {
-                $("#save").click();                
+                $("#save").click();
             }
         })
     </script>
