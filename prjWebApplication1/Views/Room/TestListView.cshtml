@@ -367,9 +367,7 @@
             $("#date-in").val("16 NOVEMBER, 2022");
             $("#date-out").val("18 NOVEMBER, 2022");
             $("#num").val(2);
-            $("#num").html("02");
             $("#roomnum").val(2);
-            $("#roomnum").html("02");
         });
     </script>
     <script>
@@ -398,7 +396,30 @@
         });
 
     </script>
-
+    <script>
+        $("#minus").click(function () {
+            var i = Number($("#num").val());
+            if (i > 1)
+                i -= 1;
+            $("#num").val(i);
+        });
+        $("#plus").click(function () {
+            var i = Number($("#num").val());
+            i += 1;
+            $("#num").val(i);
+        });
+        $("#roomminus").click(function () {
+            var i = Number($("#roomnum").val());
+            if (i > 1)
+                i -= 1;
+            $("#roomnum").val(i);
+        });
+        $("#roomplus").click(function () {
+            var i = Number($("#roomnum").val());
+            i += 1;
+            $("#roomnum").val(i);
+        });
+    </script>
     <script>
         function calc(eqID) {
            var shopUrl = "@Url.Action("forEquipment", "Room")" + "?Equipment=" + eqID;
