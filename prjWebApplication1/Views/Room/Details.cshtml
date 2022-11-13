@@ -95,23 +95,7 @@
             <div class="col-lg-7 ">
                 <div class="row">
                     <div id="comment">
-                        <h4>評論</h4>
-                        <br />
-                        <h5>評分</h5>
-                        <div class="imgbox">
-                            <img id="id1" src="~/img/star.gif" />
-                            <img id="id2" src="~/img/star.gif" />
-                            <img id="id3" src="~/img/star.gif" />
-                            <img id="id4" src="~/img/star.gif" />
-                            <img id="id5" src="~/img/star.gif" />
-                        </div>
-                        <br />
-                        <h5>留言</h5>
-                        <textarea rows="3" cols="81"></textarea>
-                        <br />
-                        <a class="bbtn" id="addcomment" href="@Url.Action()">
-                            <span>送出</span>
-                        </a>
+                        @await Component.InvokeAsync("CommentCreate", new { id = item.RoomId})
                         <br /><br />
                         <hr />
                         @await Component.InvokeAsync("Comment", new { id = item.RoomId})
