@@ -40,8 +40,8 @@ namespace PJ_MSIT143_team02.ViewModel
         }
         public int ActivityLeft
         {
-            get { return _activity.ActivityCapacity; }
-            set { _activity.ActivityCapacity = value; }
+            get { return _activity.ActivityLeft; }
+            set { _activity.ActivityLeft = value; }
         }
         public string ActivityStatus
         {
