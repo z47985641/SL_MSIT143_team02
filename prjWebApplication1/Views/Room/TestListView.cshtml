@@ -69,8 +69,8 @@
                             <p>
                                 <h3 class="mb-3" for="amount">每晚預算</h3>
                                 <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-                             </p>
-                                <div id="slider-range"></div>
+                            </p>
+                            <div id="slider-range"></div>
                         </div>
                         <div class="dropdown-divider mb-3 border-white"></div>
 
@@ -226,7 +226,7 @@
                                                 <ul class="list-unstyled d-lg-flex align-items-center m-0 d-lg-block d-none" style="padding-left:10px;">
                                                     <li>
                                                         <span class="badge badge-pill badge-info text-black mr-3">
-                                                            @r.RoomIntrodution.Substring(0,16)<span>...</span>
+                                                            @r.RoomIntrodution.Substring(0, 16)<span>...</span>
                                                         </span>
                                                     </li>
                                                     <li>
@@ -239,10 +239,11 @@
                                                 </div>
                                                 <!-- badge樣式沒有作用另外寫css的 -->
                                             </div>
-                                            <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;">
+                                            <button class="bbtn" style="text-decoration: none;background-color:transparent;margin-left:375px;border:none;" value="@r.RoomId" id="likeButton">
                                                 <span>
-                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId">
+                                                    <a class="d-flex justify-content-end" href="../Member/AddLikeList?ItemId=@r.RoomId" id="likelist" >
                                                         <img src="~/Image/heart.png" style="width:45px ;height:45px" />
+                                                        @await Component.InvokeAsync("Likelist", new { id = r.RoomId })
                                                     </a>
                                                 </span>
                                             </button>
@@ -272,6 +273,8 @@
 @section Scripts{
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/10e2f2fe75.js" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
+
     <script>
         $(function () {
             $("#slider-range").slider({
@@ -478,6 +481,9 @@
             });
 
         }
+        $('#likelist').on("click", function () {
+            toastr["success"]("已加入追蹤清單！");
+        })
     </script>
 
 }
