@@ -18,7 +18,7 @@
             <div class="col-xl-4 col-lg-5 offset-xl-2 offset-lg-1">
                 <div class="booking-form">
                     <h3>訂下專屬你的房間</h3>
-                    <form action="#" name="myForm" onsubmit="return validateForm()" method="get">
+                    <form action="@Url.Action("TestListView","Room")" name="myForm" onsubmit="return validateForm()" method="get">
                         <div class="check-date">
                             <label for="date-in">入住時間:</label>
                             <input type="text" class="date-input" id="date-in" name="mydatein" required>
@@ -46,7 +46,7 @@
                         </div>
 
                         <button type="submit" onsubmit="myButton()">
-                            @Html.ActionLink("立即搜尋","TestListView","Room",null,null)
+                            立即搜尋
                         </button>
                     </form>
                     <button id="demo" onclick="demo()">
