@@ -5,19 +5,20 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>活動管理頁面</h1>
+<h1 style="text-align:center">活動管理頁面</h1>
 
-<h4>新增活動</h4>
+<h4 style="text-align:center">新增活動</h4>
 <hr />
-<div class="row">
+<div class="row" style="min-block-size:1000px">
+    <div class="col-md-4"></div>
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
-            <label asp-for="ActivityId" class="control-label"></label>
-            <input asp-for="ActivityId" class="form-control" />
-            <span asp-validation-for="ActivityId" class="text-danger"></span>
-        </div>*@
+                <label asp-for="ActivityId" class="control-label"></label>
+                <input asp-for="ActivityId" class="form-control" />
+                <span asp-validation-for="ActivityId" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="ActivityName" class="control-label">活動名稱</label>
                 <input asp-for="ActivityName" class="form-control" />
@@ -35,13 +36,13 @@
             </div>
             <div class="form-group">
                 <label asp-for="ActivityCapacity" class="control-label">人數上限</label>
-                <input asp-for="ActivityCapacity" class="form-control" id="acap"/>
+                <input asp-for="ActivityCapacity" class="form-control" id="acap" />
                 <span asp-validation-for="ActivityCapacity" class="text-danger"></span>
             </div>
             <div class="form-group" hidden>
-                <label asp-for="ActivityLeft" class="control-label" >剩餘人數</label>
+                <label asp-for="ActivityLeft" class="control-label">剩餘人數</label>
                 <input asp-for="ActivityLeft" class="form-control" id="aleft" />
-                <span asp-validation-for="ActivityLeft" class="text-danger" ></span>
+                <span asp-validation-for="ActivityLeft" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="ActivityStatus" class="control-label">活動狀態</label>
@@ -102,12 +103,13 @@
 
         </form>
         <button class="btn btn-primary" style="margin:5px" onclick="DemoA()">Demo: 活動新增</button>
+        <div>
+            <a asp-action="List">回上頁</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="List">回上頁</a>
-</div>
+
 <div>
     <br />
     <br />
