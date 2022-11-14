@@ -150,7 +150,7 @@
                 })            
                 var i = Number($("#roomnum").val());
                 i += i;
-                if (i > Number($("#qty").html())) { 
+                if (i > Number($("#qty").html()) + 1) { 
                     toastr["warning"]("已達庫存上限！");
                     $("#add").attr("disabled", true);
                 }
