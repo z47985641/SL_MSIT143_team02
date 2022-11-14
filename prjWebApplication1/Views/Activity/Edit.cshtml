@@ -14,10 +14,10 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             @*<div class="form-group">
-                <label asp-for="ActivityId" class="control-label"></label>*@
+            <label asp-for="ActivityId" class="control-label"></label>*@
             <input type="hidden" asp-for="ActivityId" class="form-control" />
             @*<span asp-validation-for="ActivityId" class="text-danger"></span>
-                </div>*@
+            </div>*@
             <div class="form-group">
                 <label asp-for="ActivityName" class="control-label">活動名稱</label>
                 <input asp-for="ActivityName" class="form-control" />
@@ -45,10 +45,10 @@
                 <span asp-validation-for="ActivityLeft" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                    <label asp-for="ActivityStatus" class="control-label">活動狀態</label>
-                    <input asp-for="ActivityStatus" class="form-control" />
-                    <span asp-validation-for="ActivityStatus" class="text-danger"></span>
-                </div>*@
+                <label asp-for="ActivityStatus" class="control-label">活動狀態</label>
+                <input asp-for="ActivityStatus" class="form-control" />
+                <span asp-validation-for="ActivityStatus" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="ActivityStatus" class="control-label">活動狀態</label>
                 @*<input asp-for="ActivityStatus" class="form-control" />*@
@@ -64,10 +64,10 @@
                 <span asp-validation-for="ActivityStatus" class="text-danger"></span>
             </div>
             @*<div class="form-group">
-                    <label asp-for="ActivityLocation" class="control-label">活動地點</label>
-                    <input asp-for="ActivityLocation" class="form-control" />
-                    <span asp-validation-for="ActivityLocation" class="text-danger"></span>
-                </div>*@
+                <label asp-for="ActivityLocation" class="control-label">活動地點</label>
+                <input asp-for="ActivityLocation" class="form-control" />
+                <span asp-validation-for="ActivityLocation" class="text-danger"></span>
+            </div>*@
             <div class="form-group">
                 <label asp-for="ActivityLocation" class="control-label">活動地點</label>
                 @*<input asp-for="ActivityLocation" class="form-control" />*@
@@ -110,12 +110,13 @@
                 <input type="submit" value="儲存變更" class="btn btn-primary" id="submit" />
             </div>
         </form>
+        <div>
+            <a asp-action="List">回上頁</a>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="List">回上頁</a>
-</div>
+
 <div>
     <br />
     <br />
