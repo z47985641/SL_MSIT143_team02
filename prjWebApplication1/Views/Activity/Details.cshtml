@@ -61,12 +61,10 @@
                                 }
                                 else if (Model.ActivityStatus == "開放報名")
                                 {
-<<<<<<< HEAD
-                                    <span>剩餘人數/人數上限: @left / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
-                        <p id="warning" class="text-red">&emsp; 即將額滿，報名從速 !</p>
-=======
-                                    <span>剩餘人數/人數上限: <span id="aleft">@left</span> / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
->>>>>>> master
+
+                        <span>剩餘人數/人數上限: <span id="aleft">@left</span>  / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
+                        <span id="warning" class="text-red" hidden>&emsp; 即將額滿，報名從速 !</span>
+
                                 }
                                 else if (Model.ActivityStatus == "額滿")
                                 { <span>報名人數已達名額上限</span>}
@@ -189,18 +187,18 @@
                  url: "@Url.Content("~/Cart/AddActtoCart")"+`?inputact=${data}`,
                  success: ShowMessage()
             })
-<<<<<<< HEAD
-            @cal = 
+
+            @*@cal =
             if (@cal < 0.34) {
-                $("#warning").attr("hidden", false);}
-=======
+                $("#warning").attr("hidden", false);}*@
+
 
             let qty = Number(@left);
             let count = Number($("#actnum").val());
         $("#aleft").html(qty - count);
+            if ((qty - count)/ @ac < 0.34) {
+                $("#warning").attr("hidden", false);}
 
-
->>>>>>> master
         });
         function ShowMessage() {
             toastr["success"]("活動已加入購物車！");
