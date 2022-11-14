@@ -2,6 +2,7 @@
 
 @{ 
     ViewData["Title"] = "Details";
+    decimal price = Model.ActivityPrice;
     //int count = 13;
     //int left = Model.ActivityCapacity - count;
     int left = Model.ActivityLeft;
@@ -74,7 +75,7 @@
 
                             </p>
                             <p class="col-sm-10 card-text">
-                                活動價格: 新台幣 @Html.DisplayFor(model => model.ActivityPrice) 元
+                                活動價格: 新台幣 @price.ToString("###,###,##0") 元
                             </p>
                             <p class="col-sm-10 card-text">
                                 目前狀態: @Html.DisplayFor(model => model.ActivityStatus)
@@ -176,30 +177,44 @@
                 i += 1;
             $("#actnum").val(i);
         });
-        $("#add").click(function(){
-            var s = {
-                "ActivityId": Number(@Html.DisplayFor(model => model.ActivityId)),
-                "count": Number($("#actnum").val()),
-            };
-            let data = JSON.stringify(s);
-            $.ajax({
-                 type: "GET",
-                 url: "@Url.Content("~/Cart/AddActtoCart")"+`?inputact=${data}`,
-                 success: ShowMessage()
-            })
+        $("#add").click(function () {
+            if ($("#actnum").val() > Number($("#aleft").html())) {
+                alert("加入購物車數量大於庫存數");
+            } else if ($("#actnum").val() < 1) {
+                alert("加入購物車數量小於1");
+            } else {
+                var s = {
+                    "ActivityId": Number(@Html.DisplayFor(model => model.ActivityId)),
+                    "count": Number($("#actnum").val()),
+                };
+                let data = JSON.stringify(s);
+                $.ajax({
+                    type: "GET",
+                    url: "@Url.Content("~/Cart/AddActtoCart")" + `?inputact=${data}`,
+                    success: ShowMessage()
+                })
 
             @*@cal =
             if (@cal < 0.34) {
                 $("#warning").attr("hidden", false);}*@
 
 
-            let qty = Number(@left);
-            let count = Number($("#actnum").val());
-        $("#aleft").html(qty - count);
-            if ((qty - count)/ @ac < 0.34) {
-                $("#warning").attr("hidden", false);}
+                let qty = Number($("#aleft").html());
+                let count = Number($("#actnum").val());
+                $("#aleft").html(qty - count);
+                if ((qty - count) / @ac < 0.34) {
+                    $("#warning").attr("hidden", false);
+                }
+                var i = Number($("#actnum").val());
+                i += i;
+                if (i > qty + (count - 1)) {
+                    toastr["warning"]("已達庫存上限！");
+                    $("#add").attr("disabled", true);
+                }
 
+            }
         });
+        
         function ShowMessage() {
             toastr["success"]("活動已加入購物車！");
         }
