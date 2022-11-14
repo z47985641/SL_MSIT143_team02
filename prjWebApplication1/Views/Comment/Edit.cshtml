@@ -61,7 +61,7 @@
     <script>$('#Comment').addClass('active');</script>
     <script>
         $(function () {
-            if ($("#status").val() == "yes") {
+            if ($("#status").val() == "no") {
                 $("#unblock").removeAttr("disabled");
                 $("#block").attr("disabled", true);
             }
@@ -77,14 +77,14 @@
             }
         })
         $("#block").click(function () {
-            $("#status").val("yes");
+            $("#status").val("no");
             var result = confirm("確定要隱藏該評論嗎?");
             if (result) {
                 $("#save").click();
             }
         })
         $("#unblock").click(function () {
-            $("#status").val("no");
+            $("#status").val("yes");
             var result = confirm("確定要取消隱藏該評論嗎?");
             if (result) {
                 $("#save").click();

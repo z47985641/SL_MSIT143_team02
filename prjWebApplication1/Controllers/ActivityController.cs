@@ -113,6 +113,7 @@ namespace PJ_MSIT143_team02.Controllers
                 act.ActivityInfo = inAct.ActivityInfo;
                 act.ActivityLocation = inAct.ActivityLocation;
                 act.ActivityPrice = inAct.ActivityPrice;
+                act.ActivityLeft = inAct.ActivityLeft;
 
                 db.SaveChanges();
             }

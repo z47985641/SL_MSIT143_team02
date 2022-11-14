@@ -19,7 +19,7 @@ namespace PJ_MSIT143_team02.ViewComponents
                         {
                             EquipmentId = e.EquipmentId,
                             EquipmentName = e.EquipmentName,
-                        }).ToList();
+                        }).Distinct().ToList();
             return View(data);
         }
     }

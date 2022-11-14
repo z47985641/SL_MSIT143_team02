@@ -49,6 +49,9 @@
                             @Html.ActionLink("立即搜尋","TestListView","Room",null,null)
                         </button>
                     </form>
+                    <button id="demo" onclick="demo()">
+                        Demo鍵
+                    </button>
                 </div>
             </div>
         </div>
@@ -538,6 +541,14 @@
                 alert("不能為空值");
                 return false;
             }
+        }
+        function demo() {
+            $("#date-in").val("16 NOVEMBER, 2022");
+            $("#date-out").val("18 NOVEMBER, 2022");
+            $("#num").val(2);
+            $("#num").html("02");
+            $("#roomnum").val(2);
+            $("#roomnum").html("02");
         }
 
         //立即搜尋的按鈕進去到搜好房
