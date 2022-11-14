@@ -144,7 +144,7 @@ namespace PJ_MSIT143_team02.Controllers
 
             datas.MemberPassword = datasedit.MemberNewPassword;
             db.SaveChanges();
-            return RedirectToAction("MemberPersonalData");
+            return RedirectToAction("Login", "MemberCreate");
         }
         public IActionResult LikeList()
         {
