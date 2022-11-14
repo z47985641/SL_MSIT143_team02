@@ -125,7 +125,7 @@
         });
         $("#roomplus").click(function () { 
             var i = Number($("#roomnum").val());
-            if(i < @Html.DisplayFor(model => model[0].Qty))
+            if(i < Number($("#qty").html()))
                 i += 1;
             $("#roomnum").val(i);
         });
