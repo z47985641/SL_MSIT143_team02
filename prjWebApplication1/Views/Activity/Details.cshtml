@@ -5,6 +5,12 @@
     //int count = 13;
     //int left = Model.ActivityCapacity - count;
     int left = Model.ActivityLeft;
+    double cal = 0;
+    double ac = Model.ActivityCapacity;
+    if (left != 0)
+    {
+        cal = left / ac;
+    }
  }
 
 <style>
@@ -12,7 +18,12 @@
         list-style-type: none;
         padding: 15px 0px 0px 15px;
     }
+
+    .text-red {
+        color: red;
+    }
 </style>
+
 
 <link href="~/css/acti-and-disc.css" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" rel="stylesheet" />
@@ -51,67 +62,70 @@
                                 else if (Model.ActivityStatus == "開放報名")
                                 {
                                     <span>剩餘人數/人數上限: @left / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
+                        <p id="warning" class="text-red">&emsp; 即將額滿，報名從速 !</p>
                                 }
                                 else if (Model.ActivityStatus == "額滿")
                                 { <span>報名人數已達名額上限</span>}
                                 else if (Model.ActivityStatus == "未開放報名")
                                 { <span>人數上限: @Html.DisplayFor(model => model.ActivityCapacity) 人</span>}
                             }
-                        </p>
-                        <p class="col-sm-10 card-text">
-                            活動價格: 新台幣 @Html.DisplayFor(model => model.ActivityPrice) 元
-                        </p>
-                        <p class="col-sm-10 card-text">
-                            目前狀態: @Html.DisplayFor(model => model.ActivityStatus)
-                        </p>
-                        <p class="col-sm-10 card-text">
-                            活動介紹: @Html.DisplayFor(model => model.ActivityInfo)
-                        </p>
-                        <br />
-                    @*</div>
-                    <div>*@
-                        <ul class="ap-services">
-                            @if(Model.ActivityStatus == "開放報名") {
-                            <li class="none">
-                                加入人數:
-                                <button type="button" class="btn btn-secondary" id="actminus">-</button>
-                                <input type="text" id="actnum" style="text-align:center;width:30px" value="1">
-                                <button type="button" class="btn btn-secondary" id="actplus">+</button>
-                            </li>
-                            }
-                        <li class="none">
-                            @if (Model.ActivityCapacity > 0)
-                            {
-                                if (Model.ActivityStatus == "開放報名")
-                                {
 
-                                    <button class="btn btn-secondary" id="add" style="text-decoration: none;">
-                                        <span>我要參加</span>
-                                    </button>
-                                }
-                                else if (Model.ActivityStatus == "已結束")
+                            </p>
+                            <p class="col-sm-10 card-text">
+                                活動價格: 新台幣 @Html.DisplayFor(model => model.ActivityPrice) 元
+                            </p>
+                            <p class="col-sm-10 card-text">
+                                目前狀態: @Html.DisplayFor(model => model.ActivityStatus)
+                            </p>
+                            <p class="col-sm-10 card-text">
+                                活動介紹: @Html.DisplayFor(model => model.ActivityInfo)
+                            </p>
+                            <br />
+                            @*</div>
+            <div>*@
+                            <ul class="ap-services">
+                                @if (Model.ActivityStatus == "開放報名")
                                 {
-                                    <br />
-                                    <button class="btn btn-light" id="unable" style="text-decoration: none;">
-                                        <span>活動已結束</span>
-                                    </button>
+                                    <li class="none">
+                                        加入人數:
+                                        <button type="button" class="btn btn-secondary" id="actminus">-</button>
+                                        <input type="text" id="actnum" style="text-align:center;width:30px" value="1">
+                                        <button type="button" class="btn btn-secondary" id="actplus">+</button>
+                                    </li>
                                 }
-                                else
-                                {
-                                    <br />
-                                    <button class="btn btn-light" id="unable" style="text-decoration: none;">
-                                        <span>無法參加</span>
-                                    </button>
-                                }
+                                <li class="none">
+                                    @if (Model.ActivityCapacity > 0)
+                                    {
+                                        if (Model.ActivityStatus == "開放報名")
+                                        {
 
-                            }
-                            else
-                            {
-                                <span id="cart" class="text-muted">商品缺貨中</span>
-                            }
-                        </li>
-                        </ul>
-                    </div>
+                                            <button class="btn btn-secondary" id="add" style="text-decoration: none;">
+                                                <span>我要參加</span>
+                                            </button>
+                                        }
+                                        else if (Model.ActivityStatus == "已結束")
+                                        {
+                                            <br />
+                                            <button class="btn btn-light" id="unable" style="text-decoration: none;">
+                                                <span>活動已結束</span>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <br />
+                                            <button class="btn btn-light" id="unable" style="text-decoration: none;">
+                                                <span>無法參加</span>
+                                            </button>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <span id="cart" class="text-muted">商品缺貨中</span>
+                                    }
+                                </li>
+                            </ul>
+                        </div>
                 </div>
             </div>
             <div id="imgcard" class="col-lg-6 col-md-6 mb-4">
@@ -171,6 +185,9 @@
                  url: "@Url.Content("~/Cart/AddActtoCart")"+`?inputact=${data}`,
                  success: ShowMessage()
             })
+            @cal = 
+            if (@cal < 0.34) {
+                $("#warning").attr("hidden", false);}
         });
         function ShowMessage() {
             toastr["success"]("活動已加入購物車！");
