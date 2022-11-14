@@ -125,12 +125,12 @@
         });
         $("#roomplus").click(function () { 
             var i = Number($("#roomnum").val());
-            if(i < @Html.DisplayFor(model => model[0].Qty))
+            if(i < Number($("#qty").html()))
                 i += 1;
             $("#roomnum").val(i);
         });
         $("#add").click(function(){
-            if ($("#roomnum").val() > @Html.DisplayFor(model => model[0].Qty)) {
+            if ($("#roomnum").val() > Number($("#qty").html())) {
                 alert("加入購物車數量大於庫存數");
             } else if ($("#roomnum").val() < 1) {
                 alert("加入購物車數量小於1");
@@ -150,7 +150,7 @@
                 })            
                 var i = Number($("#roomnum").val());
                 i += i;
-                if (i > @Html.DisplayFor(model => model[0].Qty)) { 
+                if (i > qty + (count-1)) { 
                     toastr["warning"]("已達庫存上限！");
                     $("#add").attr("disabled", true);
                 }
