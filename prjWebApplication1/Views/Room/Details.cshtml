@@ -60,7 +60,7 @@
                     <div id="content">
                         <div>
                             <p style="float:right;font-size:19px">
-                                剩餘間數: @Html.DisplayFor(model => item.Qty)
+                                剩餘間數: <span id="qty">@Html.DisplayFor(model => item.Qty)</span>
                             </p>
                             <h4 id="roomname">@Html.DisplayFor(model => item.RoomName)</h4>
                             <p id="roomlocation">
@@ -135,9 +135,12 @@
             } else if ($("#roomnum").val() < 1) {
                 alert("加入購物車數量小於1");
             } else {
+                let qty = Number($("#qty").html());
+                let count = Number($("#roomnum").val());
+                $("#qty").html(qty - count);
                 var s = {
                     "RoomId": Number(@Html.DisplayFor(model => model[0].RoomId)),
-                    "count": Number($("#roomnum").val()),
+                    "count": count,
                 };
                 let data = JSON.stringify(s);
                 $.ajax({
