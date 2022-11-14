@@ -130,7 +130,7 @@
             $("#roomnum").val(i);
         });
         $("#add").click(function(){
-            if ($("#roomnum").val() > @Html.DisplayFor(model => model[0].Qty)) {
+            if ($("#roomnum").val() > Number($("#qty").html())) {
                 alert("加入購物車數量大於庫存數");
             } else if ($("#roomnum").val() < 1) {
                 alert("加入購物車數量小於1");
