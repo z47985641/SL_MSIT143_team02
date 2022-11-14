@@ -50,7 +50,7 @@
                                 }
                                 else if (Model.ActivityStatus == "開放報名")
                                 {
-                                    <span>剩餘人數/人數上限: @left / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
+                                    <span>剩餘人數/人數上限: <span id="aleft">@left</span> / @Html.DisplayFor(model => model.ActivityCapacity) 人</span>
                                 }
                                 else if (Model.ActivityStatus == "額滿")
                                 { <span>報名人數已達名額上限</span>}
@@ -156,7 +156,7 @@
         });
         $("#actplus").click(function () {
             var i = Number($("#actnum").val());
-            if(i < @left)
+            if(i < Number($("#aleft").html()))
                 i += 1;
             $("#actnum").val(i);
         });
@@ -171,6 +171,12 @@
                  url: "@Url.Content("~/Cart/AddActtoCart")"+`?inputact=${data}`,
                  success: ShowMessage()
             })
+
+            let qty = Number(@left);
+            let count = Number($("#actnum").val());
+        $("#aleft").html(qty - count);
+
+
         });
         function ShowMessage() {
             toastr["success"]("活動已加入購物車！");
